@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Building2, 
   Search, 
@@ -31,15 +31,77 @@ import {
 import LinkedinIcon from './components/LinkedinIcon';
 import NetworkGraph from './components/NetworkGraph';
 import CompanyDetailModal from './components/CompanyDetailModal';
+import bundledDataset from './data/companies.json';
 
 const API_BASE = '/api';
 
+// Standalone CRM & filter helpers
+function getCrmOverrides() {
+  try {
+    return JSON.parse(localStorage.getItem('revolut_crm_overrides') || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveCrmOverride(id, updates) {
+  try {
+    const overrides = getCrmOverrides();
+    overrides[id] = { ...(overrides[id] || {}), ...updates };
+    localStorage.setItem('revolut_crm_overrides', JSON.stringify(overrides));
+  } catch (e) {
+    console.warn('Could not save to localStorage', e);
+  }
+}
+
+function computeLocalStats(comps) {
+  const total = comps.length;
+  const france = comps.filter(c => c.country === 'FR').length;
+  const switzerland = comps.filter(c => c.country === 'CH').length;
+  const toContact = comps.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
+  const contacted = comps.filter(c => c.crmStatus?.startsWith('contacted')).length;
+  const inCrm = comps.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
+  const highConfidence = comps.filter(c => (c.confidenceScore || 0) >= 75).length;
+  return { total, france, switzerland, toContact, contacted, inCrm, highConfidence };
+}
+
+function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search = '', verifiedOnly = false, dateFilter = 'all' } = {}) {
+  const overrides = getCrmOverrides();
+  const merged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
+
+  return merged.filter(c => {
+    if (country !== 'ALL' && c.country !== country) return false;
+    if (crmStatus !== 'ALL' && c.crmStatus !== crmStatus) return false;
+    if (verifiedOnly && (c.confidenceScore || 0) < 75) return false;
+
+    if (search) {
+      const q = search.toLowerCase().trim();
+      const matchName = c.name?.toLowerCase().includes(q);
+      const matchCity = c.city?.toLowerCase().includes(q);
+      const matchAct = c.activity?.toLowerCase().includes(q);
+      const matchReg = c.registrationNumber?.toLowerCase().includes(q);
+      const matchDir = c.dirigeants?.some(d => d.name?.toLowerCase().includes(q));
+      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir) return false;
+    }
+
+    if (dateFilter !== 'all') {
+      const dateStr = c.incorporationDate || c.scrapedAt;
+      if (dateStr) {
+        const compDate = new Date(dateStr);
+        const now = new Date();
+        const diffDays = Math.floor((now - compDate) / (1000 * 60 * 60 * 24));
+        if (dateFilter === 'today' && diffDays > 0) return false;
+        if (dateFilter === 'yesterday' && (diffDays < 1 || diffDays > 2)) return false;
+        if (dateFilter === '7d' && diffDays > 7) return false;
+      }
+    }
+
+    return true;
+  });
+}
+
 export default function App() {
-  const [companies, setCompanies] = useState([]);
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [syncMessage, setSyncMessage] = useState(null);
+  const allStaticCompaniesRef = useRef(bundledDataset.companies || []);
 
   // Theme state: dark or light
   const [theme, setTheme] = useState(() => {
@@ -52,6 +114,16 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [dateFilter, setDateFilter] = useState('all');
+
+  const [companies, setCompanies] = useState(() => {
+    return applyLocalFilters(bundledDataset.companies || []);
+  });
+  const [stats, setStats] = useState(() => {
+    return bundledDataset.stats || computeLocalStats(bundledDataset.companies || []);
+  });
+  const [loading, setLoading] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState(null);
 
   // Modals
   const [selectedCompany, setSelectedCompany] = useState(null);
@@ -75,80 +147,26 @@ export default function App() {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
-  const allStaticCompaniesRef = useRef(null);
-
   useEffect(() => {
     fetchData();
   }, [selectedCountry, selectedCrmStatus, searchQuery, verifiedOnly, dateFilter]);
 
-  // Helper to get CRM overrides from localStorage
-  const getCrmOverrides = () => {
-    try {
-      return JSON.parse(localStorage.getItem('revolut_crm_overrides') || '{}');
-    } catch {
-      return {};
-    }
-  };
-
-  const saveCrmOverride = (id, updates) => {
-    try {
-      const overrides = getCrmOverrides();
-      overrides[id] = { ...(overrides[id] || {}), ...updates };
-      localStorage.setItem('revolut_crm_overrides', JSON.stringify(overrides));
-    } catch (e) {
-      console.warn('Could not save to localStorage', e);
-    }
-  };
-
-  const computeLocalStats = (comps) => {
-    const total = comps.length;
-    const france = comps.filter(c => c.country === 'FR').length;
-    const switzerland = comps.filter(c => c.country === 'CH').length;
-    const toContact = comps.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
-    const contacted = comps.filter(c => c.crmStatus?.startsWith('contacted')).length;
-    const inCrm = comps.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
-    const highConfidence = comps.filter(c => (c.confidenceScore || 0) >= 75).length;
-    return { total, france, switzerland, toContact, contacted, inCrm, highConfidence };
-  };
-
-  const applyLocalFilters = (rawList) => {
-    const overrides = getCrmOverrides();
-    const merged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
-
-    return merged.filter(c => {
-      if (selectedCountry !== 'ALL' && c.country !== selectedCountry) return false;
-      if (selectedCrmStatus !== 'ALL' && c.crmStatus !== selectedCrmStatus) return false;
-      if (verifiedOnly && (c.confidenceScore || 0) < 75) return false;
-
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase().trim();
-        const matchName = c.name?.toLowerCase().includes(q);
-        const matchCity = c.city?.toLowerCase().includes(q);
-        const matchAct = c.activity?.toLowerCase().includes(q);
-        const matchReg = c.registrationNumber?.toLowerCase().includes(q);
-        const matchDir = c.dirigeants?.some(d => d.name?.toLowerCase().includes(q));
-        if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir) return false;
-      }
-
-      if (dateFilter !== 'all') {
-        const dateStr = c.incorporationDate || c.scrapedAt;
-        if (dateStr) {
-          const compDate = new Date(dateStr);
-          const now = new Date();
-          const diffDays = Math.floor((now - compDate) / (1000 * 60 * 60 * 24));
-          if (dateFilter === 'today' && diffDays > 0) return false;
-          if (dateFilter === 'yesterday' && (diffDays < 1 || diffDays > 2)) return false;
-          if (dateFilter === '7d' && diffDays > 7) return false;
-        }
-      }
-
-      return true;
-    });
-  };
-
   const fetchData = async () => {
     try {
-      setLoading(true);
+      const rawList = allStaticCompaniesRef.current;
+      const filtered = applyLocalFilters(rawList, {
+        country: selectedCountry,
+        crmStatus: selectedCrmStatus,
+        search: searchQuery,
+        verifiedOnly,
+        dateFilter
+      });
+      setCompanies(filtered);
+      const overrides = getCrmOverrides();
+      const allMerged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
+      setStats(computeLocalStats(allMerged));
+
+      // Attempt live API in background if available
       const params = new URLSearchParams();
       if (selectedCountry !== 'ALL') params.append('country', selectedCountry);
       if (selectedCrmStatus !== 'ALL') params.append('crmStatus', selectedCrmStatus);
@@ -156,47 +174,21 @@ export default function App() {
       if (verifiedOnly) params.append('verifiedOnly', 'true');
       if (dateFilter !== 'all') params.append('dateRange', dateFilter);
 
-      // Attempt live API
-      let loadedViaApi = false;
-      try {
-        const [compRes, statsRes] = await Promise.all([
-          fetch(`${API_BASE}/companies?${params.toString()}`),
-          fetch(`${API_BASE}/stats`)
-        ]);
+      const [compRes, statsRes] = await Promise.all([
+        fetch(`${API_BASE}/companies?${params.toString()}`),
+        fetch(`${API_BASE}/stats`)
+      ]);
 
-        if (compRes.ok && statsRes.ok) {
-          const compData = await compRes.json();
-          const statsData = await statsRes.json();
-          if (compData.success && Array.isArray(compData.companies)) {
-            setCompanies(compData.companies);
-            if (statsData.success) setStats(statsData.stats);
-            loadedViaApi = true;
-          }
-        }
-      } catch (apiErr) {
-        // Fallback to static data.json (GitHub Pages mode)
-      }
-
-      if (!loadedViaApi) {
-        // Load static data.json
-        if (!allStaticCompaniesRef.current) {
-          const staticRes = await fetch('./data.json');
-          if (staticRes.ok) {
-            const staticData = await staticRes.json();
-            allStaticCompaniesRef.current = staticData.companies || [];
-          }
-        }
-
-        if (allStaticCompaniesRef.current) {
-          const filtered = applyLocalFilters(allStaticCompaniesRef.current);
-          setCompanies(filtered);
-          const overrides = getCrmOverrides();
-          const allMerged = allStaticCompaniesRef.current.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
-          setStats(computeLocalStats(allMerged));
+      if (compRes.ok && statsRes.ok) {
+        const compData = await compRes.json();
+        const statsData = await statsRes.json();
+        if (compData.success && Array.isArray(compData.companies)) {
+          setCompanies(compData.companies);
+          if (statsData.success) setStats(statsData.stats);
         }
       }
-    } catch (err) {
-      console.error('Erreur chargement:', err);
+    } catch {
+      // Live API unreachable: offline or GitHub Pages, already successfully rendered!
     } finally {
       setLoading(false);
     }
