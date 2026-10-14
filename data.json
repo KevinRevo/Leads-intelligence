@@ -101,6 +101,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -204,6 +214,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -320,6 +340,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -423,6 +453,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -526,6 +566,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -642,6 +692,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -745,6 +805,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -848,6 +918,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -951,6 +1031,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1054,6 +1144,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1157,6 +1257,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1273,6 +1383,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1376,6 +1496,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1479,6 +1609,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1582,6 +1722,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1685,6 +1835,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1801,6 +1961,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -1904,6 +2074,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2007,6 +2187,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2123,6 +2313,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2226,6 +2426,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2329,6 +2539,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2445,6 +2665,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2548,6 +2778,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2651,6 +2891,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2754,6 +3004,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2857,6 +3117,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -2960,6 +3230,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3063,6 +3343,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3179,6 +3469,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3282,6 +3582,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3385,6 +3695,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3488,6 +3808,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3591,6 +3921,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3694,6 +4034,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3797,6 +4147,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -3900,6 +4260,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4016,6 +4386,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4132,6 +4512,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4235,6 +4625,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4351,6 +4751,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4454,6 +4864,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4557,6 +4977,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4676,6 +5106,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4779,6 +5219,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4882,6 +5332,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -4985,6 +5445,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5101,6 +5571,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5217,6 +5697,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5336,6 +5826,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5455,6 +5955,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Intermédiation financière : vérification de l'enregistrement ORIAS ou FINMA",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -5571,6 +6081,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5674,6 +6194,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5793,6 +6323,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -5909,6 +6449,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6028,6 +6578,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6147,6 +6707,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6266,6 +6836,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6398,6 +6978,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6514,6 +7104,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6617,6 +7217,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Intermédiation financière : vérification de l'enregistrement ORIAS ou FINMA",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -6736,6 +7346,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6839,6 +7459,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -6971,6 +7601,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -7090,6 +7730,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -7209,6 +7859,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -7325,6 +7985,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -7444,6 +8114,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -7576,6 +8256,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Opérations immobilières complexes : justification de l'origine des fonds requise",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -7692,6 +8382,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -7795,6 +8495,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -7911,6 +8621,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8014,6 +8734,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8133,6 +8863,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Négoce international à flux transfrontaliers : revue des pays tiers et partenaires",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -8252,6 +8992,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8378,6 +9128,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8497,6 +9257,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8600,6 +9370,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8719,6 +9499,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -8845,6 +9635,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Opérations immobilières complexes : justification de l'origine des fonds requise",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -8977,6 +9777,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -9093,6 +9903,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -9209,6 +10029,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -9312,6 +10142,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -9415,6 +10255,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -9518,6 +10368,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -9634,6 +10494,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -9737,6 +10607,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -9856,6 +10736,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -9988,6 +10878,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10091,6 +10991,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10194,6 +11104,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -10310,6 +11230,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10413,6 +11343,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10545,6 +11485,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10661,6 +11611,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10780,6 +11740,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -10899,6 +11869,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11018,6 +11998,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11121,6 +12111,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11240,6 +12240,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11359,6 +12369,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11491,6 +12511,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11610,6 +12640,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11713,6 +12753,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -11832,6 +12882,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Opérations immobilières complexes : justification de l'origine des fonds requise",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -11951,6 +13011,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12067,6 +13137,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12170,6 +13250,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12286,6 +13376,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12405,6 +13505,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -12524,6 +13634,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12650,6 +13770,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12766,6 +13896,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12869,6 +14009,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -12972,6 +14122,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13104,6 +14264,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13223,6 +14393,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13355,6 +14535,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13458,6 +14648,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13561,6 +14761,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -13677,6 +14887,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13780,6 +15000,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -13919,6 +15149,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14038,6 +15278,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Négoce international à flux transfrontaliers : revue des pays tiers et partenaires",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -14157,6 +15407,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14273,6 +15533,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14376,6 +15646,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -14493,6 +15773,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14597,6 +15887,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14714,6 +16014,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14831,6 +16141,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -14948,6 +16268,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15052,6 +16382,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15169,6 +16509,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15286,6 +16636,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15403,6 +16763,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15507,6 +16877,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15611,6 +16991,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15715,6 +17105,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15819,6 +17219,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -15923,6 +17333,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16043,6 +17463,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16147,6 +17577,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16264,6 +17704,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16381,6 +17831,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16485,6 +17945,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16602,6 +18072,16 @@
           }
         ],
         "edges": []
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -16756,6 +18236,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -16939,6 +18429,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -17059,6 +18559,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Holding / Gestion de participations : justificatif de la chaîne d'actionnariat requis (UBO)",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -17192,6 +18702,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -17333,6 +18853,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -17508,6 +19038,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -17662,6 +19202,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -17816,6 +19366,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -17935,6 +19495,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -18074,6 +19644,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "label": "Onboarding Immédiat",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services standard (B2B, Conseil, Tech, BTP, E-commerce, Santé, Transport). Conforme à 100% à la politique d'acceptation Revolut.",
+        "onboardingSpeed": "Moins de 24h (Onboarding automatisé)",
+        "salesRecommendation": "Cible prioritaire : conversion rapide avec compte actif sous 24h.",
+        "isEligible": true
       }
     },
     {
@@ -18193,6 +19773,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Négoce international à flux transfrontaliers : revue des pays tiers et partenaires",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -18313,6 +19903,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Intermédiation financière : vérification de l'enregistrement ORIAS ou FINMA",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     },
     {
@@ -18433,6 +20033,16 @@
             "type": "mandate"
           }
         ]
+      },
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Due Diligence",
+        "label": "Éligible sous Conditions",
+        "color": "amber",
+        "reason": "Négoce international à flux transfrontaliers : revue des pays tiers et partenaires",
+        "onboardingSpeed": "48h - 72h (Revue documentaire requise)",
+        "salesRecommendation": "Prospectable en qualifiant la structure juridique et la liste des bénéficiaires effectifs.",
+        "isEligible": true
       }
     }
   ],

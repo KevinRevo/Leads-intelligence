@@ -65,13 +65,14 @@ function computeLocalStats(comps) {
   return { total, france, switzerland, toContact, contacted, inCrm, highConfidence };
 }
 
-function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search = '', verifiedOnly = false, dateFilter = 'all' } = {}) {
+function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search = '', verifiedOnly = false, dateFilter = 'all', compliance = 'ALL' } = {}) {
   const overrides = getCrmOverrides();
   const merged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
 
   return merged.filter(c => {
     if (country !== 'ALL' && c.country !== country) return false;
     if (crmStatus !== 'ALL' && c.crmStatus !== crmStatus) return false;
+    if (compliance !== 'ALL' && c.compliance?.status !== compliance) return false;
     if (verifiedOnly && (c.confidenceScore || 0) < 75) return false;
 
     if (search) {
@@ -111,6 +112,7 @@ export default function App() {
   // Filters
   const [selectedCountry, setSelectedCountry] = useState('ALL');
   const [selectedCrmStatus, setSelectedCrmStatus] = useState('ALL');
+  const [selectedCompliance, setSelectedCompliance] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [dateFilter, setDateFilter] = useState('all');
@@ -149,7 +151,7 @@ export default function App() {
 
   useEffect(() => {
     fetchData();
-  }, [selectedCountry, selectedCrmStatus, searchQuery, verifiedOnly, dateFilter]);
+  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter]);
 
   const fetchData = async () => {
     try {
@@ -157,6 +159,7 @@ export default function App() {
       const filtered = applyLocalFilters(rawList, {
         country: selectedCountry,
         crmStatus: selectedCrmStatus,
+        compliance: selectedCompliance,
         search: searchQuery,
         verifiedOnly,
         dateFilter
@@ -458,10 +461,10 @@ export default function App() {
         {/* Filters & Digital Presence Exclude Toggle */}
         <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm space-y-3 transition-colors">
           
-          <div className="flex flex-col lg:flex-row gap-3 items-center justify-between">
+          <div className="flex flex-col lg:flex-row gap-3 items-center justify-between flex-wrap">
             
             {/* Search Input */}
-            <div className="relative w-full lg:w-80">
+            <div className="relative w-full lg:w-72">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -501,7 +504,7 @@ export default function App() {
             </div>
 
             {/* CRM Status Dropdown */}
-            <div className="w-full lg:w-48">
+            <div className="w-full lg:w-44">
               <select
                 value={selectedCrmStatus}
                 onChange={(e) => setSelectedCrmStatus(e.target.value)}
@@ -518,8 +521,22 @@ export default function App() {
               </select>
             </div>
 
-            {/* Date Range Dropdown (Cumulative History) */}
+            {/* Conformité Revolut (KYB Pre-Screening) */}
             <div className="w-full lg:w-52">
+              <select
+                value={selectedCompliance}
+                onChange={(e) => setSelectedCompliance(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
+              >
+                <option value="ALL">🛡️ Tous profils conformité</option>
+                <option value="eligible">🟢 Éligible Revolut (&lt;24h)</option>
+                <option value="conditional">🟡 Due Diligence (48h-72h)</option>
+                <option value="restricted">🔴 Risque Compliance</option>
+              </select>
+            </div>
+
+            {/* Date Range Dropdown (Cumulative History) */}
+            <div className="w-full lg:w-48">
               <select
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
@@ -714,17 +731,32 @@ export default function App() {
                           </div>
                         </td>
 
-                        {/* 3. NATURE D'ACTIVITE (SHORT CATEGORY BADGE IN TABLE, FULL TEXT IN MODAL) */}
+                        {/* 3. NATURE D'ACTIVITE & PRE-QUALIFICATION REVOLUT */}
                         <td className="py-3 px-3 whitespace-nowrap">
                           <div 
                             onClick={() => setSelectedCompany(c)}
-                            className="cursor-pointer group flex items-center gap-1.5"
-                            title="Cliquer pour voir la description complète dans la fiche"
+                            className="cursor-pointer group space-y-1"
+                            title="Cliquer pour voir l'analyse conformité et la description complète"
                           >
-                            {getCategoryBadge(c.activityCategory || 'Services B2B')}
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 opacity-0 group-hover:opacity-100 transition">
-                              🔍 voir plus
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              {getCategoryBadge(c.activityCategory || 'Services B2B')}
+                              <span className="text-[10px] text-slate-400 dark:text-slate-500 opacity-0 group-hover:opacity-100 transition">
+                                🔍 fiche
+                              </span>
+                            </div>
+                            {c.compliance && (
+                              <div className="flex items-center gap-1">
+                                <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border inline-flex items-center gap-1 ${
+                                  c.compliance.status === 'restricted'
+                                    ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800'
+                                    : c.compliance.status === 'conditional'
+                                    ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800'
+                                    : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                                }`}>
+                                  <span>{c.compliance.badge}</span>
+                                </span>
+                              </div>
+                            )}
                           </div>
                         </td>
 

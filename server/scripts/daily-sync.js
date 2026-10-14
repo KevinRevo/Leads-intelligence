@@ -1,0 +1,92 @@
+const fs = require('fs');
+const path = require('path');
+const { runSync } = require('../cron');
+const { evaluateRevolutCompliance } = require('../services/compliance');
+const { buildCompanyNetwork } = require('../services/network');
+
+function cleanCompanyName(name) {
+  if (!name) return '';
+  return name
+    .replace(/\b(SAS|SARL|SA|SASU|EURL|GmbH|Sàrl|Sarl|AG|SNC|SCI|INC|LTD|CORP|GROUP|FRANCE|SUISSE)\b/gi, '')
+    .replace(/[^\w\s-]/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isGeneric(name, companyName) {
+  if (!name) return true;
+  const n = name.trim().toLowerCase();
+  const c = (companyName || '').trim().toLowerCase();
+  if (n === 'x' || n === 'fondateur' || n === 'non renseigné' || n === 'non renseigne') return true;
+  if (n.includes('direction') || n.includes('conseil d\'administration')) return true;
+  if (n === c || n === c + ' direction' || n.includes(c + ' direction')) return true;
+  return false;
+}
+
+async function main() {
+  console.log('[Daily Sync] Démarrage du scraping quotidien automatisé...');
+  
+  // 1. Run official scrapers (BODACC France & SHAB Suisse)
+  const syncResult = await runSync({ country: 'ALL' });
+  console.log('[Daily Sync] Résultat brut:', JSON.stringify(syncResult));
+
+  // 2. Read updated database and apply 100% factual rules & compliance
+  const dbPath = path.join(__dirname, '../data/db.json');
+  const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+
+  for (const comp of db.companies) {
+    const cleanComp = cleanCompanyName(comp.name);
+    comp.linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(cleanComp || comp.name)}`;
+
+    // Dirigeants
+    const realDirs = (comp.dirigeants || []).filter(d => !isGeneric(d.name, comp.name));
+    if (realDirs.length > 0) {
+      comp.dirigeants = realDirs;
+      comp.linkedinDirigeantUrl = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(realDirs[0].name)}`;
+    } else {
+      comp.dirigeants = [{ name: 'X', role: 'Non renseigné au registre', isPrimary: true }];
+      comp.linkedinDirigeantUrl = null;
+    }
+
+    // CFO
+    if (comp.cfo && isGeneric(comp.cfo.name, comp.name)) {
+      comp.cfo = { name: 'X', role: 'Non renseigné', isEstimated: false, linkedinSearchUrl: null };
+    }
+
+    // Revolut Compliance Pre-Screening
+    comp.compliance = evaluateRevolutCompliance(comp);
+  }
+
+  // 3. Write back to server db.json
+  fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+  // 4. Calculate stats and build public bundle
+  const total = db.companies.length;
+  const france = db.companies.filter(c => c.country === 'FR').length;
+  const switzerland = db.companies.filter(c => c.country === 'CH').length;
+  const toContact = db.companies.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
+  const contacted = db.companies.filter(c => c.crmStatus?.startsWith('contacted')).length;
+  const inCrm = db.companies.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
+  const highConfidence = db.companies.filter(c => (c.confidenceScore || 0) >= 70).length;
+
+  const stats = { total, france, switzerland, toContact, contacted, inCrm, highConfidence };
+  const publicBundle = { companies: db.companies, stats };
+
+  // 5. Update client data sources
+  const clientPublicPath = path.join(__dirname, '../../client/public/data.json');
+  const clientSrcPath = path.join(__dirname, '../../client/src/data/companies.json');
+
+  if (fs.existsSync(path.dirname(clientPublicPath))) {
+    fs.writeFileSync(clientPublicPath, JSON.stringify(publicBundle, null, 2));
+  }
+  if (fs.existsSync(path.dirname(clientSrcPath))) {
+    fs.writeFileSync(clientSrcPath, JSON.stringify(publicBundle, null, 2));
+  }
+
+  console.log(`[Daily Sync Terminé] Base à jour avec ${total} sociétés (${france} FR, ${switzerland} CH).`);
+}
+
+main().catch(err => {
+  console.error('[Daily Sync Erreur]', err);
+  process.exit(1);
+});
