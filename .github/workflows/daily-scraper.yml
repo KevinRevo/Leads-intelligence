@@ -1,0 +1,58 @@
+name: Daily Scraping & Leads Sync (Revolut Business)
+
+on:
+  schedule:
+    # Exécution automatique chaque matin à 04:00 UTC (06:00 heure de Paris / Genève)
+    - cron: '0 4 * * *'
+  workflow_dispatch: # Permet également de lancer la mise à jour manuellement en 1 clic sur GitHub
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  scrape-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Récupérer le dépôt
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Configurer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Installer les dépendances serveur
+        run: |
+          npm install
+
+      - name: 🚀 Lancer le scraping quotidien officiel (BODACC FR & SHAB CH)
+        run: |
+          node server/scripts/daily-sync.js
+
+      - name: 🛠️ Installer et compiler l'application client (Vite)
+        run: |
+          cd client
+          npm install
+          npm run build
+          cd ..
+
+      - name: 📋 Synchroniser le bundle GitHub Pages à la racine
+        run: |
+          cp -r client/dist/* .
+
+      - name: 💾 Commit et Push automatique sur GitHub Pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "Aucune nouvelle entreprise à synchroniser aujourd'hui."
+          else
+            git commit -m "🤖 Synchronisation automatique des leads du jour [skip ci]"
+            git push origin main
+            echo "Nouveaux leads déployés avec succès sur GitHub Pages !"
+          fi
