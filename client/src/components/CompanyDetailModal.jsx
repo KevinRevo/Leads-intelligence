@@ -140,38 +140,38 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             </div>
           </div>
 
-          {/* Revolut KYB & Compliance Pre-Screening Assessment */}
+          {/* Revolut Industry & Compliance Eligibility Assessment */}
           {company.compliance && (
             <div className={`p-4 rounded-xl border transition ${
               company.compliance.status === 'restricted'
-                ? 'bg-rose-50/70 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50'
+                ? 'bg-rose-50/80 dark:bg-rose-950/30 border-rose-200 dark:border-rose-900/60'
                 : company.compliance.status === 'conditional'
-                ? 'bg-amber-50/70 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50'
-                : 'bg-emerald-50/70 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900/50'
+                ? 'bg-amber-50/80 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/60'
+                : 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/60'
             }`}>
-              <div className="flex items-center justify-between flex-wrap gap-2 mb-2 pb-2 border-b border-current/10">
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-2.5 pb-2.5 border-b border-current/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base">{company.compliance.badge}</span>
+                  <span className="text-base font-bold">{company.compliance.badge}</span>
                   <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wide ${
                     company.compliance.status === 'restricted'
-                      ? 'bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-300'
+                      ? 'bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-200'
                       : company.compliance.status === 'conditional'
-                      ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300'
-                      : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300'
+                      ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200'
+                      : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200'
                   }`}>
-                    {company.compliance.label}
+                    {company.compliance.tag || company.compliance.badge}
                   </span>
                 </div>
                 <div className="text-xs font-semibold flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
-                  <span>⏱️ Délai estimé :</span>
-                  <span className="font-bold underline underline-offset-2">{company.compliance.onboardingSpeed}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Secteur analysé :</span>
+                  <span className="font-bold">{company.compliance.industry || company.activityCategory || 'Services B2B'}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mt-2">
                 <div className="space-y-1">
                   <span className="font-bold text-slate-700 dark:text-slate-300 block">
-                    📋 Évaluation Conformité & Politique Risque :
+                    📋 Éligibilité selon l'Activité & Politique Revolut :
                   </span>
                   <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                     {company.compliance.reason}
@@ -179,7 +179,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 </div>
                 <div className="space-y-1">
                   <span className="font-bold text-slate-700 dark:text-slate-300 block">
-                    💼 Recommandation Commerciale Revolut :
+                    💼 Action Commerciale Recommandée :
                   </span>
                   <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                     {company.compliance.salesRecommendation}

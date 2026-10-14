@@ -521,17 +521,17 @@ export default function App() {
               </select>
             </div>
 
-            {/* Conformité Revolut (KYB Pre-Screening) */}
+            {/* Éligibilité Secteur Revolut Business */}
             <div className="w-full lg:w-52">
               <select
                 value={selectedCompliance}
                 onChange={(e) => setSelectedCompliance(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
               >
-                <option value="ALL">🛡️ Tous profils conformité</option>
-                <option value="eligible">🟢 Éligible Revolut (&lt;24h)</option>
-                <option value="conditional">🟡 Due Diligence (48h-72h)</option>
-                <option value="restricted">🔴 Risque Compliance</option>
+                <option value="ALL">🛡️ Toutes activités</option>
+                <option value="eligible">🟢 Éligible Revolut (Activité autorisée)</option>
+                <option value="conditional">🟡 Activité Réglementée (Due Diligence)</option>
+                <option value="restricted">🔴 Non Éligible (Industrie Interdite)</option>
               </select>
             </div>
 
