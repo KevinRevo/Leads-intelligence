@@ -126,8 +126,8 @@ async function scrapeSwitzerlandCreations(limit = 15) {
 
         if (dirigeants.length === 0) {
           dirigeants.push({
-            name: 'Direction & Conseil d\'administration',
-            role: 'Administrateur',
+            name: 'X',
+            role: 'Non renseigné au registre',
             isPrimary: true,
           });
         }

@@ -236,48 +236,57 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 Dirigeants & Mandataires Sociaux
               </span>
               <div className="space-y-2">
-                {company.dirigeants?.map((d, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 flex items-center justify-center font-bold text-xs">
-                        {d.name.slice(0, 2).toUpperCase()}
+                {company.dirigeants?.map((d, idx) => {
+                  const isX = !d.name || d.name === 'X' || d.name.includes('Direction') || d.name.includes('Conseil');
+                  return (
+                    <div key={idx} className="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center font-bold text-xs font-mono">
+                          {isX ? 'X' : d.name.slice(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          {isX ? (
+                            <span className="text-sm font-semibold text-slate-400 dark:text-slate-500 font-mono italic">
+                              X <span className="text-xs font-sans not-italic text-slate-400">(Non renseigné au registre)</span>
+                            </span>
+                          ) : (
+                            <button
+                              onClick={() => handleCopy(d.name, `dir-${idx}`)}
+                              className="text-sm font-semibold text-slate-900 dark:text-white hover:text-blue-500 text-left"
+                              title="Copier le nom"
+                            >
+                              {d.name} {copiedField === `dir-${idx}` && <span className="text-emerald-500 text-xs">✓</span>}
+                            </button>
+                          )}
+                          <div className="text-xs text-slate-500 dark:text-slate-400">{d.role || 'Mandataire'}</div>
+                        </div>
                       </div>
-                      <div>
-                        <button
-                          onClick={() => handleCopy(d.name, `dir-${idx}`)}
-                          className="text-sm font-semibold text-slate-900 dark:text-white hover:text-blue-500 text-left"
-                          title="Copier le nom"
-                        >
-                          {d.name} {copiedField === `dir-${idx}` && <span className="text-emerald-500 text-xs">✓</span>}
-                        </button>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">{d.role}</div>
-                      </div>
+                      {!isX && (
+                        <div className="flex items-center gap-1.5">
+                          <a
+                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-2 py-1 bg-[#0a66c2]/10 hover:bg-[#0a66c2]/20 text-[#0a66c2] rounded-lg transition flex items-center gap-1 text-xs font-semibold"
+                            title={`Rechercher ${d.name} sur LinkedIn`}
+                          >
+                            <LinkedinIcon className="w-3.5 h-3.5" />
+                            <span>LinkedIn</span>
+                          </a>
+                          <a
+                            href={`https://www.google.com/search?q=${encodeURIComponent('site:linkedin.com/in ' + d.name + ' ' + (company.city || ''))}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="p-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-lg transition"
+                            title={`Recherche Google directe du profil LinkedIn de ${d.name}`}
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      )}
                     </div>
-                    {d.name && d.name !== 'Direction Générale' && (
-                      <div className="flex items-center gap-1.5">
-                        <a
-                          href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="px-2 py-1 bg-[#0a66c2]/10 hover:bg-[#0a66c2]/20 text-[#0a66c2] rounded-lg transition flex items-center gap-1 text-xs font-semibold"
-                          title={`Rechercher ${d.name} sur LinkedIn`}
-                        >
-                          <LinkedinIcon className="w-3.5 h-3.5" />
-                          <span>LinkedIn</span>
-                        </a>
-                        <a
-                          href={`https://www.google.com/search?q=${encodeURIComponent('site:linkedin.com/in ' + d.name + ' ' + (company.city || ''))}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="p-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-lg transition"
-                          title={`Recherche Google directe du profil LinkedIn de ${d.name}`}
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -286,17 +295,28 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                 Directeur Financier / CFO
               </span>
-              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 space-y-2">
+              <div className="p-3 rounded-lg bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 space-y-2">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-sm font-bold text-slate-900 dark:text-white block">
-                      {company.cfo?.name || 'Direction Financière'}
-                    </span>
-                    <span className="text-xs text-blue-700 dark:text-blue-300 font-medium">
-                      {company.cfo?.role || 'Directeur Financier'}
-                    </span>
+                    {(!company.cfo?.name || company.cfo.name === 'X' || company.cfo.name.includes('Direction')) ? (
+                      <div>
+                        <span className="text-sm font-bold text-slate-400 dark:text-slate-500 font-mono italic block">
+                          X <span className="text-xs font-sans not-italic text-slate-400">(Non renseigné au registre)</span>
+                        </span>
+                        <span className="text-xs text-slate-400">Fonction financière non individualisée au greffe</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="text-sm font-bold text-slate-900 dark:text-white block">
+                          {company.cfo.name}
+                        </span>
+                        <span className="text-xs text-blue-700 dark:text-blue-300 font-medium">
+                          {company.cfo.role || 'Directeur Financier'}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                  {company.cfo?.name && company.cfo.name !== 'Direction Financière' && (
+                  {company.cfo?.name && company.cfo.name !== 'X' && !company.cfo.name.includes('Direction') && (
                     <div className="flex items-center gap-1.5">
                       <a
                         href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(company.cfo.name)}`}
@@ -308,24 +328,27 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                         <LinkedinIcon className="w-3.5 h-3.5" />
                         <span>LinkedIn</span>
                       </a>
-                      <a
-                        href={`https://www.google.com/search?q=${encodeURIComponent('site:linkedin.com/in ' + company.cfo.name + ' ' + (company.city || ''))}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="p-1 bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-lg transition border border-slate-200 dark:border-slate-700"
-                        title={`Recherche Google directe du profil de ${company.cfo.name}`}
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
                     </div>
                   )}
                 </div>
-                {company.cfo?.isEstimated && (
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-                    ℹ️ Structure naissante : le dirigeant assume les pouvoirs bancaires au démarrage.
-                  </p>
-                )}
               </div>
+
+              {/* Dedicated LinkedIn Company Banner */}
+              {company.linkedinCompanyUrl && (
+                <div className="pt-1">
+                  <a
+                    href={company.linkedinCompanyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full py-2 px-3 bg-[#0a66c2] hover:bg-[#004182] text-white rounded-lg flex items-center justify-center gap-2 text-xs font-bold transition shadow-xs"
+                    title="Ouvrir la page LinkedIn de l'entreprise"
+                  >
+                    <LinkedinIcon className="w-4 h-4 text-white" />
+                    <span>Rechercher l'entreprise sur LinkedIn (Voir l'équipe & employés)</span>
+                    <ExternalLink className="w-3 h-3 text-white/80" />
+                  </a>
+                </div>
+              )}
             </div>
 
           </div>

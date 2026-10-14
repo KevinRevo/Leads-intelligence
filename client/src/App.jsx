@@ -605,7 +605,8 @@ export default function App() {
                   companies.map((c) => {
                     const isCH = c.country === 'CH';
                     const flag = isCH ? '🇨🇭' : '🇫🇷';
-                    const primaryDirigeant = c.dirigeants?.[0]?.name || 'Fondateur';
+                    const rawDir = c.dirigeants?.[0]?.name;
+                    const primaryDirigeant = (!rawDir || rawDir.includes('Direction') || rawDir.includes('Conseil')) ? 'X' : rawDir;
                     const safetyScore = c.safety?.score || 50;
 
                     return (
@@ -730,24 +731,35 @@ export default function App() {
                         {/* 4. Dirigeant & CFO (1-Click Copyable!) */}
                         <td className="py-3 px-3 whitespace-nowrap">
                           
-                          {/* 1-Click Copy Dirigeant */}
-                          <button
-                            onClick={() => handleCopy(primaryDirigeant, `dir-${c.id}`)}
-                            className="font-semibold text-slate-900 dark:text-slate-200 hover:text-blue-500 flex items-center gap-1 text-left group"
-                            title="Copier le nom du dirigeant"
-                          >
-                            <UserCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                            <span>{primaryDirigeant}</span>
-                            {copiedKey === `dir-${c.id}` && (
-                              <span className="text-[10px] text-emerald-500 font-semibold">✓</span>
-                            )}
-                          </button>
+                          {/* Dirigeant */}
+                          {primaryDirigeant === 'X' ? (
+                            <div className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
+                              <span className="font-mono font-bold text-xs bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">X</span>
+                              <span className="text-[10px] italic">Non renseigné</span>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => handleCopy(primaryDirigeant, `dir-${c.id}`)}
+                              className="font-semibold text-slate-900 dark:text-slate-200 hover:text-blue-500 flex items-center gap-1 text-left group"
+                              title="Copier le nom du dirigeant"
+                            >
+                              <UserCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                              <span>{primaryDirigeant}</span>
+                              {copiedKey === `dir-${c.id}` && (
+                                <span className="text-[10px] text-emerald-500 font-semibold">✓</span>
+                              )}
+                            </button>
+                          )}
 
-                          <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-1">
+                          <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
                             <span>CFO :</span>
-                            <span className="text-slate-700 dark:text-slate-300 font-medium">
-                              {c.cfo?.name || 'Fondateur'}
-                            </span>
+                            {c.cfo?.name && c.cfo.name !== 'X' && !c.cfo.name.includes('Direction') ? (
+                              <span className="text-slate-700 dark:text-slate-300 font-medium">
+                                {c.cfo.name}
+                              </span>
+                            ) : (
+                              <span className="font-mono text-slate-400 dark:text-slate-500 text-[10px]">X</span>
+                            )}
                           </div>
                         </td>
 
@@ -834,7 +846,22 @@ export default function App() {
                                 </span>
                               )}
 
-                              {primaryDirigeant && primaryDirigeant !== 'Direction Générale' && (
+                              {/* 1. LinkedIn Entreprise : Pour trouver les collaborateurs et l'équipe */}
+                              {c.linkedinCompanyUrl && (
+                                <a
+                                  href={c.linkedinCompanyUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-[10px] px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-[#0a66c2] dark:text-sky-300 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 flex items-center gap-1 font-semibold transition"
+                                  title="Rechercher la page LinkedIn de l'entreprise pour voir les collaborateurs et décisionnaires"
+                                >
+                                  <LinkedinIcon className="w-3 h-3 text-[#0a66c2]" />
+                                  <span>LinkedIn Boîte</span>
+                                </a>
+                              )}
+
+                              {/* 2. LinkedIn Dirigeant : UNIQUEMENT si personne réelle identifiée */}
+                              {primaryDirigeant && primaryDirigeant !== 'X' && (
                                 <>
                                   <a
                                     href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(primaryDirigeant)}`}
@@ -843,7 +870,7 @@ export default function App() {
                                     className="text-[10px] px-1.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/40 text-[#0a66c2] dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-950/70 border border-sky-200 dark:border-sky-800/60 flex items-center gap-1 font-semibold transition"
                                     title={`Recherche nominative de ${primaryDirigeant} sur LinkedIn`}
                                   >
-                                    <LinkedinIcon className="w-3 h-3 text-[#0a66c2]" />
+                                    <UserCheck className="w-3 h-3 text-sky-500" />
                                     <span>Dirigeant</span>
                                   </a>
                                   <a
@@ -856,18 +883,6 @@ export default function App() {
                                     <span>Google ↗</span>
                                   </a>
                                 </>
-                              )}
-
-                              {c.name && (
-                                <a
-                                  href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(c.name.replace(/\b(SAS|SARL|SA|SNC|GmbH|AG|Sàrl)\b/gi, '').trim())}`}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center gap-1 transition"
-                                  title="Recherche de l'entreprise sur LinkedIn"
-                                >
-                                  <span>Boîte</span>
-                                </a>
                               )}
                             </div>
 

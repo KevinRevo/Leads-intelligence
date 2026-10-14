@@ -130,8 +130,8 @@ async function scrapeFranceCreations(limit = 20) {
 
         if (dirigeants.length === 0) {
           dirigeants.push({
-            name: companyName.split(',').length > 1 ? companyName.split(',')[0] : 'Direction Générale',
-            role: 'Fondateur',
+            name: 'X',
+            role: 'Non renseigné au registre',
             isPrimary: true,
           });
         }
