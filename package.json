@@ -1,0 +1,29 @@
+{
+  "name": "revolut-business-registre-intelligence",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "client": "npm --prefix client run dev"
+  },
+  "keywords": [
+    "revolut",
+    "sales-intelligence",
+    "bodacc",
+    "fosc",
+    "shab",
+    "registre-du-commerce"
+  ],
+  "author": "Revolut Business Outbound Team",
+  "license": "ISC",
+  "description": "Sales Lead Intelligence & Registre du Commerce Scraper for Revolut Business SDR/BDR teams",
+  "dependencies": {
+    "axios": "^1.20.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "node-cron": "^4.6.0"
+  }
+}
