@@ -1,6 +1,3948 @@
 {
   "companies": [
     {
+      "id": "CH-CHE477265074",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Selimi Gastro & Mobility",
+      "registrationNumber": "CHE-477.265.074",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 32 8006 Zürich     Selimi Gastro & Mobil, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:19.262Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Selimi%20Gastro%20Mobility",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:19.480Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE329207501",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Raum mit Stil Corinna Grossenbacher",
+      "registrationNumber": "CHE-329.207.501",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 22 8712 Stäfa     Raum mit Stil Corinna, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:19.030Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Raum%20mit%20Stil%20Corinna%20Grossenbacher",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:19.140Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE499167417",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Zakraoui Axendor Innovation",
+      "registrationNumber": "CHE-499.167.417",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 123 8424 Embrach     Zakraoui Axendor In, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:18.796Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Zakraoui%20Axendor%20Innovation",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:18.908Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE951092218",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Alhome GmbH",
+      "registrationNumber": "CHE-951.092.218",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 3 4800 Zofingen     Alhome GmbH, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "AG",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:18.130Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://alhome.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "alhome.com",
+      "emails": [
+        {
+          "email": "contact@alhome.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": true
+        }
+      ],
+      "bestEmail": "contact@alhome.com",
+      "emailSource": "Serveur Mail MX Actif (alhome.com)",
+      "phone": "+41 22 819 20 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Alhome",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 95,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:18.667Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE541866595",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "GKS MA AG",
+      "registrationNumber": "CHE-541.866.595",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SA / AG",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "Genève, Canton GR",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "GR",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:17.764Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GKS%20MA",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:17.990Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE888330764",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Jupiter Invest AG",
+      "registrationNumber": "CHE-888.330.764",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SA / AG",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "Genève, Canton AG",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "AG",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:17.415Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://jupiterinvest.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "jupiterinvest.com",
+      "emails": [
+        {
+          "email": "contact@jupiterinvest.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": true
+        }
+      ],
+      "bestEmail": "contact@jupiterinvest.com",
+      "emailSource": "Serveur Mail MX Actif (jupiterinvest.com)",
+      "phone": "+41 22 819 20 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Jupiter%20Invest",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 95,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:17.635Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE725357738",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Marantelli Performance Sagl",
+      "registrationNumber": "CHE-725.357.738",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "Genève, Canton GR",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "GR",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:17.159Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Marantelli%20Performance%20Sagl",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:17.291Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE189131315",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "vierK Media GmbH",
+      "registrationNumber": "CHE-189.131.315",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "Genève, Canton AG",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "AG",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:15.689Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://vierkmedia.ch",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "vierkmedia.ch",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": "+41 22 819 20 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=vierK%20Media",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 80,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:17.029Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE323354470",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "GYROS HOUSE, Ntzaliasvili Alexios",
+      "registrationNumber": "CHE-323.354.470",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 37 6454 Flüelen     GYROS HOUSE, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "UR",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:15.296Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GYROS%20HOUSE%20Ntzaliasvili%20Alexios",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:15.567Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE284125699",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "AlpKultUR",
+      "registrationNumber": "CHE-284.125.699",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 25 6460 Altdorf UR     AlpKultUR, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "UR",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:14.230Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://alpkultur.ch",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "alpkultur.ch",
+      "emails": [
+        {
+          "email": "contact@alpkultur.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": true
+        }
+      ],
+      "bestEmail": "contact@alpkultur.ch",
+      "emailSource": "Serveur Mail MX Actif (alpkultur.ch)",
+      "phone": "+41 22 819 20 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=AlpKultUR",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 95,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:15.173Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE572976281",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Ovisto GmbH",
+      "registrationNumber": "CHE-572.976.281",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 12/14 6130 Willisau     Ovisto GmbH, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "LU",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:13.357Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Ovisto",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:14.097Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE400911847",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Housesafari GmbH",
+      "registrationNumber": "CHE-400.911.847",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 24 8620 Wetzikon ZH     Housesafari GmbH, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:12.610Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://housesafari.ch",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "housesafari.ch",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": "+41 22 819 20 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Housesafari",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 80,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:13.236Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE682719331",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Gasser Advisory GmbH",
+      "registrationNumber": "CHE-682.719.331",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 31 8484 Weisslingen     Gasser Advisory, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:11.782Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Gasser%20Advisory",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:12.488Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE334340825",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Siegenthaler Mönchaltorf GmbH",
+      "registrationNumber": "CHE-334.340.825",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "Genève, Canton ZH",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:11.464Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Siegenthaler%20Mnchaltorf",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:11.659Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE279832441",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Physiotherapie Marbacher GmbH",
+      "registrationNumber": "CHE-279.832.441",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 109a 6433 Stoos SZ     Physiotherapie Ma, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "SZ",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:11.019Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Physiotherapie%20Marbacher",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:11.341Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE760951012",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "BenBridge Bio GmbH",
+      "registrationNumber": "CHE-760.951.012",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "strasse 12 6403 Küssnacht am Rigi     BenBridge, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "SZ",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:10.705Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=BenBridge%20Bio",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:10.897Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE409740447",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "nice assets ag",
+      "registrationNumber": "CHE-409.740.447",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Commerce, services financiers et technologiques en Suisse",
+      "address": "Genève, Canton LU",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "LU",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:08.786Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=nice%20assets",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:10.582Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE176233865",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "VF Capital SA",
+      "registrationNumber": "CHE-176.233.865",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SA / AG",
+      "shareCapital": 20000,
+      "activity": "le commerce, l'importation et l'exportation de tous types de produits et de machines, notamment dans le domaine du froid et de la climatisation",
+      "address": "Rue des Sablières 1 1242 Satigny     VF Capi, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "GE",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:08.051Z",
+      "activityCategory": "Import / Export",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=VF%20Capital",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:08.662Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Import / Export",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE511859637",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "N8R Sàrl",
+      "registrationNumber": "CHE-511.859.637",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Prestation de services dans les domaines de la technologie de l'information, du développement de logiciels, de l'ingénierie informatique, du conseil technique et de la formation",
+      "address": "Rue des Planchettes 61 2900 Porrentruy     N, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "JU",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:06.029Z",
+      "activityCategory": "Consulting",
+      "website": "https://n8r.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "n8r.com",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": "+41 22 819 20 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=N8R",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 80,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:07.928Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "CH-CHE330846200",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "EIWA Project SA",
+      "registrationNumber": "CHE-330.846.200",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SA / AG",
+      "shareCapital": 20000,
+      "activity": "le développement, la gestion, le financement et la commercialisation de projets de réduction et de séquestration des émissions de gaz à effet de serre, en particulier des projets en lien avec la nature (nature - based solutions) visant à lutter contre le réchauffement climatique et à la préservation forestière dans le monde",
+      "address": "Rue Rodolphe-TOEPFFER 8 1206 Genève     EIWA, 1201 Genève",
+      "city": "Genève",
+      "postalCode": "1201",
+      "canton": "GE",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "FOSC / SHAB (2026)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:05.562Z",
+      "activityCategory": "Consulting",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=EIWA%20Project",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 55,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:05.890Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130932601",
+      "country": "FR",
+      "countryName": "France",
+      "name": "PERES CONSULTING",
+      "registrationNumber": "130932601",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "La détention et la gestion de participations dans d'autres sociétés et la fourniture de services administratifs et financiers à ces sociétés - Code NAF: 70.10Z",
+      "address": "47 RUE VIVIENNE 75002 PARIS",
+      "city": "PARIS",
+      "postalCode": "75002",
+      "dirigeants": [
+        {
+          "name": "PATRICIA PERES",
+          "role": "Président de SAS",
+          "birthYear": "1974",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:02.919Z",
+      "activityCategory": "Consulting",
+      "website": "https://peresconsulting.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "peresconsulting.com",
+      "emails": [
+        {
+          "email": "patricia.peres@peresconsulting.com",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@peresconsulting.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "patricia.peres@peresconsulting.com",
+      "emailSource": "Serveur Mail MX Actif (peresconsulting.com)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=PERES%20CONSULTING",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=PATRICIA%20PERES",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:04.561Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Réglementé",
+        "tag": "🟡 Activité Réglementée",
+        "industry": "Holding & Gestion de Participations",
+        "color": "amber",
+        "reason": "Holdings et structures financières : nécessite la fourniture de l'organigramme et des bénéficiaires effectifs (UBO).",
+        "salesRecommendation": "Prospectable en demandant la structure juridique et les pièces justificatives d'activité.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130840838",
+      "country": "FR",
+      "countryName": "France",
+      "name": "GIANTS SOCIETY FRANCE",
+      "registrationNumber": "130840838",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "L'enseignement, la formation professionnelle dans tous domaines, sous toutes ses formes et sur tous supports à destination de tout public, la formation initiale, la formation professionnelle continue, la formation en alternance et la formation par apprentissage, la formation à distance ou en face à face pédagogique, la conception, la réalisation, l'édition et la distribution d'outils pédagogiques sous les formes les plus diverses, et toutes prestations annexes y afférentes ; l'exploitation, la gestion, l'administration et le développement d'un organisme de formation et/ou d'un centre de formation d'apprentis (Cfa), au sens des dispositions applicables du Code du travail, incluant notamment l'accueil, l'information, l'orientation, l'accompagnement pédagogique, administratif et professionnel des apprenants, stagiaires, alternants et apprentis ; la mise en oeuvre d'actions de formation par apprentissage, d'actions de Professionnalisation, de parcours Certifiants, qualifiants ou Diplômants, de bilans de compétences, d'actions de validation des acquis de l'expérience (Vae), et de toute action concourant au développement des compétences ; la conclusion de toutes conventions, contrats, partenariats ou accords avec des entreprises, organismes publics ou privés, Opco, certificateurs, organismes Financeurs, établissements d'enseignement, Cfa, Ufa, collectivités, institutions ou partenaires concourant à la réalisation de son objet. - Code NAF: 85.59A",
+      "address": "7 RUE DU COLONEL MOLL 75017 PARIS",
+      "city": "PARIS",
+      "postalCode": "75017",
+      "dirigeants": [
+        {
+          "name": "GIANTS",
+          "role": "Président de SAS",
+          "birthYear": null,
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:02.491Z",
+      "activityCategory": "Consulting",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GIANTS%20SOCIETY",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=GIANTS",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:02.644Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130842115",
+      "country": "FR",
+      "countryName": "France",
+      "name": "FINANCIERE GAMBETTA",
+      "registrationNumber": "130842115",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "L'exercice de la profession d'expert-comptable. - Code NAF: 69.20Z",
+      "address": "4 RUE REGIS 75006 PARIS",
+      "city": "PARIS",
+      "postalCode": "75006",
+      "dirigeants": [
+        {
+          "name": "ALEX LAREAL",
+          "role": "Président de SAS",
+          "birthYear": "1995",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:02.165Z",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=FINANCIERE%20GAMBETTA",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=ALEX%20LAREAL",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:02.387Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130878077",
+      "country": "FR",
+      "countryName": "France",
+      "name": "BELLEO",
+      "registrationNumber": "130878077",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "La conception, la programmation de logiciels, sites Web et outils informatiques, ainsi que la gestion de projets y relatifs - Code NAF: 62.01Z",
+      "address": "47 RUE VIVIENNE 75002 PARIS",
+      "city": "PARIS",
+      "postalCode": "75002",
+      "dirigeants": [
+        {
+          "name": "LOUISE MÉLANIE PILLON",
+          "role": "Président de SAS",
+          "birthYear": "2002",
+          "isPrimary": true
+        },
+        {
+          "name": "TANGUY GAUTHIER NARCISSE ROHAUT",
+          "role": "Directeur Général",
+          "birthYear": "1995",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:57:00.735Z",
+      "activityCategory": "Consulting",
+      "website": "https://belleo.fr",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "belleo.fr",
+      "emails": [
+        {
+          "email": "louise.melaniepillon@belleo.fr",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@belleo.fr",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "louise.melaniepillon@belleo.fr",
+      "emailSource": "Serveur Mail MX Actif (belleo.fr)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=BELLEO",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=LOUISE%20M%C3%89LANIE%20PILLON",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:02.062Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130938509",
+      "country": "FR",
+      "countryName": "France",
+      "name": "ARENA",
+      "registrationNumber": "130938509",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "La conception, la production, la réalisation, l'édition, la diffusion et l'exploitation, sur tout support et par tout moyen de communication au public existant ou à venir, de tous contenus et programmes de toute nature, notamment dans le domaine du sport, du divertissement et de l'actualité, ainsi que l'édition, l'animation et l'exploitation de tous sites internet, applications, Plateformes, chaînes et comptes sur les réseaux sociaux et services de partage de contenus, et l'animation et la Monétisation des communautés en ligne qui s'y rattachent. L'exercice de toute activité de média, de presse, d'information et de journalisme, notamment sportif, en ce compris la collecte, le traitement, l'analyse et le commentaire de l'information. La commercialisation, la régie et la vente d'espaces publicitaires et de dispositifs promotionnel - Code NAF: 58.13Z",
+      "address": "34 RUE LAUGIER 75017 PARIS",
+      "city": "PARIS",
+      "postalCode": "75017",
+      "dirigeants": [
+        {
+          "name": "SUPERNOVA INT",
+          "role": "Président de SAS",
+          "birthYear": null,
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:58.679Z",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://arena.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "arena.com",
+      "emails": [
+        {
+          "email": "supernova.int@arena.com",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@arena.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "supernova.int@arena.com",
+      "emailSource": "Serveur Mail MX Actif (arena.com)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=ARENA",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=SUPERNOVA%20INT",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:57:00.630Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131167322",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LES BARAQUES CHARDIN",
+      "registrationNumber": "131167322",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SCI",
+      "shareCapital": 5000,
+      "activity": "locations immobilières - Code NAF: 68.20B",
+      "address": "29 RUE DE FRANCE 70290 PLANCHER-LES-MINES",
+      "city": "PLANCHER-LES-MINES",
+      "postalCode": "70290",
+      "dirigeants": [
+        {
+          "name": "FLAVIO PIERRE CLAUDE FUNIATI",
+          "role": "Gérant et associé indéfiniment responsable",
+          "birthYear": "1999",
+          "isPrimary": true
+        },
+        {
+          "name": "MARIE MARCONOT",
+          "role": "Gérant et associé indéfiniment responsable",
+          "birthYear": "1987",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:58.412Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LES%20BARAQUES%20CHARDIN",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=FLAVIO%20PIERRE%20CLAUDE%20FUNIATI",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:58.563Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131263238",
+      "country": "FR",
+      "countryName": "France",
+      "name": "MANER ANNA",
+      "registrationNumber": "131263238",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SCI",
+      "shareCapital": 5000,
+      "activity": "l'acquisition, l'administration, la vente à titre exceptionnel et la gestion par bail location ou autrement de tous immeubles et biens immobiliers. - Code NAF: 68.20B",
+      "address": "3 RUE SOPHIE TREBUCHET 56450 THEIX-NOYALO",
+      "city": "THEIX-NOYALO",
+      "postalCode": "56450",
+      "dirigeants": [
+        {
+          "name": "SYLVAIN LAZ",
+          "role": "Associé indéfiniment responsable",
+          "birthYear": "1980",
+          "isPrimary": true
+        },
+        {
+          "name": "LS PROJETS",
+          "role": "Gérant et associé indéfiniment responsable",
+          "birthYear": null,
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:58.055Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=MANER%20ANNA",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=SYLVAIN%20LAZ",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:58.279Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130604739",
+      "country": "FR",
+      "countryName": "France",
+      "name": "GRAVIN",
+      "registrationNumber": "130604739",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "L'acquisition, la détention, la propriété, l'administration, la gestion et l'exploitation par bail, location ou autrement, de tous immeubles bâtis ou non bâtis, ainsi que de tous droits immobiliers, dont elle pourrait devenir propriétaire par voie d'acquisition, d'échange, d'apport ou autrement. - Code NAF: 68.20B",
+      "address": "229 ROUTE DE GRAVIN 74300 MAGLAND",
+      "city": "MAGLAND",
+      "postalCode": "74300",
+      "dirigeants": [
+        {
+          "name": "LUCAS VINCENT MARIE CHEVALIER-GIROD",
+          "role": "Président de SAS",
+          "birthYear": "1977",
+          "isPrimary": true
+        },
+        {
+          "name": "AXEL NUNES",
+          "role": "Directeur Général",
+          "birthYear": "1996",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:57.583Z",
+      "activityCategory": "Immobilier",
+      "website": "https://gravin.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "gravin.com",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GRAVIN",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=LUCAS%20VINCENT%20MARIE%20CHEVALIER-GIROD",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 85,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:57.853Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130800899",
+      "country": "FR",
+      "countryName": "France",
+      "name": "IMNOV",
+      "registrationNumber": "130800899",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société civile immobilière",
+      "shareCapital": 5000,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "34470 Pérols",
+      "city": "Pérols",
+      "postalCode": "34470",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:57.016Z",
+      "activityCategory": "Consulting",
+      "website": "https://imnov.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "imnov.com",
+      "emails": [
+        {
+          "email": "contact@imnov.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": true
+        }
+      ],
+      "bestEmail": "contact@imnov.com",
+      "emailSource": "Serveur Mail MX Actif (imnov.com)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=IMNOV",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:57.468Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-130568249",
+      "country": "FR",
+      "countryName": "France",
+      "name": "VLB PATRIMOINE",
+      "registrationNumber": "130568249",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SCI",
+      "shareCapital": 5000,
+      "activity": "l'acquisition, l'administration, la gestion par location ou autrement de tous immeubles et biens immobiliers, la vente de tous immeubles et biens immobiliers, et notamment d'un immeuble sis à villeneuve-lès-béziers (hérault), 34420, 8 rue du quatre septembre, consistant en une maison à usage d'habitation élevée de deux étages sur rez-de-chaussée, comprenant : au rez-de-chaussée, une cour, une cuisine, une arrière-cuisine, une salle à manger, un salon, une seconde cour et un abri ; au premier étage, un dégagement, un bureau, une salle d'eau et trois chambres ; au deuxième étage, deux chambres, un séjour avec coin repas, une salle d'eau avec wc et un dégagement ; le tout figurant au cadastre section aa, numéro 567, lieudit 8 rue du quatre septembre , pour une superficie de 00 ha 01 a 44 ca, tel que le bien existe, avec tous droits y attachés, sans aucune exception ni réserve, moyennant le prix de 85 000 € (quatre-vingt-cinq mille euros) toutes opérations financières, mobilières ou immobilières se rattachant directement ou indirectement à cet objet et susceptibles d'en favoriser la réalisation, à condition toutefois d'en respecter le caractère civil. - Code NAF: 68.20B",
+      "address": "92 BOULEVARD VICTOR HUGO 34410 SERIGNAN",
+      "city": "SERIGNAN",
+      "postalCode": "34410",
+      "dirigeants": [
+        {
+          "name": "JONATHAN BERNARDI",
+          "role": "Gérant et associé indéfiniment responsable",
+          "birthYear": "1980",
+          "isPrimary": true
+        },
+        {
+          "name": "RICHARD CARMONA",
+          "role": "Gérant et associé indéfiniment responsable",
+          "birthYear": "1955",
+          "isPrimary": true
+        },
+        {
+          "name": "EL-MEHDI EL ALAMI",
+          "role": "Gérant et associé indéfiniment responsable",
+          "birthYear": "1986",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:56.885Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=VLB%20PATRIMOINE",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=JONATHAN%20BERNARDI",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:56.924Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131408536",
+      "country": "FR",
+      "countryName": "France",
+      "name": "ELBK MOBILITY",
+      "registrationNumber": "131408536",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société par Actions Simplifiée",
+      "shareCapital": 5000,
+      "activity": "Chauffeur VTC - Convoyeur de véhicules - Achats et ventes de véhicules d'occasion",
+      "address": "51100 Reims",
+      "city": "Reims",
+      "postalCode": "51100",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:56.412Z",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=ELBK%20MOBILITY",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:56.635Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131170797",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LES SERRES DE BONCÉ",
+      "registrationNumber": "131170797",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "la production de légumes et fruits sous serres, leur conditionnement et leur commercialisation, production maraîchère. - Code NAF: 01.13Z",
+      "address": "LA CROIX AU MEE 707 ROUTE LA SACTIERE 50370 BRECEY",
+      "city": "BRECEY",
+      "postalCode": "50370",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:56.114Z",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LES%20SERRES%20DE%20BONC",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:56.307Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131268369",
+      "country": "FR",
+      "countryName": "France",
+      "name": "SCI AIDE ET SOIN SAINT HELIER",
+      "registrationNumber": "131268369",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société civile immobilière",
+      "shareCapital": 5000,
+      "activity": "la propriété, la gestion, l'administration, la mise en valeur et la mutation de tous biens et droits immobiliers",
+      "address": "54 Rue Saint-Hélier",
+      "city": "Rennes",
+      "postalCode": "35000",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:55.630Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=AIDE%20ET%20SOIN%20SAINT%20HELIER",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:56.004Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131323735",
+      "country": "FR",
+      "countryName": "France",
+      "name": "NANO",
+      "registrationNumber": "131323735",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société civile immobilière",
+      "shareCapital": 5000,
+      "activity": "l'acquisition, en état futur d'achèvement ou achevés, l'apport, la propriété, la mise en valeur, la transformation, la construction, l'aménagement, l'administration, la location et la vente (exceptionnelle) de tous biens et droits immobiliers, ainsi que de tous biens et droits pouvant constituer l'accessoire, l'annexe ou le complément des biens et droits immobiliers en question.",
+      "address": "18 Allée Michel Petrucciani",
+      "city": "Vern-sur-Seiche",
+      "postalCode": "35770",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:55.195Z",
+      "activityCategory": "Immobilier",
+      "website": "https://nano.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "nano.com",
+      "emails": [
+        {
+          "email": "contact@nano.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": true
+        }
+      ],
+      "bestEmail": "contact@nano.com",
+      "emailSource": "Serveur Mail MX Actif (nano.com)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=NANO",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:55.538Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131267031",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LV PLAINE",
+      "registrationNumber": "131267031",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SCI",
+      "shareCapital": 5000,
+      "activity": "grandes cultures - Code NAF: 01.11Z",
+      "address": "3 RUE DES HAUTES BRUYERES 27250 NEAUFLES-AUVERGNY",
+      "city": "NEAUFLES-AUVERGNY",
+      "postalCode": "27250",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:54.970Z",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LV%20PLAINE",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:55.103Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131412900",
+      "country": "FR",
+      "countryName": "France",
+      "name": "SARL ANCLA",
+      "registrationNumber": "131412900",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société à responsabilité limitée",
+      "shareCapital": 5000,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "22300 Lannion",
+      "city": "Lannion",
+      "postalCode": "22300",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:52.150Z",
+      "activityCategory": "Consulting",
+      "website": "https://ancla.io",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "ancla.io",
+      "emails": [
+        {
+          "email": "sarl.ancla@ancla.io",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@ancla.io",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "sarl.ancla@ancla.io",
+      "emailSource": "Serveur Mail MX Actif (ancla.io)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=ANCLA",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:54.749Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131327843",
+      "country": "FR",
+      "countryName": "France",
+      "name": "GALERIE NOELIA",
+      "registrationNumber": "131327843",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "activité de transaction de tous biens immobiliers meublés ou non meublés, bâtis ou non bâtis, de fonds de commerce et de droits sociaux, de gestion, de location de ces biens et ou de tous autres biens. - toutes prestations de services de communication audiovisuelle liée au domaine immobilier ou s'y rattachant, sur tous supports (dont notamment les réseaux sociaux) et toutes prestations de création de contenus photographiques, audiovisuels, ainsi que leur diffusion et leur monétisation. - Code NAF: 68.31Z",
+      "address": "20 RUE ANTOINE BOURDELLE 21000 DIJON",
+      "city": "DIJON",
+      "postalCode": "21000",
+      "dirigeants": [
+        {
+          "name": "NOAH LABRI",
+          "role": "Président de SAS",
+          "birthYear": "2003",
+          "isPrimary": true
+        },
+        {
+          "name": "ELIO LONNY SAYER",
+          "role": "Directeur Général",
+          "birthYear": "2004",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:52.016Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GALERIE%20NOELIA",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=NOAH%20LABRI",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:52.058Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131371700",
+      "country": "FR",
+      "countryName": "France",
+      "name": "GrandVernier Estate",
+      "registrationNumber": "131371700",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "l'achat et la revente, en bloc ou par lot, après avoir éventuellement effectué des travaux de rénovation, ou de restructuration, de tous biens, ou droits immobiliers (marchand de biens) - Code NAF: 68.10Z",
+      "address": "6 RUE CLAUDE CHAPPE 25300 PONTARLIER",
+      "city": "PONTARLIER",
+      "postalCode": "25300",
+      "dirigeants": [
+        {
+          "name": "RG-AG",
+          "role": "Président de SAS",
+          "birthYear": null,
+          "isPrimary": true
+        },
+        {
+          "name": "GROUPE VERNIER",
+          "role": "Directeur Général",
+          "birthYear": null,
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:51.779Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GrandVernier%20Estate",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=RG-AG",
+      "hasDigitalPresence": false,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:51.888Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Réglementé",
+        "tag": "🟡 Activité Réglementée",
+        "industry": "Promotion Immobilière & Marchands de Biens",
+        "color": "amber",
+        "reason": "Opérations immobilières complexes : justification de l'origine des fonds et garanties financières requises.",
+        "salesRecommendation": "Prospectable en demandant la structure juridique et les pièces justificatives d'activité.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131328429",
+      "country": "FR",
+      "countryName": "France",
+      "name": "HOTEL LITTERAIRE COLETTE",
+      "registrationNumber": "131328429",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société Commerciale",
+      "shareCapital": 5000,
+      "activity": "l'achat le vente l'exploitation la prise à bail ou en location gérance de tous hôtels ou sociétés hôtelières. - Code NAF: 55.10Z",
+      "address": "22 BOULEVARD ANATOLE FRANCE 19100 BRIVE-LA-GAILLARDE",
+      "city": "BRIVE-LA-GAILLARDE",
+      "postalCode": "19100",
+      "dirigeants": [
+        {
+          "name": "ALBAN HADRIEN JACQUES-MARIE LETERTRE",
+          "role": "Gérant et associé indéfiniment et solidairement responsable",
+          "birthYear": "1988",
+          "isPrimary": true
+        },
+        {
+          "name": "JACKY JEAN-PIERRE DÉSIRÉ LETERTRE",
+          "role": "Associé indéfiniment et solidairement responsable",
+          "birthYear": "1956",
+          "isPrimary": true
+        },
+        {
+          "name": "BLACE FINANCE",
+          "role": "Associé indéfiniment et solidairement responsable",
+          "birthYear": null,
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:51.445Z",
+      "activityCategory": "Restauration",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=HOTEL%20LITTERAIRE%20COLETTE",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=ALBAN%20HADRIEN%20JACQUES-MARIE%20LETERTRE",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:51.671Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Restauration",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131180499",
+      "country": "FR",
+      "countryName": "France",
+      "name": "HF CONSULTING",
+      "registrationNumber": "131180499",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 5000,
+      "activity": "conseil et assistance en matière informatique - Code NAF: 62.02A",
+      "address": "48 RUE DE L'ANCIENNE DISTILLERIE 17480 LE CHATEAU-D'OLERON",
+      "city": "LE CHATEAU-D'OLERON",
+      "postalCode": "17480",
+      "dirigeants": [
+        {
+          "name": "HERVÉ EMMANUEL FRAIGNE",
+          "role": "Président de SAS",
+          "birthYear": "1967",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:49.657Z",
+      "activityCategory": "Consulting",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=HF%20CONSULTING",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=HERV%C3%89%20EMMANUEL%20FRAIGNE",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:51.334Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131163115",
+      "country": "FR",
+      "countryName": "France",
+      "name": "DELICES DU SUD",
+      "registrationNumber": "131163115",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société par Actions Simplifiée",
+      "shareCapital": 5000,
+      "activity": "Boulangerie, pâtisserie, viennoiseries, sandwicherie, snacking, pizzas artisanales sur place et à emporter",
+      "address": "13300 Salon-de-Provence",
+      "city": "Salon-de-Provence",
+      "postalCode": "13300",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:49.217Z",
+      "activityCategory": "Restauration",
+      "website": "https://delicesdusud.com",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "delicesdusud.com",
+      "emails": [
+        {
+          "email": "delices.dusud@delicesdusud.com",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@delicesdusud.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "delices.dusud@delicesdusud.com",
+      "emailSource": "Serveur Mail MX Actif (delicesdusud.com)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=DELICES%20DU%20SUD",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:49.551Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Restauration",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131139115",
+      "country": "FR",
+      "countryName": "France",
+      "name": "ALIM'HYGIENE13",
+      "registrationNumber": "131139115",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 5000,
+      "activity": "Toute prestation de conseil, audit, accompagnement, assistance et formation auprès des entreprises et organisations notamment en matière d'hygiène, de sécurité alimentaire, de qualité, de conformité réglementaire, d'organisation et de prévention des risques. - Code NAF: 70.22Z",
+      "address": "1 SQUARE JEAN MOULIN 13300 SALON-DE-PROVENCE",
+      "city": "SALON-DE-PROVENCE",
+      "postalCode": "13300",
+      "dirigeants": [
+        {
+          "name": "FLORIAN MARC FRANCIS DIVO",
+          "role": "Gérant",
+          "birthYear": "1996",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:49.046Z",
+      "activityCategory": "Consulting",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=ALIMHYGIENE13",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=FLORIAN%20MARC%20FRANCIS%20DIVO",
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:49.086Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131011355",
+      "country": "FR",
+      "countryName": "France",
+      "name": "DL IMMO",
+      "registrationNumber": "131011355",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société à responsabilité limitée",
+      "shareCapital": 5000,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "13240 Septèmes-les-Vallons",
+      "city": "Septèmes-les-Vallons",
+      "postalCode": "13240",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:46.127Z",
+      "activityCategory": "Consulting",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=DL%20IMMO",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:48.932Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Consulting",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131373052",
+      "country": "FR",
+      "countryName": "France",
+      "name": "SCI MANO",
+      "registrationNumber": "131373052",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société civile immobilière",
+      "shareCapital": 5000,
+      "activity": "acquisition et gestion immobiliere",
+      "address": "24 Boulevard Guy Lussac",
+      "city": "Marseille 14e Arrondissement",
+      "postalCode": "13014",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:44.678Z",
+      "activityCategory": "Immobilier",
+      "website": "https://mano.fr",
+      "websiteStatus": "Certifié SSL & Actif",
+      "domain": "mano.fr",
+      "emails": [
+        {
+          "email": "sci.mano@mano.fr",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@mano.fr",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "sci.mano@mano.fr",
+      "emailSource": "Serveur Mail MX Actif (mano.fr)",
+      "phone": "+33 1 84 16 00 00",
+      "phoneSource": "Standard Siège Social (PagesPro / Insee)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=MANO",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web actif & serveur DNS résolu",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:46.030Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible",
+        "tag": "🟢 Éligible Revolut",
+        "industry": "Immobilier",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services conforme à la charte d'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).",
+        "salesRecommendation": "Prospect prioritaire : activité standard directement acceptée sur Revolut Business.",
+        "isEligible": true
+      }
+    },
+    {
+      "id": "FR-131272684",
+      "country": "FR",
+      "countryName": "France",
+      "name": "SWING INVESTISSEMENTS II",
+      "registrationNumber": "131272684",
+      "incorporationDate": "2026-10-15",
+      "legalForm": "Société à responsabilité limitée",
+      "shareCapital": 5000,
+      "activity": "activités de courtage, de conseil et d'intermédiation dans les domaines des assurances, des opérations de banque et services de paiement, de l'investissement financier, des transactions sur immeubles et fonds de commerce, ainsi que sur tous actifs financiers, immobiliers et numériques, cotés ou non cotés. activités de conseil, formation, animation, coaching et accompagnement à destination des personnes physiques, personnes morales et collectivités, notamment dans les domaines de la gestion, du management, du recrutement, du conseil en stratégie, du développement commercial et marketing.",
+      "address": "594 Rue Georges Charpak",
+      "city": "Saint-Quentin",
+      "postalCode": "02100",
+      "dirigeants": [
+        {
+          "name": "X",
+          "role": "Non renseigné au registre",
+          "isPrimary": true
+        }
+      ],
+      "source": "BODACC / RNE / INPI",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-10-15T08:56:44.337Z",
+      "activityCategory": "Immobilier",
+      "website": null,
+      "websiteStatus": "Pas de site actif (en cours d'installation)",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au greffe",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=SWING%20INVESTISSEMENTS%20II",
+      "linkedinDirigeantUrl": null,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Vérification recommandée)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant légal certifié au greffe",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "enrichedAt": "2026-10-15T08:56:44.586Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Réglementé",
+        "tag": "🟡 Activité Réglementée",
+        "industry": "Intermédiation Financière & Assurance",
+        "color": "amber",
+        "reason": "Activités financières réglementées : justificatif d'enregistrement officiel ORIAS (FR) ou FINMA (CH) requis.",
+        "salesRecommendation": "Prospectable en demandant la structure juridique et les pièces justificatives d'activité.",
+        "isEligible": true
+      }
+    },
+    {
       "id": "CH-CHE-327657672",
       "country": "CH",
       "countryName": "Suisse",
@@ -20048,6 +23990,17 @@
   ],
   "syncLogs": [
     {
+      "date": "2026-10-15T08:57:19.498Z",
+      "status": "success",
+      "recordsFetched": 45,
+      "recordsAdded": 45,
+      "recordsUpdated": 0,
+      "totalDatabase": 206,
+      "durationSeconds": 36.5,
+      "errors": null,
+      "country": "ALL"
+    },
+    {
       "date": "2026-10-14T07:14:59.861Z",
       "status": "success",
       "recordsFetched": 28,
@@ -20060,13 +24013,13 @@
     }
   ],
   "lastSync": {
-    "date": "2026-10-14T07:14:59.861Z",
+    "date": "2026-10-15T08:57:19.498Z",
     "status": "success",
-    "recordsFetched": 28,
-    "recordsAdded": 28,
+    "recordsFetched": 45,
+    "recordsAdded": 45,
     "recordsUpdated": 0,
-    "totalDatabase": 28,
-    "durationSeconds": 4.1,
+    "totalDatabase": 206,
+    "durationSeconds": 36.5,
     "errors": null,
     "country": "ALL"
   },
