@@ -55,6 +55,11 @@ async function main() {
 
     // Revolut Compliance Pre-Screening
     comp.compliance = evaluateRevolutCompliance(comp);
+
+    // Ensure rich network cartography
+    if (!comp.network || !comp.network.nodes || comp.network.nodes.length <= 1) {
+      comp.network = await buildCompanyNetwork(comp, db.companies);
+    }
   }
 
   // 3. Write back to server db.json
@@ -67,9 +72,22 @@ async function main() {
   const toContact = db.companies.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
   const contacted = db.companies.filter(c => c.crmStatus?.startsWith('contacted')).length;
   const inCrm = db.companies.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
-  const highConfidence = db.companies.filter(c => (c.confidenceScore || 0) >= 70).length;
+  const highSafetyCount = db.companies.filter(c => (c.safety?.score || c.confidenceScore || 0) >= 60).length;
+  const verifiedWebCount = db.companies.filter(c => Boolean(c.website)).length;
 
-  const stats = { total, france, switzerland, toContact, contacted, inCrm, highConfidence };
+  const stats = {
+    total,
+    france,
+    switzerland,
+    franceCount: france,
+    switzerlandCount: switzerland,
+    toContact,
+    contacted,
+    inCrm,
+    highConfidence: highSafetyCount,
+    highSafetyCount,
+    verifiedWebCount
+  };
   const publicBundle = { companies: db.companies, stats };
 
   // 5. Update client data sources

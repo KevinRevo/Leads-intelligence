@@ -5,57 +5,64 @@
 
 function evaluateRevolutCompliance(company) {
   const activity = (company.activity || '').toLowerCase();
+  const primaryActivity = (company.activity || '').split(/\.\s+/)[0].toLowerCase();
   const name = (company.name || '').toLowerCase();
   const category = (company.activityCategory || '').toLowerCase();
   const fullText = `${name} ${activity} ${category}`;
+  const primaryText = `${name} ${primaryActivity} ${category}`;
 
   // 1. PASTILLE ROUGE : Industries interdites / Non éligibles sur Revolut Business
   // (Politique d'utilisation acceptable & restrictions bancaires Revolut)
   const prohibitedIndustries = [
     {
-      pattern: /\b(crypto|bitcoin|ethereum|token|nft|web3|blockchain|mining|minage|ico)\b/i,
+      pattern: /\b(crypto|krypto|bitcoin|ethereum|token|nft|web3|blockchain|mining|minage|ico)\b/i,
       industry: 'Crypto-actifs & Minage non régulé',
       reason: 'Activité sur les actifs numériques / crypto-monnaies non autorisée par la politique Revolut Business.'
     },
     {
-      pattern: /\b(casino|pari|gambling|jeux d'argent|loterie|betting|poker|pronostic|turf)\b/i,
+      pattern: /\b(casino|pari|gambling|jeux d'argent|loterie|betting|poker|pronostic|turf|glücksspiel|wetten)\b/i,
       industry: 'Jeux d\'argent, Paris & Casinos',
       reason: 'Jeux de hasard, paris sportifs et loteries strictement exclus de l\'ouverture de compte Revolut.'
     },
     {
-      pattern: /\b(armement|defense militaire|armes|munitions|tactical|fusil|balistique)\b/i,
+      pattern: /\b(armement|defense militaire|armes|munitions|tactical|fusil|balistique|waffen|munition|rüstung)\b/i,
       industry: 'Armes, Munitions & Matériel Militaire',
       reason: 'Fabrication et négoce d\'armes, munitions et équipements de combat exclus par la politique de conformité.'
     },
     {
-      pattern: /\b(adulte|erotique|sex|escort|pornograph|strip-tease|charme)\b/i,
+      pattern: /\b(adulte|erotique|sex|escort|pornograph|strip-tease|charme|erotik)\b/i,
       industry: 'Divertissement pour adultes & Services érotiques',
       reason: 'Industrie pour adultes et contenus érotiques non acceptés par la politique de conformité Revolut.'
     },
     {
-      pattern: /\b(tabac|cigarette|vape|vapote|e-liquide|cbd|cannabis|chicha|buraliste)\b/i,
+      pattern: /\b(tabac|tabak|cigarette|vape|vapote|e-liquide|cbd|cannabis|hanf|chicha|buraliste)\b/i,
       industry: 'Tabac, Vape & Produits dérivés du CBD',
       reason: 'Vente de tabac, produits de vapotage et dérivés de cannabinoïdes restreinte par la réglementation bancaire.'
     },
     {
-      pattern: /\b(forex|cfd|options binaires|trading speculatif|courtage speculatif)\b/i,
+      pattern: /\b(forex|cfd|options binaires|trading speculatif|courtage speculatif|algo trading|devisenhandel)\b/i,
       industry: 'Trading Spéculatif, Forex & CFD',
       reason: 'Trading de devises et instruments financiers à effet de levier non agréés.'
     },
     {
-      pattern: /\b(pret sur gage|pawnshop|recouvrement agressif|usure|rachat de dette)\b/i,
+      pattern: /\b(pret sur gage|pawnshop|recouvrement agressif|usure|rachat de dette|pfandhaus|inkasso)\b/i,
       industry: 'Prêt sur Gage & Recouvrement Agressif',
       reason: 'Crédit non bancaire sur gage et recouvrement contentieux exclus de l\'offre Revolut.'
     },
     {
-      pattern: /\b(or brut|diamant brut|pierres precieuses|metaux precieux physique)\b/i,
-      industry: 'Négoce de Métaux & Pierres Précieuses Brutes',
-      reason: 'Commerce physique de métaux précieux bruts et lingots sans certification bancaire.'
+      pattern: /\b(or brut|diamant brut|pierres precieuses|metaux precieux|edelmetall|rohstoffhandel|commodities)\b/i,
+      industry: 'Négoce de Métaux & Matières Premières Sensibles',
+      reason: 'Commerce physique de métaux précieux bruts, diamants ou matières premières réglementées.'
     },
     {
-      pattern: /\b(pyramidal|mlm|marketing de reseau|vente multiniveau)\b/i,
+      pattern: /\b(pyramidal|mlm|marketing de reseau|vente multiniveau|strukturvertrieb)\b/i,
       industry: 'Vente Pyramidale & Marketing Multi-Niveaux (MLM)',
       reason: 'Modèles de distribution multiniveaux ou vente pyramidale exclus des services Revolut Business.'
+    },
+    {
+      pattern: /\b(stiftung|fondation|fondazione|familienstiftung)\b/i,
+      industry: 'Fondation & Structure Patrimoniale Spéciale',
+      reason: 'Les fondations (Stiftung) et trusts familiaux sont exclus de l\'onboarding standard Revolut Business.'
     }
   ];
 
@@ -78,19 +85,19 @@ function evaluateRevolutCompliance(company) {
   // (Holdings, promoteurs immobiliers, courtiers financiers agréés)
   const regulatedIndustries = [
     {
-      pattern: /\b(holding|participations|societe de portefeuille|societe de gestion)\b/i,
+      pattern: /\b(holding|participations|societe de portefeuille|societe de gestion|beteiligungen|family office|vermögensverwaltung)\b/i,
       industry: 'Holding & Gestion de Participations',
       reason: 'Holdings et structures financières : nécessite la fourniture de l\'organigramme et des bénéficiaires effectifs (UBO).'
     },
     {
-      pattern: /\b(marchand de biens|promotion immobiliere|construction-vente)\b/i,
+      pattern: /\b(marchand de biens|promotion immobiliere|construction-vente|immobilienentwicklung|generalunternehmung)\b/i,
       industry: 'Promotion Immobilière & Marchands de Biens',
       reason: 'Opérations immobilières complexes : justification de l\'origine des fonds et garanties financières requises.'
     },
     {
-      pattern: /\b(courtage|courtier|fintech|paiement|intermediaire bancaire)\b/i,
-      industry: 'Intermédiation Financière & Assurance',
-      reason: 'Activités financières réglementées : justificatif d\'enregistrement officiel ORIAS (FR) ou FINMA (CH) requis.'
+      pattern: /\b(courtage|courtier|fintech|paiement|intermediaire bancaire|finanzdienstleistung|treuhand|fiduciaire)\b/i,
+      industry: 'Intermédiation Financière & Fiduciaire',
+      reason: 'Activités financières réglementées : justificatif d\'enregistrement officiel ORIAS (FR) ou FINMA / OAR (CH) requis.'
     },
     {
       pattern: /\b(negoc|import.export|matiere premiere|petrole)\b/i,
@@ -100,7 +107,7 @@ function evaluateRevolutCompliance(company) {
   ];
 
   for (const item of regulatedIndustries) {
-    if (item.pattern.test(fullText)) {
+    if (item.pattern.test(primaryText)) {
       return {
         status: 'conditional',
         badge: '🟡 Réglementé',

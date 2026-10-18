@@ -189,17 +189,17 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             </div>
           )}
 
-          {/* Official Registries & Legal Portals (Pappers for FR, Zefix for CH) */}
+          {/* Official Registries & Legal Portals (Unified Visuals for FR & CH) */}
           <div className="bg-gradient-to-r from-slate-100 to-blue-50/50 dark:from-slate-900/80 dark:to-blue-950/20 p-4 rounded-xl border border-slate-200 dark:border-blue-900/30 flex items-center justify-between flex-wrap gap-3">
             <div>
               <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
                 <FileText className="w-4 h-4 text-blue-500" />
-                <span>{isCH ? 'Registre Fédéral Suisse (Zefix & FOSC)' : 'Registres Légaux & Financiers (Pappers & INPI)'}</span>
+                <span>{isCH ? 'Registres Légaux & Financiers (Zefix & FOSC)' : 'Registres Légaux & Financiers (Pappers & INPI)'}</span>
               </span>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                 {isCH 
-                  ? 'Vérification directe auprès de l\'Index central des raisons de commerce (OFJ)' 
-                  : 'Vérification légale, bilans, statuts déposés et bénéficiaires effectifs'}
+                  ? 'Vérification légale, statuts déposés, conseil d\'administration et publications FOSC (OFJ)' 
+                  : 'Vérification légale, bilans, statuts déposés et bénéficiaires effectifs (RCS / RNE)'}
               </p>
             </div>
 
@@ -210,20 +210,20 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                     href={`https://www.zefix.ch/fr/search/entity/list?name=${encodeURIComponent(company.name)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
-                    title="Ouvrir la recherche officielle sur l'Index central Zefix"
+                    className="px-3 py-1.5 rounded-lg bg-[#0066FF] hover:bg-[#0052cc] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                    title="Ouvrir la fiche officielle sur l'Index central Zefix"
                   >
-                    <span>🇨🇭 Consulter sur Zefix</span>
+                    <span>🇨🇭 Fiche Zefix</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                   <a
-                    href={`https://www.shab.ch/#!/search/publications?subRubrics=HR01&search=${encodeURIComponent(company.name)}`}
+                    href={`https://www.shab.ch/#!/search/publications?subRubrics=HR01&search=${encodeURIComponent(company.registrationNumber && company.registrationNumber !== 'En cours' ? company.registrationNumber : company.name)}`}
                     target="_blank"
                     rel="noreferrer"
                     className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"
-                    title="Voir l'annonce officielle sur la FOSC"
+                    title="Voir l'annonce officielle sur la FOSC / SHAB"
                   >
-                    <span>Fiche FOSC / SHAB</span>
+                    <span>FOSC / SHAB (OFJ)</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </>
@@ -258,7 +258,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
           <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800">
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                Nature d'activité & But Social
+                Nature d'activité & Objet Social
               </span>
               <button
                 onClick={() => handleCopy(company.activity, 'activity')}
@@ -276,14 +276,21 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             </p>
           </div>
 
-          {/* Dirigeants & CFO Section */}
+          {/* Dirigeants, Board & CFO Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-            {/* Dirigeants */}
+            {/* Dirigeants, Membres du Board & Directeurs */}
             <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                Dirigeants & Mandataires Sociaux
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                  Dirigeants, Board & Directeurs
+                </span>
+                {company.dirigeants?.filter(d => d.name && d.name !== 'X').length > 0 && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold">
+                    {company.dirigeants.filter(d => d.name && d.name !== 'X').length} certifié(s)
+                  </span>
+                )}
+              </div>
               <div className="space-y-2">
                 {company.dirigeants?.map((d, idx) => {
                   const isX = !d.name || d.name === 'X' || d.name.includes('Direction') || d.name.includes('Conseil');
@@ -307,7 +314,10 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                               {d.name} {copiedField === `dir-${idx}` && <span className="text-emerald-500 text-xs">✓</span>}
                             </button>
                           )}
-                          <div className="text-xs text-slate-500 dark:text-slate-400">{d.role || 'Mandataire'}</div>
+                          <div className="text-xs text-slate-500 dark:text-slate-400">
+                            {d.role || 'Mandataire / Membre du Board'}
+                            {d.birthYear ? ` • Né(e) en ${d.birthYear}` : ''}
+                          </div>
                         </div>
                       </div>
                       {!isX && (
@@ -336,23 +346,48 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                     </div>
                   );
                 })}
+
+                {/* Corporate Holdings / Personnes Morales if present */}
+                {company.corporateLinks?.length > 0 && (
+                  <div className="pt-1 space-y-1.5">
+                    <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider block">
+                      Holdings & Personnes Morales Liées :
+                    </span>
+                    {company.corporateLinks.map((corp, cIdx) => (
+                      <div key={cIdx} className="flex items-center justify-between p-2 rounded-lg bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 text-xs">
+                        <div>
+                          <span className="font-bold text-slate-800 dark:text-slate-200 block">{corp.name}</span>
+                          <span className="text-[11px] text-emerald-700 dark:text-emerald-400">
+                            {corp.roleHeld || 'Holding / Associée Morale'} {corp.siren ? `(${corp.siren})` : ''}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => onOpenNetwork(company)}
+                          className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1"
+                        >
+                          <Share2 className="w-3 h-3" /> Voir graphe
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* CFO / Décideur Financier */}
+            {/* CFO / Décideur Financier & Co-Direction */}
             <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                Directeur Financier / CFO
+                Directeur Financier / CFO & Co-Décideurs
               </span>
               <div className="p-3 rounded-lg bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 space-y-2">
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between gap-2">
                   <div>
                     {(!company.cfo?.name || company.cfo.name === 'X' || company.cfo.name.includes('Direction')) ? (
                       <div>
                         <span className="text-sm font-bold text-slate-400 dark:text-slate-500 font-mono italic block">
-                          X <span className="text-xs font-sans not-italic text-slate-400">(Non renseigné au registre)</span>
+                          X <span className="text-xs font-sans not-italic text-slate-400">(Pas de 2e mandataire ou CFO inscrit au greffe)</span>
                         </span>
-                        <span className="text-xs text-slate-400">Fonction financière non individualisée au greffe</span>
+                        <span className="text-xs text-slate-400">Utiliser le bouton ci-dessous pour cibler le DAF/CFO salarié sur LinkedIn</span>
                       </div>
                     ) : (
                       <div>
@@ -360,25 +395,39 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                           {company.cfo.name}
                         </span>
                         <span className="text-xs text-blue-700 dark:text-blue-300 font-medium">
-                          {company.cfo.role || 'Directeur Financier'}
+                          {company.cfo.role || 'Directeur Financier / Co-Décideur'}
                         </span>
                       </div>
                     )}
                   </div>
                   {company.cfo?.name && company.cfo.name !== 'X' && !company.cfo.name.includes('Direction') && (
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 shrink-0">
                       <a
                         href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(company.cfo.name)}`}
                         target="_blank"
                         rel="noreferrer"
                         className="px-2 py-1 bg-[#0a66c2]/10 hover:bg-[#0a66c2]/20 text-[#0a66c2] rounded-lg transition flex items-center gap-1 text-xs font-semibold"
-                        title="Chercher CFO sur LinkedIn"
+                        title="Chercher sur LinkedIn"
                       >
                         <LinkedinIcon className="w-3.5 h-3.5" />
                         <span>LinkedIn</span>
                       </a>
                     </div>
                   )}
+                </div>
+
+                {/* Direct LinkedIn search for CFO / DAF of this company */}
+                <div className="pt-1.5 border-t border-blue-200/60 dark:border-blue-900/40 flex items-center justify-between">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">Ciblage fonction finance :</span>
+                  <a
+                    href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent((company.name || '').replace(/\([^)]*\)/g, '').trim() + ' CFO OR DAF OR Finance OR Directeur')}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                  >
+                    <span>Chercher CFO / Directeurs sur LinkedIn</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
 
@@ -393,7 +442,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                     title="Ouvrir la page LinkedIn de l'entreprise"
                   >
                     <LinkedinIcon className="w-4 h-4 text-white" />
-                    <span>Rechercher l'entreprise sur LinkedIn (Voir l'équipe & employés)</span>
+                    <span>Rechercher l'entreprise sur LinkedIn (Voir l'équipe & Board)</span>
                     <ExternalLink className="w-3 h-3 text-white/80" />
                   </a>
                 </div>

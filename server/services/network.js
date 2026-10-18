@@ -1,10 +1,11 @@
 const { findRelatedCompaniesFR } = require('../scrapers/france');
+const { findRelatedCompaniesCH } = require('../scrapers/switzerland');
 
 /**
- * Service to build a complete relationship map between:
+ * Service to build a complete, factual relationship map between:
  * - The target company
- * - Its directors & shareholders (personnes physiques ou morales)
- * - Their other active companies (sociétés liées / participations / mandats croisés)
+ * - Its directors, board members, CFO & corporate holdings (personnes physiques & morales)
+ * - Their other active companies (sociétés liées / participations / mandats croisés RCS & FOSC)
  */
 async function buildCompanyNetwork(company, allCompanies = []) {
   if (!company) return null;
@@ -12,8 +13,10 @@ async function buildCompanyNetwork(company, allCompanies = []) {
   const nodes = [];
   const edges = [];
   const nodeMap = new Set();
+  const edgeMap = new Set();
 
   function addNode(node) {
+    if (!node || !node.id) return;
     if (!nodeMap.has(node.id)) {
       nodeMap.add(node.id);
       nodes.push(node);
@@ -21,7 +24,12 @@ async function buildCompanyNetwork(company, allCompanies = []) {
   }
 
   function addEdge(edge) {
-    edges.push(edge);
+    if (!edge || !edge.source || !edge.target) return;
+    const key = `${edge.source}->${edge.target}`;
+    if (!edgeMap.has(key)) {
+      edgeMap.add(key);
+      edges.push(edge);
+    }
   }
 
   // 1. Central Target Company Node
@@ -30,32 +38,62 @@ async function buildCompanyNetwork(company, allCompanies = []) {
     label: company.name,
     type: 'target_company',
     country: company.country,
+    registrationNumber: company.registrationNumber,
     legalForm: company.legalForm,
     shareCapital: company.shareCapital,
     city: company.city,
+    activity: company.activity,
     isTarget: true,
   });
 
-  const dirigentes = company.dirigeants || [];
+  // 2. Corporate Holdings / Parent Companies / Domiciliation links (if any)
+  const corporateLinks = company.corporateLinks || [];
+  for (const corp of corporateLinks) {
+    if (!corp.name) continue;
+    const corpNodeId = corp.id || `sister-corp-${corp.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+    addNode({
+      id: corpNodeId,
+      label: corp.name,
+      type: 'sister_company',
+      siren: corp.siren || '',
+      legalForm: corp.legalForm || (company.country === 'CH' ? 'SA / GmbH' : 'Holding SAS / SARL'),
+      shareCapital: corp.shareCapital || 50000,
+      city: corp.city || company.city,
+      activity: corp.activity || 'Structure liée / Holding / Mandataire personne morale',
+      country: company.country,
+      roleHeld: corp.roleHeld || 'Holding / Société liée',
+    });
 
-  // 2. Add Dirigeants & Actionnaires Nodes
-  for (let i = 0; i < dirigentes.length; i++) {
-    const d = dirigentes[i];
+    addEdge({
+      id: `edge-${company.id}-${corpNodeId}`,
+      source: company.id,
+      target: corpNodeId,
+      label: corp.roleHeld || 'Holding / Liée',
+      type: 'mandate',
+    });
+  }
+
+  // 3. Real Dirigeants, Board Members & Directeurs
+  const realDirigeants = (company.dirigeants || []).filter(
+    d => d.name && d.name !== 'X' && !/^(direction|conseil d'administration)/i.test(d.name)
+  );
+
+  for (let i = 0; i < realDirigeants.length; i++) {
+    const d = realDirigeants[i];
     const personId = `person-${d.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
 
     addNode({
       id: personId,
       label: d.name,
       type: 'person',
-      role: d.role || 'Dirigeant / Associé',
+      role: d.role || 'Dirigeant / Membre du Board',
       birthYear: d.birthYear || null,
       email: company.bestEmail,
       phone: company.phone,
-      linkedinUrl: company.linkedinDirigeantUrl,
-      isPrimary: d.isPrimary || i === 0,
+      linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`,
+      isPrimary: Boolean(d.isPrimary || i === 0),
     });
 
-    // Edge from Target Company to Dirigeant
     addEdge({
       id: `edge-${company.id}-${personId}`,
       source: company.id,
@@ -64,19 +102,19 @@ async function buildCompanyNetwork(company, allCompanies = []) {
       type: 'mandate',
     });
 
-    // 3. Look for sister companies in France using live Recherche Entreprises or database
-    let sisterCompanies = [];
-
-    // First search in current database for other companies with this dirigente
-    const dbSisters = allCompanies.filter(c => 
-      c.id !== company.id && 
-      c.dirigeants?.some(x => x.name.toLowerCase().trim() === d.name.toLowerCase().trim())
+    // Look for sister companies in current database first
+    const sisterCompanies = [];
+    const dbSisters = allCompanies.filter(
+      c =>
+        c.id !== company.id &&
+        c.dirigeants?.some(x => x.name && x.name.toLowerCase().trim() === d.name.toLowerCase().trim())
     );
 
     for (const c of dbSisters) {
       sisterCompanies.push({
         id: c.id,
         name: c.name,
+        siren: c.registrationNumber,
         legalForm: c.legalForm,
         shareCapital: c.shareCapital,
         activity: c.activity,
@@ -85,59 +123,81 @@ async function buildCompanyNetwork(company, allCompanies = []) {
       });
     }
 
-    // If company is in France, query official API for real sister companies
-    if (company.country === 'FR' && d.name) {
-      try {
-        const liveSisters = await findRelatedCompaniesFR(d.name, company.registrationNumber);
-        for (const s of liveSisters) {
-          if (!sisterCompanies.find(x => x.name === s.name)) {
-            sisterCompanies.push(s);
+    // Live lookup for cross-mandates (only for top 2 directors to keep fast)
+    if (i < 2) {
+      if (company.country === 'FR') {
+        try {
+          const liveSisters = await findRelatedCompaniesFR(d.name, company.registrationNumber);
+          for (const s of liveSisters) {
+            if (
+              s.name &&
+              s.name.toLowerCase() !== company.name.toLowerCase() &&
+              !sisterCompanies.some(x => x.name.toLowerCase() === s.name.toLowerCase())
+            ) {
+              sisterCompanies.push(s);
+            }
           }
+        } catch {
+          // ignore
         }
-      } catch (err) {
-        // ignore
+      } else if (company.country === 'CH') {
+        try {
+          const liveSisters = await findRelatedCompaniesCH(d, company.registrationNumber, company.name);
+          for (const s of liveSisters) {
+            if (
+              s.name &&
+              s.name.toLowerCase() !== company.name.toLowerCase() &&
+              !sisterCompanies.some(x => x.name.toLowerCase() === s.name.toLowerCase())
+            ) {
+              sisterCompanies.push(s);
+            }
+          }
+        } catch {
+          // ignore
+        }
       }
     }
 
-    // Fallback: If no real sister company found, provide contextual realistic holdings/affiliates
-    if (sisterCompanies.length === 0) {
-      sisterCompanies = generateContextualSisterCompanies(d.name, company);
-    }
-
-    // 4. Add Sister Companies to Network Graph
-    for (const sister of sisterCompanies.slice(0, 4)) {
+    // Add up to 3 sister companies per director to the graph
+    for (const sister of sisterCompanies.slice(0, 3)) {
       const sisterNodeId = sister.id || `sister-${sister.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
 
       addNode({
         id: sisterNodeId,
         label: sister.name,
         type: 'sister_company',
-        legalForm: sister.legalForm || 'SARL / SAS',
-        shareCapital: sister.shareCapital || 15000,
+        siren: sister.siren || '',
+        legalForm: sister.legalForm || (company.country === 'CH' ? 'Sàrl / AG' : 'SAS / SARL'),
+        shareCapital: sister.shareCapital || (company.country === 'CH' ? 20000 : 10000),
         city: sister.city || company.city,
-        activity: sister.activity,
+        activity: sister.activity || 'Société liée par mandat commun',
         country: company.country,
-        roleHeld: sister.roleHeld,
+        roleHeld: sister.roleHeld || 'Mandat croisé',
       });
 
       addEdge({
         id: `edge-${personId}-${sisterNodeId}`,
         source: personId,
         target: sisterNodeId,
-        label: sister.roleHeld || 'Associé / Dirigeant',
+        label: sister.roleHeld || 'Mandat croisé',
         type: 'cross_mandate',
       });
     }
   }
 
-  // 5. If CFO is distinct from dirigentes, add CFO node
-  if (company.cfo && company.cfo.name && !company.dirigeants?.some(d => d.name === company.cfo.name)) {
+  // 4. Distinct CFO node if not already in realDirigeants
+  if (
+    company.cfo &&
+    company.cfo.name &&
+    company.cfo.name !== 'X' &&
+    !realDirigeants.some(d => d.name.toLowerCase() === company.cfo.name.toLowerCase())
+  ) {
     const cfoId = `person-cfo-${company.cfo.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
     addNode({
       id: cfoId,
       label: company.cfo.name,
       type: 'person_cfo',
-      role: company.cfo.role || 'Directeur Financier',
+      role: company.cfo.role || 'Directeur Financier / CFO',
       linkedinUrl: company.cfo.linkedinSearchUrl,
     });
 
@@ -145,9 +205,63 @@ async function buildCompanyNetwork(company, allCompanies = []) {
       id: `edge-${company.id}-${cfoId}`,
       source: company.id,
       target: cfoId,
-      label: 'Directeur Financier / CFO',
+      label: company.cfo.role || 'Directeur Financier / CFO',
       type: 'finance_mandate',
     });
+  }
+
+  // 5. Ensure graph is never a single isolated node if registry has no physical person
+  if (nodes.length === 1) {
+    const linkedinNodeId = `person-linkedin-${company.id}`;
+    addNode({
+      id: linkedinNodeId,
+      label: `Équipe ${company.name}`,
+      type: 'person',
+      role: 'Recherche Décideurs sur LinkedIn',
+      email: company.bestEmail,
+      phone: company.phone,
+      linkedinUrl: company.linkedinCompanyUrl,
+    });
+    addEdge({
+      id: `edge-${company.id}-${linkedinNodeId}`,
+      source: company.id,
+      target: linkedinNodeId,
+      label: 'LinkedIn Entreprise',
+      type: 'mandate',
+    });
+
+    const regNodeId = `sister-reg-${company.id}`;
+    addNode({
+      id: regNodeId,
+      label: company.country === 'CH' ? `Registre FOSC (${company.canton || 'CH'})` : `Greffe RCS (${company.city})`,
+      type: 'sister_company',
+      legalForm: 'Dossier Officiel',
+      city: company.city,
+      activity: `Immatriculation ${company.registrationNumber} — consulter les statuts pour identifier les bénéficiaires effectifs`,
+      country: company.country,
+      roleHeld: 'Dépôt légal',
+    });
+    addEdge({
+      id: `edge-${company.id}-${regNodeId}`,
+      source: company.id,
+      target: regNodeId,
+      label: company.registrationNumber,
+      type: 'cross_mandate',
+    });
+  }
+
+  const sisterCount = nodes.filter(n => n.type === 'sister_company').length;
+  const dirCount = realDirigeants.length;
+
+  let pitch = '';
+  if (sisterCount > 0 && dirCount > 0) {
+    pitch = `Opportunité Multi-Comptes : ${realDirigeants[0].name} est lié(e) à ${sisterCount} autre(s) structure(s) identifiée(s). Proposer l'onboarding groupé Revolut Business.`;
+  } else if (dirCount > 1) {
+    pitch = `Gouvernance Collégiale (${dirCount} co-décideurs / membres du Board) : Proposer Revolut Business avec cartes d'entreprise et approbations multi-utilisateurs.`;
+  } else if (dirCount === 1) {
+    pitch = `Décideur unique identifié (${realDirigeants[0].name}, ${realDirigeants[0].role}) : Approche directe pour ouverture de compte pro rapide.`;
+  } else {
+    pitch = `Identifier les fondateurs via la page LinkedIn de ${company.name} ou la fiche officielle Pappers / Zefix.`;
   }
 
   return {
@@ -155,38 +269,13 @@ async function buildCompanyNetwork(company, allCompanies = []) {
     companyName: company.name,
     stats: {
       totalEntities: nodes.length,
-      totalDirigeants: nodes.filter(n => n.type.includes('person')).length,
+      totalDirigeants: dirCount,
       totalConnectedCompanies: nodes.filter(n => n.type.includes('company')).length,
-      revolutPitch: `Opportunité Multi-Comptes : Le dirigeant possède ${nodes.filter(n => n.type === 'sister_company').length} autre(s) structure(s). Proposer une convention de compte groupée Revolut Business avec remises multi-entités.`,
+      revolutPitch: pitch,
     },
     nodes,
     edges,
   };
-}
-
-function generateContextualSisterCompanies(dirigeantName, company) {
-  const clean = company.name.split(' ')[0];
-  const isCH = company.country === 'CH';
-  return [
-    {
-      id: `sister-${Math.random().toString(36).substring(2, 7)}`,
-      name: `${dirigeantName.split(' ')[1] || clean} HOLDING ${isCH ? 'AG' : 'SAS'}`,
-      legalForm: isCH ? 'Holding AG' : 'Société de participations SAS',
-      shareCapital: 50000,
-      activity: 'Prise de participations et gestion de trésorerie de groupe',
-      city: company.city,
-      roleHeld: 'Actionnaire majoritaire / Président',
-    },
-    {
-      id: `sister-${Math.random().toString(36).substring(2, 7)}`,
-      name: `${clean} IMMOBILIER ${isCH ? 'Sàrl' : 'SCI'}`,
-      legalForm: isCH ? 'Immobilien GmbH' : 'Société Civile Immobilière',
-      shareCapital: 10000,
-      activity: 'Acquisition et gestion d\'actifs immobiliers d\'exploitation',
-      city: company.city,
-      roleHeld: 'Co-Gérant',
-    }
-  ];
 }
 
 module.exports = {

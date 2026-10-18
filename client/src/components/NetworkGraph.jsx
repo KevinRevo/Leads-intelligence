@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building2, 
   User, 
-  Briefcase, 
   Share2, 
   ZoomIn, 
   ZoomOut, 
@@ -12,56 +11,59 @@ import {
   Sparkles,
   X,
   Phone,
-  Mail
+  Mail,
+  FileText
 } from 'lucide-react';
 
-export default function NetworkGraph({ network, onClose, onSelectCompany }) {
+export default function NetworkGraph({ network, onClose }) {
   const [selectedNode, setSelectedNode] = useState(null);
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   
-  // Dynamic layout positions
   const [nodePositions, setNodePositions] = useState({});
   const [draggingNodeId, setDraggingNodeId] = useState(null);
 
   useEffect(() => {
-    if (!network || !network.nodes) return;
+    if (!network || !Array.isArray(network.nodes) || network.nodes.length === 0) return;
 
     const positions = {};
-    const center = { x: 450, y: 300 };
+    const center = { x: 430, y: 290 };
 
     const targetNode = network.nodes.find(n => n.type === 'target_company') || network.nodes[0];
     if (targetNode) {
       positions[targetNode.id] = { ...center };
     }
 
-    const personNodes = network.nodes.filter(n => n.type.includes('person'));
-    const sisterNodes = network.nodes.filter(n => n.type === 'sister_company');
+    const otherNodes = network.nodes.filter(n => n.id !== targetNode?.id);
+    const personNodes = otherNodes.filter(n => n.type.includes('person'));
+    const companyNodes = otherNodes.filter(n => !n.type.includes('person'));
 
-    // Place persons in an inner ring
-    const personRadius = 170;
+    // Place persons (Dirigeants / Board / CFO) in inner ring
+    const personRadius = 165;
+    const personAngles = {};
     personNodes.forEach((node, index) => {
       const angle = (2 * Math.PI * index) / (personNodes.length || 1) - Math.PI / 2;
+      personAngles[node.id] = angle;
       positions[node.id] = {
         x: center.x + personRadius * Math.cos(angle),
         y: center.y + personRadius * Math.sin(angle),
       };
     });
 
-    // Place sister companies in outer ring, connected near their related person
-    const sisterRadius = 310;
-    sisterNodes.forEach((node, index) => {
-      // Find connected edge to person
-      const edge = network.edges.find(e => e.target === node.id || e.source === node.id);
-      const connectedPersonId = edge ? (edge.source === node.id ? edge.target : edge.source) : null;
-      const personPos = positions[connectedPersonId] || center;
+    // Place sister / holding companies in outer ring
+    const sisterRadius = 305;
+    companyNodes.forEach((node, index) => {
+      const edge = (network.edges || []).find(e => e.target === node.id || e.source === node.id);
+      const connectedId = edge ? (edge.source === node.id ? edge.target : edge.source) : null;
+      const baseAngle = connectedId && personAngles[connectedId] !== undefined
+        ? personAngles[connectedId] + ((index % 3) - 1) * 0.38
+        : (2 * Math.PI * index) / (companyNodes.length || 1) + Math.PI / 4;
 
-      const angle = (2 * Math.PI * index) / (sisterNodes.length || 1) + Math.PI / 4;
       positions[node.id] = {
-        x: center.x + sisterRadius * Math.cos(angle),
-        y: center.y + sisterRadius * Math.sin(angle),
+        x: center.x + sisterRadius * Math.cos(baseAngle),
+        y: center.y + sisterRadius * Math.sin(baseAngle),
       };
     });
 
@@ -70,7 +72,6 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
   }, [network]);
 
   const handleMouseDown = (e) => {
-    // If clicking on SVG canvas background
     if (e.target.tagName === 'svg' || e.target.id === 'graph-bg') {
       setIsDragging(true);
       setDragStart({ x: e.clientX - offset.x, y: e.clientY - offset.y });
@@ -85,6 +86,7 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
       });
     } else if (draggingNodeId) {
       const svg = document.getElementById('network-svg');
+      if (!svg) return;
       const rect = svg.getBoundingClientRect();
       const newX = (e.clientX - rect.left - offset.x) / zoom;
       const newY = (e.clientY - rect.top - offset.y) / zoom;
@@ -105,11 +107,12 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
     switch (type) {
       case 'target_company':
         return { fill: '#0075eb', stroke: '#38bdf8', badge: 'Société Cible' };
-      case 'person':
       case 'person_cfo':
-        return { fill: '#7c3aed', stroke: '#c084fc', badge: 'Dirigeant / Actionnaire' };
+        return { fill: '#2563eb', stroke: '#60a5fa', badge: 'Directeur / CFO / Board' };
+      case 'person':
+        return { fill: '#7c3aed', stroke: '#c084fc', badge: 'Dirigeant / Membre du Board' };
       case 'sister_company':
-        return { fill: '#059669', stroke: '#34d399', badge: 'Société Liée' };
+        return { fill: '#059669', stroke: '#34d399', badge: 'Société Liée / Holding' };
       default:
         return { fill: '#4b5563', stroke: '#9ca3af', badge: 'Entité' };
     }
@@ -126,16 +129,16 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
               <Share2 className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-wide">
-                  Cartographie des Liens & Actionnariat
+                  Cartographie Réseau, Board & Actionnariat
                 </h2>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-medium border border-blue-200 dark:border-blue-500/30">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200 dark:border-blue-500/30">
                   {network?.companyName}
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Visualisation des mandats croisés, co-fondateurs et sociétés sœurs identifiées
+                Visualisation interactive des dirigeants, membres du Board, holdings mères et mandats croisés (RCS / FOSC)
               </p>
             </div>
           </div>
@@ -160,7 +163,7 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
               <button 
                 onClick={() => { setZoom(1); setOffset({ x: 0, y: 0 }); }}
                 className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded transition"
-                title="Réinitialiser"
+                title="Réinitialiser la vue"
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
@@ -177,16 +180,16 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
 
         {/* Commercial Pitch Banner */}
         {network?.stats?.revolutPitch && (
-          <div className="bg-blue-50/80 dark:bg-gradient-to-r dark:from-blue-950/60 dark:via-purple-950/50 dark:to-slate-900 border-b border-blue-200 dark:border-blue-900/40 px-6 py-2.5 flex items-center justify-between text-xs transition-colors">
+          <div className="bg-blue-50/80 dark:bg-gradient-to-r dark:from-blue-950/60 dark:via-purple-950/50 dark:to-slate-900 border-b border-blue-200 dark:border-blue-900/40 px-6 py-2.5 flex items-center justify-between text-xs flex-wrap gap-2 transition-colors">
             <div className="flex items-center gap-2 text-blue-900 dark:text-blue-200">
               <Sparkles className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0 animate-pulse" />
               <span className="font-semibold text-slate-900 dark:text-white">Angle d'attaque Revolut Business :</span>
               <span className="text-slate-700 dark:text-slate-300">{network.stats.revolutPitch}</span>
             </div>
             <div className="flex items-center gap-4 text-slate-500 dark:text-slate-400 shrink-0 font-medium">
-              <span>{network.stats.totalConnectedCompanies} société(s) liée(s)</span>
+              <span>{network.stats.totalConnectedCompanies || 1} entité(s) dans le graphe</span>
               <span>•</span>
-              <span>{network.stats.totalDirigeants} décideur(s)</span>
+              <span>{network.stats.totalDirigeants || 0} décideur(s) / Board</span>
             </div>
           </div>
         )}
@@ -221,7 +224,7 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
                 </marker>
               </defs>
-              <rect width="2000" height="2000" x="-500" y="-500" fill="url(#grid)" pointerEvents="none" />
+              <rect width="2400" height="2400" x="-600" y="-600" fill="url(#grid)" pointerEvents="none" />
 
               {/* Draw Edges */}
               {network?.edges?.map(edge => {
@@ -246,9 +249,9 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                       markerEnd="url(#arrow)"
                     />
                     <rect
-                      x={midX - 45}
+                      x={midX - 52}
                       y={midY - 10}
-                      width="90"
+                      width="104"
                       height="18"
                       rx="4"
                       className="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-700"
@@ -261,13 +264,13 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                       fontSize="9"
                       textAnchor="middle"
                     >
-                      {edge.label ? (edge.label.length > 15 ? edge.label.slice(0, 14) + '...' : edge.label) : 'Lien'}
+                      {edge.label ? (edge.label.length > 18 ? edge.label.slice(0, 17) + '…' : edge.label) : 'Mandat'}
                     </text>
                   </g>
                 );
               })}
 
-              {/* Draw Nodes - WITHOUT hover:scale to avoid SVG jittering bug! */}
+              {/* Draw Nodes */}
               {network?.nodes?.map(node => {
                 const pos = nodePositions[node.id];
                 if (!pos) return null;
@@ -293,20 +296,18 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                       setDraggingNodeId(node.id);
                     }}
                   >
-                    {/* Outer glow for selected or target node */}
                     {(isSelected || isTarget) && (
                       <circle
                         r={radius + 8}
                         fill="none"
                         stroke={colors.stroke}
                         strokeWidth="2"
-                        strokeOpacity="0.4"
+                        strokeOpacity="0.45"
                         className={isTarget ? "animate-pulse" : ""}
                         pointerEvents="none"
                       />
                     )}
 
-                    {/* Node circle with smooth stroke highlight on hover (NO SCALE JITTER) */}
                     <circle
                       r={radius}
                       fill={colors.fill}
@@ -315,7 +316,6 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                       className="transition-all duration-150 group-hover:stroke-white dark:group-hover:stroke-sky-300 shadow-md"
                     />
 
-                    {/* Node Icon */}
                     <foreignObject x={-14} y={-14} width="28" height="28" pointerEvents="none">
                       <div className="w-full h-full flex items-center justify-center text-white select-none">
                         {isPerson ? (
@@ -326,7 +326,6 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                       </div>
                     </foreignObject>
 
-                    {/* Node Label underneath */}
                     <text
                       y={radius + 16}
                       className="fill-slate-900 dark:fill-slate-100 font-medium select-none pointer-events-none drop-shadow-xs"
@@ -334,18 +333,17 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                       fontWeight={isTarget ? "bold" : "600"}
                       textAnchor="middle"
                     >
-                      {node.label?.length > 20 ? node.label.slice(0, 18) + '...' : node.label}
+                      {node.label?.length > 22 ? node.label.slice(0, 20) + '…' : node.label}
                     </text>
 
-                    {/* Role / Subtitle */}
-                    {(node.role || node.legalForm) && (
+                    {(node.role || node.roleHeld || node.legalForm) && (
                       <text
                         y={radius + 30}
                         className="fill-slate-500 dark:fill-slate-400 select-none pointer-events-none"
                         fontSize="9"
                         textAnchor="middle"
                       >
-                        {node.role || node.legalForm}
+                        {(node.role || node.roleHeld || node.legalForm).slice(0, 26)}
                       </text>
                     )}
                   </g>
@@ -355,18 +353,18 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
 
             {/* Floating Legend */}
             <div className="absolute bottom-4 left-4 bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs flex flex-col gap-2 backdrop-blur-sm shadow-xl transition-colors">
-              <span className="font-semibold text-slate-800 dark:text-slate-200">Légende du réseau :</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200">Légende de la cartographie :</span>
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                 <span className="w-3 h-3 rounded-full bg-[#0075eb] border border-[#38bdf8]" />
                 <span>Société Cible</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                 <span className="w-3 h-3 rounded-full bg-[#7c3aed] border border-[#c084fc]" />
-                <span>Dirigeant / Fondateur / Actionnaire</span>
+                <span>Dirigeant / Board / CFO</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                 <span className="w-3 h-3 rounded-full bg-[#059669] border border-[#34d399]" />
-                <span>Société Liée (Mandat ou participation)</span>
+                <span>Holding / Société Liée (Mandat croisé)</span>
               </div>
             </div>
           </div>
@@ -391,10 +389,19 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
 
               {/* Node Details */}
               <div className="space-y-3 text-xs">
-                {selectedNode.role && (
+                {(selectedNode.role || selectedNode.roleHeld) && (
                   <div className="bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700/60">
-                    <span className="text-slate-500 dark:text-slate-400 block mb-0.5">Fonction exercée</span>
-                    <span className="text-slate-900 dark:text-white font-medium">{selectedNode.role}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block mb-0.5">Fonction / Lien juridique</span>
+                    <span className="text-slate-900 dark:text-white font-semibold">{selectedNode.role || selectedNode.roleHeld}</span>
+                  </div>
+                )}
+
+                {(selectedNode.registrationNumber || selectedNode.siren) && (
+                  <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400">N° Registre (SIREN / IDE)</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-mono font-semibold">
+                      {selectedNode.registrationNumber || selectedNode.siren}
+                    </span>
                   </div>
                 )}
 
@@ -408,7 +415,9 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                 {selectedNode.shareCapital && (
                   <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
                     <span className="text-slate-500 dark:text-slate-400">Capital Social</span>
-                    <span className="text-slate-800 dark:text-slate-200 font-semibold">{selectedNode.shareCapital.toLocaleString()} € / CHF</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-semibold">
+                      {selectedNode.shareCapital.toLocaleString()} {selectedNode.country === 'CH' ? 'CHF' : '€'}
+                    </span>
                   </div>
                 )}
 
@@ -421,37 +430,78 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
 
                 {selectedNode.activity && (
                   <div className="py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400 block mb-1">Activité</span>
-                    <span className="text-slate-700 dark:text-slate-300 leading-relaxed">{selectedNode.activity}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block mb-1">Activité / Objet</span>
+                    <span className="text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-4">{selectedNode.activity}</span>
                   </div>
                 )}
 
                 {/* Direct Contact info if person */}
                 {selectedNode.type.includes('person') && (
                   <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-xl p-3 space-y-2 mt-2">
-                    <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 block">Contact Direct :</span>
+                    <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 block">Investigation & Contact Direct :</span>
                     {selectedNode.email && (
                       <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 truncate">
                         <Mail className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                        <span className="truncate">{selectedNode.email}</span>
+                        <span className="truncate font-mono">{selectedNode.email}</span>
                       </div>
                     )}
                     {selectedNode.phone && (
                       <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                         <Phone className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                        <span>{selectedNode.phone}</span>
+                        <span className="font-mono">{selectedNode.phone}</span>
                       </div>
                     )}
-                    {selectedNode.linkedinUrl && (
+                    <div className="flex flex-col gap-1.5 pt-1">
+                      {selectedNode.linkedinUrl && (
+                        <a
+                          href={selectedNode.linkedinUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full py-1.5 px-2.5 bg-[#0a66c2] hover:bg-[#004182] text-white rounded-lg inline-flex items-center justify-center gap-1.5 font-semibold text-xs transition"
+                        >
+                          <span>Rechercher sur LinkedIn</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                       <a
-                        href={selectedNode.linkedinUrl}
+                        href={`https://www.google.com/search?q=${encodeURIComponent('site:linkedin.com/in ' + selectedNode.label)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:underline font-medium text-xs pt-1"
+                        className="w-full py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg inline-flex items-center justify-center gap-1.5 font-semibold text-xs transition border border-slate-200 dark:border-slate-700"
                       >
-                        Voir profil LinkedIn <ExternalLink className="w-3 h-3" />
+                        <span>Profil LinkedIn via Google</span>
+                        <ExternalLink className="w-3 h-3" />
                       </a>
-                    )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Direct Registry & LinkedIn links if company node */}
+                {!selectedNode.type.includes('person') && (
+                  <div className="space-y-1.5 pt-1">
+                    <a
+                      href={
+                        selectedNode.country === 'CH'
+                          ? `https://www.zefix.ch/fr/search/entity/list?name=${encodeURIComponent(selectedNode.label)}`
+                          : `https://www.pappers.fr/recherche?q=${encodeURIComponent(selectedNode.siren || selectedNode.registrationNumber || selectedNode.label)}`
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-1.5 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg flex items-center justify-center gap-1.5 font-semibold text-xs transition"
+                    >
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>{selectedNode.country === 'CH' ? 'Consulter sur Zefix (CH)' : 'Consulter sur Pappers (FR)'}</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a
+                      href={`https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(selectedNode.label)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-1.5 px-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg flex items-center justify-center gap-1.5 font-semibold text-xs transition border border-slate-200 dark:border-slate-700"
+                    >
+                      <span>Voir l'entreprise sur LinkedIn</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 )}
 
@@ -459,12 +509,12 @@ export default function NetworkGraph({ network, onClose, onSelectCompany }) {
                 <div className="pt-2">
                   <div className="p-3 bg-slate-50 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
                     <span className="text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1.5 mb-1 text-[11px]">
-                      <ShieldCheck className="w-3.5 h-3.5" /> Recommandation Revolut
+                      <ShieldCheck className="w-3.5 h-3.5" /> Stratégie Commerciale Revolut
                     </span>
                     <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
                       {selectedNode.type.includes('company')
-                        ? "Vérifier si cette entité a déjà un compte ouvert dans le système ou proposer l'on-boarding express."
-                        : "Prendre contact directement avec ce dirigeant pour proposer un compte multi-devises et cartes virtuelles illimitées."}
+                        ? "Vérifier si cette entité (ou sa holding) possède déjà un compte Revolut Business et proposer un onboarding multi-sociétés."
+                        : "Approcher ce décideur / membre du Board en mentionnant l'ensemble de ses structures liées pour proposer une offre groupée."}
                     </p>
                   </div>
                 </div>
