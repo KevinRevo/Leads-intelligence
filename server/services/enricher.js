@@ -1,6 +1,6 @@
 const dns = require('dns').promises;
 const https = require('https');
-const { evaluateRevolutCompliance } = require('./compliance');
+const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone } = require('./compliance');
 
 function cleanCompanyName(name) {
   if (!name) return '';
@@ -488,6 +488,8 @@ async function enrichCompany(rawCompany) {
   };
 
   enrichedObj.compliance = evaluateRevolutCompliance(enrichedObj);
+  enrichedObj.fxPotential = evaluateFxPotential(enrichedObj);
+  enrichedObj.geoZone = getGeoZone(enrichedObj);
   return enrichedObj;
 }
 

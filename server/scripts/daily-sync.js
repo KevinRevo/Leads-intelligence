@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { runSync } = require('../cron');
-const { evaluateRevolutCompliance } = require('../services/compliance');
+const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone } = require('../services/compliance');
 const { buildCompanyNetwork } = require('../services/network');
 
 function cleanCompanyName(name) {
@@ -80,8 +80,10 @@ async function main() {
       comp.cfo = { name: 'X', role: 'Non renseigné', isEstimated: false, linkedinSearchUrl: null };
     }
 
-    // Revolut Compliance Pre-Screening
+    // Revolut Compliance Pre-Screening + FX Multi-Currency & Geo Zone
     comp.compliance = evaluateRevolutCompliance(comp);
+    comp.fxPotential = evaluateFxPotential(comp);
+    comp.geoZone = getGeoZone(comp);
 
     // Ensure rich network cartography
     if (!comp.network || !comp.network.nodes || comp.network.nodes.length <= 1) {
@@ -101,6 +103,7 @@ async function main() {
   const inCrm = db.companies.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
   const highSafetyCount = db.companies.filter(c => (c.safety?.score || c.confidenceScore || 0) >= 60).length;
   const verifiedWebCount = db.companies.filter(c => Boolean(c.website)).length;
+  const highFxCount = db.companies.filter(c => c.fxPotential?.level === 'high').length;
 
   const stats = {
     total,
@@ -113,7 +116,8 @@ async function main() {
     inCrm,
     highConfidence: highSafetyCount,
     highSafetyCount,
-    verifiedWebCount
+    verifiedWebCount,
+    highFxCount
   };
   const publicBundle = { companies: db.companies, stats };
 

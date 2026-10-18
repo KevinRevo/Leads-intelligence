@@ -164,6 +164,7 @@ function computeLocalStats(comps) {
   const inCrm = comps.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
   const highSafetyCount = comps.filter(c => (c.safety?.score || c.confidenceScore || 0) >= 60).length;
   const verifiedWebCount = comps.filter(c => Boolean(c.website)).length;
+  const highFxCount = comps.filter(c => c.fxPotential?.level === 'high').length;
   return {
     total,
     france,
@@ -175,7 +176,8 @@ function computeLocalStats(comps) {
     inCrm,
     highConfidence: highSafetyCount,
     highSafetyCount,
-    verifiedWebCount
+    verifiedWebCount,
+    highFxCount
   };
 }
 
@@ -186,18 +188,58 @@ function formatDateFr(isoDate = '') {
   return `${parts[2]}/${parts[1]}/${parts[0]}`;
 }
 
-function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search = '', verifiedOnly = false, dateFilter = 'all', exactDate = '', compliance = 'ALL' } = {}) {
+function applyLocalFilters(rawList, {
+  country = 'ALL',
+  crmStatus = 'ALL',
+  search = '',
+  verifiedOnly = false,
+  dateFilter = 'all',
+  exactDate = '',
+  compliance = 'ALL',
+  fxFilter = 'ALL',
+  minCapital = 0,
+  legalFormFilter = 'ALL',
+  geoFilter = 'ALL',
+  sortBy = 'date_desc'
+} = {}) {
   const overrides = getCrmOverrides();
   const merged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
 
   // Reference date = latest incorporation date in dataset or today
   const refDate = new Date('2026-10-18T23:59:59Z');
 
-  return merged.filter(c => {
+  const filtered = merged.filter(c => {
     if (country !== 'ALL' && c.country !== country) return false;
     if (crmStatus !== 'ALL' && c.crmStatus !== crmStatus) return false;
     if (compliance !== 'ALL' && c.compliance?.status !== compliance) return false;
     if (verifiedOnly && !c.website && !c.linkedinDirigeantUrl) return false;
+
+    // Point 1: FX Potential Filter
+    if (fxFilter === 'high' && c.fxPotential?.level !== 'high') return false;
+    if (fxFilter === 'medium_high' && c.fxPotential?.level !== 'high' && c.fxPotential?.level !== 'medium') return false;
+
+    // Point 4: Minimum Share Capital Filter
+    if (minCapital > 0 && (Number(c.shareCapital) || 0) < minCapital) return false;
+
+    // Point 4: Legal Form Filter
+    if (legalFormFilter !== 'ALL') {
+      const lf = (c.legalForm || '').toUpperCase();
+      if (legalFormFilter === 'SAS' && !lf.includes('SAS')) return false;
+      if (legalFormFilter === 'SARL' && (!lf.includes('SARL') && !lf.includes('EURL'))) return false;
+      if (legalFormFilter === 'SA_AG' && (!lf.includes('SA / AG') && lf !== 'SA' && !lf.includes('AG'))) return false;
+      if (legalFormFilter === 'SARL_GMBH' && (!lf.includes('SÀRL') && !lf.includes('GMBH'))) return false;
+    }
+
+    // Point 4: Geo / Language / Canton / Region Filter
+    if (geoFilter !== 'ALL') {
+      if (geoFilter.startsWith('canton:')) {
+        const targetCanton = geoFilter.replace('canton:', '');
+        if (c.country !== 'CH' || (c.canton || '').toUpperCase() !== targetCanton) return false;
+      } else {
+        const regionCode = c.geoZone?.regionCode || '';
+        if (regionCode !== geoFilter) return false;
+      }
+    }
 
     if (search) {
       const q = search.toLowerCase().trim();
@@ -208,7 +250,8 @@ function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search
       const matchDir = c.dirigeants?.some(d => d.name?.toLowerCase().includes(q));
       const matchCfo = c.cfo?.name?.toLowerCase().includes(q);
       const matchDate = c.incorporationDate?.includes(q) || formatDateFr(c.incorporationDate).includes(q);
-      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir && !matchCfo && !matchDate) return false;
+      const matchCanton = c.canton?.toLowerCase() === q;
+      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir && !matchCfo && !matchDate && !matchCanton) return false;
     }
 
     const dateStr = (c.incorporationDate || c.scrapedAt || '').split('T')[0];
@@ -238,6 +281,22 @@ function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search
 
     return true;
   });
+
+  // Dynamic sorting
+  filtered.sort((a, b) => {
+    if (sortBy === 'capital_desc') {
+      return (Number(b.shareCapital) || 0) - (Number(a.shareCapital) || 0);
+    }
+    if (sortBy === 'fx_desc') {
+      return (b.fxPotential?.score || 0) - (a.fxPotential?.score || 0);
+    }
+    if (sortBy === 'safety_desc') {
+      return (b.safety?.score || 0) - (a.safety?.score || 0);
+    }
+    return (b.incorporationDate || '').localeCompare(a.incorporationDate || '');
+  });
+
+  return filtered;
 }
 
 export default function App() {
@@ -252,6 +311,11 @@ export default function App() {
   const [selectedCountry, setSelectedCountry] = useState('ALL');
   const [selectedCrmStatus, setSelectedCrmStatus] = useState('ALL');
   const [selectedCompliance, setSelectedCompliance] = useState('ALL');
+  const [fxFilter, setFxFilter] = useState('ALL');
+  const [minCapital, setMinCapital] = useState(0);
+  const [legalFormFilter, setLegalFormFilter] = useState('ALL');
+  const [geoFilter, setGeoFilter] = useState('ALL');
+  const [sortBy, setSortBy] = useState('date_desc');
   const [searchQuery, setSearchQuery] = useState('');
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [dateFilter, setDateFilter] = useState('all');
@@ -264,6 +328,9 @@ export default function App() {
     for (const c of list) {
       if (selectedCountry !== 'ALL' && c.country !== selectedCountry) continue;
       if (selectedCompliance !== 'ALL' && c.compliance?.status !== selectedCompliance) continue;
+      if (fxFilter === 'high' && c.fxPotential?.level !== 'high') continue;
+      if (fxFilter === 'medium_high' && c.fxPotential?.level !== 'high' && c.fxPotential?.level !== 'medium') continue;
+      if (minCapital > 0 && (Number(c.shareCapital) || 0) < minCapital) continue;
       if (verifiedOnly && !c.website && !c.linkedinDirigeantUrl) continue;
       const d = (c.incorporationDate || '').split('T')[0];
       if (d) counts[d] = (counts[d] || 0) + 1;
@@ -271,7 +338,7 @@ export default function App() {
     return Object.entries(counts)
       .sort((a, b) => b[0].localeCompare(a[0]))
       .map(([date, count]) => ({ date, count, label: `${formatDateFr(date)} (${count} société${count > 1 ? 's' : ''})` }));
-  }, [selectedCountry, selectedCompliance, verifiedOnly]);
+  }, [selectedCountry, selectedCompliance, fxFilter, minCapital, verifiedOnly]);
 
   const [companies, setCompanies] = useState(() => {
     return applyLocalFilters(bundledDataset.companies || []);
@@ -311,6 +378,11 @@ export default function App() {
       country: selectedCountry,
       crmStatus: selectedCrmStatus,
       compliance: selectedCompliance,
+      fxFilter,
+      minCapital,
+      legalFormFilter,
+      geoFilter,
+      sortBy,
       search: searchQuery,
       verifiedOnly,
       dateFilter,
@@ -328,7 +400,7 @@ export default function App() {
 
   useEffect(() => {
     fetchData();
-  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter, exactDate]);
+  }, [selectedCountry, selectedCrmStatus, selectedCompliance, fxFilter, minCapital, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
   // Real-time multi-user cloud synchronization (on mount, every 10s, and on tab focus)
   useEffect(() => {
@@ -348,7 +420,7 @@ export default function App() {
       clearInterval(interval);
       window.removeEventListener('focus', onFocus);
     };
-  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter, exactDate]);
+  }, [selectedCountry, selectedCrmStatus, selectedCompliance, fxFilter, minCapital, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
   const fetchData = async () => {
     try {
@@ -706,17 +778,25 @@ export default function App() {
               </div>
             </div>
 
-            {/* Card 4: To Contact (Priority) */}
-            <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors">
+            {/* Card 4: High FX Potential & Priority */}
+            <div 
+              onClick={() => setFxFilter(prev => prev === 'high' ? 'ALL' : 'high')}
+              className={`cursor-pointer bg-white dark:bg-[#121824] p-4 rounded-2xl border shadow-sm transition-all ${
+                fxFilter === 'high'
+                  ? 'border-cyan-500 ring-2 ring-cyan-500/20'
+                  : 'border-slate-200 dark:border-slate-800/80 hover:border-cyan-500/50'
+              }`}
+              title="Cliquer pour filtrer uniquement les sociétés à Fort Potentiel FX (Multi-devises CHF / EUR / USD)"
+            >
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
-                <span className="font-medium">À Contacter en Priorité</span>
-                <Clock className="w-4 h-4 text-amber-500" />
+                <span className="font-medium">💱 Fort Potentiel FX (Multi-Devises)</span>
+                <TrendingUp className="w-4 h-4 text-cyan-500" />
               </div>
-              <div className="text-2xl font-black text-amber-600 dark:text-amber-400">
-                {stats.toContact}
+              <div className="text-2xl font-black text-cyan-600 dark:text-cyan-400">
+                {stats.highFxCount || 0}
               </div>
-              <div className="text-[11px] text-amber-600/80 dark:text-amber-400/80 mt-1">
-                Leads frais non sollicités
+              <div className="text-[11px] text-cyan-600/80 dark:text-cyan-400/80 mt-1 font-medium">
+                {fxFilter === 'high' ? '✓ Filtre FX actif (cliquer pour retirer)' : `${stats.toContact} à contacter en priorité`}
               </div>
             </div>
 
@@ -726,14 +806,15 @@ export default function App() {
         {/* Filters & Digital Presence Exclude Toggle */}
         <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm space-y-3 transition-colors">
           
-          <div className="flex flex-col lg:flex-row gap-3 items-center justify-between flex-wrap">
+          {/* Row 1: Search, Country, CRM Status, Compliance, Date Range */}
+          <div className="flex flex-col lg:flex-row gap-2.5 items-center justify-between flex-wrap">
             
             {/* Search Input */}
             <div className="relative w-full lg:w-64">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Rechercher société, dirigeant, ville, SIREN..."
+                placeholder="Société, dirigeant, ville, SIREN, canton..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition"
@@ -834,6 +915,104 @@ export default function App() {
 
           </div>
 
+          {/* Row 2 (Points 1 & 4): FX Potential, Share Capital, Legal Form, Language/Canton/Region & Dynamic Sort */}
+          <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+            
+            {/* 1. FX Potential Filter */}
+            <select
+              value={fxFilter}
+              onChange={(e) => setFxFilter(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#161f30] border border-cyan-500/40 dark:border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 font-semibold"
+              title="Filtrer selon le besoin de change multi-devises (CHF, EUR, USD, GBP)"
+            >
+              <option value="ALL">💱 Tous profils FX (Multi-devises)</option>
+              <option value="high">🔥 Fort Potentiel FX (CHF / EUR / USD)</option>
+              <option value="medium_high">🌐 Potentiel FX Fort & Modéré</option>
+            </select>
+
+            {/* 2. Minimum Share Capital Filter */}
+            <select
+              value={minCapital}
+              onChange={(e) => setMinCapital(Number(e.target.value))}
+              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
+              title="Filtrer par capital social minimum"
+            >
+              <option value={0}>💰 Tous les capitaux sociaux</option>
+              <option value={5000}>💰 Capital ≥ 5 000 € / CHF</option>
+              <option value={10000}>💰 Capital ≥ 10 000 € / CHF</option>
+              <option value={20000}>💰 Capital ≥ 20 000 € / CHF (Sàrl CH)</option>
+              <option value={50000}>💰 Capital ≥ 50 000 € / CHF</option>
+              <option value={100000}>💰 Capital ≥ 100 000 € / CHF (SA / AG)</option>
+            </select>
+
+            {/* 3. Legal Form Filter */}
+            <select
+              value={legalFormFilter}
+              onChange={(e) => setLegalFormFilter(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+            >
+              <option value="ALL">🏛️ Toutes formes juridiques</option>
+              <option value="SAS">🇫🇷 SAS / SASU</option>
+              <option value="SARL">🇫🇷 SARL / EURL</option>
+              <option value="SA_AG">🇨🇭🇫🇷 SA / AG (Société Anonyme)</option>
+              <option value="SARL_GMBH">🇨🇭 Sàrl / GmbH (Suisse)</option>
+            </select>
+
+            {/* 4. Language Zone / Canton (CH) / Region (FR) Filter */}
+            <select
+              value={geoFilter}
+              onChange={(e) => setGeoFilter(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+              title="Filtrer par langue (Suisse Romande FR vs Alémanique DE), par Canton suisse ou par Région française"
+            >
+              <option value="ALL">📍 Toutes zones, langues & cantons</option>
+              <optgroup label="🇨🇭 Suisse par Zone Linguistique">
+                <option value="CH_FR">🇨🇭🗣️ Suisse Romande (Francophone : GE, VD, VS, NE, FR, JU)</option>
+                <option value="CH_DE">🇨🇭🗣️ Suisse Alémanique (Germanophone : ZH, ZG, BE, AG, BS...)</option>
+                <option value="CH_IT">🇨🇭🗣️ Suisse Italienne (Tessin TI)</option>
+              </optgroup>
+              <optgroup label="🇨🇭 Suisse par Canton">
+                <option value="canton:GE">🇨🇭 Canton de Genève (GE)</option>
+                <option value="canton:VD">🇨🇭 Canton de Vaud (VD)</option>
+                <option value="canton:VS">🇨🇭 Canton du Valais (VS)</option>
+                <option value="canton:FR">🇨🇭 Canton de Fribourg (FR)</option>
+                <option value="canton:NE">🇨🇭 Canton de Neuchâtel (NE)</option>
+                <option value="canton:JU">🇨🇭 Canton du Jura (JU)</option>
+                <option value="canton:ZH">🇨🇭 Canton de Zürich (ZH)</option>
+                <option value="canton:ZG">🇨🇭 Canton de Zoug (ZG)</option>
+                <option value="canton:AG">🇨🇭 Canton d'Argovie (AG)</option>
+                <option value="canton:BE">🇨🇭 Canton de Berne (BE)</option>
+                <option value="canton:LU">🇨🇭 Canton de Lucerne (LU)</option>
+                <option value="canton:BS">🇨🇭 Canton de Bâle-Ville (BS)</option>
+                <option value="canton:BL">🇨🇭 Canton de Bâle-Campagne (BL)</option>
+                <option value="canton:TI">🇨🇭 Canton du Tessin (TI)</option>
+                <option value="canton:GR">🇨🇭 Canton des Grisons (GR)</option>
+              </optgroup>
+              <optgroup label="🇫🇷 France par Région">
+                <option value="FR_IDF">🇫🇷 Île-de-France (Paris & RP)</option>
+                <option value="FR_ARA">🇫🇷 Auvergne-Rhône-Alpes (Lyon, Genève-74)</option>
+                <option value="FR_PACA">🇫🇷 PACA & Côte d'Azur (Marseille, Nice)</option>
+                <option value="FR_NAQ">🇫🇷 Nouvelle-Aquitaine (Bordeaux)</option>
+                <option value="FR_OCC">🇫🇷 Occitanie (Toulouse, Montpellier)</option>
+                <option value="FR_HDF_GE">🇫🇷 Nord & Grand Est (Lille, Strasbourg)</option>
+                <option value="FR_OUEST">🇫🇷 Grand Ouest & Centre (Nantes, Rennes)</option>
+              </optgroup>
+            </select>
+
+            {/* 5. Dynamic Sorting */}
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-bold"
+            >
+              <option value="date_desc">🔽 Tri : Date d'incorporation (Récentes)</option>
+              <option value="capital_desc">💰 Tri : Capital Social (Plus élevé)</option>
+              <option value="fx_desc">💱 Tri : Potentiel FX (Plus élevé)</option>
+              <option value="safety_desc">🛡️ Tri : Score Sûreté (Plus élevé)</option>
+            </select>
+
+          </div>
+
           {/* Dedicated Filter by Exact Incorporation Day (Jour d'incorporation) */}
           <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
             <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
@@ -919,7 +1098,7 @@ export default function App() {
               </span>
             </label>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-              💡 Astuce : Cliquez sur une date d'incorporation 📅 dans le tableau pour filtrer sur ce jour précis
+              💡 Astuce : Cliquez sur une date 📅, un capital 💰 ou un badge FX 💱 pour filtrer en 1 clic
             </span>
           </div>
 
@@ -942,6 +1121,24 @@ export default function App() {
                   <button onClick={() => setExactDate('')} className="hover:text-rose-500 ml-1" title="Retirer le filtre de jour">✕</button>
                 </span>
               )}
+              {fxFilter !== 'ALL' && (
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 font-bold border border-cyan-500/30 flex items-center gap-1.5">
+                  💱 Filtre FX actif
+                  <button onClick={() => setFxFilter('ALL')} className="hover:text-rose-500 ml-1">✕</button>
+                </span>
+              )}
+              {minCapital > 0 && (
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-bold border border-indigo-500/30 flex items-center gap-1.5">
+                  💰 Capital ≥ {minCapital.toLocaleString('fr-FR')}
+                  <button onClick={() => setMinCapital(0)} className="hover:text-rose-500 ml-1">✕</button>
+                </span>
+              )}
+              {geoFilter !== 'ALL' && (
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400 font-bold border border-purple-500/30 flex items-center gap-1.5">
+                  📍 Zone : {geoFilter}
+                  <button onClick={() => setGeoFilter('ALL')} className="hover:text-rose-500 ml-1">✕</button>
+                </span>
+              )}
             </div>
             <span className="text-xs text-slate-500 dark:text-slate-400">
               Historique 6 derniers mois • BODACC (FR) & FOSC/SHAB (CH)
@@ -953,8 +1150,8 @@ export default function App() {
               <thead className="bg-slate-100 dark:bg-[#161f30] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[11px] border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-3">Statut CRM</th>
-                  <th className="py-3 px-3">Entreprise, SIREN & Incorporation</th>
-                  <th className="py-3 px-3">Nature d'Activité</th>
+                  <th className="py-3 px-3">Entreprise, Capital & Incorporation</th>
+                  <th className="py-3 px-3">Activité, Conformité & FX</th>
                   <th className="py-3 px-3">Dirigeant & CFO</th>
                   <th className="py-3 px-3">Contact (Tél & Mail)</th>
                   <th className="py-3 px-3">Score Sûreté</th>
@@ -984,6 +1181,7 @@ export default function App() {
                     const rawDir = c.dirigeants?.[0]?.name;
                     const primaryDirigeant = (!rawDir || rawDir.includes('Direction') || rawDir.includes('Conseil')) ? 'X' : rawDir;
                     const safetyScore = c.safety?.score || 50;
+                    const capAmount = Number(c.shareCapital) || 0;
 
                     return (
                       <tr 
@@ -1030,7 +1228,7 @@ export default function App() {
                           </div>
                         </td>
 
-                        {/* 2. Company Name & SIREN (Clicking Name opens full modal page!) */}
+                        {/* 2. Company Name, Capital, Geo & SIREN */}
                         <td className="py-3 px-3">
                           <div className="flex items-start gap-2">
                             <span className="text-base select-none mt-0.5">{flag}</span>
@@ -1063,7 +1261,7 @@ export default function App() {
                                 </button>
                               </div>
 
-                              {/* Forme + Ville + SIREN + Date d'incorporation cliquable */}
+                              {/* Forme + Capital + Ville/Canton + SIREN + Date d'incorporation cliquable */}
                               <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 flex-wrap">
                                 {c.incorporationDate && (
                                   <button
@@ -1084,7 +1282,34 @@ export default function App() {
                                 <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 rounded font-medium text-slate-700 dark:text-slate-300">
                                   {c.legalForm}
                                 </span>
-                                <span>{c.city}</span>
+                                {capAmount > 0 && (
+                                  <span
+                                    className={`px-1.5 py-0.2 rounded font-bold border ${
+                                      capAmount >= 50000
+                                        ? 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/30'
+                                        : capAmount >= 20000
+                                        ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/25'
+                                        : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700'
+                                    }`}
+                                    title={`Capital social : ${capAmount.toLocaleString('fr-FR')} ${isCH ? 'CHF' : 'EUR'}`}
+                                  >
+                                    💰 {capAmount.toLocaleString('fr-FR')} {isCH ? 'CHF' : '€'}
+                                  </span>
+                                )}
+                                <span
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (isCH && c.canton) {
+                                      setGeoFilter(prev => prev === `canton:${c.canton}` ? 'ALL' : `canton:${c.canton}`);
+                                    } else if (c.geoZone?.regionCode) {
+                                      setGeoFilter(prev => prev === c.geoZone.regionCode ? 'ALL' : c.geoZone.regionCode);
+                                    }
+                                  }}
+                                  className="cursor-pointer hover:text-blue-500 font-medium"
+                                  title={c.geoZone?.regionLabel || c.city}
+                                >
+                                  📍 {c.city} {isCH && c.canton ? `(${c.canton})` : c.postalCode ? `(${c.postalCode.slice(0, 2)})` : ''}
+                                </span>
                                 <span>•</span>
                                 <button
                                   onClick={(e) => {
@@ -1128,12 +1353,12 @@ export default function App() {
                           </div>
                         </td>
 
-                        {/* 3. NATURE D'ACTIVITE & PRE-QUALIFICATION REVOLUT */}
+                        {/* 3. NATURE D'ACTIVITE, PRE-QUALIFICATION REVOLUT & POTENTIEL FX */}
                         <td className="py-3 px-3 whitespace-nowrap">
                           <div 
                             onClick={() => setSelectedCompany(c)}
                             className="cursor-pointer group space-y-1"
-                            title="Cliquer pour voir l'analyse conformité et la description complète"
+                            title="Cliquer pour voir l'analyse conformité, le potentiel FX et la description complète"
                           >
                             <div className="flex items-center gap-1.5">
                               {getCategoryBadge(c.activityCategory || 'Services B2B')}
@@ -1141,8 +1366,8 @@ export default function App() {
                                 🔍 fiche
                               </span>
                             </div>
-                            {c.compliance && (
-                              <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 flex-wrap">
+                              {c.compliance && (
                                 <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border inline-flex items-center gap-1 ${
                                   c.compliance.status === 'restricted'
                                     ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800'
@@ -1152,8 +1377,25 @@ export default function App() {
                                 }`}>
                                   <span>{c.compliance.badge}</span>
                                 </span>
-                              </div>
-                            )}
+                              )}
+
+                              {c.fxPotential && c.fxPotential.level === 'high' && (
+                                <span
+                                  className="text-[10px] font-bold px-1.5 py-0.5 rounded border bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30 inline-flex items-center gap-1"
+                                  title={`${c.fxPotential.badge} — ${c.fxPotential.reasons?.[0] || ''}`}
+                                >
+                                  {c.fxPotential.badge}
+                                </span>
+                              )}
+                              {c.fxPotential && c.fxPotential.level === 'medium' && (
+                                <span
+                                  className="text-[10px] font-medium px-1.5 py-0.5 rounded border bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700 inline-flex items-center gap-1"
+                                  title={c.fxPotential.badge}
+                                >
+                                  {c.fxPotential.shortBadge}
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </td>
 

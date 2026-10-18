@@ -92,6 +92,11 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 <span className="flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5" /> {company.city} ({company.postalCode})
                 </span>
+                {company.geoZone && (
+                  <span className="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200 dark:border-blue-800/50">
+                    {company.geoZone.regionLabel} • {company.geoZone.subLabel}
+                  </span>
+                )}
               </p>
             </div>
           </div>
@@ -189,6 +194,69 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                   </span>
                   <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                     {company.compliance.salesRecommendation}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Point 1: Détecteur de Besoins FX / Multi-Devises (Potentiel Revolut FX) */}
+          {company.fxPotential && (
+            <div className={`p-4 rounded-xl border transition ${
+              company.fxPotential.level === 'high'
+                ? 'bg-violet-50/90 dark:bg-violet-950/30 border-violet-300 dark:border-violet-800/70'
+                : company.fxPotential.level === 'medium'
+                ? 'bg-indigo-50/70 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-900/50'
+                : 'bg-slate-50 dark:bg-[#161e2e] border-slate-200 dark:border-slate-800'
+            }`}>
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-2.5 pb-2.5 border-b border-violet-200/60 dark:border-violet-800/40">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-sm font-bold text-violet-900 dark:text-violet-200">
+                    {company.fxPotential.badge}
+                  </span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-violet-200/80 dark:bg-violet-900/70 text-violet-900 dark:text-violet-200 font-bold">
+                    Score FX : {company.fxPotential.score}/100
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Devises cibles détectées :</span>
+                  {(company.fxPotential.currencies || []).map(curr => (
+                    <span
+                      key={curr}
+                      className="text-xs px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 text-violet-700 dark:text-violet-300 font-mono font-bold border border-violet-300 dark:border-violet-700 shadow-sm"
+                    >
+                      {curr}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mt-2">
+                <div className="space-y-1">
+                  <span className="font-bold text-slate-700 dark:text-slate-300 block">
+                    🔍 Signaux Multi-Devises & Transfrontaliers détectés :
+                  </span>
+                  <ul className="list-disc list-inside text-slate-600 dark:text-slate-400 space-y-0.5">
+                    {(company.fxPotential.reasons || []).map((r, idx) => (
+                      <li key={idx} className="leading-relaxed">{r}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-slate-700 dark:text-slate-300">
+                      🎯 Pitch Commercial Revolut FX :
+                    </span>
+                    <button
+                      onClick={() => handleCopy(company.fxPotential.salesPitch, 'fxPitch')}
+                      className="text-[11px] px-2 py-0.5 rounded bg-violet-600 hover:bg-violet-500 text-white font-semibold flex items-center gap-1 transition shadow-sm"
+                    >
+                      {copiedField === 'fxPitch' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                      {copiedField === 'fxPitch' ? 'Pitch copié !' : 'Copier le pitch FX'}
+                    </button>
+                  </div>
+                  <p className="text-slate-700 dark:text-slate-300 bg-white/70 dark:bg-slate-900/60 p-2.5 rounded-lg border border-violet-200/60 dark:border-violet-800/40 italic leading-relaxed">
+                    "{company.fxPotential.salesPitch}"
                   </p>
                 </div>
               </div>
