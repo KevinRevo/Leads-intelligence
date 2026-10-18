@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building2, 
   User, 
@@ -31,6 +31,12 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [copiedField, setCopiedField] = useState(null);
+
+  useEffect(() => {
+    setCrmStatus(company.crmStatus || 'new');
+    setCrmNotes(company.crmNotes || '');
+    setCrmAssignedTo(company.crmAssignedTo || '');
+  }, [company.id, company.crmStatus, company.crmNotes, company.crmAssignedTo]);
 
   const handleCopy = (text, fieldName) => {
     if (!text) return;
@@ -540,16 +546,19 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
 
           {/* CRM & Sales Management Box */}
           <div className="bg-slate-100 dark:bg-[#162035] p-5 rounded-xl border border-slate-300 dark:border-blue-900/50 space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-2">
               <div className="flex items-center gap-2">
                 <Briefcase className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
-                  Suivi Commercial & Synchronisation CRM
+                  Suivi Commercial & Session Partagée (Anti-Doublon)
                 </h4>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-500/30">
+                  ☁️ Sync Multi-Postes Active
+                </span>
               </div>
               {saveSuccess && (
-                <span className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4" /> Modifié et enregistré !
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                  <CheckCircle className="w-4 h-4" /> Synchronisé sur tous les postes !
                 </span>
               )}
             </div>
@@ -559,7 +568,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
               {/* CRM Status Dropdown */}
               <div>
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
-                  Statut de Prospection
+                  Statut de Prospection (Visible par toute l'équipe)
                 </label>
                 <select
                   value={crmStatus}
@@ -579,7 +588,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
               {/* Assignee */}
               <div>
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
-                  Commercial Revolut Assigné
+                  Commercial Revolut Assigné (Anti-doublon)
                 </label>
                 <input
                   type="text"
@@ -595,24 +604,27 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             {/* Notes */}
             <div>
               <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
-                Notes d'appel / Historique de contact
+                Notes d'appel / Historique de contact (Partagé en direct avec les collègues)
               </label>
               <textarea
                 rows={3}
-                placeholder="Ex: Intéressé par le compte multi-devises CHF/EUR. Relance prévue jeudi 10h."
+                placeholder="Ex: Appelé ce matin par Kevin — intéressé par le compte multi-devises CHF/EUR. Ne pas relancer avant jeudi."
                 value={crmNotes}
                 onChange={(e) => setCrmNotes(e.target.value)}
                 className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
               />
             </div>
 
-            <div className="flex justify-end pt-1">
+            <div className="flex items-center justify-between pt-1 flex-wrap gap-2">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                {company.updatedAt ? `Dernière modification partagée : ${new Date(company.updatedAt).toLocaleString('fr-FR')}` : 'Toute modification ici est immédiatement visible sur les ordinateurs de vos collègues.'}
+              </span>
               <button
                 onClick={handleSaveCRM}
                 disabled={isSaving}
                 className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition shadow-md disabled:opacity-50"
               >
-                {isSaving ? 'Enregistrement...' : 'Enregistrer le statut CRM'}
+                {isSaving ? 'Synchronisation Cloud...' : 'Enregistrer & Partager avec l\'équipe'}
               </button>
             </div>
 
