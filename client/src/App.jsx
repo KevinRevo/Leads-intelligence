@@ -179,9 +179,19 @@ function computeLocalStats(comps) {
   };
 }
 
-function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search = '', verifiedOnly = false, dateFilter = 'all', compliance = 'ALL' } = {}) {
+function formatDateFr(isoDate = '') {
+  if (!isoDate) return '';
+  const parts = isoDate.split('-');
+  if (parts.length !== 3) return isoDate;
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+
+function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search = '', verifiedOnly = false, dateFilter = 'all', exactDate = '', compliance = 'ALL' } = {}) {
   const overrides = getCrmOverrides();
   const merged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
+
+  // Reference date = latest incorporation date in dataset or today
+  const refDate = new Date('2026-10-18T23:59:59Z');
 
   return merged.filter(c => {
     if (country !== 'ALL' && c.country !== country) return false;
@@ -197,19 +207,32 @@ function applyLocalFilters(rawList, { country = 'ALL', crmStatus = 'ALL', search
       const matchReg = c.registrationNumber?.toLowerCase().includes(q);
       const matchDir = c.dirigeants?.some(d => d.name?.toLowerCase().includes(q));
       const matchCfo = c.cfo?.name?.toLowerCase().includes(q);
-      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir && !matchCfo) return false;
+      const matchDate = c.incorporationDate?.includes(q) || formatDateFr(c.incorporationDate).includes(q);
+      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir && !matchCfo && !matchDate) return false;
     }
 
-    if (dateFilter !== 'all') {
-      const dateStr = c.incorporationDate || c.scrapedAt;
-      if (dateStr) {
-        const compDate = new Date(dateStr);
-        const refDate = new Date('2026-10-14T23:59:59Z');
+    const dateStr = (c.incorporationDate || c.scrapedAt || '').split('T')[0];
+
+    // Exact incorporation day filter (priority if set)
+    if (exactDate) {
+      if (dateStr !== exactDate) return false;
+      return true;
+    }
+
+    if (dateFilter !== 'all' && dateStr) {
+      if (dateFilter.startsWith('month:')) {
+        const targetMonth = dateFilter.replace('month:', '');
+        if (!dateStr.startsWith(targetMonth)) return false;
+      } else {
+        const compDate = new Date(`${dateStr}T12:00:00Z`);
         const diffDays = Math.max(0, Math.floor((refDate - compDate) / (1000 * 60 * 60 * 24)));
-        if (dateFilter === 'today' && diffDays > 1) return false;
+        if (dateFilter === 'today' && diffDays > 2) return false;
         if (dateFilter === '3days' && diffDays > 3) return false;
         if (dateFilter === '7days' && diffDays > 7) return false;
+        if (dateFilter === '14days' && diffDays > 14) return false;
         if (dateFilter === '30days' && diffDays > 30) return false;
+        if (dateFilter === '90days' && diffDays > 90) return false;
+        if (dateFilter === '180days' && diffDays > 185) return false;
       }
     }
 
@@ -232,6 +255,23 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [dateFilter, setDateFilter] = useState('all');
+  const [exactDate, setExactDate] = useState('');
+
+  // Compute all distinct incorporation dates (sorted newest -> oldest) with counts
+  const availableIncorporationDays = React.useMemo(() => {
+    const counts = {};
+    const list = allStaticCompaniesRef.current || [];
+    for (const c of list) {
+      if (selectedCountry !== 'ALL' && c.country !== selectedCountry) continue;
+      if (selectedCompliance !== 'ALL' && c.compliance?.status !== selectedCompliance) continue;
+      if (verifiedOnly && !c.website && !c.linkedinDirigeantUrl) continue;
+      const d = (c.incorporationDate || '').split('T')[0];
+      if (d) counts[d] = (counts[d] || 0) + 1;
+    }
+    return Object.entries(counts)
+      .sort((a, b) => b[0].localeCompare(a[0]))
+      .map(([date, count]) => ({ date, count, label: `${formatDateFr(date)} (${count} société${count > 1 ? 's' : ''})` }));
+  }, [selectedCountry, selectedCompliance, verifiedOnly]);
 
   const [companies, setCompanies] = useState(() => {
     return applyLocalFilters(bundledDataset.companies || []);
@@ -273,7 +313,8 @@ export default function App() {
       compliance: selectedCompliance,
       search: searchQuery,
       verifiedOnly,
-      dateFilter
+      dateFilter,
+      exactDate
     });
     setCompanies(filtered);
     const overrides = getCrmOverrides();
@@ -287,7 +328,7 @@ export default function App() {
 
   useEffect(() => {
     fetchData();
-  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter]);
+  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
   // Real-time multi-user cloud synchronization (on mount, every 10s, and on tab focus)
   useEffect(() => {
@@ -307,7 +348,7 @@ export default function App() {
       clearInterval(interval);
       window.removeEventListener('focus', onFocus);
     };
-  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter]);
+  }, [selectedCountry, selectedCrmStatus, selectedCompliance, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
   const fetchData = async () => {
     try {
@@ -324,7 +365,8 @@ export default function App() {
       if (selectedCrmStatus !== 'ALL') params.append('crmStatus', selectedCrmStatus);
       if (searchQuery) params.append('search', searchQuery);
       if (verifiedOnly) params.append('verifiedOnly', 'true');
-      if (dateFilter !== 'all') params.append('dateRange', dateFilter);
+      if (exactDate) params.append('exactDate', exactDate);
+      else if (dateFilter !== 'all') params.append('dateRange', dateFilter);
 
       const [compRes, statsRes] = await Promise.all([
         fetch(`${API_BASE}/companies?${params.toString()}`),
@@ -334,7 +376,7 @@ export default function App() {
       if (compRes.ok && statsRes.ok) {
         const compData = await compRes.json();
         const statsData = await statsRes.json();
-        if (compData.success && Array.isArray(compData.companies)) {
+        if (compData.success && Array.isArray(compData.companies) && !exactDate && !dateFilter.startsWith('month:')) {
           setCompanies(compData.companies);
           if (statsData.success) setStats(statsData.stats);
         }
@@ -625,7 +667,7 @@ export default function App() {
             {/* Card 1: Total Scraped */}
             <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
-                <span className="font-medium">Total Détectées (Depuis 1er Oct)</span>
+                <span className="font-medium">Total Qualifiées (6 Derniers Mois)</span>
                 <Building2 className="w-4 h-4 text-blue-500" />
               </div>
               <div className="text-2xl font-black text-slate-900 dark:text-white">{stats.total}</div>
@@ -687,7 +729,7 @@ export default function App() {
           <div className="flex flex-col lg:flex-row gap-3 items-center justify-between flex-wrap">
             
             {/* Search Input */}
-            <div className="relative w-full lg:w-72">
+            <div className="relative w-full lg:w-64">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -758,21 +800,109 @@ export default function App() {
               </select>
             </div>
 
-            {/* Date Range Dropdown (Cumulative History) */}
-            <div className="w-full lg:w-48">
+            {/* Date Range Dropdown (6-Month Cumulative History & Months) */}
+            <div className="w-full lg:w-56">
               <select
                 value={dateFilter}
-                onChange={(e) => setDateFilter(e.target.value)}
+                onChange={(e) => {
+                  setDateFilter(e.target.value);
+                  setExactDate('');
+                }}
                 className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
               >
-                <option value="all">📅 Tout l'historique (Depuis 1er Oct)</option>
-                <option value="today">📅 Aujourd'hui (14 Oct)</option>
-                <option value="3days">📅 3 derniers jours</option>
-                <option value="7days">📅 7 derniers jours</option>
-                <option value="30days">📅 30 derniers jours</option>
+                <optgroup label="Périodes glissantes">
+                  <option value="all">📅 Tout l'historique (6 derniers mois)</option>
+                  <option value="today">📅 Dernières 24h / 48h</option>
+                  <option value="3days">📅 3 derniers jours</option>
+                  <option value="7days">📅 7 derniers jours</option>
+                  <option value="14days">📅 14 derniers jours</option>
+                  <option value="30days">📅 30 derniers jours (1 mois)</option>
+                  <option value="90days">📅 90 derniers jours (3 mois)</option>
+                  <option value="180days">📅 180 derniers jours (6 mois)</option>
+                </optgroup>
+                <optgroup label="Par mois d'incorporation">
+                  <option value="month:2026-10">🗓️ Octobre 2026</option>
+                  <option value="month:2026-09">🗓️ Septembre 2026</option>
+                  <option value="month:2026-08">🗓️ Août 2026</option>
+                  <option value="month:2026-07">🗓️ Juillet 2026</option>
+                  <option value="month:2026-06">🗓️ Juin 2026</option>
+                  <option value="month:2026-05">🗓️ Mai 2026</option>
+                  <option value="month:2026-04">🗓️ Avril 2026</option>
+                </optgroup>
               </select>
             </div>
 
+          </div>
+
+          {/* Dedicated Filter by Exact Incorporation Day (Jour d'incorporation) */}
+          <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
+            <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+              <span className="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                📅 Filtrer par jour d'incorporation :
+              </span>
+
+              {/* Calendar Date Input */}
+              <input
+                type="date"
+                value={exactDate}
+                min="2026-04-01"
+                max="2026-10-31"
+                onChange={(e) => setExactDate(e.target.value)}
+                className="bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
+                title="Choisir une date précise d'incorporation sur le calendrier"
+              />
+
+              {/* Dropdown of active registry days with company count */}
+              <select
+                value={exactDate}
+                onChange={(e) => setExactDate(e.target.value)}
+                className="bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+              >
+                <option value="">— Sélectionner un jour de publication ({availableIncorporationDays.length} jours) —</option>
+                {availableIncorporationDays.map(d => (
+                  <option key={d.date} value={d.date}>
+                    📅 {d.label}
+                  </option>
+                ))}
+              </select>
+
+              {/* Previous / Next active incorporation day navigation */}
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => {
+                    if (!availableIncorporationDays.length) return;
+                    const idx = availableIncorporationDays.findIndex(d => d.date === exactDate);
+                    const nextIdx = idx === -1 ? 0 : Math.min(availableIncorporationDays.length - 1, idx + 1);
+                    setExactDate(availableIncorporationDays[nextIdx].date);
+                  }}
+                  className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition"
+                  title="Jour d'incorporation précédent"
+                >
+                  ◀ Jour préc.
+                </button>
+                <button
+                  onClick={() => {
+                    if (!availableIncorporationDays.length) return;
+                    const idx = availableIncorporationDays.findIndex(d => d.date === exactDate);
+                    const prevIdx = idx <= 0 ? 0 : idx - 1;
+                    setExactDate(availableIncorporationDays[prevIdx].date);
+                  }}
+                  className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition"
+                  title="Jour d'incorporation suivant"
+                >
+                  Jour suiv. ▶
+                </button>
+              </div>
+
+              {exactDate && (
+                <button
+                  onClick={() => setExactDate('')}
+                  className="px-2.5 py-1.5 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-bold text-[11px] transition"
+                >
+                  ✕ Afficher tous les jours
+                </button>
+              )}
+            </div>
           </div>
 
           {/* User Requested: Filter to exclude companies with NO active website or LinkedIn */}
@@ -789,7 +919,7 @@ export default function App() {
               </span>
             </label>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-              💡 Astuce : Cliquez sur n'importe quelle donnée (Nom, SIREN, Tél, Mail) pour la copier en 1 clic
+              💡 Astuce : Cliquez sur une date d'incorporation 📅 dans le tableau pour filtrer sur ce jour précis
             </span>
           </div>
 
@@ -798,17 +928,23 @@ export default function App() {
         {/* Lead Table View */}
         <div className="bg-white dark:bg-[#121824] border border-slate-200 dark:border-slate-800/80 rounded-2xl overflow-hidden shadow-sm transition-colors">
           
-          <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-[#161f30]/30">
-            <div className="flex items-center gap-2">
+          <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2 bg-slate-50/50 dark:bg-[#161f30]/30">
+            <div className="flex items-center gap-2 flex-wrap">
               <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-wide">
                 Nouvelles Entreprises Détectées
               </h3>
               <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border border-slate-300 dark:border-slate-700">
                 {companies.length} résultat(s)
               </span>
+              {exactDate && (
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-600/15 text-blue-600 dark:text-blue-400 font-bold border border-blue-500/30 flex items-center gap-1.5">
+                  📅 Jour d'incorporation : {formatDateFr(exactDate)}
+                  <button onClick={() => setExactDate('')} className="hover:text-rose-500 ml-1" title="Retirer le filtre de jour">✕</button>
+                </span>
+              )}
             </div>
             <span className="text-xs text-slate-500 dark:text-slate-400">
-              Immatriculées au registre du commerce des dernières 24h
+              Historique 6 derniers mois • BODACC (FR) & FOSC/SHAB (CH)
             </span>
           </div>
 
@@ -817,7 +953,7 @@ export default function App() {
               <thead className="bg-slate-100 dark:bg-[#161f30] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[11px] border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-3">Statut CRM</th>
-                  <th className="py-3 px-3">Entreprise & SIREN</th>
+                  <th className="py-3 px-3">Entreprise, SIREN & Incorporation</th>
                   <th className="py-3 px-3">Nature d'Activité</th>
                   <th className="py-3 px-3">Dirigeant & CFO</th>
                   <th className="py-3 px-3">Contact (Tél & Mail)</th>
@@ -927,8 +1063,24 @@ export default function App() {
                                 </button>
                               </div>
 
-                              {/* Forme + Ville + SIREN (1-Click Copyable) */}
+                              {/* Forme + Ville + SIREN + Date d'incorporation cliquable */}
                               <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 flex-wrap">
+                                {c.incorporationDate && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setExactDate(prev => prev === c.incorporationDate ? '' : c.incorporationDate);
+                                    }}
+                                    className={`px-1.5 py-0.2 rounded font-semibold transition border ${
+                                      exactDate === c.incorporationDate
+                                        ? 'bg-blue-600 text-white border-blue-600'
+                                        : 'bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-blue-500'
+                                    }`}
+                                    title="Cliquer pour filtrer uniquement les entreprises incorporées ce jour-là"
+                                  >
+                                    📅 {formatDateFr(c.incorporationDate)}
+                                  </button>
+                                )}
                                 <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 rounded font-medium text-slate-700 dark:text-slate-300">
                                   {c.legalForm}
                                 </span>

@@ -42,6 +42,7 @@ app.get('/api/companies', (req, res) => {
       crmStatus: req.query.crmStatus || 'ALL',
       search: req.query.search || '',
       dateRange: req.query.dateRange || 'all',
+      exactDate: req.query.exactDate || '',
       verifiedOnly: req.query.verifiedOnly === 'true',
     };
     const list = getCompanies(filters);

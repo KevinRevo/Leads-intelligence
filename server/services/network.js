@@ -7,8 +7,9 @@ const { findRelatedCompaniesCH } = require('../scrapers/switzerland');
  * - Its directors, board members, CFO & corporate holdings (personnes physiques & morales)
  * - Their other active companies (sociétés liées / participations / mandats croisés RCS & FOSC)
  */
-async function buildCompanyNetwork(company, allCompanies = []) {
+async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
   if (!company) return null;
+  const { skipLiveLookup = false } = options;
 
   const nodes = [];
   const edges = [];
@@ -123,8 +124,8 @@ async function buildCompanyNetwork(company, allCompanies = []) {
       });
     }
 
-    // Live lookup for cross-mandates (only for top 2 directors to keep fast)
-    if (i < 2) {
+    // Live lookup for cross-mandates (only for top 2 directors when not skipped)
+    if (!skipLiveLookup && i < 2) {
       if (company.country === 'FR') {
         try {
           const liveSisters = await findRelatedCompaniesFR(d.name, company.registrationNumber);

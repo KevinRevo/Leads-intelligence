@@ -92,17 +92,31 @@ function getCompanies(filters = {}) {
   // Always exclude solo individual entrepreneurs (EI / personnes physiques)
   list = list.filter(c => !/individuel|personne physique|einzelfirma|einzelunternehmen|auto-entrepreneur/i.test(c.legalForm || '') && !/individuel/i.test(c.name || ''));
 
-  if (filters.dateRange === 'today') {
-    const today = new Date().toISOString().split('T')[0];
-    list = list.filter(c => c.incorporationDate === today);
+  if (filters.exactDate) {
+    list = list.filter(c => (c.incorporationDate || '').split('T')[0] === filters.exactDate);
+  } else if (filters.dateRange && filters.dateRange.startsWith('month:')) {
+    const targetMonth = filters.dateRange.replace('month:', '');
+    list = list.filter(c => (c.incorporationDate || '').startsWith(targetMonth));
+  } else if (filters.dateRange === 'today') {
+    const limitDate = new Date(Date.now() - 2 * 86400000).toISOString().split('T')[0];
+    list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
   } else if (filters.dateRange === '3days') {
     const limitDate = new Date(Date.now() - 3 * 86400000).toISOString().split('T')[0];
     list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
   } else if (filters.dateRange === '7days') {
     const limitDate = new Date(Date.now() - 7 * 86400000).toISOString().split('T')[0];
     list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
+  } else if (filters.dateRange === '14days') {
+    const limitDate = new Date(Date.now() - 14 * 86400000).toISOString().split('T')[0];
+    list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
   } else if (filters.dateRange === '30days') {
     const limitDate = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
+    list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
+  } else if (filters.dateRange === '90days') {
+    const limitDate = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
+    list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
+  } else if (filters.dateRange === '180days') {
+    const limitDate = new Date(Date.now() - 185 * 86400000).toISOString().split('T')[0];
     list = list.filter(c => (c.incorporationDate || c.createdAt) >= limitDate);
   }
   // 'all' preserves all historical leads from day 14, 15, 16, etc.

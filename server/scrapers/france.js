@@ -15,6 +15,99 @@ function formatPersonName(prenoms = '', nom = '') {
 }
 
 /**
+ * Parse the `personne.administration` string directly from a BODACC record
+ * to extract physical directors (Président, Directeur général, Gérant, Administrateur)
+ * and corporate holdings (Personnes morales).
+ */
+function parseBodaccAdministration(adminStr = '') {
+  if (!adminStr || typeof adminStr !== 'string') {
+    return { dirigeants: [], corporateLinks: [] };
+  }
+  const dirigeants = [];
+  const corporateLinks = [];
+
+  const segments = adminStr
+    .replace(/\u00a0/g, ' ')
+    .split(/;\s*|\.\s+(?=(?:Pr[eé]sident|Directeur|G[eé]rant|Administrateur|Membre|Commissaire|Associ[eé]|Contr[oô]leur))/i)
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  for (const seg of segments) {
+    const colonIdx = seg.indexOf(':');
+    if (colonIdx === -1) continue;
+    const rawRole = seg.slice(0, colonIdx).trim();
+    let rawPerson = seg.slice(colonIdx + 1).trim().replace(/\.$/, '');
+    rawPerson = rawPerson.replace(/\s+nom d'usage\s*:\s*[^,;.]*/gi, '').trim();
+
+    const isCorporateKeyword = /(?:^|\s)(SAS|SARL|SA|SASU|EURL|SCI|SNC|St[eé]|Soci[eé]t[eé]|GROUP|GROUPE|HOLDING|CAPITAL|INVEST|PARTNERS|CABINET|AUDIT|KPMG|DELOITTE|ERNST|PWC|FIDUCIAIRE|GESTION)(?:\s|$)/i.test(rawPerson);
+    const hasAllCapsOnly = !/[A-ZÀ-Ÿ][a-zà-ÿ]{2,}/.test(rawPerson.replace(/\b(de|du|des|et|la|le|les|en|sur|par|actions|simplifiée|responsabilité|limitée|anonyme)\b/gi, ''));
+
+    if (isCorporateKeyword || hasAllCapsOnly || /repr[eé]sent[eé] par/i.test(rawPerson)) {
+      const corpName = rawPerson
+        .split(/repr[eé]sent[eé] par/i)[0]
+        .replace(/^(?:St[eé]|Soci[eé]t[eé])\s+(?:par\s+actions\s+simplifi[eé]e|à\s+responsabilit[eé]\s+limit[eé]e|anonyme|civile)\s+/i, '')
+        .trim();
+      if (corpName && corpName.length > 2) {
+        const isAudit = /commissaire aux comptes/i.test(rawRole);
+        corporateLinks.push({
+          name: corpName,
+          legalForm: isAudit ? 'Commissaire aux Comptes' : 'Holding / Personne Morale',
+          shareCapital: 50000,
+          activity: isAudit ? 'Audit légal & Commissariat aux comptes' : `Société mère / Mandataire (${rawRole})`,
+          roleHeld: `${rawRole} (Personne Morale)`,
+          city: 'France',
+        });
+      }
+      const repMatch = rawPerson.match(/repr[eé]sent[eé] par\s+([A-ZÀ-Ÿa-zà-ÿ\s,-]+)$/i);
+      if (repMatch) {
+        rawPerson = repMatch[1].trim();
+      } else {
+        continue;
+      }
+    }
+
+    // Parse human name
+    let fullName = '';
+    if (rawPerson.includes(',')) {
+      const parts = rawPerson.split(',').map(p => p.trim()).filter(Boolean);
+      const words0 = parts[0].split(/\s+/);
+      if (words0.length >= 2 && words0[0] === words0[0].toUpperCase() && words0[1] !== words0[1].toUpperCase()) {
+        const last = words0[0].toUpperCase();
+        const first = words0.slice(1).join(' ');
+        fullName = `${first} ${last}`.trim();
+      } else if (parts.length >= 2) {
+        const last = parts[0].toUpperCase();
+        const first = parts[1].split(/\s+/)[0];
+        fullName = `${first} ${last}`.trim();
+      }
+    } else {
+      const words = rawPerson.split(/\s+/).filter(Boolean);
+      if (words.length >= 2) {
+        const upperWords = words.filter(w => w === w.toUpperCase() && w.length > 1);
+        const mixedWords = words.filter(w => w !== w.toUpperCase() || w.length <= 1);
+        if (upperWords.length >= 1 && mixedWords.length >= 1) {
+          fullName = `${mixedWords[0]} ${upperWords.join(' ')}`.trim();
+        } else {
+          fullName = `${words.slice(1).join(' ')} ${words[0].toUpperCase()}`.trim();
+        }
+      }
+    }
+
+    if (fullName && fullName.length > 4 && !/\d/.test(fullName) && !/commissaire/i.test(rawRole)) {
+      if (!dirigeants.some(d => d.name.toLowerCase() === fullName.toLowerCase())) {
+        dirigeants.push({
+          name: fullName,
+          role: rawRole || 'Président / Dirigeant',
+          isPrimary: dirigeants.length === 0,
+        });
+      }
+    }
+  }
+
+  return { dirigeants, corporateLinks };
+}
+
+/**
  * Fetch all physical directors, board members, CFOs, and corporate holding links
  * from the official French government RNE/Sirene API (recherche-entreprises.api.gouv.fr).
  * If a company's President/Director is a corporate holding ("personne morale"),
@@ -187,6 +280,11 @@ async function scrapeFranceCreations(limit = 20) {
                 if (a.codePostal) postalCode = a.codePostal;
                 if (a.ville) city = a.ville;
               }
+              if (person.administration) {
+                const adminParsed = parseBodaccAdministration(person.administration);
+                if (adminParsed.dirigeants.length > 0) dirigeants = adminParsed.dirigeants;
+                if (adminParsed.corporateLinks.length > 0) corporateLinks = adminParsed.corporateLinks;
+              }
             }
           } catch {
             // Ignore
@@ -211,24 +309,26 @@ async function scrapeFranceCreations(limit = 20) {
           }
         }
 
-        // Deep-enrich via API Recherche Entreprises (including holding resolution!)
-        const gouvData = await fetchFrenchDirectorsAndLinks(siren, companyName);
-        if (gouvData.dirigeants.length > 0) {
-          dirigeants = gouvData.dirigeants;
-        }
-        if (gouvData.corporateLinks.length > 0) {
-          corporateLinks = gouvData.corporateLinks;
-        }
-        if (gouvData.item) {
-          const item = gouvData.item;
-          if (!companyName && item.nom_complet) companyName = item.nom_complet;
-          if (item.nature_juridique && (!legalForm || legalForm === 'Société Commerciale')) {
-            legalForm = mapNatureJuridique(item.nature_juridique);
+        // Deep-enrich via API Recherche Entreprises if needed (including holding resolution!)
+        if (dirigeants.length === 0 || corporateLinks.length > 0) {
+          const gouvData = await fetchFrenchDirectorsAndLinks(siren, companyName);
+          if (gouvData.dirigeants.length > 0) {
+            dirigeants = gouvData.dirigeants;
           }
-          if (item.siege) {
-            if (!address && item.siege.adresse) address = item.siege.adresse;
-            if (!postalCode && item.siege.code_postal) postalCode = item.siege.code_postal;
-            if (!city && item.siege.libelle_commune) city = item.siege.libelle_commune;
+          if (gouvData.corporateLinks.length > 0 && corporateLinks.length === 0) {
+            corporateLinks = gouvData.corporateLinks;
+          }
+          if (gouvData.item) {
+            const item = gouvData.item;
+            if (!companyName && item.nom_complet) companyName = item.nom_complet;
+            if (item.nature_juridique && (!legalForm || legalForm === 'Société Commerciale')) {
+              legalForm = mapNatureJuridique(item.nature_juridique);
+            }
+            if (item.siege) {
+              if (!address && item.siege.adresse) address = item.siege.adresse;
+              if (!postalCode && item.siege.code_postal) postalCode = item.siege.code_postal;
+              if (!city && item.siege.libelle_commune) city = item.siege.libelle_commune;
+            }
           }
         }
 
@@ -329,6 +429,7 @@ function mapNatureJuridique(code) {
 module.exports = {
   scrapeFranceCreations,
   fetchFrenchDirectorsAndLinks,
+  parseBodaccAdministration,
   findRelatedCompaniesFR,
   formatPersonName,
   mapNatureJuridique,

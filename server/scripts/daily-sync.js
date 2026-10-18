@@ -30,11 +30,38 @@ async function main() {
   const syncResult = await runSync({ country: 'ALL' });
   console.log('[Daily Sync] Résultat brut:', JSON.stringify(syncResult));
 
-  // 2. Read updated database and apply 100% factual rules & compliance
+  // 2. Read updated database and apply 100% factual rules, compliance & cloud CRM overrides
   const dbPath = path.join(__dirname, '../data/db.json');
   const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 
+  // Pull shared multi-computer CRM overrides from GitHub Issue #1
+  let cloudOverrides = {};
+  try {
+    const res = await fetch('https://api.github.com/repos/KevinRevo/Leads-intelligence/issues/1', {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {})
+      }
+    });
+    if (res.ok) {
+      const issue = await res.json();
+      const parsed = JSON.parse(issue.body || '{}');
+      cloudOverrides = parsed.overrides || {};
+      console.log(`[Daily Sync] ${Object.keys(cloudOverrides).length} notes/statuts partagés récupérés du Cloud.`);
+    }
+  } catch (e) {
+    console.warn('[Daily Sync] Impossible de lire les overrides Cloud:', e.message);
+  }
+
   for (const comp of db.companies) {
+    // Merge shared team notes/status if present
+    if (cloudOverrides[comp.id]) {
+      const ov = cloudOverrides[comp.id];
+      if (ov.crmStatus) comp.crmStatus = ov.crmStatus;
+      if (ov.crmNotes !== undefined) comp.crmNotes = ov.crmNotes;
+      if (ov.crmAssignedTo !== undefined) comp.crmAssignedTo = ov.crmAssignedTo;
+    }
+
     const cleanComp = cleanCompanyName(comp.name);
     comp.linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(cleanComp || comp.name)}`;
 
