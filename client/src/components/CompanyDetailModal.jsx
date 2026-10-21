@@ -606,12 +606,25 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                   <span className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mb-1">
                     <Phone className="w-3.5 h-3.5 text-emerald-500" /> Téléphone Direct
                   </span>
-                  <span className="text-xs font-mono font-medium text-slate-900 dark:text-slate-200 block">
-                    {company.phone || 'Non communiqué au greffe'}
-                  </span>
-                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block mt-1">
-                    Source : {company.phoneSource || 'Standard'}
-                  </span>
+                  {company.phone ? (
+                    <>
+                      <span className="text-xs font-mono font-bold text-slate-900 dark:text-slate-100 block">
+                        {company.phone}
+                      </span>
+                      <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium block mt-1">
+                        ✓ {company.phoneSource || 'Site internet officiel'}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-xs font-mono text-slate-400 dark:text-slate-500 italic block">
+                        Non renseigné
+                      </span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block mt-1">
+                        {company.website ? 'Non publié sur le site web' : 'Non renseigné au registre légal'}
+                      </span>
+                    </>
+                  )}
                 </div>
                 {company.phone && (
                   <button

@@ -2,6 +2,7 @@ const dns = require('dns').promises;
 const https = require('https');
 const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone } = require('./compliance');
 const { isValidPhysicalPersonName, buildNorthDataUrl, detectInternationalLinks } = require('./northdata');
+const { normalizePhone, extractPhonesFromHtml } = require('./phoneExtractor');
 
 function cleanCompanyName(name) {
   if (!name) return '';
@@ -248,6 +249,7 @@ async function checkHttpsValid(hostname, companyName = '', countryCode = 'FR', c
     valid: true,
     statusCode: page.statusCode,
     title: titleMatch ? titleMatch[1].replace(/\s+/g, ' ').trim() : '',
+    html: page.html || '',
   };
 }
 
@@ -257,7 +259,7 @@ async function checkHttpsValid(hostname, companyName = '', countryCode = 'FR', c
 async function verifyDomain(name, countryCode = 'FR', city = '') {
   const candidateDomains = generateDomainCandidates(name, countryCode);
   if (candidateDomains.length === 0) {
-    return { website: null, websiteStatus: 'Non déposé', hasMx: false, domain: null };
+    return { website: null, websiteStatus: 'Non déposé', hasMx: false, domain: null, detectedPhone: null };
   }
 
   const dnsChecks = await Promise.all(
@@ -302,11 +304,16 @@ async function verifyDomain(name, countryCode = 'FR', city = '') {
         hasMx = false;
       }
 
+      const siteHtml = checkedApex.valid ? checkedApex.html : checkedWww.html;
+      const phones = extractPhonesFromHtml(siteHtml, countryCode);
+      const detectedPhone = phones.length > 0 ? phones[0] : null;
+
       return {
         website: validUrl,
         websiteStatus: 'Certifié SSL & Contenu Vérifié',
         hasMx,
         domain,
+        detectedPhone,
       };
     } catch {
       // Try next resolved domain
@@ -318,6 +325,7 @@ async function verifyDomain(name, countryCode = 'FR', city = '') {
     websiteStatus: 'Pas de site web officiel détecté',
     hasMx: false,
     domain: null,
+    detectedPhone: null,
   };
 }
 
@@ -521,17 +529,24 @@ async function enrichCompany(rawCompany) {
     }
   }
 
-  let phone = rawCompany.phone || null;
+  let phone = normalizePhone(rawCompany.phone, country) || null;
   let phoneSource = rawCompany.phoneSource || 'Non renseigné au greffe';
 
   if (!phone) {
     if (rawCompany.rawPhone) {
-      phone = rawCompany.rawPhone;
-      phoneSource = country === 'CH' ? 'Annonce légale FOSC (CH)' : country === 'FR' ? 'Annonce légale BODACC' : (rawCompany.phoneSource || 'Registre officiel');
-    } else if (domainInfo.website && (country === 'CH' || country === 'FR')) {
-      phone = country === 'CH' ? '+41 22 819 20 00' : '+33 1 84 16 00 00';
-      phoneSource = country === 'CH' ? 'Standard Siège Social (Local.ch / FOSC)' : 'Standard Siège Social (PagesPro / Insee)';
+      phone = normalizePhone(rawCompany.rawPhone, country);
+      if (phone) {
+        phoneSource = country === 'CH' ? 'Annonce légale FOSC (CH)' : country === 'FR' ? 'Annonce légale BODACC' : (rawCompany.phoneSource || 'Registre officiel');
+      }
+    } else if (domainInfo.detectedPhone) {
+      phone = domainInfo.detectedPhone;
+      phoneSource = `Site internet officiel (${domainInfo.domain})`;
     }
+  }
+
+  if (!phone) {
+    phone = null;
+    phoneSource = 'Non renseigné au registre ou sur le site';
   }
 
   const cfo = detectCFO(dirigeants, rawCompany.name);
