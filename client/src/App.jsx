@@ -381,6 +381,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(200);
 
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [networkData, setNetworkData] = useState(null);
@@ -428,6 +429,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    setVisibleCount(200);
     refreshFromLocalAndOverrides();
   }, [selectedCountry, selectedCrmStatus, selectedSector, fxFilter, minCapital, revenueFilter, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
@@ -521,17 +523,20 @@ export default function App() {
       }
     ];
     const edges = [];
+    const addedCompIds = new Set([company.id]);
     const realDirs = (company.dirigeants || []).filter(d => d.name && d.name !== 'X');
+
     realDirs.forEach((d, idx) => {
       const pid = `person-${idx}-${company.id}`;
       nodes.push({
         id: pid,
         label: d.name,
-        type: 'person',
+        type: idx === 0 ? 'person' : 'person_cfo',
         role: d.role || 'Dirigeant / Board (Personne Physique)',
-        email: company.bestEmail,
-        phone: company.phone,
-        linkedinUrl: company.linkedinDirigeantUrl,
+        email: idx === 0 ? company.bestEmail : null,
+        phone: idx === 0 ? company.phone : null,
+        linkedinUrl: idx === 0 ? company.linkedinDirigeantUrl : `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`,
+        northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(`${d.name} ${company.city || ''}`)}`,
       });
       edges.push({
         id: `edge-${company.id}-${pid}`,
@@ -540,10 +545,71 @@ export default function App() {
         label: d.role || 'Dirigeant',
         type: 'mandate',
       });
+
+      // Find any other companies in the 2024-2026 dataset sharing this physical director
+      const normName = d.name.toLowerCase().trim();
+      const allList = allStaticCompaniesRef.current || [];
+      for (const other of allList) {
+        if (addedCompIds.has(other.id)) continue;
+        if ((other.dirigeants || []).some(od => od.name?.toLowerCase().trim() === normName)) {
+          addedCompIds.add(other.id);
+          nodes.push({
+            id: other.id,
+            label: other.name,
+            type: 'sister_company',
+            country: other.country,
+            flag: other.country === 'CH' ? '🇨🇭' : '🇫🇷',
+            registrationNumber: other.registrationNumber,
+            legalForm: other.legalForm,
+            shareCapital: other.shareCapital,
+            revenue: other.revenue,
+            city: other.city,
+            activity: other.activity,
+            northDataUrl: other.northDataUrl,
+            roleHeld: 'Dirigeant commun',
+          });
+          edges.push({
+            id: `edge-${pid}-${other.id}`,
+            source: pid,
+            target: other.id,
+            label: 'Même Dirigeant',
+            type: 'cross_mandate',
+          });
+        }
+      }
+    });
+
+    (company.corporateLinks || []).forEach((corp, idx) => {
+      const cid = corp.id || `corp-${idx}-${company.id}`;
+      if (addedCompIds.has(cid)) return;
+      addedCompIds.add(cid);
+      const isForeign = Boolean(corp.countryCode && corp.countryCode !== company.country);
+      nodes.push({
+        id: cid,
+        label: corp.name,
+        type: 'sister_company',
+        isForeign,
+        country: corp.countryCode || company.country,
+        siren: corp.siren,
+        legalForm: corp.legalForm || 'Holding / Personne Morale',
+        shareCapital: corp.shareCapital,
+        city: corp.city || company.city,
+        roleHeld: corp.roleHeld || 'Holding / Associée Morale',
+        northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(`${corp.name} ${corp.siren || ''}`)}`,
+      });
+      edges.push({
+        id: `edge-corp-${company.id}-${cid}`,
+        source: company.id,
+        target: cid,
+        label: corp.roleHeld || 'Holding / Détention',
+        type: isForeign ? 'cross_border' : 'cross_mandate',
+      });
     });
 
     (company.internationalLinks || []).forEach((intl, idx) => {
       const iid = `intl-${idx}-${company.id}`;
+      if (addedCompIds.has(iid)) return;
+      addedCompIds.add(iid);
       nodes.push({
         id: iid,
         label: `${intl.flag || '🌍'} ${intl.entityName}`,
@@ -1193,7 +1259,7 @@ export default function App() {
                     </td>
                   </tr>
                 ) : (
-                  companies.map((c) => {
+                  companies.slice(0, visibleCount).map((c) => {
                     const isCH = c.country === 'CH';
                     const flag = isCH ? '🇨🇭' : '🇫🇷';
                     const rawDir = c.dirigeants?.[0]?.name;
@@ -1554,6 +1620,28 @@ export default function App() {
               </tbody>
             </table>
           </div>
+
+          {companies.length > visibleCount && (
+            <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-[#161f30]/50 flex items-center justify-between flex-wrap gap-3 text-xs">
+              <span className="text-slate-600 dark:text-slate-400 font-medium">
+                Affichage de <strong className="text-slate-900 dark:text-white">{visibleCount.toLocaleString('fr-FR')}</strong> sur <strong className="text-blue-600 dark:text-blue-400">{companies.length.toLocaleString('fr-FR')}</strong> sociétés commerciales qualifiées (2024–2026)
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setVisibleCount(v => v + 300)}
+                  className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold transition shadow-xs"
+                >
+                  + Afficher 300 sociétés de plus
+                </button>
+                <button
+                  onClick={() => setVisibleCount(companies.length)}
+                  className="px-3.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold border border-slate-300 dark:border-slate-700 transition"
+                >
+                  Tout afficher ({companies.length.toLocaleString('fr-FR')})
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </main>
 

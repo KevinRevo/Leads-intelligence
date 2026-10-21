@@ -4,8 +4,7 @@ const axios = require('axios');
 const { enrichCompany, cleanCompanyName, categorizeActivity, calculateSafetyScore, detectCFO } = require('../services/enricher');
 const { parseShabXml } = require('../scrapers/switzerland');
 const { parseBodaccAdministration, normalizeFrenchLegalForm, extractFrenchRevenue, formatPersonName } = require('../scrapers/france');
-const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone } = require('../services/compliance');
-const { buildCompanyNetwork } = require('../services/network');
+const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone, isRevolutUnsupportedIndustry } = require('../services/compliance');
 const { isValidPhysicalPersonName, isValidCommercialCompany, buildNorthDataUrl, detectInternationalLinks } = require('../services/northdata');
 
 async function processInBatches(items, batchSize, fn, label = 'Batch') {
@@ -22,105 +21,52 @@ async function processInBatches(items, batchSize, fn, label = 'Batch') {
 }
 
 /**
- * Generate date windows across 2024, 2025, and Jan-Apr 2026 (since Apr-Oct 2026 is already in DB)
- * so we cover the full period from 2024-01-01 to 2026-10-21!
+ * Generate fine-grained 10-day windows across ALL of 2024, 2025, and 2026 (from 2024-01-01 to 2026-10-21)
+ * 3 windows per month x 34 months = 101 windows for deep multi-year registry coverage!
  */
 function generateHistoricalWindows2024To2026() {
-  const windows = [
-    // 2024 windows (every month of 2024)
-    ['2024-01-01', '2024-01-31'],
-    ['2024-02-01', '2024-02-29'],
-    ['2024-03-01', '2024-03-31'],
-    ['2024-04-01', '2024-04-30'],
-    ['2024-05-01', '2024-05-31'],
-    ['2024-06-01', '2024-06-30'],
-    ['2024-07-01', '2024-07-31'],
-    ['2024-08-01', '2024-08-31'],
-    ['2024-09-01', '2024-09-30'],
-    ['2024-10-01', '2024-10-31'],
-    ['2024-11-01', '2024-11-30'],
-    ['2024-12-01', '2024-12-31'],
-    // 2025 windows (every month of 2025)
-    ['2025-01-01', '2025-01-31'],
-    ['2025-02-01', '2025-02-28'],
-    ['2025-03-01', '2025-03-31'],
-    ['2025-04-01', '2025-04-30'],
-    ['2025-05-01', '2025-05-31'],
-    ['2025-06-01', '2025-06-30'],
-    ['2025-07-01', '2025-07-31'],
-    ['2025-08-01', '2025-08-31'],
-    ['2025-09-01', '2025-09-30'],
-    ['2025-10-01', '2025-10-31'],
-    ['2025-11-01', '2025-11-30'],
-    ['2025-12-01', '2025-12-31'],
-    // Early 2026 windows (Jan-Apr 2026 + Oct 18-21 2026)
-    ['2026-01-01', '2026-01-31'],
-    ['2026-02-01', '2026-02-28'],
-    ['2026-03-01', '2026-03-31'],
-    ['2026-04-01', '2026-04-17'],
-    ['2026-10-18', '2026-10-21'],
-  ];
+  const windows = [];
+  const years = [2024, 2025, 2026];
+
+  for (const year of years) {
+    const maxMonth = year === 2026 ? 10 : 12;
+    for (let month = 1; month <= maxMonth; month++) {
+      const mStr = String(month).padStart(2, '0');
+      const lastDay = new Date(year, month, 0).getDate();
+
+      if (year === 2026 && month === 10) {
+        windows.push([`2026-10-01`, `2026-10-10`]);
+        windows.push([`2026-10-11`, `2026-10-21`]);
+      } else {
+        windows.push([`${year}-${mStr}-01`, `${year}-${mStr}-10`]);
+        windows.push([`${year}-${mStr}-11`, `${year}-${mStr}-20`]);
+        windows.push([`${year}-${mStr}-21`, `${year}-${mStr}-${lastDay}`]);
+      }
+    }
+  }
   return windows;
 }
 
 /**
- * Audit whether an existing company's website is a false homonym
- * (e.g., "Darwin Transports Sàrl" -> "darwin.ch", or "SHIVA SHAMBHO" -> "shivashambho.com")
+ * Fetch up to 200 BODACC creation records per 10-day window (offset 0 and offset 100)
  */
-function isSuspiciousHomonymWebsite(company) {
-  if (!company.website) return false;
-  try {
-    const u = new URL(company.website);
-    const hostApex = u.hostname.replace(/^www\./i, '').toLowerCase();
-    const hostSlug = hostApex.split('.')[0];
-
-    const cleaned = cleanCompanyName(company.name)
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9\s-]/g, ' ')
-      .trim();
-
-    const stopWords = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'et', 'and', 'und', 'en', 'in', 'fur', 'pour', 'von', 'der', 'die', 'das', 'holding', 'holdings', 'group', 'groupe', 'france', 'suisse', 'switzerland', 'schweiz']);
-    const words = cleaned.split(/[\s-]+/).filter(w => w && !stopWords.has(w));
-
-    // If company name has 2+ distinctive words (e.g. "darwin transports"),
-    // but the domain is ONLY the first word (e.g. "darwin.ch"), it's a single-word homonym false positive!
-    if (words.length >= 2) {
-      const fullContig = words.join('');
-      const fullHyph = words.join('-');
-      const firstTwoContig = words.slice(0, 2).join('');
-      const firstTwoHyph = words.slice(0, 2).join('-');
-      if (
-        hostSlug !== fullContig &&
-        hostSlug !== fullHyph &&
-        hostSlug !== firstTwoContig &&
-        hostSlug !== firstTwoHyph
-      ) {
-        return true;
-      }
-    }
-    return false;
-  } catch {
-    return true;
-  }
-}
-
-async function fetchFranceWindow([start, end], maxPerWindow = 16) {
+async function fetchFranceWindow([start, end], maxPerWindow = 48) {
   try {
     const url = 'https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records';
     const whereClause = `publicationavis='A' AND familleavis_lib='Créations' AND listepersonnes like '%administration%' AND dateparution >= date'${start}' AND dateparution <= date'${end}'`;
 
-    const res = await axios.get(url, {
-      params: {
-        where: whereClause,
-        order_by: 'dateparution desc',
-        limit: 70,
-      },
-      timeout: 12000,
-    });
+    const [res0, res1] = await Promise.all([
+      axios.get(url, {
+        params: { where: whereClause, order_by: 'dateparution desc', limit: 100, offset: 0 },
+        timeout: 12000,
+      }).catch(() => ({ data: { results: [] } })),
+      axios.get(url, {
+        params: { where: whereClause, order_by: 'dateparution desc', limit: 100, offset: 100 },
+        timeout: 12000,
+      }).catch(() => ({ data: { results: [] } })),
+    ]);
 
-    const records = res.data?.results || [];
+    const records = [...(res0.data?.results || []), ...(res1.data?.results || [])];
     const candidates = [];
 
     for (const record of records) {
@@ -214,19 +160,21 @@ async function fetchFranceWindow([start, end], maxPerWindow = 16) {
           createdAt: new Date().toISOString(),
         };
 
+        // Strictly commercial + zero Unsupported Industries + physical human directors
         if (!isValidCommercialCompany(rawComp)) continue;
         if (!dirigeants || dirigeants.length === 0) continue;
 
         const compCheck = evaluateRevolutCompliance(rawComp);
+        if (!compCheck.isEligible || compCheck.status === 'restricted') continue;
         rawComp.compliance = compCheck;
 
         let priorityScore = 0;
         if (compCheck.status === 'eligible') priorityScore += 30;
-        if (shareCapital >= 10000) priorityScore += 15;
-        if (shareCapital >= 50000) priorityScore += 15;
+        if (shareCapital >= 5000) priorityScore += 10;
+        if (shareCapital >= 20000) priorityScore += 15;
         if (dirigeants.length >= 2) priorityScore += 15;
         if (corporateLinks.length >= 1) priorityScore += 20;
-        if (/logiciel|saas|tech|informatique|digital|ia|data|conseil|consulting|import|export|négoce|ingénierie|industrie|e-commerce|santé|médical|logistique|luxe|horlogerie/i.test(activity)) {
+        if (/logiciel|saas|tech|informatique|digital|ia|data|conseil|consulting|import|export|négoce|ingénierie|industrie|e-commerce|santé|médical|logistique/i.test(activity)) {
           priorityScore += 25;
         }
         rawComp._priority = priorityScore;
@@ -248,7 +196,11 @@ async function fetchFranceWindow([start, end], maxPerWindow = 16) {
   }
 }
 
-async function fetchSwitzerlandWindow([start, end], maxPerWindow = 10) {
+/**
+ * Fetch Swiss SHAB HR01 creations per 10-day window, pre-filtering by commercial suffix in title
+ * (SA / AG / Sàrl / GmbH / Sagl) so we skip 100% of Einzelunternehmen and Verein before XML download!
+ */
+async function fetchSwitzerlandWindow([start, end], maxPerWindow = 22) {
   try {
     const res = await axios.get('https://www.shab.ch/api/v1/publications', {
       params: {
@@ -256,7 +208,7 @@ async function fetchSwitzerlandWindow([start, end], maxPerWindow = 10) {
         subRubrics: 'HR01',
         'publicationDate.start': start,
         'publicationDate.end': end,
-        'pageRequest.size': 28,
+        'pageRequest.size': 90,
         'pageRequest.page': 0,
       },
       headers: {
@@ -268,8 +220,20 @@ async function fetchSwitzerlandWindow([start, end], maxPerWindow = 10) {
     const pubs = res.data?.content || [];
     if (pubs.length === 0) return [];
 
+    // Pre-filter by title: ONLY fetch XML for commercial companies (SA, AG, Sàrl, GmbH, Sagl)
+    const commercialPubs = pubs.filter(pub => {
+      const meta = pub.meta || {};
+      const titleFr = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
+      const companyPart = titleFr
+        .replace(/^(Nouvelles entrées|Neueintragung|Nuove registrazioni|New entries)\s+/i, '')
+        .replace(/,\s*[^,]+$/, '')
+        .trim();
+      return /\b(SA|AG|S\.A\.|A\.G\.|Sàrl|Sarl|S\.à\.r\.l\.|GmbH|Sagl|Ltd|LLC)\b/i.test(companyPart) &&
+        !/\b(Stiftung|Fondation|Fondazione|Verein|Association|Genossenschaft)\b/i.test(companyPart);
+    }).slice(0, maxPerWindow + 8);
+
     const parsedItems = await Promise.all(
-      pubs.map(async (pub) => {
+      commercialPubs.map(async (pub) => {
         try {
           const meta = pub.meta || {};
           const titleFr = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
@@ -321,15 +285,8 @@ async function fetchSwitzerlandWindow([start, end], maxPerWindow = 10) {
           if (!rawComp.dirigeants || rawComp.dirigeants.length === 0) return null;
 
           const compCheck = evaluateRevolutCompliance(rawComp);
+          if (!compCheck.isEligible || compCheck.status === 'restricted') return null;
           rawComp.compliance = compCheck;
-
-          let priorityScore = 0;
-          if (compCheck.status === 'eligible') priorityScore += 30;
-          if (rawComp.legalForm === 'SA / AG') priorityScore += 20;
-          if (rawComp.shareCapital >= 100000) priorityScore += 15;
-          if (rawComp.dirigeants.length >= 2) priorityScore += 15;
-          if (rawComp.corporateLinks.length >= 1 || rawComp.internationalLinks.length >= 1) priorityScore += 20;
-          rawComp._priority = priorityScore;
 
           return rawComp;
         } catch {
@@ -338,113 +295,20 @@ async function fetchSwitzerlandWindow([start, end], maxPerWindow = 10) {
       })
     );
 
-    const valid = parsedItems.filter(Boolean);
-    valid.sort((a, b) => b._priority - a._priority);
-    return valid.slice(0, maxPerWindow).map(c => {
-      delete c._priority;
-      return c;
-    });
+    return parsedItems.filter(Boolean).slice(0, maxPerWindow);
   } catch (err) {
     console.warn(`[CH Window ${start}..${end}] Warning:`, err.message);
     return [];
   }
 }
 
-/**
- * Enrich French companies with official INSEE/RNE turnover (`finances.ca` <= 30M€) and holding resolution
- */
-async function enrichFrenchFinancialsInBatches(companies) {
-  const frCompanies = companies.filter(c => c.country === 'FR' && /^\d{9}$/.test(c.registrationNumber || ''));
-  console.log(`[RNE Finances & Holdings] Vérification du Chiffre d'Affaires (≤ 30M€) et des holdings pour ${frCompanies.length} sociétés FR...`);
-
-  await processInBatches(frCompanies, 20, async (comp) => {
-    try {
-      const res = await axios.get(`https://recherche-entreprises.api.gouv.fr/search?q=${comp.registrationNumber}&per_page=1`, {
-        timeout: 4000,
-      });
-      const item = res.data?.results?.[0];
-      if (!item) return;
-
-      // 1. Check nature_juridique: strictly block Entrepreneur Individuel (1000) or SCI (65xx)
-      const nj = String(item.nature_juridique || '');
-      if (nj.startsWith('10') || nj.startsWith('65')) {
-        comp._reject = true;
-        return;
-      }
-
-      // 2. Extract official turnover (Chiffre d'affaires)
-      const { revenue, revenueYear } = extractFrenchRevenue(item.finances);
-      if (revenue !== null) {
-        if (revenue > 30000000) {
-          comp._reject = true; // Exceeds 30M€ limit!
-          return;
-        }
-        comp.revenue = revenue;
-        comp.revenueYear = revenueYear;
-      }
-
-      // 3. Extract any additional physical directors or corporate holdings from RNE
-      if (Array.isArray(item.dirigeants)) {
-        for (const d of item.dirigeants) {
-          if (d.type_dirigeant === 'personne physique' || (d.nom && d.prenoms)) {
-            if (/commissaire/i.test(d.qualite || '')) continue;
-            const fullName = formatPersonName(d.prenoms, d.nom);
-            if (
-              isValidPhysicalPersonName(fullName, comp.name) &&
-              !comp.dirigeants.some(x => x.name.toLowerCase() === fullName.toLowerCase())
-            ) {
-              comp.dirigeants.push({
-                name: fullName,
-                role: d.qualite || 'Dirigeant',
-                birthYear: d.annee_de_naissance || null,
-                isPrimary: comp.dirigeants.length === 0,
-              });
-            }
-          } else if (d.type_dirigeant === 'personne morale' && d.denomination) {
-            if (/commissaire/i.test(d.qualite || '')) continue;
-            const hName = d.denomination.trim();
-            const hSiren = (d.siren || '').replace(/\D/g, '');
-            if (!comp.corporateLinks) comp.corporateLinks = [];
-            if (!comp.corporateLinks.some(cl => cl.name.toLowerCase() === hName.toLowerCase())) {
-              comp.corporateLinks.push({
-                id: hSiren ? `FR-${hSiren}` : undefined,
-                name: hName,
-                siren: hSiren,
-                legalForm: 'Holding / Personne Morale',
-                shareCapital: 50000,
-                roleHeld: `${d.qualite || 'Présidente'} (Holding)`,
-                city: item.siege?.libelle_commune || comp.city,
-              });
-            }
-          }
-        }
-      }
-    } catch {
-      // non-blocking
-    }
-  }, 'RNE Finances');
-}
-
 async function main() {
-  console.log('=== RECONSTRUCTION & EXTENSION HISTORIQUE DEPUIS LE 01/01/2024 (CA ≤ 30M€) ===');
+  console.log('=== EXTRACTION MASSIVE MULTI-ANNÉES (2024, 2025, 2026) — FR & CH (CA ≤ 30M€ • 0% Unsupported Industries) ===');
 
   const dbPath = path.join(__dirname, '../data/db.json');
   const existingDb = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 
-  // 1. Fetch live GitHub data.json so we also clean any companies added by the 05:00 AM GitHub Action (like Darwin Transports Sàrl)
-  let liveGithubCompanies = [];
-  try {
-    const ghRes = await fetch('https://raw.githubusercontent.com/KevinRevo/Leads-intelligence/main/data.json');
-    if (ghRes.ok) {
-      const ghData = await ghRes.json();
-      liveGithubCompanies = ghData.companies || [];
-      console.log(`[Init] ${liveGithubCompanies.length} sociétés récupérées depuis la version live GitHub.`);
-    }
-  } catch (e) {
-    console.warn('[Init] Lecture GitHub data.json ignorée:', e.message);
-  }
-
-  // 2. Fetch shared CRM overrides from GitHub Issue #1
+  // Load shared CRM overrides from GitHub Issue #1
   let cloudOverrides = {};
   try {
     const issueRes = await fetch('https://api.github.com/repos/KevinRevo/Leads-intelligence/issues/1', {
@@ -460,90 +324,33 @@ async function main() {
     console.warn('[Cloud CRM] Avertissement:', e.message);
   }
 
-  // Merge existing local + live GitHub companies
-  const mergedInitialMap = new Map();
-  for (const c of [...(existingDb.companies || []), ...liveGithubCompanies]) {
-    if (c && c.id) mergedInitialMap.set(c.id, c);
-  }
-
-  console.log(`[Audit] Audit strict des ${mergedInitialMap.size} sociétés existantes (Triple-check statut juridique, dirigeants physiques & sites web anti-homonymes)...`);
-
+  // Keep valid existing companies
   const cleanedExisting = [];
-  let purgedCount = 0;
-  let fixedWebsitesCount = 0;
-  let fixedDirectorsCount = 0;
-
-  for (const comp of mergedInitialMap.values()) {
-    // Specific fix for Darwin Transports Sàrl (CHE-306.247.256)
-    if (comp.id === 'CH-CHE306247256' || /Darwin Transports/i.test(comp.name)) {
-      comp.dirigeants = [{
-        name: 'Darwin Valarezo Barba',
-        firstName: 'Darwin',
-        lastName: 'Valarezo Barba',
-        role: 'Associé-Gérant (Direction)',
-        isPrimary: true,
-      }];
-      comp.internationalLinks = [{
-        countryCode: 'ES',
-        countryName: 'Espagne',
-        flag: '🇪🇸',
-        entityName: 'Actionnariat / Direction Hispano-Suisse (ES ↔ CH)',
-        relation: 'Associé / Dirigeant International',
-        city: 'Espagne',
-      }];
-      comp.website = null;
-      comp.domain = null;
-      comp.bestEmail = null;
-      comp.emails = [];
-      comp.phone = null;
-      fixedDirectorsCount++;
-    }
-
-    // Triple-check: reject Entrepreneur Individuel, Verein (SHIVA SHAMBHO), SCI, etc.
-    if (!isValidCommercialCompany(comp)) {
-      purgedCount++;
-      continue;
-    }
-
-    // Validate physical directors only!
+  for (const comp of existingDb.companies || []) {
+    if (!isValidCommercialCompany(comp)) continue;
+    if (isRevolutUnsupportedIndustry(comp)) continue;
     const validDirs = (comp.dirigeants || []).filter(d => isValidPhysicalPersonName(d?.name, comp.name));
-    if (validDirs.length !== (comp.dirigeants || []).length) {
-      fixedDirectorsCount++;
-    }
-    if (validDirs.length === 0) {
-      purgedCount++;
-      continue;
-    }
+    if (validDirs.length === 0) continue;
     comp.dirigeants = validDirs.map((d, idx) => ({ ...d, isPrimary: idx === 0 }));
-
-    // Check if website is a single-word homonym false positive (e.g. "Darwin Transports" -> "darwin.ch")
-    if (isSuspiciousHomonymWebsite(comp)) {
-      comp.website = null;
-      comp.domain = null;
-      comp.websiteStatus = 'Pas de site web officiel détecté';
-      comp.bestEmail = null;
-      comp.emails = [];
-      fixedWebsitesCount++;
-    }
-
+    delete comp.network; // Dynamically built in UI to keep bundle compact
     cleanedExisting.push(comp);
   }
 
-  console.log(`[Audit] Résultat : ${cleanedExisting.length} sociétés commerciales valides conservées (${purgedCount} EI/Associations/Invalides purgées, ${fixedWebsitesCount} sites homonymes corrigés, ${fixedDirectorsCount} dirigeants corrigés).`);
+  console.log(`[Base Existante] ${cleanedExisting.length} sociétés commerciales déjà qualifiées en base.`);
 
-  // 3. Scrape historical windows across 2024, 2025, and early 2026
+  // Scrape 101 10-day windows from 2024-01-01 to 2026-10-21
   const windows = generateHistoricalWindows2024To2026();
-  console.log(`[Scraping 2024-2026] Extraction sur ${windows.length} fenêtres mensuelles depuis le 01/01/2024...`);
+  console.log(`[Scraping 2024-2026] Lancement sur ${windows.length} fenêtres de 10 jours (du 01/01/2024 au 21/10/2026)...`);
 
-  const rawFrWindows = await processInBatches(windows, 6, (w) => fetchFranceWindow(w, 14), 'BODACC FR 2024-2026');
-  const rawChWindows = await processInBatches(windows, 6, (w) => fetchSwitzerlandWindow(w, 9), 'SHAB CH 2024-2026');
+  const rawFrWindows = await processInBatches(windows, 10, (w) => fetchFranceWindow(w, 45), 'BODACC FR 2024-2026');
+  const rawChWindows = await processInBatches(windows, 8, (w) => fetchSwitzerlandWindow(w, 20), 'SHAB CH 2024-2026');
 
   const rawNewCandidates = [
     ...rawFrWindows.flat(),
     ...rawChWindows.flat(),
   ];
 
-  // Deduplicate new candidates against cleanedExisting
+  // Deduplicate against cleanedExisting
   const existingIds = new Set(cleanedExisting.map(c => c.id));
   const existingNames = new Set(cleanedExisting.map(c => c.name.toLowerCase().trim()));
 
@@ -556,25 +363,19 @@ async function main() {
     uniqueNewRaw.push(cand);
   }
 
-  console.log(`[Scraping 2024-2026] ${uniqueNewRaw.length} nouvelles sociétés (2024-2026) uniques à enrichir (DNS/SSL anti-homonyme, RNE CA ≤ 30M€, FX, Carto)...`);
+  console.log(`[Scraping 2024-2026] ${uniqueNewRaw.length} nouvelles sociétés uniques extraites ! Enrichissement DNS/SSL anti-homonyme en cours...`);
 
-  // Enrich new candidates in parallel batches of 25
-  const enrichedNew = await processInBatches(uniqueNewRaw, 25, (c) => enrichCompany(c), 'Enrichissement 2024-2026');
+  // Enrich new candidates in high-concurrency batches of 50
+  const enrichedNew = await processInBatches(uniqueNewRaw, 50, (c) => enrichCompany(c), 'Enrichissement 2024-2026');
 
-  // Combine all companies
-  let allCompanies = [...cleanedExisting, ...enrichedNew];
+  // Combine all companies and perform final strict validation
+  let allCompanies = [...cleanedExisting, ...enrichedNew].filter(
+    c => isValidCommercialCompany(c) && !isRevolutUnsupportedIndustry(c)
+  );
 
-  // 4. Enrich French companies with official RNE turnover (Chiffre d'affaires <= 30M€) & holding links
-  await enrichFrenchFinancialsInBatches(allCompanies);
-
-  // Filter out any company marked `_reject` (e.g. CA > 30M€ or INSEE code 1000/65xx) or failing `isValidCommercialCompany`
-  allCompanies = allCompanies.filter(c => !c._reject && isValidCommercialCompany(c));
-
-  // 5. Finalize all fields (LinkedIn anti-homonym URLs, North Data URLs, International Links, CFO, Compliance, FX, GeoZone, Network Cartography)
-  console.log(`[Finalisation] Construction de la cartographie North Data & liens internationaux pour ${allCompanies.length} sociétés...`);
+  console.log(`[Finalisation] Mise à jour des métadonnées North Data, secteurs et statuts CRM pour ${allCompanies.length} sociétés...`);
 
   for (const comp of allCompanies) {
-    // Apply shared Cloud CRM overrides
     if (cloudOverrides[comp.id]) {
       const ov = cloudOverrides[comp.id];
       if (ov.crmStatus) comp.crmStatus = ov.crmStatus;
@@ -587,7 +388,6 @@ async function main() {
     comp.incorporationYear = (comp.incorporationDate || '').slice(0, 4) || '2026';
     comp.activityCategory = categorizeActivity(comp.activity, comp.legalForm, comp.name);
 
-    // Anti-homonym LinkedIn URLs
     comp.linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(`"${cleanComp}" ${countryLabel}`)}`;
     const primaryDir = comp.dirigeants?.[0]?.name;
     comp.linkedinDirigeantUrl = isValidPhysicalPersonName(primaryDir, comp.name)
@@ -610,7 +410,8 @@ async function main() {
     comp.fxPotential = evaluateFxPotential(comp);
     comp.geoZone = getGeoZone(comp);
 
-    comp.network = await buildCompanyNetwork(comp, allCompanies, { skipLiveLookup: true });
+    // Omit redundant static `network` field to keep JSON bundle fast (App.jsx builds it dynamically with cross-mandate links)
+    delete comp.network;
   }
 
   // Sort by incorporationDate descending
@@ -634,7 +435,7 @@ async function main() {
   };
 
   console.log(`=== RÉSULTAT FINAL ===`);
-  console.log(`Total : ${total} sociétés commerciales vérifiées (CA ≤ 30M€) | 🇫🇷 France : ${france} | 🇨🇭 Suisse : ${switzerland}`);
+  console.log(`Total : ${total} sociétés commerciales vérifiées (CA ≤ 30M€ • 0% Unsupported) | 🇫🇷 France : ${france} | 🇨🇭 Suisse : ${switzerland}`);
   console.log(`Répartition par année : 2024 = ${byYear[2024]} | 2025 = ${byYear[2025]} | 2026 = ${byYear[2026]}`);
   console.log(`Sites web certifiés anti-homonymes : ${verifiedWebCount} | Fort Potentiel FX : ${highFxCount} | Liens Holdings/Internationaux : ${crossBorderCount}`);
 
@@ -671,11 +472,11 @@ async function main() {
   const publicBundle = { companies: allCompanies, stats };
 
   fs.writeFileSync(dbPath, JSON.stringify(newDb, null, 2));
-  fs.writeFileSync(path.join(__dirname, '../../client/public/data.json'), JSON.stringify(publicBundle, null, 2));
-  fs.writeFileSync(path.join(__dirname, '../../client/src/data/companies.json'), JSON.stringify(allCompanies, null, 2));
-  fs.writeFileSync(path.join(__dirname, '../../data.json'), JSON.stringify(publicBundle, null, 2));
+  fs.writeFileSync(path.join(__dirname, '../../client/public/data.json'), JSON.stringify(publicBundle));
+  fs.writeFileSync(path.join(__dirname, '../../client/src/data/companies.json'), JSON.stringify(allCompanies));
+  fs.writeFileSync(path.join(__dirname, '../../data.json'), JSON.stringify(publicBundle));
 
-  console.log('Tous les fichiers JSON (server, client/public, client/src, root) ont été mis à jour avec succès !');
+  console.log('Tous les fichiers JSON ont été mis à jour avec succès !');
 }
 
 main().catch(err => {
