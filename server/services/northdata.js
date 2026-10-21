@@ -117,6 +117,12 @@ function isValidCommercialCompany(company) {
     return false;
   }
 
+  // 4. Revolut Business Unsupported Industries check (Weapons, Adult, Auctions/Fine Art, Cannabinoids, Unregulated Finance/Client Funds, Gambling, Charities/Trusts, Secondhand Vehicles/Heavy Equipment, SPVs, Arcades/Streaming, Endangered Species, MLM, Oil/Gas/Petroleum, Precious Metals/Stones/Jewelry, Chemicals, Unsupported Crypto)
+  const { isRevolutUnsupportedIndustry } = require('./compliance');
+  if (isRevolutUnsupportedIndustry(company)) {
+    return false;
+  }
+
   return true;
 }
 

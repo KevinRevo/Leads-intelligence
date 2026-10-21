@@ -562,23 +562,27 @@ async function enrichCompany(rawCompany) {
 
 /**
  * Multilingual Activity Categorization (FR / DE / IT)
+ * Strictly aligned with Revolut Business Supported Industries
+ * (Excludes all Unsupported Industries: Weapons, Adult, Auctions/Fine Art, Cannabinoids,
+ * Unregulated Finance/Client Funds, Gambling, Charities/Trusts, Secondhand Vehicles/Heavy Equipment,
+ * SPVs, Arcades/Streaming, Endangered Species, MLM, Oil/Gas, Precious Metals/Stones/Jewelry, Chemicals, Unsupported Crypto)
  */
 function categorizeActivity(activityText, legalForm = '', companyName = '') {
   const full = `${companyName || ''} ${activityText || ''}`.toLowerCase();
   const primarySentence = `${companyName || ''} ${(activityText || '').split(/\.\s+/)[0]}`.toLowerCase();
 
   for (const t of [primarySentence, full]) {
-    if (/\b(santé|médic|soin|physio|pharma|clinique|médical|praxis|psychiatr|ärzt|arzt|therapie|pflege|dent|zahn|medica|salute)\b/i.test(t)) return 'Santé & Médical';
-    if (/\b(restaur|café|bar\b|snack|brasserie|hôtel|hotel|traiteur|pizzeria|gastronomi|boulangerie|pâtisserie|food|catering|ristorante|caffè)\b/i.test(t)) return 'Restauration';
-    if (/\b(luxe|montre|horloger|bijou|joaillerie|haute couture|uhren|schmuck|gioiell)\b/i.test(t)) return 'Luxe & Horlogerie';
+    if (/\b(santé|médic|soin|physio|pharma|clinique|médical|praxis|psychiatr|ärzt|arzt|therapie|pflege|dent|zahn|medica|salute|biotech|medtech)\b/i.test(t)) return 'Santé & Médical';
+    if (/\b(restaur|café|bar\b|snack|brasserie|hôtel|hotel|traiteur|pizzeria|gastronomi|boulangerie|pâtisserie|food|catering|ristorante|caffè)\b/i.test(t)) return 'Restauration & Hôtellerie';
     if (/\b(btp|bâtiment|travaux|construct|maçonnerie|rénovation|renovation|électricité|plomberie|menuiserie|bau\b|bauleitung|architektur|architecte|sanitär|gewerbebau|hochbau|tiefbau|edilizia|costruzion)\b/i.test(t)) return 'BTP & Construction';
     if (/\b(transport|logistique|fret|livraison|coursier|déménagement|logistik|spedition|fracht|taxi|vtc|chauffeur|trasporti|logistica)\b/i.test(t)) return 'Transport & Logistique';
-    if (/\b(logiciel|software|cloud|informatique|tech|saas|appli|programmation|data|ia\b|intelligence artificielle|ict\b|it-lösungen|digitalisierung|cyber|développement web)\b/i.test(t)) return 'Tech & Logiciel';
+    if (/\b(logiciel|software|cloud|informatique|tech|saas|appli|programmation|data|ia\b|intelligence artificielle|ict\b|it-lösungen|digitalisierung|cyber|développement web|blockchain consulting|nft platform|non-custodial wallet)\b/i.test(t)) return 'Tech & Logiciel';
     if (/\b(import|export|négoce|negoce|commerce de gros|fret international|grosshandel|handelsgesellschaft|importazione|esportazione)\b/i.test(t)) return 'Import / Export';
-    if (/\b(immo|foncier|logement|promotion immobilière|marchand de biens|liegenschaft|immobilien|grundeigentum|immobiliare)\b/i.test(t)) return 'Immobilier';
-    if (/\b(finance|fintech|trading|patrimoine|invest|fonds|holding|bancaire|crédit|beteiligungen|vermögensverwaltung|family office|finanz|asset management)\b/i.test(t)) return 'Finance & Fintech';
-    if (/\b(conseil|consult|stratégie|gestion|management|audit|coaching|beratung|unternehmensführung|projektmanagement|governance|fiduciaire|treuhand|consulenza)\b/i.test(t)) return 'Consulting';
-    if (/\b(e-commerce|boutique|vente en ligne|commerce de détail|magasin|detailhandel|shop|salon|coiffure|hair|beauté|kosmetik)\b/i.test(t)) return 'Commerce & Vente';
+    if (/\b(immo|foncier|logement|promotion immobilière|marchand de biens|liegenschaft|immobilien|grundeigentum|immobiliare)\b/i.test(t)) return 'Immobilier (Propre Compte)';
+    if (/\b(holding|participations|société de portefeuille|beteiligungen|family office)\b/i.test(t)) return 'Holding & Participations';
+    if (/\b(ingénierie|engineering|fabrication|manufacture|industrie|énergie renouvelable|solaire|cleantech|électronique|mécanique)\b/i.test(t)) return 'Industrie & Ingénierie';
+    if (/\b(conseil|consult|stratégie|gestion|management|audit|coaching|beratung|unternehmensführung|projektmanagement|governance|expertise comptable|treuhand|consulenza)\b/i.test(t)) return 'Consulting & Conseil';
+    if (/\b(e-commerce|boutique|vente en ligne|commerce de détail|magasin|detailhandel|shop|salon|coiffure|hair|beauté|kosmetik|mode|prêt-à-porter)\b/i.test(t)) return 'Commerce & E-Commerce';
     if (/\b(communication|marketing|publicité|agence|événementiel|médias|werbung|media|design|event)\b/i.test(t)) return 'Marketing & Com';
   }
 

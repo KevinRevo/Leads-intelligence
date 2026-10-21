@@ -129,7 +129,7 @@ export default function NetworkGraph({ network, onClose }) {
   const northDataMainUrl = network?.northDataUrl || targetNode?.northDataUrl || `https://www.northdata.fr/?query=${encodeURIComponent(targetNode?.label || '')}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-3 animate-fade-in">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-3 animate-fade-in">
       <div className="bg-white dark:bg-[#121824] border border-slate-200 dark:border-slate-700/80 rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col shadow-2xl overflow-hidden transition-colors">
         
         {/* Header */}
@@ -195,6 +195,7 @@ export default function NetworkGraph({ network, onClose }) {
             <button
               onClick={onClose}
               className="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
+              title="Fermer uniquement la cartographie (conserve la fiche entreprise ouverte)"
             >
               <X className="w-5 h-5" />
             </button>

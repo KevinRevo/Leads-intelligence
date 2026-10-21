@@ -1,108 +1,230 @@
 /**
- * Module d'évaluation de la conformité sectorielle Revolut Business
- * Basé strictement sur la Nature d'Activité (Liste officielle des industries interdites / non éligibles).
+ * Liste officielle complète des industries NON ÉLIGIBLES sur Revolut Business
+ * ("Unsupported industries for Revolut Business" - FR / DE / EN / IT & codes NAF)
  */
+const REVOLUT_UNSUPPORTED_RULES = [
+  // 1. Weapons, defence, armaments & UK/EU strategic export control / military / dual-use goods
+  {
+    id: 'weapons_defence',
+    industry: 'Weapons, Defence & Armaments / Dual-Use',
+    reason: 'Armes, défense, armement, munitions, pyrotechnie ou biens militaires / à double usage sous contrôle d\'exportation stratégique.',
+    pattern: /\b(armement|arme|armes|munition|munitions|militaire|militaires|défense nationale|defense militaire|matériel de guerre|materiel de guerre|balistique|explosif|explosifs|pyrotechn|tir sportif|armurerie|airsoft|waffen|munition|rüstung|militär|sprengstoff|weapons|firearms|ammunition|military|armaments|dual-use)\b/i,
+    nafPrefix: ['25.4', '20.51', '30.4', '47.78B']
+  },
+  // 2. Adult content and services
+  {
+    id: 'adult_content',
+    industry: 'Adult Content & Services',
+    reason: 'Contenus et services pour adultes, érotisme, sex-shops ou rencontres pour adultes.',
+    pattern: /\b(adulte|adultes|érotique|erotique|érotisme|pornograph|sex-shop|sexshop|sexy|lingerie fine érotique|escort|strip-tease|striptease|cabaret de charme|charme|onlyfans|camgirl|erotik|sexkino|prostitution)\b/i
+  },
+  // 3. Auctions and fine art dealing
+  {
+    id: 'auctions_fine_art',
+    industry: 'Auctions & Fine Art Dealing',
+    reason: 'Ventes aux enchères, commissaires-priseurs, galeries d\'art, marchands d\'art et négoce d\'objets d\'art ou d\'antiquités.',
+    pattern: /\b(enchères|encheres|vente aux enchères|commissaire-priseur|hotel des ventes|hôtel des ventes|galerie d'art|marchand d'art|négoce d'art|negoce d'art|oeuvres d'art|œuvres d'art|objets d'art|fine art|art dealer|art gallery|antiquité|antiquites|antiquaire|brocante|numismatique|kunsthandel|kunstgalerie|auktion|auktionshaus|antiquitäten)\b/i,
+    nafPrefix: ['47.78C', '47.79Z', '90.03B']
+  },
+  // 4. Cannabinoids and controlled chemicals (plus tobacco/vape restrictions)
+  {
+    id: 'cannabinoids_controlled',
+    industry: 'Cannabinoids & Controlled Chemicals',
+    reason: 'Cannabinoïdes (CBD, chanvre, cannabis) et substances chimiques contrôlées.',
+    pattern: /\b(cbd|cannabis|cannabino|chanvre|thc|hanf|marijuana|stupéfiant|stupefiant|narcotique|psychotrope|tabac|cigarette|vape|vapote|e-liquide|chicha)\b/i
+  },
+  // 5. Unregulated or high-risk financial services & Client funds management
+  {
+    id: 'unregulated_finance_client_funds',
+    industry: 'Unregulated Financial Services & Client Funds Management',
+    reason: 'Services financiers non régulés, change manuel, transfert de fonds, recouvrement de créances, prêt sur gage ou détention/gestion de fonds appartenant à des clients (Client Funds Management).',
+    pattern: /\b(prêt sur gage|pret sur gage|pawnshop|pfandhaus|recouvrement de créances|recouvrement de creances|société de recouvrement|inkasso|debt collection|bureau de change|change de devises|wechselstube|transfert d'argent|transfert de fonds|money transfer|remittance|western union|fonds de tiers|fonds clients|pour le compte de tiers|encaissement pour compte de tiers|séquestre|sequestre|escrow|syndic de copropriété|syndic de copropriete|fiducie|forex|cfd|options binaires|binary options|courtage spéculatif|high-risk financial)\b/i,
+    nafPrefix: ['64.92', '66.12', '82.91']
+  },
+  // 6. Diplomatic or political entities
+  {
+    id: 'diplomatic_political',
+    industry: 'Diplomatic or Political Entities',
+    reason: 'Entités diplomatiques, ambassades, consulats, partis ou organisations politiques et syndicats.',
+    pattern: /\b(ambassade|consulat|diplomati|parti politique|organisation politique|campagne électorale|campagne electorale|syndicat professionnel|botschaft|konsulat|politische partei)\b/i,
+    nafPrefix: ['94.92', '99.00']
+  },
+  // 7. Gambling and quasi-cash merchants
+  {
+    id: 'gambling_quasicash',
+    industry: 'Gambling & Quasi-Cash Merchants',
+    reason: 'Jeux d\'argent et de hasard, paris sportifs, casinos, loteries, poker et marchands quasi-cash.',
+    pattern: /\b(casino|casinos|jeux d'argent|jeux de hasard|pari|paris sportifs|bookmaker|gambling|betting|loterie|loto|poker|pronostic|pronostics|turf|pmu|glücksspiel|wetten|spielbank|spielhalle|quasi-cash)\b/i,
+    nafPrefix: ['92.00']
+  },
+  // 8. Charities, foundations, trusts, and religious organisations
+  {
+    id: 'charities_foundations_trusts_religious',
+    industry: 'Charities, Foundations, Trusts & Religious Organisations',
+    reason: 'Organisations caritatives, ONG, fondations (Stiftung), trusts, fiducies et organisations religieuses ou cultuelles.',
+    pattern: /\b(charité|charite|caritatif|caritative|charity|philanthrop|fondation|stiftung|fondazione|familienstiftung|trust\b|trustee|fiducie|religieux|religieuse|organisation religieuse|culte|église|eglise|paroisse|mosquée|mosquee|synagogue|temple|monastère|kirchlich|religiös)\b/i,
+    nafPrefix: ['94.91', '94.99', '88.99']
+  },
+  // 9. Secondhand vehicles and heavy equipment
+  {
+    id: 'secondhand_vehicles_heavy_equipment',
+    industry: 'Secondhand Vehicles & Heavy Equipment',
+    reason: 'Achat, vente et négoce de véhicules d\'occasion (voitures, motos, utilitaires, camions) et d\'équipements lourds / engins de chantier ou agricoles.',
+    pattern: /\b(véhicules d'occasion|vehicules d'occasion|voitures d'occasion|autos d'occasion|achat et vente de véhicules|achat-vente de véhicules|achat vente de vehicules|négoce automobile|negoce automobile|négoce de véhicules|negoce de vehicules|commerce de voitures|commerce de véhicules|concessionnaire automobile|mandataire automobile|import-export de véhicules|achat et revente de véhicules|vente de voitures|vente de véhicules|occasion automobile|poids lourds|camions|engins de chantier|matériel lourd|materiel lourd|machines Lourdes|engins btp|machines agricoles|tracteurs|gebrauchtwagen|fahrzeugen aller art|handel mit fahrzeugen|autohandel|fahrzeughandel|baumaschinen|heavy equipment|used cars|secondhand vehicles|car dealer)\b/i,
+    nafPrefix: ['45.11', '45.19', '45.40', '46.63', '46.61']
+  },
+  // 10. Special purpose vehicles/entities (SPV / SPE)
+  {
+    id: 'spv_entities',
+    industry: 'Special Purpose Vehicles / Entities (SPV)',
+    reason: 'Véhicules de titrisation, Special Purpose Vehicles (SPV / SPE) ou entités ad hoc de financement.',
+    pattern: /\b(\bspv\b|\bspe\b|special purpose vehicle|special purpose entity|titrisation|fonds commun de titrisation|société de titrisation|véhicule d'investissement ad hoc|zweckgesellschaft|securitisation)\b/i,
+    nafPrefix: ['64.30']
+  },
+  // 11. Streaming and video game arcades
+  {
+    id: 'streaming_arcades',
+    industry: 'Streaming & Video Game Arcades',
+    reason: 'Salles de jeux vidéo d\'arcade et plateformes de live streaming.',
+    pattern: /\b(salle d'arcade|salles d'arcade|jeux d'arcade|video game arcade|spielhalle|arcade games|live streaming|plateforme de streaming|streaming vidéo|streaming musical)\b/i
+  },
+  // 12. Trading restricted/endangered animal/plant products
+  {
+    id: 'endangered_species',
+    industry: 'Restricted / Endangered Animal & Plant Products',
+    reason: 'Commerce d\'espèces animales ou végétales protégées, fourrure, ivoire ou bois exotiques réglementés (CITES).',
+    pattern: /\b(espèces protégées|especes protegees|animaux exotiques|ivoire|fourrure|fourrures|pelleterie|cites\b|bois précieux protégés|pelzhandel|artenschutz|endangered species)\b/i
+  },
+  // 13. Pyramid and get-rich-quick schemes
+  {
+    id: 'pyramid_mlm',
+    industry: 'Pyramid & Get-Rich-Quick Schemes',
+    reason: 'Vente pyramidale, marketing de réseau (MLM) ou programmes d\'enrichissement rapide.',
+    pattern: /\b(pyramidal|vente pyramidale|mlm\b|marketing de réseau|marketing de reseau|marketing multiniveau|network marketing|strukturvertrieb|get rich quick|revenus passifs garantis)\b/i
+  },
+  // 14. Oil, gas, and certain industrial sectors (exploration, extraction, refining, tankers, pipelines, marketing of petroleum)
+  {
+    id: 'oil_gas_petroleum',
+    industry: 'Oil, Gas & Petroleum Products',
+    reason: 'Pétrole, gaz, hydrocarbures : exploration, extraction, raffinage, transport par tankers/pipelines et commercialisation de produits pétroliers ou miniers.',
+    pattern: /\b(pétrole|petrole|pétrolier|petrolier|produits pétroliers|produits petroliers|hydrocarbure|hydrocarbures|raffinage|raffinerie|forage pétrolier|extraction pétrolière|extraction minière|gaz naturel|gnl\b|pipeline|oil tanker|pétrolier|station-service|carburant|carburants|fioul|mazout|bitume|charbon|houille|uranium|erdöl|erdgas|mineralöl|rohöl|tankstelle|brennstoff|oil and gas|oil & gas|petroleum|crude oil)\b/i,
+    nafPrefix: ['05.', '06.', '07.', '08.9', '09.', '19.', '46.71', '47.30']
+  },
+  // 15. Fake or counterfeit goods
+  {
+    id: 'counterfeit_goods',
+    industry: 'Fake or Counterfeit Goods',
+    reason: 'Marchandises contrefaites, répliques ou copies non autorisées.',
+    pattern: /\b(contrefaçon|contrefacon|réplique de montre|repliques|imitation de marque|counterfeit|fälschung)\b/i
+  },
+  // 16. Precious metals & stone dealers (gold, silver, diamonds, jewelry, precious stones, watch/jewelry trading)
+  {
+    id: 'precious_metals_stones',
+    industry: 'Precious Metals & Stone Dealers',
+    reason: 'Négoce de métaux précieux (or, argent, platine), pierres précieuses, diamants, joaillerie et bijouterie.',
+    pattern: /\b(métaux précieux|metaux precieux|or brut|achat d'or|vente d'or|négoce d'or|negoce d'or|lingot|pièces d'or|pieces d'or|diamant|diamants|diamantaire|pierres précieuses|pierres precieuses|pierres fines|gemmologie|joaillerie|joaillier|bijouterie|bijoutier|horlogerie-bijouterie|montres de luxe|négoce de montres|edelmetall|edelmetalle|goldhandel|diamanten|edelsteine|schmuckhandel|juwelier|precious metals|precious stones|bullion|diamond dealer)\b/i,
+    nafPrefix: ['32.12', '46.48', '46.72', '47.77']
+  },
+  // 17. Chemicals and allied products
+  {
+    id: 'chemicals_allied',
+    industry: 'Chemicals & Allied Products',
+    reason: 'Fabrication, distribution ou négoce de produits chimiques, solvants, engrais chimiques et matières connexes.',
+    pattern: /\b(produits chimiques|produit chimique|industrie chimique|négoce chimique|negoce chimique|chimie industrielle|solvant|solvants|acide industriel|pesticide|pesticides|phytosanitaire|engrais chimique|matières dangereuses|matieres dangereuses|chemikalien|chemische produkte|chemische industrie|chemiehandel|chemicals)\b/i,
+    nafPrefix: ['20.1', '20.2', '20.3', '20.5', '20.6', '46.75']
+  },
+  // 18. Unsupported Cryptocurrency firms (Exchanges, brokers, dealers, ATMs, ICOs, mining, investment/trading/asset management, unregulated custodial)
+  {
+    id: 'unsupported_crypto',
+    industry: 'Unsupported Cryptocurrency Activity (Exchange / Broker / Mining / ICO / Trading)',
+    reason: 'Plateformes d\'échange crypto, courtiers/dealers crypto, distributeurs ATM crypto, ICO, minage de crypto, trading ou gestion d\'actifs crypto.',
+    pattern: /\b(crypto.?exchange|échange de crypto|echange de crypto|courtier en crypto|crypto broker|crypto dealer|crypto atm|distributeur bitcoin|\bico\b|initial coin offering|minage de crypto|crypto mining|bitcoin mining|ferme de minage|crypto trading|trading de crypto|investissement en crypto|fonds crypto|crypto asset management|gestion d'actifs numériques|gestion de portefeuille crypto|kryptobörse|krypto-mining|kryptohandel)\b/i
+  }
+];
+
+/**
+ * Vérifie si une entreprise exerce une activité exclue par Revolut Business.
+ * Retourne l'objet de règle si exclu, ou `null` si l'entreprise est éligible.
+ */
+function getUnsupportedIndustryMatch(company) {
+  if (!company) return null;
+  const activity = (company.activity || '').toLowerCase();
+  const name = (company.name || '').toLowerCase();
+  const category = (company.activityCategory || '').toLowerCase();
+  const pubText = (company.pubText || '').toLowerCase();
+  const naf = (company.nafCode || '').toUpperCase().trim();
+  const fullText = `${name} ${activity} ${category} ${pubText}`;
+
+  // Check if it's an ACCEPTED blockchain/crypto tech company before flagging generic crypto keywords
+  const isAcceptedBlockchainTech = /\b(blockchain consulting|conseil en blockchain|développement blockchain|developpement blockchain|application blockchain|nft platform|plateforme nft|non-custodial wallet|portefeuille non-custodial|formation blockchain|blockchain learning|blockchain news)\b/i.test(fullText) &&
+    !/\b(exchange|broker|dealer|mining|minage|ico|trading|asset management|investissement)\b/i.test(fullText);
+
+  for (const rule of REVOLUT_UNSUPPORTED_RULES) {
+    if (rule.id === 'unsupported_crypto' && isAcceptedBlockchainTech) {
+      continue;
+    }
+    if (rule.nafPrefix && naf) {
+      if (rule.nafPrefix.some(prefix => naf.startsWith(prefix))) {
+        return rule;
+      }
+    }
+    if (rule.pattern.test(fullText)) {
+      return rule;
+    }
+  }
+
+  // Generic crypto/token trading catch-all if not explicitly in the accepted blockchain tech list
+  if (!isAcceptedBlockchainTech && /\b(crypto-monnaie|cryptomonnaie|cryptocurrency|bitcoin|ethereum|kryptowährung)\b/i.test(fullText)) {
+    return {
+      id: 'unsupported_crypto_generic',
+      industry: 'Unsupported Cryptocurrency / Virtual Asset Activity',
+      reason: 'Activité liée au négoce, courtage, investissement ou gestion de crypto-actifs non supportée par Revolut Business.'
+    };
+  }
+
+  return null;
+}
+
+function isRevolutUnsupportedIndustry(company) {
+  return Boolean(getUnsupportedIndustryMatch(company));
+}
 
 function evaluateRevolutCompliance(company) {
+  const unsupportedMatch = getUnsupportedIndustryMatch(company);
+  if (unsupportedMatch) {
+    return {
+      status: 'restricted',
+      badge: '🔴 Non éligible Revolut',
+      tag: '🔴 Unsupported Industry',
+      industry: unsupportedMatch.industry,
+      color: 'rose',
+      reason: unsupportedMatch.reason,
+      isEligible: false
+    };
+  }
+
   const activity = (company.activity || '').toLowerCase();
   const primaryActivity = (company.activity || '').split(/\.\s+/)[0].toLowerCase();
   const name = (company.name || '').toLowerCase();
   const category = (company.activityCategory || '').toLowerCase();
-  const fullText = `${name} ${activity} ${category}`;
   const primaryText = `${name} ${primaryActivity} ${category}`;
 
-  // 1. PASTILLE ROUGE : Industries interdites / Non éligibles sur Revolut Business
-  // (Politique d'utilisation acceptable & restrictions bancaires Revolut)
-  const prohibitedIndustries = [
-    {
-      pattern: /\b(crypto|krypto|bitcoin|ethereum|token|nft|web3|blockchain|mining|minage|ico)\b/i,
-      industry: 'Crypto-actifs & Minage non régulé',
-      reason: 'Activité sur les actifs numériques / crypto-monnaies non autorisée par la politique Revolut Business.'
-    },
-    {
-      pattern: /\b(casino|pari|gambling|jeux d'argent|loterie|betting|poker|pronostic|turf|glücksspiel|wetten)\b/i,
-      industry: 'Jeux d\'argent, Paris & Casinos',
-      reason: 'Jeux de hasard, paris sportifs et loteries strictement exclus de l\'ouverture de compte Revolut.'
-    },
-    {
-      pattern: /\b(armement|defense militaire|armes|munitions|tactical|fusil|balistique|waffen|munition|rüstung)\b/i,
-      industry: 'Armes, Munitions & Matériel Militaire',
-      reason: 'Fabrication et négoce d\'armes, munitions et équipements de combat exclus par la politique de conformité.'
-    },
-    {
-      pattern: /\b(adulte|erotique|sex|escort|pornograph|strip-tease|charme|erotik)\b/i,
-      industry: 'Divertissement pour adultes & Services érotiques',
-      reason: 'Industrie pour adultes et contenus érotiques non acceptés par la politique de conformité Revolut.'
-    },
-    {
-      pattern: /\b(tabac|tabak|cigarette|vape|vapote|e-liquide|cbd|cannabis|hanf|chicha|buraliste)\b/i,
-      industry: 'Tabac, Vape & Produits dérivés du CBD',
-      reason: 'Vente de tabac, produits de vapotage et dérivés de cannabinoïdes restreinte par la réglementation bancaire.'
-    },
-    {
-      pattern: /\b(forex|cfd|options binaires|trading speculatif|courtage speculatif|algo trading|devisenhandel)\b/i,
-      industry: 'Trading Spéculatif, Forex & CFD',
-      reason: 'Trading de devises et instruments financiers à effet de levier non agréés.'
-    },
-    {
-      pattern: /\b(pret sur gage|pawnshop|recouvrement agressif|usure|rachat de dette|pfandhaus|inkasso)\b/i,
-      industry: 'Prêt sur Gage & Recouvrement Agressif',
-      reason: 'Crédit non bancaire sur gage et recouvrement contentieux exclus de l\'offre Revolut.'
-    },
-    {
-      pattern: /\b(or brut|diamant brut|pierres precieuses|metaux precieux|edelmetall|rohstoffhandel|commodities)\b/i,
-      industry: 'Négoce de Métaux & Matières Premières Sensibles',
-      reason: 'Commerce physique de métaux précieux bruts, diamants ou matières premières réglementées.'
-    },
-    {
-      pattern: /\b(pyramidal|mlm|marketing de reseau|vente multiniveau|strukturvertrieb)\b/i,
-      industry: 'Vente Pyramidale & Marketing Multi-Niveaux (MLM)',
-      reason: 'Modèles de distribution multiniveaux ou vente pyramidale exclus des services Revolut Business.'
-    },
-    {
-      pattern: /\b(stiftung|fondation|fondazione|familienstiftung)\b/i,
-      industry: 'Fondation & Structure Patrimoniale Spéciale',
-      reason: 'Les fondations (Stiftung) et trusts familiaux sont exclus de l\'onboarding standard Revolut Business.'
-    }
-  ];
-
-  for (const item of prohibitedIndustries) {
-    if (item.pattern.test(fullText)) {
-      return {
-        status: 'restricted',
-        badge: '🔴 Non éligible',
-        tag: '🔴 Industrie Interdite',
-        industry: item.industry,
-        color: 'rose',
-        reason: item.reason,
-        salesRecommendation: 'Ne pas contacter : industrie sur liste rouge Revolut, ouverture de compte bloquée.',
-        isEligible: false
-      };
-    }
-  }
-
-  // 2. PASTILLE JAUNE : Activités réglementées nécessitant une vérification de conformité
-  // (Holdings, promoteurs immobiliers, courtiers financiers agréés)
+  // 2. PASTILLE JAUNE : Activités éligibles mais nécessitant des justificatifs KYB renforcés
   const regulatedIndustries = [
     {
-      pattern: /\b(holding|participations|societe de portefeuille|societe de gestion|beteiligungen|family office|vermögensverwaltung)\b/i,
-      industry: 'Holding & Gestion de Participations',
-      reason: 'Holdings et structures financières : nécessite la fourniture de l\'organigramme et des bénéficiaires effectifs (UBO).'
+      pattern: /\b(holding|participations|societe de portefeuille|société de portefeuille|beteiligungen|family office)\b/i,
+      industry: 'Holding & Gestion de Participations (Propre Compte)',
+      reason: 'Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l\'organigramme de détention et l\'identité des bénéficiaires effectifs (UBO).'
     },
     {
-      pattern: /\b(marchand de biens|promotion immobiliere|construction-vente|immobilienentwicklung|generalunternehmung)\b/i,
+      pattern: /\b(marchand de biens|promotion immobiliere|promotion immobilière|construction-vente|immobilienentwicklung|generalunternehmung)\b/i,
       industry: 'Promotion Immobilière & Marchands de Biens',
-      reason: 'Opérations immobilières complexes : justification de l\'origine des fonds et garanties financières requises.'
+      reason: 'Opérations immobilières pour compte propre (sans détention de fonds mandants/syndic) : justificatifs d\'origine des fonds requis.'
     },
     {
-      pattern: /\b(courtage|courtier|fintech|paiement|intermediaire bancaire|finanzdienstleistung|treuhand|fiduciaire)\b/i,
-      industry: 'Intermédiation Financière & Fiduciaire',
-      reason: 'Activités financières réglementées : justificatif d\'enregistrement officiel ORIAS (FR) ou FINMA / OAR (CH) requis.'
-    },
-    {
-      pattern: /\b(negoc|import.export|matiere premiere|petrole)\b/i,
-      industry: 'Négoce International & Import-Export',
-      reason: 'Commerce international à flux transfrontaliers : vérification des pays partenaires et flux de paiement.'
+      pattern: /\b(blockchain consulting|conseil en blockchain|développement blockchain|nft platform|non-custodial wallet)\b/i,
+      industry: 'Services Tech Blockchain / NFT / Wallet Non-Custodial',
+      reason: 'Activité technologique ou conseil Blockchain acceptée par Revolut Business (hors échange, courtage, ICO ou minage).'
     }
   ];
 
@@ -110,12 +232,11 @@ function evaluateRevolutCompliance(company) {
     if (item.pattern.test(primaryText)) {
       return {
         status: 'conditional',
-        badge: '🟡 Réglementé',
-        tag: '🟡 Activité Réglementée',
+        badge: '🟡 Éligible (KYB Renforcé)',
+        tag: '🟡 KYB Renforcé',
         industry: item.industry,
         color: 'amber',
         reason: item.reason,
-        salesRecommendation: 'Prospectable en demandant la structure juridique et les pièces justificatives d\'activité.',
         isEligible: true
       };
     }
@@ -124,12 +245,11 @@ function evaluateRevolutCompliance(company) {
   // 3. PASTILLE VERTE : Industries standards 100% Éligibles Revolut Business
   return {
     status: 'eligible',
-    badge: '🟢 Éligible',
-    tag: '🟢 Éligible Revolut',
+    badge: '🟢 Éligible Revolut',
+    tag: '🟢 Industrie Supportée',
     industry: company.activityCategory || 'Commerce, Services & Industrie',
     color: 'emerald',
-    reason: 'Activité commerciale ou de services conforme à la charte d\'acceptation Revolut Business (Tech, BTP, E-commerce, Conseil, Restauration, Santé, Transport, etc.).',
-    salesRecommendation: 'Prospect prioritaire : activité standard directement acceptée sur Revolut Business.',
+    reason: 'Activité commerciale ou de services B2B/B2C conforme à la politique d\'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).',
     isEligible: true
   };
 }
@@ -192,12 +312,12 @@ function evaluateFxPotential(company) {
     currencySet.add('USD');
     currencySet.add('GBP');
     reasons.push('E-Commerce & Distribution : encaissements clients multi-devises et achats fournisseurs hors zone Euro');
-  } else if (/\b(luxe|horlogerie|montres|joaillerie|bijoux|mode|cosmétique|parfum|conciergerie|yacht|aviation|hôtellerie|tourisme|voyage|travel)\b/i.test(fullText)) {
-    score += 35;
+  } else if (/\b(mode|cosmétique|parfum|conciergerie|yacht|aviation|hôtellerie|tourisme|voyage|travel)\b/i.test(fullText)) {
+    score += 30;
     currencySet.add('USD');
     currencySet.add('CHF');
     currencySet.add('GBP');
-    reasons.push('Luxe, Horlogerie & Conciergerie : clientèle internationale fortunée (encaissements USD, CHF, GBP, AED)');
+    reasons.push('Hôtellerie, Tourisme & Conciergerie : clientèle internationale (encaissements USD, CHF, GBP)');
   } else if (/\b(industrie|ingénierie|engineering|fabrication|manufacture|biotech|medtech|pharma|médical|laboratoire|énergie|solaire|cleantech|aéronautique)\b/i.test(fullText)) {
     score += 25;
     currencySet.add('USD');
@@ -232,10 +352,7 @@ function evaluateFxPotential(company) {
       badge: `💱 Fort Potentiel FX (${currencies.slice(0, 3).join('/')})`,
       shortBadge: '💱 Fort Potentiel FX',
       currencies,
-      reasons: reasons.slice(0, 3),
-      salesPitch: isCH
-        ? `Argument FX Revolut : Cette société suisse (${capital.toLocaleString('fr-FR')} CHF) est exposée aux flux ${currencies.join(' / ')}. Proposer les comptes IBAN multi-devises CHF/EUR/USD au taux interbancaire pour économiser 1,5% à 2,5% de marge bancaire.`
-        : `Argument FX Revolut : Fort besoin de change (${currencies.join(' / ')}) détecté sur l'activité. Proposer les comptes multi-devises et cartes corporate sans frais de change à l'étranger.`
+      reasons: reasons.slice(0, 3)
     };
   }
 
@@ -246,8 +363,7 @@ function evaluateFxPotential(company) {
       badge: `🌐 FX Modéré (${currencies.slice(0, 2).join('/')})`,
       shortBadge: '🌐 FX Modéré',
       currencies,
-      reasons: reasons.length > 0 ? reasons.slice(0, 2) : ['Dépenses logiciels/fournisseurs ponctuelles en devises étrangères'],
-      salesPitch: `Argument Revolut : Proposer le compte principal pro + cartes physiques/virtuelles sans frais sur les abonnements SaaS en USD et déplacements internationaux.`
+      reasons: reasons.length > 0 ? reasons.slice(0, 2) : ['Dépenses logiciels/fournisseurs ponctuelles en devises étrangères']
     };
   }
 
@@ -257,8 +373,7 @@ function evaluateFxPotential(company) {
     badge: '🏠 Flux Domestiques',
     shortBadge: '🏠 Domestique',
     currencies,
-    reasons: ['Activité principalement locale : cibler sur la gratuité des virements SEPA et les cartes multi-utilisateurs'],
-    salesPitch: `Argument Revolut : Mettre en avant la rapidité d'ouverture de compte, l'automatisation comptable et les cartes d'équipe avec plafonds personnalisés.`
+    reasons: ['Activité principalement locale (flux EUR / CHF)']
   };
 }
 
@@ -310,6 +425,9 @@ function getGeoZone(company) {
 }
 
 module.exports = {
+  REVOLUT_UNSUPPORTED_RULES,
+  getUnsupportedIndustryMatch,
+  isRevolutUnsupportedIndustry,
   evaluateRevolutCompliance,
   evaluateFxPotential,
   getGeoZone

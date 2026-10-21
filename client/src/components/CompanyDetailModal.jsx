@@ -188,28 +188,18 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mt-2">
-                <div className="space-y-1">
-                  <span className="font-bold text-slate-700 dark:text-slate-300 block">
-                    📋 Éligibilité selon l'Activité & Politique Revolut :
-                  </span>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {company.compliance.reason}
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <span className="font-bold text-slate-700 dark:text-slate-300 block">
-                    💼 Action Commerciale Recommandée :
-                  </span>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {company.compliance.salesRecommendation}
-                  </p>
-                </div>
+              <div className="text-xs mt-2">
+                <span className="font-bold text-slate-700 dark:text-slate-300 block mb-0.5">
+                  📋 Politique d'éligibilité Revolut Business (Unsupported Industries Check) :
+                </span>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  {company.compliance.reason}
+                </p>
               </div>
             </div>
           )}
 
-          {/* Point 1: Détecteur de Besoins FX / Multi-Devises (Potentiel Revolut FX) */}
+          {/* Détecteur de Besoins FX / Multi-Devises (sans pitch commercial) */}
           {company.fxPotential && (
             <div className={`p-4 rounded-xl border transition ${
               company.fxPotential.level === 'high'
@@ -218,7 +208,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 ? 'bg-indigo-50/70 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-900/50'
                 : 'bg-slate-50 dark:bg-[#161e2e] border-slate-200 dark:border-slate-800'
             }`}>
-              <div className="flex items-center justify-between flex-wrap gap-2 mb-2.5 pb-2.5 border-b border-violet-200/60 dark:border-violet-800/40">
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-2 pb-2 border-b border-violet-200/60 dark:border-violet-800/40">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-sm font-bold text-violet-900 dark:text-violet-200">
                     {company.fxPotential.badge}
@@ -240,34 +230,15 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mt-2">
-                <div className="space-y-1">
-                  <span className="font-bold text-slate-700 dark:text-slate-300 block">
-                    🔍 Signaux Multi-Devises & Transfrontaliers détectés :
-                  </span>
-                  <ul className="list-disc list-inside text-slate-600 dark:text-slate-400 space-y-0.5">
-                    {(company.fxPotential.reasons || []).map((r, idx) => (
-                      <li key={idx} className="leading-relaxed">{r}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-slate-700 dark:text-slate-300">
-                      🎯 Pitch Commercial Revolut FX :
-                    </span>
-                    <button
-                      onClick={() => handleCopy(company.fxPotential.salesPitch, 'fxPitch')}
-                      className="text-[11px] px-2 py-0.5 rounded bg-violet-600 hover:bg-violet-500 text-white font-semibold flex items-center gap-1 transition shadow-sm"
-                    >
-                      {copiedField === 'fxPitch' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                      {copiedField === 'fxPitch' ? 'Pitch copié !' : 'Copier le pitch FX'}
-                    </button>
-                  </div>
-                  <p className="text-slate-700 dark:text-slate-300 bg-white/70 dark:bg-slate-900/60 p-2.5 rounded-lg border border-violet-200/60 dark:border-violet-800/40 italic leading-relaxed">
-                    "{company.fxPotential.salesPitch}"
-                  </p>
-                </div>
+              <div className="text-xs mt-1.5">
+                <span className="font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                  🔍 Signaux Multi-Devises & Transfrontaliers détectés :
+                </span>
+                <ul className="list-disc list-inside text-slate-600 dark:text-slate-400 space-y-0.5">
+                  {(company.fxPotential.reasons || []).map((r, idx) => (
+                    <li key={idx} className="leading-relaxed">{r}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           )}

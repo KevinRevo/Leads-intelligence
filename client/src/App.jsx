@@ -204,6 +204,8 @@ function applyLocalFilters(rawList, {
     if (/individuel|verein|association/i.test(c.legalForm || '')) return false;
     // Never show companies with turnover > 30M€
     if (c.revenue && c.revenue > 30000000) return false;
+    // Never show Revolut Business Unsupported Industries
+    if (c.compliance && (c.compliance.isEligible === false || c.compliance.status === 'restricted')) return false;
 
     if (country !== 'ALL' && c.country !== country) return false;
     if (crmStatus !== 'ALL' && c.crmStatus !== crmStatus) return false;
@@ -634,26 +636,30 @@ export default function App() {
     switch (cat) {
       case 'Import / Export':
         return <span className={baseCls + "bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800"}>🚢 Import / Export</span>;
+      case 'Immobilier (Propre Compte)':
       case 'Immobilier':
-        return <span className={baseCls + "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"}>🏢 Immobilier</span>;
+        return <span className={baseCls + "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"}>🏢 {cat}</span>;
+      case 'Consulting & Conseil':
       case 'Consulting':
-        return <span className={baseCls + "bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800"}>💼 Consulting</span>;
+        return <span className={baseCls + "bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800"}>💼 {cat}</span>;
       case 'Tech & Logiciel':
         return <span className={baseCls + "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800"}>💻 Tech & Logiciel</span>;
-      case 'Finance & Fintech':
-        return <span className={baseCls + "bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800"}>📈 Finance & Holding</span>;
+      case 'Holding & Participations':
+        return <span className={baseCls + "bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800"}>🏛️ Holding & Participations</span>;
+      case 'Industrie & Ingénierie':
+        return <span className={baseCls + "bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-800"}>⚙️ Industrie & Ingénierie</span>;
       case 'Transport & Logistique':
         return <span className={baseCls + "bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"}>🚚 Transport & Log.</span>;
+      case 'Restauration & Hôtellerie':
       case 'Restauration':
-        return <span className={baseCls + "bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800"}>🍽️ Restauration</span>;
+        return <span className={baseCls + "bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800"}>🍽️ {cat}</span>;
       case 'BTP & Construction':
         return <span className={baseCls + "bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700"}>🏗️ BTP & Travaux</span>;
       case 'Santé & Médical':
         return <span className={baseCls + "bg-teal-100 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800"}>🩺 Santé & Médical</span>;
-      case 'Luxe & Horlogerie':
-        return <span className={baseCls + "bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800"}>💎 Luxe & Horlogerie</span>;
+      case 'Commerce & E-Commerce':
       case 'Commerce & Vente':
-        return <span className={baseCls + "bg-pink-100 dark:bg-pink-950/60 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800"}>🛍️ Commerce & Vente</span>;
+        return <span className={baseCls + "bg-pink-100 dark:bg-pink-950/60 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800"}>🛍️ {cat}</span>;
       case 'Marketing & Com':
         return <span className={baseCls + "bg-fuchsia-100 dark:bg-fuchsia-950/60 text-fuchsia-700 dark:text-fuchsia-300 border-fuchsia-200 dark:border-fuchsia-800"}>📣 Marketing & Com</span>;
       default:
@@ -1558,7 +1564,6 @@ export default function App() {
           onClose={() => setSelectedCompany(null)}
           onUpdateStatus={handleUpdateStatus}
           onOpenNetwork={(comp) => {
-            setSelectedCompany(null);
             handleOpenNetwork(comp);
           }}
         />
