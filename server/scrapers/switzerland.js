@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { enrichCompany } = require('../services/enricher');
-const { isValidPhysicalPersonName, isValidCommercialCompany, detectInternationalLinks } = require('../services/northdata');
+const { normalizePersonName, isValidPhysicalPersonName, isValidCommercialCompany, detectInternationalLinks } = require('../services/northdata');
 
 /**
  * Translate / normalize Swiss commercial register roles (DE / FR / IT -> clear FR title)
@@ -42,7 +42,7 @@ function normalizeSwissRole(rawRoleText = '') {
 
 /**
  * Parse a single Swiss person clause (e.g. "Valarezo Barba Darwin, de Espagne, à Lausanne, associé-gérant...")
- * Returns { fullName, firstName, lastName, role } or null if corporate / invalid
+ * Returns { name, firstName, lastName, role } or null if corporate / invalid
  */
 function parseSwissPersonEntry(entry = '', companyName = '', defaultRoleHint = '') {
   if (!entry) return null;
@@ -55,7 +55,7 @@ function parseSwissPersonEntry(entry = '', companyName = '', defaultRoleHint = '
   if (parts.length === 0) return null;
 
   const seg0 = parts[0]
-    .replace(/^(?:l'associé[e-]*gérant[e]*|associé[e-]*gérant[e]*|gérant[e]*|président[e]*|administrateur|membre)\s+/i, '')
+    .replace(/^(?:l'associé[e-]*gérant[e]*|l'associé[e]?|associé[e-]*gérant[e]*|gérant[e]*|président[e]*|administrateur|membre)\s+/i, '')
     .replace(/\s+avec signature.*$/i, '')
     .trim();
   const seg1 = parts[1] || '';
@@ -65,7 +65,6 @@ function parseSwissPersonEntry(entry = '', companyName = '', defaultRoleHint = '
   let firstName = '';
 
   if (parts.length >= 2 && (/^(de|du|des|d'|von|da|in|à|a)\b/i.test(seg1) || /Staatsangehörig|ressortissant|citoyen/i.test(seg1))) {
-    // Format: "Valarezo Barba Darwin, de Espagne, à Lausanne..." -> Last word is FirstName (or LastName FirstName)
     const words = seg0.split(/\s+/).filter(Boolean);
     if (words.length >= 2 && words.length <= 5) {
       firstName = words[words.length - 1];
@@ -75,7 +74,7 @@ function parseSwissPersonEntry(entry = '', companyName = '', defaultRoleHint = '
   } else if (parts.length >= 2 && !/^(avec|mit|con|sans|ohne|pour|avec signature)\b/i.test(seg1)) {
     // Format: "Eycan, Ozan, von Rheinfelden..." (seg0 is LastName, seg1 is FirstName)
     const cleanSeg1 = seg1.replace(/\s+avec signature.*$/i, '').trim();
-    if (cleanSeg1.split(/\s+/).length <= 3 && seg0.split(/\s+/).length <= 3) {
+    if (cleanSeg1.split(/\s+/).length <= 4 && seg0.split(/\s+/).length <= 3) {
       lastName = seg0;
       firstName = cleanSeg1;
       fullName = `${firstName} ${lastName}`.trim();
@@ -89,15 +88,17 @@ function parseSwissPersonEntry(entry = '', companyName = '', defaultRoleHint = '
     }
   }
 
-  if (!isValidPhysicalPersonName(fullName, companyName)) {
+  const normalized = normalizePersonName(fullName, 'CH', firstName, lastName);
+  if (!isValidPhysicalPersonName(normalized, companyName)) {
     return null;
   }
 
+  const normParts = normalized.split(/\s+/);
   const role = normalizeSwissRole(`${defaultRoleHint} ${entry}`);
   return {
-    name: fullName,
-    firstName,
-    lastName,
+    name: normalized,
+    firstName: normParts[0],
+    lastName: normParts.slice(1).join(' '),
     role,
   };
 }

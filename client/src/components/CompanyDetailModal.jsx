@@ -387,17 +387,17 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                       {!isX && (
                         <div className="flex items-center gap-1.5">
                           <a
-                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${d.name}" "${cleanBrand}"`)}`}
+                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${d.name} ${isCH ? 'Suisse' : 'France'}`)}`}
                             target="_blank"
                             rel="noreferrer"
                             className="px-2 py-1 bg-[#0a66c2]/10 hover:bg-[#0a66c2]/20 text-[#0a66c2] rounded-lg transition flex items-center gap-1 text-xs font-semibold"
-                            title={`Recherche anti-homonyme : "${d.name}" chez "${cleanBrand}" sur LinkedIn`}
+                            title={`Rechercher ${d.name} (${isCH ? 'Suisse' : 'France'}) sur LinkedIn`}
                           >
                             <LinkedinIcon className="w-3.5 h-3.5" />
                             <span>LinkedIn</span>
                           </a>
                           <a
-                            href={`https://www.northdata.fr/?query=${encodeURIComponent(`${d.name} ${company.city || ''}`)}`}
+                            href={`https://www.northdata.fr/?query=${encodeURIComponent(d.name)}`}
                             target="_blank"
                             rel="noreferrer"
                             className="px-2 py-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-lg transition flex items-center gap-1 text-[11px] font-bold"

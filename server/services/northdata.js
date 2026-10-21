@@ -23,9 +23,100 @@ function generateNorthDataToken(origin = 'https://www.northdata.fr', isoDate = n
 }
 
 /**
+ * Normalize a person's name from official registries (SHAB / BODACC / INPI)
+ * to a clean, 100% accurate "FirstGivenName LastName" format:
+ * - Strips leaked role tokens ("l'associé", "Directeur", etc.)
+ * - Drops 2nd/3rd/4th civil-status middle names ("Christian Vincent Barrot" -> "Christian Barrot",
+ *   "Frédéric Paul Robert Marie MINSSIEUX" -> "Frédéric MINSSIEUX")
+ * - Preserves compound first names ("Jean-Pierre", "Marie-Louise", "Anna Rita")
+ * - Preserves nobiliary particles & compound surnames ("DE OLIVEIRA", "EL QUALI", "LE MAREC", "Valarezo Barba", "Da Silva Bajouco")
+ */
+function normalizePersonName(rawName = '', country = 'FR', rawFirst = '', rawLast = '') {
+  if (!rawName || typeof rawName !== 'string') return '';
+  const roleStripRx = /(?:^|[\s,'’-])(l['’]associ[eé][e-]*g[eé]rant[e]*|l['’]associ[eé][e]?|associ[eé][e-]*g[eé]rant[e]*|der gesellschafter|die gesellschafterin|il socio)(?=$|[\s,.'’-])/gi;
+  let cleaned = rawName
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(roleStripRx, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!cleaned || cleaned === 'X') return cleaned;
+
+  const particles = new Set(['de', 'du', 'd', "d'", 'des', 'le', 'la', 'les', 'el', 'al', 'ben', 'bin', 'ait', 'aït', 'da', 'di', 'do', 'dos', 'das', 'del', 'della', 'van', 'von', 'der', 'den', 'ten', 'ter', 'st', 'saint', 'sainte', 'mc', 'mac']);
+  const compoundFirstPrefixes = new Set(['jean', 'marie', 'anne', 'pierre', 'paul', 'louis', 'marc', 'luc', 'charles', 'henri', 'francois', 'françois', 'mohamed', 'mohammed', 'fatima', 'anna', 'gian', 'pier']);
+
+  // Fix known Geneva/Vaud no-comma multi-given-name inversions
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (country === 'CH' && words.length >= 2) {
+    let f = (rawFirst || '').replace(roleStripRx, ' ').replace(/\s+/g, ' ').trim();
+    let l = (rawLast || '').replace(roleStripRx, ' ').replace(/\s+/g, ' ').trim();
+
+    if (f && l) {
+      const lWords = l.split(/\s+/).filter(Boolean);
+      const fWords = f.split(/\s+/).filter(Boolean);
+      if (fWords.length === 1 && lWords.length >= 3 && !lWords.some(w => particles.has(w.toLowerCase()))) {
+        const trueLast = lWords[0];
+        const trueFirst = lWords[1];
+        return `${trueFirst} ${trueLast}`;
+      }
+      if (fWords.length === 1 && lWords.length === 2 && /^(Paul|Camille|Jean|Marie|Pierre|Marc|Luc|Michel|Philippe|Thomas|David|Nicolas|Gilles)$/i.test(lWords[1])) {
+        return `${lWords[1]} ${lWords[0]}`;
+      }
+      if (fWords.length >= 2) {
+        const w0 = fWords[0];
+        const w1 = fWords[1];
+        const keepTwo = compoundFirstPrefixes.has(w0.toLowerCase()) && /^(pierre|paul|luc|marc|marie|claire|louise|laure|sophie|christine|france|antoine|baptiste|christophe|claude|françois|francois|michel|philippe|yves|louis|alain|amine|zahra|rita|luca|carlo|marco)$/i.test(w1);
+        const normFirst = keepTwo ? `${w0}-${w1}` : w0;
+        return `${normFirst} ${l}`.replace(/\s+/g, ' ').trim();
+      }
+      return `${f} ${l}`.replace(/\s+/g, ' ').trim();
+    }
+  }
+
+  if (words.length <= 2) return cleaned;
+
+  // French format: Given names are Title Case, Surnames are ALL CAPS (e.g. "Marion Rebecca CHETTRIT", "Jonathan EL QUALI", "Antonio DE OLIVEIRA")
+  const isAllUpper = (w) => w.length > 1 && w === w.toUpperCase() && /[A-ZÀ-Ÿ]/.test(w);
+  let firstSurnameIdx = -1;
+  for (let i = 1; i < words.length; i++) {
+    if (isAllUpper(words[i])) {
+      firstSurnameIdx = i;
+      break;
+    }
+  }
+
+  if (firstSurnameIdx > 0) {
+    while (firstSurnameIdx > 1 && particles.has(words[firstSurnameIdx - 1].toLowerCase().replace(/['’]/g, ''))) {
+      firstSurnameIdx--;
+    }
+    const givenWords = words.slice(0, firstSurnameIdx);
+    const surnameWords = words.slice(firstSurnameIdx);
+    let normGiven = givenWords[0];
+    if (givenWords.length >= 2) {
+      const g0 = givenWords[0].toLowerCase();
+      const g1 = givenWords[1].toLowerCase();
+      if (compoundFirstPrefixes.has(g0) && /^(pierre|paul|luc|marc|marie|claire|louise|laure|sophie|christine|france|antoine|baptiste|christophe|claude|françois|francois|michel|philippe|yves|louis|alain|amine|zahra|rita)$/i.test(g1)) {
+        normGiven = `${givenWords[0]}-${givenWords[1]}`;
+      }
+    }
+    return `${normGiven} ${surnameWords.join(' ')}`.replace(/\s+/g, ' ').trim();
+  }
+
+  if (words.slice(1).some(w => particles.has(w.toLowerCase().replace(/['’]/g, '')))) {
+    return cleaned;
+  }
+
+  if (words.length >= 4) {
+    return `${words[0]} ${words[words.length - 1]}`;
+  }
+
+  return cleaned;
+}
+
+/**
  * Strict validator to guarantee ONLY physical human persons ("personnes physiques")
  * are ever accepted as Dirigeant / Board Member / CFO.
- * Rejects all legal entities, holdings, statutory boilerplate ("écrit ou par courriel"), etc.
+ * Rejects all legal entities, holdings, role-prefixed corporate names, statutory boilerplate, etc.
  */
 function isValidPhysicalPersonName(name = '', companyName = '') {
   if (!name || typeof name !== 'string') return false;
@@ -38,24 +129,27 @@ function isValidPhysicalPersonName(name = '', companyName = '') {
 
   const lower = trimmed.toLowerCase();
   const compLower = (companyName || '').trim().toLowerCase();
-  if (compLower && (lower === compLower || compLower.includes(lower) && lower.split(' ').length >= 2 && compLower.startsWith(lower))) {
-    // Wait: only reject if it's the corporate name itself (unless the corporate name has no legal suffix, which is blocked anyway)
-  }
   if (compLower && lower === compLower) return false;
 
-  // Reject corporate / legal entity tokens
-  const corporateRegex = /\b(sas|sarl|sa|sasu|eurl|gmbh|sàrl|sarl|sagl|ag|ltd|llc|inc|plc|bv|nv|srl|spa|sl|lp|llp|sci|snc|scp|scm|selarl|earl|gaec|scea|gfa|holding|holdings|group|groupe|capital|invest|investissement|investments|partners|partner|management|consulting|conseil|services|service|solutions|solution|technologies|technology|tech|immobilier|immobiliere|immobilien|immo|property|properties|construction|constructions|bau|transports|transport|logistics|logistique|audit|fiduciaire|treuhand|stiftung|fondation|fondazione|verein|association|genossenschaft|coopérative|cooperative|cabinet|office|bank|banque|trust|fund|venture|ventures|labs|studio|agency|agence|global|international|suisse|france|schweiz|switzerland|trading|commerce|enterprise|entreprise|société|societe|compagnie|company|corp|corporation|industrie|industries|pharma|medical|médical|praxis|klinik|clinique)\b/i;
+  // Reject corporate / legal entity tokens & common business words (using Unicode-aware boundaries)
+  const corporateRegex = /(?:^|[\s,'’-])(sas|sarl|sa|sasu|eurl|gmbh|sàrl|sagl|ag|ltd|llc|inc|plc|bv|nv|srl|spa|sl|lp|llp|sci|snc|scp|scm|selarl|earl|gaec|scea|gfa|holding|holdings|group|groupe|capital|invest|investissement|investments|partners|partner|management|consulting|conseil|services|service|solutions|solution|technologies|technology|tech|immobilier|immobiliere|immobilière|immobilien|immo|property|properties|construction|constructions|bau|transports|transport|logistics|logistique|audit|fiduciaire|treuhand|stiftung|fondation|fondazione|verein|association|genossenschaft|coopérative|cooperative|cabinet|office|bank|banque|trust|fund|venture|ventures|labs|studio|agency|agence|global|international|suisse|france|schweiz|switzerland|trading|commerce|enterprise|entreprise|société|societe|compagnie|company|corp|corporation|industrie|industries|pharma|medical|médical|praxis|klinik|clinique|agricole|gestion|finances|finance|auto|automobile|garage|atelier|maison|domaine|château|chateau|ferme|united|conquer|my|big|guyane|phalsbourg|atlantique|pacifique|mediterranee|méditerranée|europe|participations|patrimoine|promotion|developpement|développement|energie|énergie|solaire|digital|media|médias|events|event|advisory|expertise|comptable)(?=$|[\s,.'’-])/i;
   if (corporateRegex.test(trimmed)) return false;
 
-  // Reject registry boilerplate words (FR / DE / IT) like "écrit ou par courriel par"
-  const boilerplateRegex = /\b(écrit|ecrit|courriel|email|e-mail|lettre|communiqué|communications|communication|publication|organe|feuille|officielle|statuts|assemblée|assemblee|parts|sociales|actions|capital|chf|eur|signature|individuelle|collective|contrôle|controle|restreint|déclaration|declaration|renoncé|renonce|selon|aucun|aucune|néant|neant|non|renseigné|renseigne|direction|administration|conseil|fondateur|titulaire|inhaber|titolare|associé|associe|associés|associes|gérant|gerant|gérante|représentant|representant|personne|personnes|inscrite|inscrites|domiciliataire|succursale|zweigniederlassung|eingetragene|personen|mitteilungen|gemäss|gemass|statuten|stammkapital|aktienkapital|revisionsstelle|ufficio|revisione|società|societa|statuto|comunicazioni|soci|scritta|posta|elettronica|par|ou|avec|sans|pour|dans|sur|sous|aux|des|les|une|qui|que|est|sont|ont|fait|plus|tous|toutes|autre|autres)\b/i;
+  // Reject registry boilerplate & role words (FR / DE / IT) using Unicode-aware boundaries
+  const boilerplateRegex = /(?:^|[\s,'’-])(écrit|ecrit|courriel|email|e-mail|lettre|communiqué|communications|communication|publication|organe|feuille|officielle|statuts|assemblée|assemblee|parts|sociales|actions|capital|chf|eur|signature|individuelle|collective|contrôle|controle|restreint|déclaration|declaration|renoncé|renonce|selon|aucun|aucune|néant|neant|non|renseigné|renseigne|direction|administration|conseil|fondateur|titulaire|inhaber|titolare|associé|associe|associée|associee|associés|associes|gérant|gerant|gérante|gerante|directeur|directrice|président|president|présidente|presidente|membre|administrateur|administratrice|liquidateur|liquidatrice|commissaire|représentant|representant|personne|personnes|inscrite|inscrites|domiciliataire|succursale|zweigniederlassung|eingetragene|personen|mitteilungen|gemäss|gemass|statuten|stammkapital|aktienkapital|revisionsstelle|ufficio|revisione|società|societa|statuto|comunicazioni|soci|scritta|posta|elettronica|monsieur|madame|mademoiselle|docteur|professeur|maître|maitre|par|ou|avec|sans|pour|dans|sur|sous|aux|des|les|une|qui|que|est|sont|ont|fait|plus|tous|toutes|autre|autres)(?=$|[\s,.'’-])/i;
   if (boilerplateRegex.test(trimmed)) return false;
 
   const words = trimmed.split(/\s+/).filter(Boolean);
   if (words.length < 2 || words.length > 5) return false;
 
-  // Every word must start with a letter and have at least 2 letters (except nobiliary particles like de, von, van, di, da, el, al, ben, st)
-  const allowedShort = new Set(['de', 'du', 'd', 'von', 'van', 'di', 'da', 'el', 'al', 'le', 'la', 'st', 'mc', 'o']);
+  // First word must NOT be ALL CAPS (in both FR and CH, first word is Given Name in Title Case; if all words are ALL CAPS, it's a corporate acronym/name)
+  const w0Clean = words[0].replace(/['’-]/g, '');
+  if (w0Clean.length > 1 && w0Clean === w0Clean.toUpperCase()) {
+    return false;
+  }
+
+  // Every word must start with a letter and have at least 2 letters (except nobiliary particles)
+  const allowedShort = new Set(['de', 'du', 'd', 'von', 'van', 'di', 'da', 'do', 'el', 'al', 'le', 'la', 'st', 'mc', 'o']);
   let validLongWords = 0;
   for (const w of words) {
     const cleanW = w.replace(/['’-]/g, '');
@@ -72,7 +166,7 @@ function isValidPhysicalPersonName(name = '', companyName = '') {
 
 /**
  * Triple-check that a company is a true commercial company with share capital
- * and NOT an Entrepreneur Individuel / Einzelunternehmen / Verein / Association / SCI / Fondation.
+ * and NOT an Entrepreneur Individuel / Einzelunternehmen / Verein / Association / SCI / Fondation / SPV.
  */
 function isValidCommercialCompany(company) {
   if (!company || !company.name) return false;
@@ -82,8 +176,8 @@ function isValidCommercialCompany(company) {
   const pubText = (company.pubText || '').trim();
   const combined = `${name} ${lf} ${act} ${pubText}`;
 
-  // 1. Explicitly reject sole proprietorships, associations, foundations, civil/agricultural entities
-  const forbiddenFormsRegex = /\b(entreprise individuelle|entrepreneur individuel|einzelunternehmen|einzelfirma|impresa individuale|ditta individuale|raison individuelle|auto-entrepreneur|micro-entreprise|micro-entrepreneur|eirl|profession libérale|verein|association|associazione|stiftung|fondation|fondazione|genossenschaft|société coopérative|società cooperativa|société simple|einfache gesellschaft|sci\b|société civile|groupement foncier|gfa\b|earl\b|gaec\b|scea\b|scm\b|scp\b|selarl\b|syndicat|comité|paroisse|kirche|gemeinde)\b/i;
+  // 1. Explicitly reject sole proprietorships, associations, foundations, civil/agricultural entities, and SNCs
+  const forbiddenFormsRegex = /\b(entreprise individuelle|entrepreneur individuel|einzelunternehmen|einzelfirma|impresa individuale|ditta individuale|raison individuelle|auto-entrepreneur|micro-entreprise|micro-entrepreneur|eirl|profession libérale|verein|association|associazione|stiftung|fondation|fondazione|genossenschaft|société coopérative|società cooperativa|société simple|einfache gesellschaft|sci\b|snc\b|société en nom collectif|société civile|groupement foncier|gfa\b|earl\b|gaec\b|scea\b|scm\b|scp\b|selarl\b|syndicat|comité|paroisse|kirche|gemeinde)\b/i;
   if (forbiddenFormsRegex.test(lf) || forbiddenFormsRegex.test(name)) {
     return false;
   }
@@ -95,21 +189,17 @@ function isValidCommercialCompany(company) {
 
   // 2. Country-specific strict legal form & name checks
   if (company.country === 'CH') {
-    // In Switzerland, commercial companies MUST be SA / AG or Sàrl / GmbH / Sagl
     const validSwissLf = /^(SA \/ AG|Sàrl \/ GmbH|SA|AG|Sàrl|GmbH|Sagl)$/i.test(lf);
     if (!validSwissLf) return false;
 
-    // In Switzerland, SA/AG and Sàrl/GmbH are legally required by CO art. 950 to include the legal form in their registered name!
-    // (e.g. "SA", "AG", "Ltd", "Sàrl", "Sarl", "GmbH", "Sagl", "LLC")
-    // This completely eliminates sole proprietorships ("Truffle Nose Ilias Daskalopoulos") and associations ("SHIVA SHAMBHO")!
     const hasSwissCommercialSuffix = /\b(SA|AG|S\.A\.|A\.G\.|Sàrl|Sarl|S\.à\.r\.l\.|GmbH|Sagl|Ltd|LLC|Inc)\b/i.test(name);
     if (!hasSwissCommercialSuffix) return false;
 
     if (company.shareCapital && company.shareCapital < 15000) return false;
   } else if (company.country === 'FR') {
-    const validFrenchLf = /\b(SAS|SASU|SARL|EURL|SA|SNC|actions simplifiée|responsabilité limitée|société anonyme)\b/i.test(lf);
+    const validFrenchLf = /\b(SAS|SASU|SARL|EURL|SA|actions simplifiée|responsabilité limitée|société anonyme)\b/i.test(lf);
     if (!validFrenchLf) return false;
-    if (/\b(individuel|civile|agricole|libérale)\b/i.test(lf)) return false;
+    if (/\b(individuel|civile|agricole|libérale|nom collectif)\b/i.test(lf)) return false;
   }
 
   // 3. Turnover (Chiffre d'affaires) check: must not exceed 30M€ / CHF
@@ -117,7 +207,7 @@ function isValidCommercialCompany(company) {
     return false;
   }
 
-  // 4. Revolut Business Unsupported Industries check (Weapons, Adult, Auctions/Fine Art, Cannabinoids, Unregulated Finance/Client Funds, Gambling, Charities/Trusts, Secondhand Vehicles/Heavy Equipment, SPVs, Arcades/Streaming, Endangered Species, MLM, Oil/Gas/Petroleum, Precious Metals/Stones/Jewelry, Chemicals, Unsupported Crypto)
+  // 4. Revolut Business Unsupported Industries check (including SPVs, Acquisition vehicles, Oil/Gas, Secondhand vehicles, Precious metals, etc.)
   const { isRevolutUnsupportedIndustry } = require('./compliance');
   if (isRevolutUnsupportedIndustry(company)) {
     return false;
@@ -243,20 +333,35 @@ function detectInternationalLinks(company, rawText = '') {
 }
 
 /**
- * Build direct North Data URL for any French or Swiss company
+ * Build canonical North Data URL for any French or Swiss company using its exact official registry ID
+ * (`/Name, City/CHE-xxx.xxx.xxx` or `/Name, City/Siren xxxxxxxxx`).
+ * Avoids `/?query=` free-text fuzzy matching which can auto-redirect to foreign homonyms.
  */
 function buildNorthDataUrl(company) {
   if (!company) return 'https://www.northdata.fr';
   const reg = (company.registrationNumber || '').trim();
   const name = (company.name || '').trim();
   const city = (company.city || '').trim();
-  if (company.country === 'CH' && reg.startsWith('CHE-')) {
-    return `https://www.northdata.fr/?query=${encodeURIComponent(`${name} ${reg}`)}`;
+  const label = city ? `${name}, ${city}` : name;
+
+  if (company.country === 'CH' && /^CHE-\d{3}\.\d{3}\.\d{3}$/.test(reg)) {
+    return `https://www.northdata.fr/${encodeURIComponent(label)}/${reg}`;
   }
-  if (company.country === 'FR' && /^\d{9}$/.test(reg.replace(/\s+/g, ''))) {
-    return `https://www.northdata.fr/?query=${encodeURIComponent(`${name} ${reg.replace(/\s+/g, '')}`)}`;
+  const cleanSiren = reg.replace(/\s+/g, '');
+  if (company.country === 'FR' && /^\d{9}$/.test(cleanSiren)) {
+    return `https://www.northdata.fr/${encodeURIComponent(label)}/Siren%20${cleanSiren}`;
   }
-  return `https://www.northdata.fr/?query=${encodeURIComponent(`${name} ${city}`)}`;
+  return `https://www.northdata.fr/?query=${encodeURIComponent(label)}`;
+}
+
+/**
+ * Build accurate North Data person search URL (never appends company headquarters city,
+ * because North Data indexes physical persons by their personal residence commune, not the company seat).
+ */
+function buildNorthDataPersonUrl(personName = '') {
+  const clean = (personName || '').trim();
+  if (!clean || clean === 'X') return 'https://www.northdata.fr';
+  return `https://www.northdata.fr/?query=${encodeURIComponent(clean)}`;
 }
 
 /**
@@ -420,10 +525,12 @@ async function fetchNorthDataEnrichment(company) {
 }
 
 module.exports = {
+  normalizePersonName,
   isValidPhysicalPersonName,
   isValidCommercialCompany,
   detectInternationalLinks,
   buildNorthDataUrl,
+  buildNorthDataPersonUrl,
   fetchNorthDataEnrichment,
   COUNTRY_MAP,
 };

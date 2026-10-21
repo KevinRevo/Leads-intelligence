@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { enrichCompany } = require('../services/enricher');
-const { isValidPhysicalPersonName, isValidCommercialCompany, detectInternationalLinks } = require('../services/northdata');
+const { normalizePersonName, isValidPhysicalPersonName, isValidCommercialCompany, detectInternationalLinks } = require('../services/northdata');
 
 function formatPersonName(prenoms = '', nom = '') {
   const cleanNom = (nom || '')
@@ -10,13 +10,13 @@ function formatPersonName(prenoms = '', nom = '') {
   const cleanPart = (str) =>
     (str || '')
       .trim()
-      .split(/[\s-]+/)
+      .split(/[\s,]+/)
       .filter(Boolean)
       .slice(0, 2)
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+      .map(w => w.split('-').map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join('-'))
       .join(' ');
   const first = cleanPart(prenoms);
-  return `${first} ${cleanNom}`.trim();
+  return normalizePersonName(`${first} ${cleanNom}`.trim(), 'FR');
 }
 
 /**

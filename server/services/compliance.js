@@ -70,15 +70,15 @@ const REVOLUT_UNSUPPORTED_RULES = [
     id: 'secondhand_vehicles_heavy_equipment',
     industry: 'Secondhand Vehicles & Heavy Equipment',
     reason: 'Achat, vente et négoce de véhicules d\'occasion (voitures, motos, utilitaires, camions) et d\'équipements lourds / engins de chantier ou agricoles.',
-    pattern: /\b(véhicules d'occasion|vehicules d'occasion|voitures d'occasion|autos d'occasion|achat et vente de véhicules|achat-vente de véhicules|achat vente de vehicules|négoce automobile|negoce automobile|négoce de véhicules|negoce de vehicules|commerce de voitures|commerce de véhicules|concessionnaire automobile|mandataire automobile|import-export de véhicules|achat et revente de véhicules|vente de voitures|vente de véhicules|occasion automobile|poids lourds|camions|engins de chantier|matériel lourd|materiel lourd|machines Lourdes|engins btp|machines agricoles|tracteurs|gebrauchtwagen|fahrzeugen aller art|handel mit fahrzeugen|autohandel|fahrzeughandel|baumaschinen|heavy equipment|used cars|secondhand vehicles|car dealer)\b/i,
+    pattern: /\b(véhicules d'occasion|vehicules d'occasion|voitures d'occasion|autos d'occasion|achat et vente de véhicules|achat-vente de véhicules|achat vente de vehicules|négoce automobile|negoce automobile|négoce de véhicules|negoce de vehicules|commerce de voitures|commerce de véhicules|concessionnaire automobile|mandataire automobile|import-export de véhicules|achat et revente de véhicules|vente de voitures|vente de véhicules|occasion automobile|poids lourds|camions|engins de chantier|matériel lourd|materiel lourd|machines lourdes|engins btp|machines agricoles|macchine agricole|macchine movimento terra|engins agricoles|tracteurs|gebrauchtwagen|fahrzeugen aller art|handel mit fahrzeugen|autohandel|fahrzeughandel|baumaschinen|landmaschinen|heavy equipment|used cars|secondhand vehicles|car dealer)\b/i,
     nafPrefix: ['45.11', '45.19', '45.40', '46.63', '46.61']
   },
-  // 10. Special purpose vehicles/entities (SPV / SPE)
+  // 10. Special purpose vehicles/entities (SPV / SPE / Acquisition SPVs / Tax-shelter SNCs)
   {
     id: 'spv_entities',
     industry: 'Special Purpose Vehicles / Entities (SPV)',
-    reason: 'Véhicules de titrisation, Special Purpose Vehicles (SPV / SPE) ou entités ad hoc de financement.',
-    pattern: /\b(\bspv\b|\bspe\b|special purpose vehicle|special purpose entity|titrisation|fonds commun de titrisation|société de titrisation|véhicule d'investissement ad hoc|zweckgesellschaft|securitisation)\b/i,
+    reason: 'Véhicules de titrisation, Special Purpose Vehicles (SPV / SPE), véhicules d\'acquisition ad hoc (AcquiCo / BidCo / Acquisition AG) ou SNC de défiscalisation.',
+    pattern: /\b(\bspv\b|\bspe\b|special purpose vehicle|special purpose entity|titrisation|fonds commun de titrisation|société de titrisation|véhicule d'investissement ad hoc|véhicule d'acquisition|zweckgesellschaft|securitisation|acquico|bidco|topco|midco|finco|mergeco|group acquisition\b|acquisition ag\b|acquisition sa\b|acquisition gmbh\b|acquisition sàrl\b|acquisition sas\b)\b/i,
     nafPrefix: ['64.30']
   },
   // 11. Streaming and video game arcades
@@ -107,7 +107,7 @@ const REVOLUT_UNSUPPORTED_RULES = [
     id: 'oil_gas_petroleum',
     industry: 'Oil, Gas & Petroleum Products',
     reason: 'Pétrole, gaz, hydrocarbures : exploration, extraction, raffinage, transport par tankers/pipelines et commercialisation de produits pétroliers ou miniers.',
-    pattern: /\b(pétrole|petrole|pétrolier|petrolier|produits pétroliers|produits petroliers|hydrocarbure|hydrocarbures|raffinage|raffinerie|forage pétrolier|extraction pétrolière|extraction minière|gaz naturel|gnl\b|pipeline|oil tanker|pétrolier|station-service|carburant|carburants|fioul|mazout|bitume|charbon|houille|uranium|erdöl|erdgas|mineralöl|rohöl|tankstelle|brennstoff|oil and gas|oil & gas|petroleum|crude oil)\b/i,
+    pattern: /\b(pétrole|petrole|pétrolier|petrolier|produits pétroliers|produits petroliers|hydrocarbure|hydrocarbures|raffinage|raffinerie|forage pétrolier|extraction pétrolière|extraction minière|gaz naturel|gnl\b|pipeline|oil tanker|station-service|carburant|carburants|fioul|mazout|bitume|charbon|houille|uranium|erdöl|erdgas|mineralöl|rohöl|tankstelle|brennstoff|oil and gas|oil & gas|petroleum|crude oil|totalenergies)\b/i,
     nafPrefix: ['05.', '06.', '07.', '08.9', '09.', '19.', '46.71', '47.30']
   },
   // 15. Fake or counterfeit goods
@@ -122,7 +122,7 @@ const REVOLUT_UNSUPPORTED_RULES = [
     id: 'precious_metals_stones',
     industry: 'Precious Metals & Stone Dealers',
     reason: 'Négoce de métaux précieux (or, argent, platine), pierres précieuses, diamants, joaillerie et bijouterie.',
-    pattern: /\b(métaux précieux|metaux precieux|or brut|achat d'or|vente d'or|négoce d'or|negoce d'or|lingot|pièces d'or|pieces d'or|diamant|diamants|diamantaire|pierres précieuses|pierres precieuses|pierres fines|gemmologie|joaillerie|joaillier|bijouterie|bijoutier|horlogerie-bijouterie|montres de luxe|négoce de montres|edelmetall|edelmetalle|goldhandel|diamanten|edelsteine|schmuckhandel|juwelier|precious metals|precious stones|bullion|diamond dealer)\b/i,
+    pattern: /\b(métaux précieux|metaux precieux|or brut|achat d'or|vente d'or|négoce d'or|negoce d'or|gold capital|gold trading|lingot|pièces d'or|pieces d'or|diamant|diamants|diamantaire|pierres précieuses|pierres precieuses|pierres fines|gemmologie|joaillerie|joaillier|bijouterie|bijoutier|horlogerie-bijouterie|montres de luxe|négoce de montres|edelmetall|edelmetalle|goldhandel|diamanten|edelsteine|schmuckhandel|juwelier|precious metals|precious stones|bullion|diamond dealer)\b/i,
     nafPrefix: ['32.12', '46.48', '46.72', '47.77']
   },
   // 17. Chemicals and allied products
@@ -130,7 +130,7 @@ const REVOLUT_UNSUPPORTED_RULES = [
     id: 'chemicals_allied',
     industry: 'Chemicals & Allied Products',
     reason: 'Fabrication, distribution ou négoce de produits chimiques, solvants, engrais chimiques et matières connexes.',
-    pattern: /\b(produits chimiques|produit chimique|industrie chimique|négoce chimique|negoce chimique|chimie industrielle|solvant|solvants|acide industriel|pesticide|pesticides|phytosanitaire|engrais chimique|matières dangereuses|matieres dangereuses|chemikalien|chemische produkte|chemische industrie|chemiehandel|chemicals)\b/i,
+    pattern: /\b(produits chimiques|produit chimique|industrie chimique|négoce chimique|negoce chimique|chimie industrielle|chemitech|solvant|solvants|acide industriel|pesticide|pesticides|phytosanitaire|engrais chimique|matières dangereuses|matieres dangereuses|chemikalien|chemische produkte|chemische industrie|chemiehandel|chemicals)\b/i,
     nafPrefix: ['20.1', '20.2', '20.3', '20.5', '20.6', '46.75']
   },
   // 18. Unsupported Cryptocurrency firms (Exchanges, brokers, dealers, ATMs, ICOs, mining, investment/trading/asset management, unregulated custodial)
@@ -150,10 +150,25 @@ function getUnsupportedIndustryMatch(company) {
   if (!company) return null;
   const activity = (company.activity || '').toLowerCase();
   const name = (company.name || '').toLowerCase();
+  const rawName = (company.name || '').trim();
   const category = (company.activityCategory || '').toLowerCase();
   const pubText = (company.pubText || '').toLowerCase();
+  const lf = (company.legalForm || '').toUpperCase().trim();
   const naf = (company.nafCode || '').toUpperCase().trim();
   const fullText = `${name} ${activity} ${category} ${pubText}`;
+
+  // Detect Loi Girardin / DOM-TOM tax-shelter SPV SNCs and serial-numbered SPV shells
+  // (e.g. "PRONY 44", "MARVIC 864", "TECOMA 44", "SEQUOIA 85", "MUTUAL'IR 8 010", "HONU TAH 313", "HMONG AGRICOLE 949", "Hera TE 7 SA", "4 HUAHINE 2026")
+  if (
+    lf === 'SNC' ||
+    /\b([A-ZÀ-Ÿ']+\s+\d{2,4}|\d+\s+[A-ZÀ-Ÿ]+\s+202\d|Hera\s+TE\s+\d+|Brusus\s+\d+)\b/i.test(rawName)
+  ) {
+    return {
+      id: 'spv_entities',
+      industry: 'Special Purpose Vehicles / Entities (SPV / SNC)',
+      reason: 'Véhicule ad hoc (SPV / SNC de portage ou de défiscalisation) exclu par la politique Revolut Business.'
+    };
+  }
 
   // Check if it's an ACCEPTED blockchain/crypto tech company before flagging generic crypto keywords
   const isAcceptedBlockchainTech = /\b(blockchain consulting|conseil en blockchain|développement blockchain|developpement blockchain|application blockchain|nft platform|plateforme nft|non-custodial wallet|portefeuille non-custodial|formation blockchain|blockchain learning|blockchain news)\b/i.test(fullText) &&

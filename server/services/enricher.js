@@ -407,7 +407,7 @@ function detectCFO(dirigeants = [], companyName = '') {
       name: financialRole.name,
       role: financialRole.role || financialRole.qualite || 'Directeur Financier / CFO',
       isEstimated: false,
-      linkedinSearchUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${financialRole.name}" "${cleanComp}"`)}`,
+      linkedinSearchUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${financialRole.name} ${cleanComp}`)}`,
     };
   }
 
@@ -418,7 +418,7 @@ function detectCFO(dirigeants = [], companyName = '') {
       name: secondExec.name,
       role: secondExec.role || 'Directeur / Membre du Board',
       isEstimated: false,
-      linkedinSearchUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${secondExec.name}" "${cleanComp}"`)}`,
+      linkedinSearchUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${secondExec.name} ${cleanComp}`)}`,
     };
   }
 
@@ -435,9 +435,20 @@ function detectCFO(dirigeants = [], companyName = '') {
  */
 async function enrichCompany(rawCompany) {
   const country = rawCompany.country || 'FR';
+  const { normalizePersonName } = require('./northdata');
 
-  // Filter dirigeants strictly to physical human persons!
-  const physicalDirs = (rawCompany.dirigeants || []).filter(d => isValidPhysicalPersonName(d?.name, rawCompany.name));
+  // Normalize and filter dirigeants strictly to physical human persons!
+  const seenNames = new Set();
+  const physicalDirs = [];
+  for (const d of rawCompany.dirigeants || []) {
+    const normName = normalizePersonName(d?.name, country, d?.firstName, d?.lastName);
+    if (!isValidPhysicalPersonName(normName, rawCompany.name)) continue;
+    const key = normName.toLowerCase();
+    if (seenNames.has(key)) continue;
+    seenNames.add(key);
+    physicalDirs.push({ ...d, name: normName });
+  }
+
   const dirigeants = physicalDirs.length > 0
     ? physicalDirs.map((d, idx) => ({ ...d, isPrimary: idx === 0 }))
     : [{ name: 'X', role: 'Non renseigné au registre', isPrimary: true }];
@@ -507,12 +518,12 @@ async function enrichCompany(rawCompany) {
 
   const cfo = detectCFO(dirigeants, rawCompany.name);
 
-  // Anti-Homonym LinkedIn URLs: exact quoted company name + country/city context
+  // Accurate LinkedIn URLs: normalized FirstGivenName LastName + country context (avoids 0-result quote failures when newly incorporated company isn't yet on the founder's profile)
   const cleanComp = cleanCompanyName(rawCompany.name) || rawCompany.name;
   const countryLabel = country === 'CH' ? 'Suisse' : 'France';
-  const linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(`"${cleanComp}" ${countryLabel}`)}`;
+  const linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(`${cleanComp} ${countryLabel}`)}`;
   const linkedinDirigeantUrl = hasRealDirigeant
-    ? `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${primaryDirigeant}" "${cleanComp}"`)}`
+    ? `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${primaryDirigeant} ${countryLabel}`)}`
     : null;
 
   const hasDigitalPresence = Boolean(domainInfo.website || hasRealDirigeant);

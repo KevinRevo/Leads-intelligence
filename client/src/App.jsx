@@ -535,8 +535,8 @@ export default function App() {
         role: d.role || 'Dirigeant / Board (Personne Physique)',
         email: idx === 0 ? company.bestEmail : null,
         phone: idx === 0 ? company.phone : null,
-        linkedinUrl: idx === 0 ? company.linkedinDirigeantUrl : `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`,
-        northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(`${d.name} ${company.city || ''}`)}`,
+        linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${d.name} ${company.country === 'CH' ? 'Suisse' : 'France'}`)}`,
+        northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(d.name)}`,
       });
       edges.push({
         id: `edge-${company.id}-${pid}`,
