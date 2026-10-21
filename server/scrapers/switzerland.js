@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { enrichCompany } = require('../services/enricher');
+const { isValidPhysicalPersonName, isValidCommercialCompany, detectInternationalLinks } = require('../services/northdata');
 
 /**
  * Translate / normalize Swiss commercial register roles (DE / FR / IT -> clear FR title)
@@ -12,19 +13,13 @@ function normalizeSwissRole(rawRoleText = '') {
   if (/vizepräsident.*verwaltungsrat|vice-président.*administration/.test(t)) {
     return 'Vice-Président du Conseil d\'Administration (Board)';
   }
-  if (/mitglied.*verwaltungsrat|membre.*administration|administrateur|membro.*amministrazione/.test(t)) {
+  if (/mitglied.*verwaltungsrat|membre.*administration|administrateur|membro.*amministrazione|administration/.test(t)) {
     return 'Membre du Conseil d\'Administration (Board)';
   }
-  if (/präsident.*stiftungsrat|président.*fondation/.test(t)) {
-    return 'Président du Conseil de Fondation (Board)';
-  }
-  if (/mitglied.*stiftungsrat|membre.*fondation/.test(t)) {
-    return 'Membre du Conseil de Fondation (Board)';
-  }
-  if (/vorsitzende.*geschäftsführung|président.*gérance/.test(t)) {
+  if (/vorsitzende.*geschäftsführung|président.*gérance|associé-gérant président/.test(t)) {
     return 'Président de la Direction (Associé-Gérant)';
   }
-  if (/gesellschafter.*geschäftsführer|associé.*gérant|socio.*gerente/.test(t)) {
+  if (/gesellschafter.*geschäftsführer|associé[s-]*gérant|socio.*gerente/.test(t)) {
     return 'Associé-Gérant (Direction)';
   }
   if (/geschäftsführer|gérant|gerente/.test(t)) {
@@ -39,13 +34,72 @@ function normalizeSwissRole(rawRoleText = '') {
   if (/gesellschafter|associé|socio/.test(t)) {
     return 'Associé / Actionnaire';
   }
-  if (/inhaber|titulaire|titolare/.test(t)) {
-    return 'Fondateur & Titulaire';
-  }
   if (/prokura|procuration|fondé de pouvoir/.test(t)) {
     return 'Fondé de Pouvoir (Direction)';
   }
   return 'Mandataire / Membre du Board';
+}
+
+/**
+ * Parse a single Swiss person clause (e.g. "Valarezo Barba Darwin, de Espagne, à Lausanne, associé-gérant...")
+ * Returns { fullName, firstName, lastName, role } or null if corporate / invalid
+ */
+function parseSwissPersonEntry(entry = '', companyName = '', defaultRoleHint = '') {
+  if (!entry) return null;
+  // Reject if it's statutory communication boilerplate
+  if (/par écrit|courriel|lettre|feuille officielle|fosc|organe de publication|communications? aux associés|mitteilungen/i.test(entry)) {
+    return null;
+  }
+
+  const parts = entry.split(/,\s+/).map(s => s.trim()).filter(Boolean);
+  if (parts.length === 0) return null;
+
+  const seg0 = parts[0]
+    .replace(/^(?:l'associé[e-]*gérant[e]*|associé[e-]*gérant[e]*|gérant[e]*|président[e]*|administrateur|membre)\s+/i, '')
+    .replace(/\s+avec signature.*$/i, '')
+    .trim();
+  const seg1 = parts[1] || '';
+
+  let fullName = '';
+  let lastName = '';
+  let firstName = '';
+
+  if (parts.length >= 2 && (/^(de|du|des|d'|von|da|in|à|a)\b/i.test(seg1) || /Staatsangehörig|ressortissant|citoyen/i.test(seg1))) {
+    // Format: "Valarezo Barba Darwin, de Espagne, à Lausanne..." -> Last word is FirstName (or LastName FirstName)
+    const words = seg0.split(/\s+/).filter(Boolean);
+    if (words.length >= 2 && words.length <= 5) {
+      firstName = words[words.length - 1];
+      lastName = words.slice(0, -1).join(' ');
+      fullName = `${firstName} ${lastName}`.trim();
+    }
+  } else if (parts.length >= 2 && !/^(avec|mit|con|sans|ohne|pour|avec signature)\b/i.test(seg1)) {
+    // Format: "Eycan, Ozan, von Rheinfelden..." (seg0 is LastName, seg1 is FirstName)
+    const cleanSeg1 = seg1.replace(/\s+avec signature.*$/i, '').trim();
+    if (cleanSeg1.split(/\s+/).length <= 3 && seg0.split(/\s+/).length <= 3) {
+      lastName = seg0;
+      firstName = cleanSeg1;
+      fullName = `${firstName} ${lastName}`.trim();
+    }
+  } else {
+    const words = seg0.split(/\s+/).filter(Boolean);
+    if (words.length >= 2 && words.length <= 4) {
+      firstName = words[words.length - 1];
+      lastName = words.slice(0, -1).join(' ');
+      fullName = `${firstName} ${lastName}`.trim();
+    }
+  }
+
+  if (!isValidPhysicalPersonName(fullName, companyName)) {
+    return null;
+  }
+
+  const role = normalizeSwissRole(`${defaultRoleHint} ${entry}`);
+  return {
+    name: fullName,
+    firstName,
+    lastName,
+    role,
+  };
 }
 
 /**
@@ -54,7 +108,8 @@ function normalizeSwissRole(rawRoleText = '') {
  * - Exact street address, zip code, city, canton
  * - Nominal share capital (CHF)
  * - Full corporate purpose (Zweck / But / Scopo)
- * - All registered directors, board members, managing partners, and corporate holdings
+ * - Strictly PHYSICAL directors, board members, managing partners (`dirigeants`)
+ * - All corporate holdings & foreign links (`corporateLinks` & `internationalLinks`)
  */
 function parseShabXml(xml = '', fallbackName = '') {
   const getTag = (tag, src = xml) => {
@@ -80,23 +135,33 @@ function parseShabXml(xml = '', fallbackName = '') {
   const pubText = getTag('publicationText', xml);
   const nominalCap = getTag('nominal', capitalBlock);
 
-  // Legal form mapping
+  // Strict Legal Form Mapping (never default a Verein or Einzelunternehmen to Sàrl!)
   const lfCode = getTag('legalForm', companyBlock);
-  let legalForm = 'Sàrl / GmbH';
-  if (lfCode === '0106' || /\b(AG|SA|Aktiengesellschaft|Société anonyme)\b/i.test(rawName)) {
-    legalForm = 'SA / AG';
-  } else if (lfCode === '0107' || /\b(GmbH|Sàrl|Sagl|LLC)\b/i.test(rawName)) {
-    legalForm = 'Sàrl / GmbH';
+  let legalForm = 'Autre';
+
+  if (
+    lfCode === '0101' ||
+    /entreprise individuelle|Einzelunternehmen|Einzelfirma|impresa individuale|ditta individuale|raison individuelle|Inhaber(?:in)?\s*:|Titulaire\s*:/i.test(pubText)
+  ) {
+    legalForm = 'Entreprise Individuelle';
+  } else if (
+    lfCode === '0108' ||
+    /\b(Verein|Association|Associazione)\b/i.test(rawName) ||
+    /Der Verein verfolgt|Nouvelle association|Statuts de l'association|ohne kommerziellen Charakter/i.test(pubText)
+  ) {
+    legalForm = 'Association / Verein';
   } else if (lfCode === '0110' || /\b(Stiftung|Fondation|Fondazione)\b/i.test(rawName)) {
     legalForm = 'Fondation / Stiftung';
-  } else if (lfCode === '0101' || /entreprise individuelle|Einzelunternehmen|impresa individuale/i.test(pubText)) {
-    legalForm = 'Entreprise Individuelle';
-  } else if (lfCode === '0103' || /\b(SNC|Kollektivgesellschaft)\b/i.test(rawName)) {
-    legalForm = 'SNC';
+  } else if (lfCode === '0109' || /\b(Genossenschaft|Société coopérative|Società cooperativa)\b/i.test(rawName + ' ' + pubText)) {
+    legalForm = 'Coopérative';
+  } else if (lfCode === '0106' || /\b(AG|SA|S\.A\.|A\.G\.|Aktiengesellschaft|Société anonyme|Società anonima|Ltd)\b/i.test(rawName)) {
+    legalForm = 'SA / AG';
+  } else if (lfCode === '0107' || /\b(GmbH|Sàrl|Sarl|S\.à\.r\.l\.|Sagl|LLC)\b/i.test(rawName)) {
+    legalForm = 'Sàrl / GmbH';
   }
 
   // Capital extraction
-  let shareCapital = 20000;
+  let shareCapital = legalForm === 'SA / AG' ? 100000 : 20000;
   if (nominalCap && !isNaN(parseFloat(nominalCap))) {
     shareCapital = Math.round(parseFloat(nominalCap));
   } else {
@@ -104,8 +169,6 @@ function parseShabXml(xml = '', fallbackName = '') {
     if (capMatch) {
       const num = parseInt(capMatch[1].replace(/['’\s]/g, '').split('.')[0], 10);
       if (!isNaN(num) && num > 0) shareCapital = num;
-    } else if (legalForm === 'SA / AG') {
-      shareCapital = 100000;
     }
   }
 
@@ -119,11 +182,10 @@ function parseShabXml(xml = '', fallbackName = '') {
   // Activity extraction
   let activity = purpose;
   if (!activity && pubText) {
-    const purpMatch = pubText.match(/(?:Zweck|But|Scopo)[:\s]+([\s\S]*?)(?:Stammkapital|Aktienkapital|Capital|Eingetragene Personen|Personne\(s\) inscrite\(s\)|Persone iscritte|$)/i);
+    const purpMatch = pubText.match(/(?:Zweck|But|Scopo)[:\s]+([\s\S]*?)(?:Stammkapital|Aktienkapital|Capital|Eingetragene Personen|Personne\(s\) inscrite\(s\)|Persone iscritte|Associé|Administration|$)/i);
     if (purpMatch) activity = purpMatch[1].trim();
   }
 
-  // Extract Dirigeants, Board Members, CFO, Directeurs AND Corporate Partners/Holdings
   const dirigeants = [];
   const corporateLinks = [];
 
@@ -131,7 +193,7 @@ function parseShabXml(xml = '', fallbackName = '') {
   const coText = addressLine1 || (pubText.match(/\bc\/o\s+([^,]+),/i)?.[1] || '');
   if (coText && /^c\/o\s+/i.test(coText)) {
     const coTarget = coText.replace(/^c\/o\s+/i, '').trim();
-    if (/\b(AG|SA|GmbH|Sàrl|Sagl|Fiduciaire|Treuhand|Holding|Management|Partners|Services|Group)\b/i.test(coTarget)) {
+    if (/\b(AG|SA|GmbH|Sàrl|Sarl|Sagl|Fiduciaire|Treuhand|Holding|Management|Partners|Services|Group|Ltd|LLC|Inc)\b/i.test(coTarget)) {
       corporateLinks.push({
         name: coTarget,
         roleHeld: 'Siège / Fiduciaire / Groupe (c/o)',
@@ -142,18 +204,18 @@ function parseShabXml(xml = '', fallbackName = '') {
   }
 
   // Check branch parent company ("Nouvelle succursale de X (CHE-...)" or "Zweigniederlassung von X")
-  const branchMatch = pubText.match(/(?:succursale de|Zweigniederlassung der|succursale di)\s+([^,(]+)(?:\s*\((CHE-[\d.]+)\))?/i);
+  const branchMatch = pubText.match(/(?:succursale de|Zweigniederlassung der|succursale di)\s+([^,(]+)(?:\s*\((CHE-[\d.]+|[A-Z0-9-]+)\))?/i);
   if (branchMatch) {
     corporateLinks.push({
       name: branchMatch[1].trim(),
       siren: branchMatch[2] || '',
       roleHeld: 'Société Mère (Siège Principal)',
       legalForm: legalForm,
-      city: 'Suisse'
+      city: 'Suisse / International'
     });
   }
 
-  // Parse "Eingetragene Personen:" / "Personne(s) inscrite(s):" / "Personne inscrite:" / "Persone iscritte:"
+  // 1. Parse standard "Eingetragene Personen:" / "Personne(s) inscrite(s):" / "Persone iscritte:"
   const personsSectionMatch = pubText.match(/(?:Eingetragene Personen|Personne\(s\) inscrite\(s\)|Personnes? inscrites?|Persone iscritte)[:\s]+([\s\S]+)$/i);
   if (personsSectionMatch) {
     const section = personsSectionMatch[1].replace(/Selon déclaration[\s\S]*$/i, '').replace(/\.$/, '').trim();
@@ -164,109 +226,104 @@ function parseShabXml(xml = '', fallbackName = '') {
       if (parts.length < 2) continue;
 
       const seg0 = parts[0];
-      const seg1 = parts[1];
 
-      // Check if entry is a corporate entity (Holding, Corporate Partner, or Audit firm)
+      // Check if entry is a corporate entity (Holding, Corporate Partner, or Foreign Parent)
       const isCorporate =
-        /\b(AG|SA|GmbH|Sàrl|Sagl|LLC|Ltd|Inc|Holding|Stiftung|Fondation|Treuhand|Fiduciaire|Partner|Partners|Group|Services)\b/i.test(seg0) ||
+        /\b(AG|SA|GmbH|Sàrl|Sarl|Sagl|LLC|Ltd|Limited|Inc|PLC|BV|Srl|SpA|SAS|SARL|Holding|Holdings|Stiftung|Fondation|Treuhand|Fiduciaire|Partner|Partners|Group|Groupe|Services|Capital|Invest|Management|Ventures)\b/i.test(seg0) ||
         /CHE-\d{3}/.test(entry);
 
       if (isCorporate) {
         const uidMatch = entry.match(/CHE-\d{3}\.\d{3}\.\d{3}/);
         const corpName = seg0.replace(/\s*\(CHE-[^)]+\)/, '').trim();
         const isAudit = /revisionsstelle|organe de révision|ufficio di revisione/i.test(entry);
+        const cityMatch = parts.find(p => /^(in|à|a)\s+/i.test(p))?.replace(/^(in|à|a)\s+/i, '') || town || canton;
+        const foreignCountryMatch = cityMatch.match(/\(([A-Z]{2})\)/);
         corporateLinks.push({
           name: corpName,
           siren: uidMatch ? uidMatch[0] : '',
-          roleHeld: isAudit ? 'Organe de Révision' : 'Holding / Associée Morale',
-          legalForm: /AG|SA/i.test(corpName) ? 'SA / AG' : 'Sàrl / GmbH',
-          city: parts.find(p => /^(in|à|a)\s+/i.test(p))?.replace(/^(in|à|a)\s+/i, '') || town || canton
+          countryCode: foreignCountryMatch ? foreignCountryMatch[1] : 'CH',
+          roleHeld: isAudit ? 'Organe de Révision' : 'Actionnaire / Associée Morale (Holding)',
+          legalForm: /AG|SA/i.test(corpName) ? 'SA / AG' : 'Holding / Société Morale',
+          city: cityMatch,
         });
         continue;
       }
 
-      // Case A: "Robalinho Lopes Joel, du Portugal, à Cugy FR, associé..." (seg1 starts with de/du/d'/von/da)
-      let fullName = '';
-      let lastName = '';
-      let firstName = '';
-
-      if (/^(de|du|des|d'|von|da|in|à|a)\b/i.test(seg1) || /Staatsangehörig|ressortissant/i.test(seg1)) {
-        const words = seg0.split(/\s+/).filter(Boolean);
-        if (words.length >= 2) {
-          firstName = words[words.length - 1];
-          lastName = words.slice(0, -1).join(' ');
-          fullName = `${firstName} ${lastName}`.trim();
-        }
-      } else {
-        // Case B: "Eycan, Ozan, von Rheinfelden..." (seg0 is LastName, seg1 is FirstName)
-        lastName = seg0;
-        firstName = seg1;
-        if (firstName.length >= 2 && lastName.length >= 2 && !/\d/.test(firstName + lastName)) {
-          fullName = `${firstName} ${lastName}`.trim();
-        }
-      }
-
-      if (!fullName || fullName.length < 4 || /\d/.test(fullName)) continue;
-      const role = normalizeSwissRole(entry);
-
-      if (!dirigeants.some(d => d.name.toLowerCase() === fullName.toLowerCase())) {
+      const parsedPerson = parseSwissPersonEntry(entry, rawName);
+      if (parsedPerson && !dirigeants.some(d => d.name.toLowerCase() === parsedPerson.name.toLowerCase())) {
         dirigeants.push({
-          name: fullName,
-          lastName,
-          firstName,
-          role,
+          ...parsedPerson,
           isPrimary: dirigeants.length === 0,
         });
       }
     }
   }
 
-  // Fallback for Geneva / Vaud / Fribourg French notices: "Associé(e)(s): ... Gérant(e)(s): ... Administration: ..."
+  // 2. Fallback for Vaud / Genève / Neuchâtel / Valais / Fribourg French notices:
+  // e.g. "Associé-gérant avec signature individuelle: Valarezo Barba Darwin, de Espagne, à Lausanne, avec 20 parts..."
+  // e.g. "Administration: Dupont Jean, de France, à Genève, président, avec signature individuelle."
+  // IMPORTANT: Exclude "Communications aux associés:" and "Obligation de fournir...:"!
   if (dirigeants.length === 0 && pubText) {
-    const assocMatches = [...pubText.matchAll(/(?:Associé(?:e|s|es)?|Administration|Gérant(?:e|s|es)?|Titulaire|Inhaber(?:in)?|Titolare)[:\s]+([^.]+)\./gi)];
-    for (const m of assocMatches) {
-      const clause = m[0];
-      const body = m[1].replace(/^l'associé(?:e)?\s+/i, '').trim();
-      // Split by " et " if multiple people listed
-      const subEntries = body.split(/\s+et\s+(?=[A-ZÀ-Ÿ])/);
+    // Strip statutory communication clauses first so they can NEVER be matched!
+    const cleanedPubText = pubText
+      .replace(/Communications?\s+aux\s+associ[eé]s\s*:[^.]+\./gi, '')
+      .replace(/Communications?\s+aux\s+actionnaires\s*:[^.]+\./gi, '')
+      .replace(/Mitteilungen\s+an\s+die\s+Gesellschafter\s*:[^.]+\./gi, '')
+      .replace(/Organe\s+de\s+publication\s*:[^.]+\./gi, '')
+      .replace(/Obligation\s+de\s+fournir[^.]+\./gi, '');
+
+    const roleClauseRegex = /(?:Associé(?:e|s|es)?(?:-gérant(?:e|s|es)?)?(?:\s+avec\s+signature[^:]*)?|Administration|Conseil\s+d'administration|Gérant(?:e|s|es)?(?:\s+avec\s+signature[^:]*)?|Directeur(?:s)?|Direction)\s*:\s*([^.]+)\./gi;
+    const matches = [...cleanedPubText.matchAll(roleClauseRegex)];
+
+    for (const m of matches) {
+      const roleHeader = m[0].split(':')[0].trim();
+      const body = m[1].trim();
+      const subEntries = body.split(/;\s+|\s+et\s+(?=[A-ZÀ-Ÿ])/);
+
       for (const sub of subEntries) {
-        const cleanedSub = sub.replace(/^l'associé(?:e)?\s+/i, '').trim();
-        const namePart = cleanedSub.split(',')[0].replace(/\s+avec signature.*$/i, '').trim();
-        const words = namePart.split(/\s+/).filter(Boolean);
-        if (words.length >= 2 && words.length <= 5 && !/\d/.test(namePart)) {
-          const firstName = words.slice(1).join(' ');
-          const lastName = words[0];
-          const fullName = `${firstName} ${lastName}`.trim();
-          const role = normalizeSwissRole(clause);
-          if (!dirigeants.some(d => d.name.toLowerCase() === fullName.toLowerCase())) {
-            dirigeants.push({
-              name: fullName,
-              lastName,
-              firstName,
-              role,
-              isPrimary: dirigeants.length === 0,
+        // Check if corporate partner in Vaud/Geneva format: e.g. "Associée: Holding XYZ SA, à Lausanne..."
+        if (/\b(AG|SA|GmbH|Sàrl|Sarl|Sagl|LLC|Ltd|SAS|SARL|Holding|Group|Capital|Invest|CHE-\d{3})\b/i.test(sub)) {
+          const corpName = sub.split(',')[0].replace(/\s*\(CHE-[^)]+\)/, '').trim();
+          const uidMatch = sub.match(/CHE-\d{3}\.\d{3}\.\d{3}/);
+          if (corpName && corpName.length > 2) {
+            corporateLinks.push({
+              name: corpName,
+              siren: uidMatch ? uidMatch[0] : '',
+              roleHeld: 'Associée Morale / Holding',
+              legalForm: /AG|SA/i.test(corpName) ? 'SA / AG' : 'Holding / Sàrl',
+              city: town || canton,
             });
           }
+          continue;
+        }
+
+        const parsedPerson = parseSwissPersonEntry(sub, rawName, roleHeader);
+        if (parsedPerson && !dirigeants.some(d => d.name.toLowerCase() === parsedPerson.name.toLowerCase())) {
+          dirigeants.push({
+            ...parsedPerson,
+            isPrimary: dirigeants.length === 0,
+          });
         }
       }
     }
   }
 
-  // If c/o is a physical person and no other director was parsed (e.g. branch or foundation)
+  // 3. If c/o is a valid physical person and no other director was parsed
   if (dirigeants.length === 0 && coText && /^c\/o\s+/i.test(coText)) {
     const coPerson = coText.replace(/^c\/o\s+/i, '').trim();
-    if (
-      coPerson.split(/\s+/).length >= 2 &&
-      coPerson.split(/\s+/).length <= 4 &&
-      !/\b(AG|SA|GmbH|Sàrl|Sagl|Fiduciaire|Treuhand|Holding|Management)\b/i.test(coPerson)
-    ) {
+    if (isValidPhysicalPersonName(coPerson, rawName)) {
       dirigeants.push({
         name: coPerson,
-        role: 'Représentant & Domiciliataire (c/o)',
+        role: 'Fondateur & Gérant (c/o)',
         isPrimary: true,
       });
     }
   }
+
+  const internationalLinks = detectInternationalLinks(
+    { country: 'CH', corporateLinks, activity, address: fullAddress },
+    pubText
+  );
 
   return {
     uid,
@@ -280,19 +337,19 @@ function parseShabXml(xml = '', fallbackName = '') {
     canton,
     dirigeants,
     corporateLinks,
+    internationalLinks,
     pubText,
   };
 }
 
 /**
- * Find other Swiss companies in SHAB where this director/board member holds a mandate
+ * Find other Swiss companies in SHAB where this physical director/board member holds a mandate
  */
 async function findRelatedCompaniesCH(dirigeant, currentUid = '', currentName = '') {
   if (!dirigeant) return [];
   const nameStr = typeof dirigeant === 'string' ? dirigeant : dirigeant.name;
-  if (!nameStr || nameStr === 'X' || nameStr.length < 4) return [];
+  if (!isValidPhysicalPersonName(nameStr, currentName)) return [];
 
-  // Build SHAB search query: "LastName, FirstName" or full name
   let query = nameStr;
   if (typeof dirigeant === 'object' && dirigeant.lastName && dirigeant.firstName) {
     query = `${dirigeant.lastName}, ${dirigeant.firstName.split(' ')[0]}`;
@@ -332,12 +389,12 @@ async function findRelatedCompaniesCH(dirigeant, currentUid = '', currentName = 
         .trim();
 
       if (!compName || seenNames.has(compName.toLowerCase())) continue;
+      // Only include commercial entities (SA/AG/Sàrl/GmbH)
+      if (!/\b(SA|AG|Sàrl|Sarl|GmbH|Sagl|Ltd|LLC)\b/i.test(compName)) continue;
       seenNames.add(compName.toLowerCase());
 
       const muni = meta.municipalities?.[0]?.town || meta.cantons?.[0] || 'Suisse';
-      let lf = 'Sàrl / GmbH';
-      if (/\b(AG|SA)\b/.test(compName)) lf = 'SA / AG';
-      else if (/\b(Stiftung|Fondation)\b/i.test(compName)) lf = 'Fondation';
+      const lf = /\b(AG|SA)\b/.test(compName) ? 'SA / AG' : 'Sàrl / GmbH';
 
       related.push({
         id: `CH-${(itemUid || compName).replace(/[^a-zA-Z0-9]/g, '')}`,
@@ -347,6 +404,7 @@ async function findRelatedCompaniesCH(dirigeant, currentUid = '', currentName = 
         shareCapital: lf === 'SA / AG' ? 100000 : 20000,
         activity: `Entité liée au Registre du Commerce (${meta.cantons?.[0] || 'CH'})`,
         city: muni,
+        countryCode: 'CH',
         roleHeld: 'Administrateur / Associé (Mandat FOSC)',
       });
 
@@ -354,17 +412,15 @@ async function findRelatedCompaniesCH(dirigeant, currentUid = '', currentName = 
     }
 
     return related;
-  } catch (err) {
+  } catch {
     return [];
   }
 }
 
 /**
- * Scraper for newly registered companies in Switzerland.
- * Source: SHAB / FOSC (Feuille Officielle Suisse du Commerce) API + XML
- * Rubric: HR01 (Nouvelles inscriptions au registre du commerce)
+ * Scraper for newly registered commercial companies in Switzerland (SA / AG & Sàrl / GmbH only).
  */
-async function scrapeSwitzerlandCreations(limit = 15) {
+async function scrapeSwitzerlandCreations(limit = 20) {
   try {
     console.log(`[Scraper CH] Interrogation de la FOSC / SHAB (Suisse) pour nouvelles inscriptions HR01...`);
 
@@ -373,7 +429,7 @@ async function scrapeSwitzerlandCreations(limit = 15) {
       params: {
         publicationStates: 'PUBLISHED',
         subRubrics: 'HR01',
-        'pageRequest.size': Math.min(limit, 25),
+        'pageRequest.size': Math.min(limit * 2, 40),
         'pageRequest.page': 0,
       },
       headers: {
@@ -393,12 +449,11 @@ async function scrapeSwitzerlandCreations(limit = 15) {
         const titleFr = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
         const pubDate = meta.publicationDate ? meta.publicationDate.split('T')[0] : new Date().toISOString().split('T')[0];
 
-        let fallbackName = titleFr
+        const fallbackName = titleFr
           .replace(/^(Nouvelles entrées|Neueintragung|Nuove registrazioni|New entries)\s+/i, '')
           .replace(/,\s*[^,]+$/, '')
           .trim();
 
-        // Fetch full XML from SHAB API
         let parsed = null;
         try {
           const xmlRes = await axios.get(`https://www.shab.ch/api/v1/publications/${meta.id}/xml`, {
@@ -406,39 +461,30 @@ async function scrapeSwitzerlandCreations(limit = 15) {
             timeout: 6000,
           });
           parsed = parseShabXml(xmlRes.data, fallbackName);
-        } catch (xmlErr) {
-          // fallback if XML fails
+        } catch {
+          continue;
         }
 
-        const companyName = parsed?.name || fallbackName || `Société Suisse`;
-        const uid = parsed?.uid || meta.uid?.[0] || 'En cours';
-        const legalForm = parsed?.legalForm || (/\b(AG|SA)\b/.test(companyName) ? 'SA / AG' : 'Sàrl / GmbH');
-        const shareCapital = parsed?.shareCapital || 20000;
-        const activity = parsed?.activity || 'Services commerciaux et financiers en Suisse';
-        const city = parsed?.city || meta.municipalities?.[0]?.town || 'Zürich';
-        const postalCode = parsed?.postalCode || String(meta.municipalities?.[0]?.swissZipCode || '8000');
-        const canton = parsed?.canton || meta.cantons?.[0] || 'ZH';
-        const address = parsed?.address || `${postalCode} ${city} (${canton})`;
-        const dirigeants = parsed?.dirigeants?.length > 0
-          ? parsed.dirigeants
-          : [{ name: 'X', role: 'Non renseigné au registre', isPrimary: true }];
+        if (!parsed || !parsed.uid) continue;
 
         const raw = {
-          id: `CH-${uid !== 'En cours' ? uid.replace(/[^\w]/g, '') : meta.id}`,
+          id: `CH-${parsed.uid.replace(/[^\w]/g, '')}`,
           country: 'CH',
           countryName: 'Suisse',
-          name: companyName,
-          registrationNumber: uid,
+          name: parsed.name || fallbackName,
+          registrationNumber: parsed.uid,
           incorporationDate: pubDate,
-          legalForm,
-          shareCapital,
-          activity,
-          address,
-          city,
-          postalCode,
-          canton,
-          dirigeants,
-          corporateLinks: parsed?.corporateLinks || [],
+          legalForm: parsed.legalForm,
+          shareCapital: parsed.shareCapital || 20000,
+          activity: parsed.activity || 'Services commerciaux et financiers en Suisse',
+          address: parsed.address,
+          city: parsed.city || 'Zürich',
+          postalCode: parsed.postalCode || '8000',
+          canton: parsed.canton || 'ZH',
+          dirigeants: parsed.dirigeants,
+          corporateLinks: parsed.corporateLinks || [],
+          internationalLinks: parsed.internationalLinks || [],
+          pubText: parsed.pubText,
           source: 'FOSC / SHAB (Registre du Commerce Suisse)',
           crmStatus: 'new',
           crmNotes: '',
@@ -447,8 +493,19 @@ async function scrapeSwitzerlandCreations(limit = 15) {
           createdAt: new Date().toISOString(),
         };
 
+        // Triple-check: strictly commercial SA/AG or Sàrl/GmbH, zero Entreprise Individuelle or Verein, and physical director present
+        if (!isValidCommercialCompany(raw)) {
+          continue;
+        }
+        delete raw.pubText;
+
+        if (!raw.dirigeants || raw.dirigeants.length === 0) {
+          continue;
+        }
+
         const enriched = await enrichCompany(raw);
         companies.push(enriched);
+        if (companies.length >= limit) break;
       } catch (itemErr) {
         console.error('[Scraper CH] Erreur sur annonce suisse:', itemErr.message);
       }
@@ -464,6 +521,7 @@ async function scrapeSwitzerlandCreations(limit = 15) {
 module.exports = {
   scrapeSwitzerlandCreations,
   parseShabXml,
+  parseSwissPersonEntry,
   findRelatedCompaniesCH,
   normalizeSwissRole,
 };

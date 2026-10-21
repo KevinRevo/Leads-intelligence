@@ -121,27 +121,36 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
 
           {/* Quick Badges Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             
-            <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 dark:text-slate-400 block mb-1">Capital Déposé</span>
-              <span className="text-lg font-bold text-slate-900 dark:text-white">
-                {company.shareCapital ? company.shareCapital.toLocaleString() : 'N/A'} {isCH ? 'CHF' : '€'}
+            <div className="bg-slate-50 dark:bg-[#182030] p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 block mb-0.5">Capital Social</span>
+              <span className="text-base font-bold text-slate-900 dark:text-white">
+                {company.shareCapital ? company.shareCapital.toLocaleString('fr-FR') : 'N/A'} {isCH ? 'CHF' : '€'}
               </span>
             </div>
 
-            <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 dark:text-slate-400 block mb-1">Source Officielle</span>
-              <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+            <div className="bg-slate-50 dark:bg-[#182030] p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 block mb-0.5">Chiffre d'Affaires (≤ 30M€)</span>
+              <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                {company.revenue
+                  ? `${company.revenue.toLocaleString('fr-FR')} € ${company.revenueYear ? `(${company.revenueYear})` : ''}`
+                  : 'PME ≤ 30M€ (Non publié)'}
+              </span>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-[#182030] p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 block mb-0.5">Source Officielle</span>
+              <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                 {company.source || 'Registre Légal'}
               </span>
             </div>
 
             {/* Score de Sûreté transparent */}
-            <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 dark:text-slate-400 block mb-1">Score de Sûreté Lead</span>
-              <div className="flex items-center gap-2">
-                <span className={`text-sm font-bold flex items-center gap-1.5 ${
+            <div className="bg-slate-50 dark:bg-[#182030] p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 block mb-0.5">Score de Sûreté Lead</span>
+              <div className="flex items-center gap-1.5">
+                <span className={`text-xs font-bold flex items-center gap-1 ${
                   safety.score >= 70 ? 'text-emerald-600 dark:text-emerald-400' :
                   safety.score >= 45 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500'
                 }`}>
@@ -174,8 +183,8 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                   </span>
                 </div>
                 <div className="text-xs font-semibold flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
-                  <span className="text-slate-500 dark:text-slate-400">Secteur analysé :</span>
-                  <span className="font-bold">{company.compliance.industry || company.activityCategory || 'Services B2B'}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Secteur d'activité :</span>
+                  <span className="font-bold">{company.activityCategory || company.compliance.industry || 'Services B2B'}</span>
                 </div>
               </div>
 
@@ -263,21 +272,30 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             </div>
           )}
 
-          {/* Official Registries & Legal Portals (Unified Visuals for FR & CH) */}
+          {/* Official Registries, North Data & Legal Portals (Unified Visuals for FR & CH) */}
           <div className="bg-gradient-to-r from-slate-100 to-blue-50/50 dark:from-slate-900/80 dark:to-blue-950/20 p-4 rounded-xl border border-slate-200 dark:border-blue-900/30 flex items-center justify-between flex-wrap gap-3">
             <div>
               <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
                 <FileText className="w-4 h-4 text-blue-500" />
-                <span>{isCH ? 'Registres Légaux & Financiers (Zefix & FOSC)' : 'Registres Légaux & Financiers (Pappers & INPI)'}</span>
+                <span>{isCH ? 'Registres Légaux, North Data & FOSC' : 'Registres Légaux, North Data & Pappers'}</span>
               </span>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                {isCH 
-                  ? 'Vérification légale, statuts déposés, conseil d\'administration et publications FOSC (OFJ)' 
-                  : 'Vérification légale, bilans, statuts déposés et bénéficiaires effectifs (RCS / RNE)'}
+                Vérification de la chaîne de détention, bilans, personnes physiques et entités étrangères liées
               </p>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap">
+              <a
+                href={company.northDataUrl || `https://www.northdata.fr/?query=${encodeURIComponent(`${company.name} ${company.registrationNumber || ''}`)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                title="Ouvrir le graphe de détention, le board et les finances sur North Data"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span>🌐 North Data</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
               {isCH ? (
                 <>
                   <a
@@ -350,24 +368,25 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             </p>
           </div>
 
-          {/* Dirigeants, Board & CFO Section */}
+          {/* Dirigeants (Personnes Physiques uniquement), Holdings & Liens Internationaux */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-            {/* Dirigeants, Membres du Board & Directeurs */}
+            {/* Dirigeants, Membres du Board & Directeurs (Personnes Physiques) */}
             <div className="bg-slate-50 dark:bg-[#182030] p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                  Dirigeants, Board & Directeurs
+                  👤 Dirigeants & Board (Personnes Physiques)
                 </span>
                 {company.dirigeants?.filter(d => d.name && d.name !== 'X').length > 0 && (
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold">
-                    {company.dirigeants.filter(d => d.name && d.name !== 'X').length} certifié(s)
+                    {company.dirigeants.filter(d => d.name && d.name !== 'X').length} personne(s) physique(s)
                   </span>
                 )}
               </div>
               <div className="space-y-2">
                 {company.dirigeants?.map((d, idx) => {
                   const isX = !d.name || d.name === 'X' || d.name.includes('Direction') || d.name.includes('Conseil');
+                  const cleanBrand = (company.name || '').replace(/\b(SAS|SARL|SA|SASU|EURL|GmbH|Sàrl|AG)\b/gi, '').trim() || company.name;
                   return (
                     <div key={idx} className="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
                       <div className="flex items-center gap-2.5">
@@ -383,7 +402,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                             <button
                               onClick={() => handleCopy(d.name, `dir-${idx}`)}
                               className="text-sm font-semibold text-slate-900 dark:text-white hover:text-blue-500 text-left"
-                              title="Copier le nom"
+                              title="Copier le nom de la personne physique"
                             >
                               {d.name} {copiedField === `dir-${idx}` && <span className="text-emerald-500 text-xs">✓</span>}
                             </button>
@@ -397,23 +416,23 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                       {!isX && (
                         <div className="flex items-center gap-1.5">
                           <a
-                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`}
+                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${d.name}" "${cleanBrand}"`)}`}
                             target="_blank"
                             rel="noreferrer"
                             className="px-2 py-1 bg-[#0a66c2]/10 hover:bg-[#0a66c2]/20 text-[#0a66c2] rounded-lg transition flex items-center gap-1 text-xs font-semibold"
-                            title={`Rechercher ${d.name} sur LinkedIn`}
+                            title={`Recherche anti-homonyme : "${d.name}" chez "${cleanBrand}" sur LinkedIn`}
                           >
                             <LinkedinIcon className="w-3.5 h-3.5" />
                             <span>LinkedIn</span>
                           </a>
                           <a
-                            href={`https://www.google.com/search?q=${encodeURIComponent('site:linkedin.com/in ' + d.name + ' ' + (company.city || ''))}`}
+                            href={`https://www.northdata.fr/?query=${encodeURIComponent(`${d.name} ${company.city || ''}`)}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-lg transition"
-                            title={`Recherche Google directe du profil LinkedIn de ${d.name}`}
+                            className="px-2 py-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-lg transition flex items-center gap-1 text-[11px] font-bold"
+                            title={`Voir tous les mandats de ${d.name} sur North Data`}
                           >
-                            <ExternalLink className="w-3.5 h-3.5" />
+                            <span>NorthData</span>
                           </a>
                         </div>
                       )}
@@ -421,11 +440,38 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                   );
                 })}
 
+                {/* International / Foreign Entity Links if present */}
+                {company.internationalLinks?.length > 0 && (
+                  <div className="pt-1.5 space-y-1.5">
+                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider block">
+                      🌍 Rattachements Internationaux & Entités Étrangères :
+                    </span>
+                    {company.internationalLinks.map((intl, iIdx) => (
+                      <div key={iIdx} className="flex items-center justify-between p-2 rounded-lg bg-amber-50/70 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800/60 text-xs">
+                        <div>
+                          <span className="font-bold text-slate-900 dark:text-amber-200 block">
+                            {intl.flag} {intl.entityName} ({intl.countryName})
+                          </span>
+                          <span className="text-[11px] text-amber-800 dark:text-amber-300">
+                            {intl.relation}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => onOpenNetwork(company)}
+                          className="text-[11px] text-amber-700 dark:text-amber-300 font-bold hover:underline flex items-center gap-1 shrink-0"
+                        >
+                          <Share2 className="w-3 h-3" /> Carto
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {/* Corporate Holdings / Personnes Morales if present */}
                 {company.corporateLinks?.length > 0 && (
                   <div className="pt-1 space-y-1.5">
                     <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider block">
-                      Holdings & Personnes Morales Liées :
+                      🏢 Détention / Holdings & Personnes Morales (Hors Dirigeants Physiques) :
                     </span>
                     {company.corporateLinks.map((corp, cIdx) => (
                       <div key={cIdx} className="flex items-center justify-between p-2 rounded-lg bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 text-xs">

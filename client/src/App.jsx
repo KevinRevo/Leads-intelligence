@@ -9,23 +9,15 @@ import {
   Mail, 
   Phone, 
   Globe, 
-  Filter, 
-  CheckCircle2, 
-  Clock, 
   TrendingUp, 
   UserCheck, 
   Sparkles, 
-  AlertCircle, 
   Copy, 
   Check, 
-  ChevronRight, 
   ShieldCheck, 
-  ShieldAlert,
   Sun, 
   Moon,
-  Info,
   CheckCircle,
-  XCircle,
   HelpCircle
 } from 'lucide-react';
 import LinkedinIcon from './components/LinkedinIcon';
@@ -42,7 +34,6 @@ function getCloudAuthHeader() {
   return `token ${token}`;
 }
 
-// Standalone CRM & Cloud Sync helpers
 function getCrmOverrides() {
   try {
     return JSON.parse(localStorage.getItem('revolut_crm_overrides') || '{}');
@@ -110,7 +101,6 @@ async function pushCloudOverrides(id, updates) {
   const localAfterSave = saveCrmOverride(id, stampedUpdates);
 
   try {
-    // 1. Fetch latest cloud state first to avoid overwriting a colleague's concurrent edit
     const getRes = await fetch(`${CLOUD_SYNC_URL}?t=${Date.now()}`, {
       headers: {
         'Authorization': getCloudAuthHeader(),
@@ -133,7 +123,6 @@ async function pushCloudOverrides(id, updates) {
     finalOverrides[id] = { ...(finalOverrides[id] || {}), ...stampedUpdates };
     localStorage.setItem('revolut_crm_overrides', JSON.stringify(finalOverrides));
 
-    // 2. Patch cloud store
     await fetch(CLOUD_SYNC_URL, {
       method: 'PATCH',
       headers: {
@@ -165,6 +154,7 @@ function computeLocalStats(comps) {
   const highSafetyCount = comps.filter(c => (c.safety?.score || c.confidenceScore || 0) >= 60).length;
   const verifiedWebCount = comps.filter(c => Boolean(c.website)).length;
   const highFxCount = comps.filter(c => c.fxPotential?.level === 'high').length;
+  const crossBorderCount = comps.filter(c => c.isCrossBorder || (c.internationalLinks && c.internationalLinks.length > 0) || (c.corporateLinks && c.corporateLinks.length > 0)).length;
   return {
     total,
     france,
@@ -177,7 +167,8 @@ function computeLocalStats(comps) {
     highConfidence: highSafetyCount,
     highSafetyCount,
     verifiedWebCount,
-    highFxCount
+    highFxCount,
+    crossBorderCount
   };
 }
 
@@ -191,13 +182,14 @@ function formatDateFr(isoDate = '') {
 function applyLocalFilters(rawList, {
   country = 'ALL',
   crmStatus = 'ALL',
+  sector = 'ALL',
   search = '',
   verifiedOnly = false,
   dateFilter = 'all',
   exactDate = '',
-  compliance = 'ALL',
   fxFilter = 'ALL',
   minCapital = 0,
+  revenueFilter = 'ALL',
   legalFormFilter = 'ALL',
   geoFilter = 'ALL',
   sortBy = 'date_desc'
@@ -205,23 +197,39 @@ function applyLocalFilters(rawList, {
   const overrides = getCrmOverrides();
   const merged = rawList.map(c => overrides[c.id] ? { ...c, ...overrides[c.id] } : c);
 
-  // Reference date = latest incorporation date in dataset or today
-  const refDate = new Date('2026-10-18T23:59:59Z');
+  const refDate = new Date('2026-10-21T23:59:59Z');
 
   const filtered = merged.filter(c => {
+    // Safety net: never show Entrepreneur Individuel or Association
+    if (/individuel|verein|association/i.test(c.legalForm || '')) return false;
+    // Never show companies with turnover > 30M€
+    if (c.revenue && c.revenue > 30000000) return false;
+
     if (country !== 'ALL' && c.country !== country) return false;
     if (crmStatus !== 'ALL' && c.crmStatus !== crmStatus) return false;
-    if (compliance !== 'ALL' && c.compliance?.status !== compliance) return false;
-    if (verifiedOnly && !c.website && !c.linkedinDirigeantUrl) return false;
 
-    // Point 1: FX Potential Filter
+    // Sector of Activity Filter (replaces old compliance filter)
+    if (sector !== 'ALL' && (c.activityCategory || 'Services B2B') !== sector) return false;
+
+    if (verifiedOnly && !c.website) return false;
+
+    // FX Potential Filter
     if (fxFilter === 'high' && c.fxPotential?.level !== 'high') return false;
     if (fxFilter === 'medium_high' && c.fxPotential?.level !== 'high' && c.fxPotential?.level !== 'medium') return false;
 
-    // Point 4: Minimum Share Capital Filter
+    // Minimum Share Capital Filter
     if (minCapital > 0 && (Number(c.shareCapital) || 0) < minCapital) return false;
 
-    // Point 4: Legal Form Filter
+    // Turnover (Chiffre d'Affaires <= 30M€) Filter
+    if (revenueFilter !== 'ALL') {
+      const rev = Number(c.revenue) || 0;
+      if (revenueFilter === 'published' && rev <= 0) return false;
+      if (revenueFilter === 'under_1m' && (rev <= 0 || rev >= 1000000)) return false;
+      if (revenueFilter === '1m_10m' && (rev < 1000000 || rev > 10000000)) return false;
+      if (revenueFilter === '10m_30m' && (rev < 10000000 || rev > 30000000)) return false;
+    }
+
+    // Legal Form Filter
     if (legalFormFilter !== 'ALL') {
       const lf = (c.legalForm || '').toUpperCase();
       if (legalFormFilter === 'SAS' && !lf.includes('SAS')) return false;
@@ -230,9 +238,13 @@ function applyLocalFilters(rawList, {
       if (legalFormFilter === 'SARL_GMBH' && (!lf.includes('SÀRL') && !lf.includes('GMBH'))) return false;
     }
 
-    // Point 4: Geo / Language / Canton / Region Filter
+    // Geo / Language / Canton / Region / Cross-Border Filter
     if (geoFilter !== 'ALL') {
-      if (geoFilter.startsWith('canton:')) {
+      if (geoFilter === 'CROSS_BORDER') {
+        if (!c.isCrossBorder && (!c.internationalLinks || c.internationalLinks.length === 0)) return false;
+      } else if (geoFilter === 'HAS_HOLDING') {
+        if ((!c.corporateLinks || c.corporateLinks.length === 0) && (!c.internationalLinks || c.internationalLinks.length === 0)) return false;
+      } else if (geoFilter.startsWith('canton:')) {
         const targetCanton = geoFilter.replace('canton:', '');
         if (c.country !== 'CH' || (c.canton || '').toUpperCase() !== targetCanton) return false;
       } else {
@@ -245,34 +257,35 @@ function applyLocalFilters(rawList, {
       const q = search.toLowerCase().trim();
       const matchName = c.name?.toLowerCase().includes(q);
       const matchCity = c.city?.toLowerCase().includes(q);
-      const matchAct = c.activity?.toLowerCase().includes(q);
+      const matchAct = c.activity?.toLowerCase().includes(q) || c.activityCategory?.toLowerCase().includes(q);
       const matchReg = c.registrationNumber?.toLowerCase().includes(q);
       const matchDir = c.dirigeants?.some(d => d.name?.toLowerCase().includes(q));
       const matchCfo = c.cfo?.name?.toLowerCase().includes(q);
+      const matchCorp = c.corporateLinks?.some(cl => cl.name?.toLowerCase().includes(q)) || c.internationalLinks?.some(il => il.countryName?.toLowerCase().includes(q) || il.entityName?.toLowerCase().includes(q));
       const matchDate = c.incorporationDate?.includes(q) || formatDateFr(c.incorporationDate).includes(q);
       const matchCanton = c.canton?.toLowerCase() === q;
-      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir && !matchCfo && !matchDate && !matchCanton) return false;
+      if (!matchName && !matchCity && !matchAct && !matchReg && !matchDir && !matchCfo && !matchCorp && !matchDate && !matchCanton) return false;
     }
 
     const dateStr = (c.incorporationDate || c.scrapedAt || '').split('T')[0];
 
-    // Exact incorporation day filter (priority if set)
     if (exactDate) {
       if (dateStr !== exactDate) return false;
       return true;
     }
 
     if (dateFilter !== 'all' && dateStr) {
-      if (dateFilter.startsWith('month:')) {
+      if (dateFilter.startsWith('year:')) {
+        const targetYear = dateFilter.replace('year:', '');
+        if (!dateStr.startsWith(targetYear)) return false;
+      } else if (dateFilter.startsWith('month:')) {
         const targetMonth = dateFilter.replace('month:', '');
         if (!dateStr.startsWith(targetMonth)) return false;
       } else {
         const compDate = new Date(`${dateStr}T12:00:00Z`);
         const diffDays = Math.max(0, Math.floor((refDate - compDate) / (1000 * 60 * 60 * 24)));
         if (dateFilter === 'today' && diffDays > 2) return false;
-        if (dateFilter === '3days' && diffDays > 3) return false;
         if (dateFilter === '7days' && diffDays > 7) return false;
-        if (dateFilter === '14days' && diffDays > 14) return false;
         if (dateFilter === '30days' && diffDays > 30) return false;
         if (dateFilter === '90days' && diffDays > 90) return false;
         if (dateFilter === '180days' && diffDays > 185) return false;
@@ -282,10 +295,12 @@ function applyLocalFilters(rawList, {
     return true;
   });
 
-  // Dynamic sorting
   filtered.sort((a, b) => {
     if (sortBy === 'capital_desc') {
       return (Number(b.shareCapital) || 0) - (Number(a.shareCapital) || 0);
+    }
+    if (sortBy === 'revenue_desc') {
+      return (Number(b.revenue) || 0) - (Number(a.revenue) || 0);
     }
     if (sortBy === 'fx_desc') {
       return (b.fxPotential?.score || 0) - (a.fxPotential?.score || 0);
@@ -300,9 +315,9 @@ function applyLocalFilters(rawList, {
 }
 
 export default function App() {
-  const allStaticCompaniesRef = useRef(bundledDataset.companies || []);
+  const initialList = Array.isArray(bundledDataset) ? bundledDataset : (bundledDataset.companies || []);
+  const allStaticCompaniesRef = useRef(initialList);
 
-  // Theme state: dark or light
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('revolut_theme') || 'dark';
   });
@@ -310,9 +325,10 @@ export default function App() {
   // Filters
   const [selectedCountry, setSelectedCountry] = useState('ALL');
   const [selectedCrmStatus, setSelectedCrmStatus] = useState('ALL');
-  const [selectedCompliance, setSelectedCompliance] = useState('ALL');
+  const [selectedSector, setSelectedSector] = useState('ALL');
   const [fxFilter, setFxFilter] = useState('ALL');
   const [minCapital, setMinCapital] = useState(0);
+  const [revenueFilter, setRevenueFilter] = useState('ALL');
   const [legalFormFilter, setLegalFormFilter] = useState('ALL');
   const [geoFilter, setGeoFilter] = useState('ALL');
   const [sortBy, setSortBy] = useState('date_desc');
@@ -321,43 +337,53 @@ export default function App() {
   const [dateFilter, setDateFilter] = useState('all');
   const [exactDate, setExactDate] = useState('');
 
-  // Compute all distinct incorporation dates (sorted newest -> oldest) with counts
+  // Compute sector counts dynamically
+  const sectorOptions = React.useMemo(() => {
+    const counts = {};
+    const list = allStaticCompaniesRef.current || [];
+    for (const c of list) {
+      if (selectedCountry !== 'ALL' && c.country !== selectedCountry) continue;
+      const cat = c.activityCategory || 'Services B2B';
+      counts[cat] = (counts[cat] || 0) + 1;
+    }
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([cat, count]) => ({ cat, count }));
+  }, [selectedCountry]);
+
+  // Compute all distinct incorporation dates with counts
   const availableIncorporationDays = React.useMemo(() => {
     const counts = {};
     const list = allStaticCompaniesRef.current || [];
     for (const c of list) {
       if (selectedCountry !== 'ALL' && c.country !== selectedCountry) continue;
-      if (selectedCompliance !== 'ALL' && c.compliance?.status !== selectedCompliance) continue;
+      if (selectedSector !== 'ALL' && (c.activityCategory || 'Services B2B') !== selectedSector) continue;
       if (fxFilter === 'high' && c.fxPotential?.level !== 'high') continue;
       if (fxFilter === 'medium_high' && c.fxPotential?.level !== 'high' && c.fxPotential?.level !== 'medium') continue;
       if (minCapital > 0 && (Number(c.shareCapital) || 0) < minCapital) continue;
-      if (verifiedOnly && !c.website && !c.linkedinDirigeantUrl) continue;
+      if (verifiedOnly && !c.website) continue;
       const d = (c.incorporationDate || '').split('T')[0];
       if (d) counts[d] = (counts[d] || 0) + 1;
     }
     return Object.entries(counts)
       .sort((a, b) => b[0].localeCompare(a[0]))
-      .map(([date, count]) => ({ date, count, label: `${formatDateFr(date)} (${count} société${count > 1 ? 's' : ''})` }));
-  }, [selectedCountry, selectedCompliance, fxFilter, minCapital, verifiedOnly]);
+      .map(([date, count]) => ({ date, count, label: `${formatDateFr(date)} (${count})` }));
+  }, [selectedCountry, selectedSector, fxFilter, minCapital, verifiedOnly]);
 
   const [companies, setCompanies] = useState(() => {
-    return applyLocalFilters(bundledDataset.companies || []);
+    return applyLocalFilters(initialList);
   });
   const [stats, setStats] = useState(() => {
-    return bundledDataset.stats || computeLocalStats(bundledDataset.companies || []);
+    return computeLocalStats(initialList);
   });
   const [loading, setLoading] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState(null);
 
-  // Modals
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [networkData, setNetworkData] = useState(null);
-
-  // 1-Click Copy Feedback tracking
   const [copiedKey, setCopiedKey] = useState(null);
 
-  // Apply theme class to <html>
   useEffect(() => {
     const root = document.documentElement;
     if (theme === 'dark') {
@@ -377,9 +403,10 @@ export default function App() {
     const filtered = applyLocalFilters(rawList, {
       country: selectedCountry,
       crmStatus: selectedCrmStatus,
-      compliance: selectedCompliance,
+      sector: selectedSector,
       fxFilter,
       minCapital,
+      revenueFilter,
       legalFormFilter,
       geoFilter,
       sortBy,
@@ -399,10 +426,9 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [selectedCountry, selectedCrmStatus, selectedCompliance, fxFilter, minCapital, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
+    refreshFromLocalAndOverrides();
+  }, [selectedCountry, selectedCrmStatus, selectedSector, fxFilter, minCapital, revenueFilter, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
-  // Real-time multi-user cloud synchronization (on mount, every 10s, and on tab focus)
   useEffect(() => {
     let isMounted = true;
     const syncCloud = async () => {
@@ -420,50 +446,12 @@ export default function App() {
       clearInterval(interval);
       window.removeEventListener('focus', onFocus);
     };
-  }, [selectedCountry, selectedCrmStatus, selectedCompliance, fxFilter, minCapital, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
-
-  const fetchData = async () => {
-    try {
-      refreshFromLocalAndOverrides();
-
-      // Pull latest team notes & statuses from cloud in background
-      pullCloudOverrides().then(merged => {
-        if (merged) refreshFromLocalAndOverrides();
-      });
-
-      // Attempt live API in background if available
-      const params = new URLSearchParams();
-      if (selectedCountry !== 'ALL') params.append('country', selectedCountry);
-      if (selectedCrmStatus !== 'ALL') params.append('crmStatus', selectedCrmStatus);
-      if (searchQuery) params.append('search', searchQuery);
-      if (verifiedOnly) params.append('verifiedOnly', 'true');
-      if (exactDate) params.append('exactDate', exactDate);
-      else if (dateFilter !== 'all') params.append('dateRange', dateFilter);
-
-      const [compRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE}/companies?${params.toString()}`),
-        fetch(`${API_BASE}/stats`)
-      ]);
-
-      if (compRes.ok && statsRes.ok) {
-        const compData = await compRes.json();
-        const statsData = await statsRes.json();
-        if (compData.success && Array.isArray(compData.companies) && !exactDate && !dateFilter.startsWith('month:')) {
-          setCompanies(compData.companies);
-          if (statsData.success) setStats(statsData.stats);
-        }
-      }
-    } catch {
-      // Live API unreachable: offline or GitHub Pages, already successfully rendered!
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [selectedCountry, selectedCrmStatus, selectedSector, fxFilter, minCapital, revenueFilter, legalFormFilter, geoFilter, sortBy, searchQuery, verifiedOnly, dateFilter, exactDate]);
 
   const handleSync = async (country = 'ALL') => {
     try {
       setIsSyncing(true);
-      setSyncMessage("Synchronisation en cours (Registres BODACC/SHAB & Session Équipe Partagée)...");
+      setSyncMessage("Synchronisation en cours (BODACC / FOSC / North Data & Session Partagée)...");
       await pullCloudOverrides();
       refreshFromLocalAndOverrides();
 
@@ -476,13 +464,13 @@ export default function App() {
         const data = await res.json();
         if (data.success) {
           setSyncMessage(`Synchronisation réussie ! ${data.result.recordsAdded} nouvelles entreprises enregistrées.`);
-          fetchData();
+          refreshFromLocalAndOverrides();
           return;
         }
       }
-      setSyncMessage("Session Cloud synchronisée avec vos collègues • 161 entreprises indexées.");
-    } catch (e) {
-      setSyncMessage("Session Cloud synchronisée avec vos collègues • 161 entreprises indexées.");
+      setSyncMessage(`Session Cloud synchronisée avec l'équipe • ${stats.total} sociétés commerciales vérifiées (2024-2026).`);
+    } catch {
+      setSyncMessage(`Session Cloud synchronisée avec l'équipe • ${stats.total} sociétés commerciales vérifiées (2024-2026).`);
     } finally {
       setIsSyncing(false);
       setTimeout(() => setSyncMessage(null), 5000);
@@ -491,7 +479,6 @@ export default function App() {
 
   const handleUpdateStatus = async (id, updates) => {
     const stamped = { ...updates, updatedAt: new Date().toISOString() };
-    // 1. Update local state & localStorage immediately (0ms latency)
     saveCrmOverride(id, stamped);
     setCompanies(prev => prev.map(c => c.id === id ? { ...c, ...stamped } : c));
     if (selectedCompany && selectedCompany.id === id) {
@@ -504,54 +491,30 @@ export default function App() {
       setStats(computeLocalStats(allMerged));
     }
 
-    // 2. Push to Shared Team Cloud Store so all colleagues see it on their computers
     await pushCloudOverrides(id, stamped);
     refreshFromLocalAndOverrides();
-
-    try {
-      const res = await fetch(`${API_BASE}/companies/${id}/status`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(stamped)
-      });
-      if (res.ok) {
-        fetch(`${API_BASE}/stats`).then(r => r.json()).then(s => s.success && setStats(s.stats));
-      }
-    } catch (err) {
-      // Running on GitHub Pages, already synced via Cloud Store!
-    }
   };
 
   const handleOpenNetwork = async (company) => {
     if (company.network && company.network.nodes && company.network.nodes.length > 1) {
-      setNetworkData(company.network);
+      setNetworkData({ ...company.network, companyName: company.name, northDataUrl: company.northDataUrl });
       return;
     }
-    try {
-      const res = await fetch(`${API_BASE}/companies/${company.id}/network`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.success && data.network?.nodes?.length > 1) {
-          setNetworkData(data.network);
-          return;
-        }
-      }
-    } catch {
-      // Fallback to client-side network builder
-    }
 
-    // Client-side fallback builder so Cartographie always works
     const nodes = [
       {
         id: company.id,
         label: company.name,
         type: 'target_company',
         country: company.country,
+        flag: company.country === 'CH' ? '🇨🇭' : '🇫🇷',
         registrationNumber: company.registrationNumber,
         legalForm: company.legalForm,
         shareCapital: company.shareCapital,
+        revenue: company.revenue,
         city: company.city,
         activity: company.activity,
+        northDataUrl: company.northDataUrl,
         isTarget: true,
       }
     ];
@@ -563,10 +526,10 @@ export default function App() {
         id: pid,
         label: d.name,
         type: 'person',
-        role: d.role || 'Dirigeant / Board',
+        role: d.role || 'Dirigeant / Board (Personne Physique)',
         email: company.bestEmail,
         phone: company.phone,
-        linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`,
+        linkedinUrl: company.linkedinDirigeantUrl,
       });
       edges.push({
         id: `edge-${company.id}-${pid}`,
@@ -576,45 +539,83 @@ export default function App() {
         type: 'mandate',
       });
     });
-    if (nodes.length === 1) {
-      const lid = `person-li-${company.id}`;
+
+    (company.internationalLinks || []).forEach((intl, idx) => {
+      const iid = `intl-${idx}-${company.id}`;
       nodes.push({
-        id: lid,
-        label: `Équipe ${company.name}`,
-        type: 'person',
-        role: 'Recherche Décideurs LinkedIn',
-        linkedinUrl: company.linkedinCompanyUrl,
+        id: iid,
+        label: `${intl.flag || '🌍'} ${intl.entityName}`,
+        type: 'sister_company',
+        isForeign: true,
+        country: intl.countryCode,
+        countryName: intl.countryName,
+        flag: intl.flag,
+        legalForm: `Entité Étrangère (${intl.countryName})`,
+        city: intl.city || intl.countryName,
+        roleHeld: intl.relation,
       });
       edges.push({
-        id: `edge-${company.id}-${lid}`,
+        id: `edge-intl-${company.id}-${iid}`,
         source: company.id,
-        target: lid,
-        label: 'LinkedIn',
-        type: 'mandate',
+        target: iid,
+        label: intl.relation || 'Lien International',
+        type: 'cross_border',
       });
-    }
+    });
+
     setNetworkData({
       companyId: company.id,
       companyName: company.name,
-      stats: {
-        totalEntities: nodes.length,
-        totalDirigeants: realDirs.length,
-        totalConnectedCompanies: nodes.filter(n => n.type.includes('company')).length,
-        revolutPitch: company.network?.stats?.revolutPitch || `Proposer une ouverture de compte Revolut Business multi-devises pour ${company.name}.`,
-      },
+      northDataUrl: company.northDataUrl,
       nodes,
       edges,
     });
   };
 
   const handleExportCsv = () => {
-    const params = new URLSearchParams();
-    if (selectedCountry !== 'ALL') params.append('country', selectedCountry);
-    if (selectedCrmStatus !== 'ALL') params.append('crmStatus', selectedCrmStatus);
-    if (searchQuery) params.append('search', searchQuery);
-    if (verifiedOnly) params.append('verifiedOnly', 'true');
-    if (dateFilter !== 'all') params.append('dateRange', dateFilter);
-    window.open(`${API_BASE}/export/csv?${params.toString()}`, '_blank');
+    const headers = [
+      'ID', 'Pays', 'Societe', 'Forme_Juridique', 'SIREN_UID', 'Date_Immatriculation',
+      'Capital_Social', 'Chiffre_Affaires_EUR', 'Secteur_Activite', 'Potentiel_FX', 'Devises_Cibles',
+      'Dirigeant_Physique_1', 'Role_1', 'Co_Dirigeant_CFO', 'Holdings_Et_Liens_Etrangers',
+      'Site_Web_Certifie', 'Email_Direct', 'Telephone', 'Ville', 'Code_Postal', 'Canton_Region',
+      'Statut_CRM', 'Assigne_A', 'Notes_Equipe', 'Lien_NorthData', 'Lien_LinkedIn'
+    ];
+    const rows = companies.map(c => [
+      c.id,
+      c.country,
+      `"${(c.name || '').replace(/"/g, '""')}"`,
+      `"${(c.legalForm || '').replace(/"/g, '""')}"`,
+      c.registrationNumber || '',
+      c.incorporationDate || '',
+      c.shareCapital || 0,
+      c.revenue || '',
+      `"${(c.activityCategory || 'Services B2B').replace(/"/g, '""')}"`,
+      `"${(c.fxPotential?.badge || '').replace(/"/g, '""')}"`,
+      `"${(c.fxPotential?.currencies || []).join('/')}"`,
+      `"${(c.dirigeants?.[0]?.name || '').replace(/"/g, '""')}"`,
+      `"${(c.dirigeants?.[0]?.role || '').replace(/"/g, '""')}"`,
+      `"${(c.cfo?.name && c.cfo.name !== 'X' ? c.cfo.name : '').replace(/"/g, '""')}"`,
+      `"${[...(c.internationalLinks || []).map(i => `${i.countryName}: ${i.entityName}`), ...(c.corporateLinks || []).map(cl => cl.name)].join(' | ').replace(/"/g, '""')}"`,
+      c.website || '',
+      c.bestEmail || '',
+      c.phone || '',
+      `"${(c.city || '').replace(/"/g, '""')}"`,
+      c.postalCode || '',
+      c.canton || c.geoZone?.regionCode || '',
+      c.crmStatus || 'new',
+      `"${(c.crmAssignedTo || '').replace(/"/g, '""')}"`,
+      `"${(c.crmNotes || '').replace(/"/g, '""')}"`,
+      c.northDataUrl || '',
+      c.linkedinCompanyUrl || ''
+    ]);
+    const csvContent = '\uFEFF' + [headers.join(';'), ...rows.map(r => r.join(';'))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `revolut_leads_${selectedCountry}_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const handleCopy = (text, key) => {
@@ -626,240 +627,283 @@ export default function App() {
 
   const getCategoryBadge = (category) => {
     const cat = category || 'Services B2B';
+    const isActive = selectedSector === cat;
+    const baseCls = `px-2 py-0.5 rounded-full text-[10px] font-bold border transition cursor-pointer inline-flex items-center gap-1 ${
+      isActive ? 'ring-2 ring-blue-500 ' : ''
+    }`;
     switch (cat) {
       case 'Import / Export':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">🚢 Import / Export</span>;
+        return <span className={baseCls + "bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800"}>🚢 Import / Export</span>;
       case 'Immobilier':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">🏢 Immobilier</span>;
+        return <span className={baseCls + "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"}>🏢 Immobilier</span>;
       case 'Consulting':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">💼 Consulting</span>;
+        return <span className={baseCls + "bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800"}>💼 Consulting</span>;
       case 'Tech & Logiciel':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">💻 Tech & Logiciel</span>;
+        return <span className={baseCls + "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800"}>💻 Tech & Logiciel</span>;
       case 'Finance & Fintech':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">📈 Finance & Fintech</span>;
+        return <span className={baseCls + "bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800"}>📈 Finance & Holding</span>;
       case 'Transport & Logistique':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">🚚 Transport & Logistique</span>;
+        return <span className={baseCls + "bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"}>🚚 Transport & Log.</span>;
       case 'Restauration':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">🍽️ Restauration</span>;
+        return <span className={baseCls + "bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800"}>🍽️ Restauration</span>;
       case 'BTP & Construction':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 border border-slate-300 dark:border-slate-700">🏗️ BTP & Travaux</span>;
+        return <span className={baseCls + "bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700"}>🏗️ BTP & Travaux</span>;
       case 'Santé & Médical':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-teal-100 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">🩺 Santé & Médical</span>;
+        return <span className={baseCls + "bg-teal-100 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800"}>🩺 Santé & Médical</span>;
       case 'Luxe & Horlogerie':
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">💎 Luxe & Horlogerie</span>;
+        return <span className={baseCls + "bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800"}>💎 Luxe & Horlogerie</span>;
+      case 'Commerce & Vente':
+        return <span className={baseCls + "bg-pink-100 dark:bg-pink-950/60 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800"}>🛍️ Commerce & Vente</span>;
+      case 'Marketing & Com':
+        return <span className={baseCls + "bg-fuchsia-100 dark:bg-fuchsia-950/60 text-fuchsia-700 dark:text-fuchsia-300 border-fuchsia-200 dark:border-fuchsia-800"}>📣 Marketing & Com</span>;
       default:
-        return <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">🏢 {cat}</span>;
+        return <span className={baseCls + "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700"}>🏢 {cat}</span>;
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0b0e14] text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 dark:bg-[#0b0e14] text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       
-      {/* Top Navbar */}
-      <header className="border-b border-slate-200 dark:border-slate-800/80 bg-white/95 dark:bg-[#10141e]/90 backdrop-blur-md sticky top-0 z-30 shadow-sm transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      {/* Compact Sticky Top Navbar */}
+      <header className="border-b border-slate-200 dark:border-slate-800/80 bg-white/95 dark:bg-[#10141e]/95 backdrop-blur-md sticky top-0 z-30 shadow-xs transition-colors">
+        <div className="w-full max-w-[1920px] mx-auto px-3 sm:px-5 h-12 flex items-center justify-between gap-2">
           
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-blue-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20 font-black text-white text-lg">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 via-blue-500 to-indigo-500 flex items-center justify-center shadow-sm font-black text-white text-sm shrink-0">
               R
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight">
-                  Revolut Business
-                </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
-                  Lead Intelligence
-                </span>
-              </div>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                Registres du Commerce FR (BODACC/RNE) & CH (SHAB/FOSC)
+            <div className="flex items-center gap-2 flex-wrap truncate">
+              <span className="font-extrabold text-slate-900 dark:text-white text-sm tracking-tight">
+                Revolut Business
+              </span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
+                Lead Intelligence 2024–2026
+              </span>
+              <span className="hidden xl:inline text-[11px] text-slate-500 dark:text-slate-400">
+                • Sociétés Commerciales FR & CH (CA ≤ 30M€ • 0% Entrepreneur Individuel • Carto North Data)
               </span>
             </div>
           </div>
 
           {/* Right Header Actions */}
-          <div className="flex items-center gap-3">
-            
-            {/* Theme Toggle (Light / Dark) */}
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition"
+              className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition"
               title={theme === 'dark' ? "Passer en mode clair" : "Passer en mode sombre"}
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
             </button>
 
-            {/* Sync Status Badge */}
-            <div className="hidden lg:flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/30" title="Les notes, statuts et attributions commerciales sont synchronisés en temps réel entre tous les ordinateurs">
+            <div className="hidden md:flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-300 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/30" title="Les notes et statuts sont synchronisés en temps réel entre tous les ordinateurs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-semibold text-emerald-700 dark:text-emerald-400">☁️ Session Partagée Active</span>
+              <span className="font-semibold text-emerald-700 dark:text-emerald-400">☁️ Session Partagée</span>
             </div>
 
-            {/* Sync Button */}
             <button
               onClick={() => handleSync('ALL')}
               disabled={isSyncing}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition disabled:opacity-50"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-semibold shadow-xs transition disabled:opacity-50"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
-              <span>{isSyncing ? 'Scraping...' : 'Actualiser (24h)'}</span>
+              <RefreshCw className={`w-3 h-3 ${isSyncing ? 'animate-spin' : ''}`} />
+              <span>{isSyncing ? 'Sync...' : 'Actualiser'}</span>
             </button>
 
-            {/* Export CSV */}
             <button
               onClick={handleExportCsv}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition shadow-sm"
-              title="Exporter au format CSV pour votre CRM"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-[11px] font-semibold border border-slate-200 dark:border-slate-700 transition"
+              title="Exporter la sélection filtrée au format CSV (Excel)"
             >
-              <Download className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              <span className="hidden sm:inline">Exporter CSV</span>
+              <Download className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+              <span className="hidden sm:inline">Exporter CSV ({companies.length})</span>
             </button>
-
           </div>
-
         </div>
 
         {syncMessage && (
-          <div className="bg-blue-50 dark:bg-blue-950/40 border-t border-blue-200 dark:border-blue-900/50 py-2 px-4 text-center text-xs text-blue-800 dark:text-blue-200 flex items-center justify-center gap-2 animate-fade-in">
-            <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+          <div className="bg-blue-50 dark:bg-blue-950/40 border-t border-blue-200 dark:border-blue-900/50 py-1 px-4 text-center text-[11px] text-blue-800 dark:text-blue-200 flex items-center justify-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
             <span>{syncMessage}</span>
           </div>
         )}
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5 flex-1 w-full">
+      {/* Main Container — Full Viewport Width with Compact Vertical Spacing */}
+      <main className="w-full max-w-[1920px] mx-auto px-3 sm:px-5 py-2.5 space-y-2.5 flex-1">
         
-        {/* KPI Stats Cards (Removed "Dans le CRM" as requested) */}
+        {/* Compact Slim KPI Strip */}
         {stats && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
             
-            {/* Card 1: Total Scraped */}
-            <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors">
-              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
-                <span className="font-medium">Total Qualifiées (6 Derniers Mois)</span>
-                <Building2 className="w-4 h-4 text-blue-500" />
+            {/* Card 1: Total Scraped 2024-2026 */}
+            <div 
+              onClick={() => { setSelectedCountry('ALL'); setFxFilter('ALL'); setGeoFilter('ALL'); setVerifiedOnly(false); }}
+              className="cursor-pointer bg-white dark:bg-[#121824] px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between shadow-2xs hover:border-blue-500/40 transition"
+            >
+              <div>
+                <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">
+                  Sociétés Qualifiées (Depuis 01/01/2024 • CA ≤ 30M€)
+                </span>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="text-lg font-black text-slate-900 dark:text-white">{stats.total}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                    🇫🇷 {stats.franceCount} FR • 🇨🇭 {stats.switzerlandCount} CH
+                  </span>
+                </div>
               </div>
-              <div className="text-2xl font-black text-slate-900 dark:text-white">{stats.total}</div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-2">
-                <span>🇫🇷 {stats.franceCount} France</span>
-                <span>•</span>
-                <span>🇨🇭 {stats.switzerlandCount} Suisse</span>
-              </div>
+              <Building2 className="w-5 h-5 text-blue-500 shrink-0" />
             </div>
 
-            {/* Card 2: High Safety Leads */}
-            <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors">
-              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
-                <span className="font-medium">Sûreté Élevée (&gt;60%)</span>
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+            {/* Card 2: Cross-Border & Holdings (North Data) */}
+            <div 
+              onClick={() => setGeoFilter(prev => prev === 'HAS_HOLDING' ? 'ALL' : 'HAS_HOLDING')}
+              className={`cursor-pointer bg-white dark:bg-[#121824] px-3.5 py-2 rounded-xl border flex items-center justify-between shadow-2xs transition ${
+                geoFilter === 'HAS_HOLDING' || geoFilter === 'CROSS_BORDER'
+                  ? 'border-amber-500 ring-1 ring-amber-500/30'
+                  : 'border-slate-200 dark:border-slate-800/80 hover:border-amber-500/40'
+              }`}
+              title="Cliquer pour filtrer les sociétés reliées à une Holding ou à une entité étrangère"
+            >
+              <div>
+                <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">
+                  🌍 Liens Holdings & Entités Étrangères (North Data)
+                </span>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="text-lg font-black text-amber-600 dark:text-amber-400">{stats.crossBorderCount || 0}</span>
+                  <span className="text-[11px] text-amber-600/80 dark:text-amber-400/80 font-medium">
+                    {geoFilter === 'HAS_HOLDING' ? '✓ Filtre Holding actif' : 'Groupes & Filiales internationales'}
+                  </span>
+                </div>
               </div>
-              <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
-                {stats.highSafetyCount || 0}
-              </div>
-              <div className="text-[11px] text-emerald-600/80 dark:text-emerald-400/80 mt-1 font-medium">
-                Contacts fiables & certifiés
-              </div>
+              <Share2 className="w-5 h-5 text-amber-500 shrink-0" />
             </div>
 
-            {/* Card 3: Active Web Presence */}
-            <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors">
-              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
-                <span className="font-medium">Site Web Actif (DNS)</span>
-                <Globe className="w-4 h-4 text-purple-500" />
+            {/* Card 3: Active Anti-Homonym Web Presence */}
+            <div 
+              onClick={() => setVerifiedOnly(prev => !prev)}
+              className={`cursor-pointer bg-white dark:bg-[#121824] px-3.5 py-2 rounded-xl border flex items-center justify-between shadow-2xs transition ${
+                verifiedOnly
+                  ? 'border-purple-500 ring-1 ring-purple-500/30'
+                  : 'border-slate-200 dark:border-slate-800/80 hover:border-purple-500/40'
+              }`}
+              title="Cliquer pour afficher uniquement les sociétés avec site web officiel certifié anti-homonyme"
+            >
+              <div>
+                <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">
+                  🌐 Site Web Certifié (Anti-Homonyme & SSL)
+                </span>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="text-lg font-black text-purple-600 dark:text-purple-400">{stats.verifiedWebCount || 0}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                    {verifiedOnly ? '✓ Filtre Site Actif' : 'Contenu & DNS vérifiés'}
+                  </span>
+                </div>
               </div>
-              <div className="text-2xl font-black text-purple-600 dark:text-purple-400">
-                {stats.verifiedWebCount || 0}
-              </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                Serveurs testés opérationnels
-              </div>
+              <Globe className="w-5 h-5 text-purple-500 shrink-0" />
             </div>
 
-            {/* Card 4: High FX Potential & Priority */}
+            {/* Card 4: High FX Potential */}
             <div 
               onClick={() => setFxFilter(prev => prev === 'high' ? 'ALL' : 'high')}
-              className={`cursor-pointer bg-white dark:bg-[#121824] p-4 rounded-2xl border shadow-sm transition-all ${
+              className={`cursor-pointer bg-white dark:bg-[#121824] px-3.5 py-2 rounded-xl border flex items-center justify-between shadow-2xs transition ${
                 fxFilter === 'high'
-                  ? 'border-cyan-500 ring-2 ring-cyan-500/20'
-                  : 'border-slate-200 dark:border-slate-800/80 hover:border-cyan-500/50'
+                  ? 'border-cyan-500 ring-1 ring-cyan-500/30'
+                  : 'border-slate-200 dark:border-slate-800/80 hover:border-cyan-500/40'
               }`}
               title="Cliquer pour filtrer uniquement les sociétés à Fort Potentiel FX (Multi-devises CHF / EUR / USD)"
             >
-              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
-                <span className="font-medium">💱 Fort Potentiel FX (Multi-Devises)</span>
-                <TrendingUp className="w-4 h-4 text-cyan-500" />
+              <div>
+                <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">
+                  💱 Fort Potentiel FX (Multi-Devises)
+                </span>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="text-lg font-black text-cyan-600 dark:text-cyan-400">{stats.highFxCount || 0}</span>
+                  <span className="text-[11px] text-cyan-600/80 dark:text-cyan-400/80 font-medium">
+                    {fxFilter === 'high' ? '✓ Filtre FX actif' : `${stats.toContact} à contacter`}
+                  </span>
+                </div>
               </div>
-              <div className="text-2xl font-black text-cyan-600 dark:text-cyan-400">
-                {stats.highFxCount || 0}
-              </div>
-              <div className="text-[11px] text-cyan-600/80 dark:text-cyan-400/80 mt-1 font-medium">
-                {fxFilter === 'high' ? '✓ Filtre FX actif (cliquer pour retirer)' : `${stats.toContact} à contacter en priorité`}
-              </div>
+              <TrendingUp className="w-5 h-5 text-cyan-500 shrink-0" />
             </div>
 
           </div>
         )}
 
-        {/* Filters & Digital Presence Exclude Toggle */}
-        <div className="bg-white dark:bg-[#121824] p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm space-y-3 transition-colors">
+        {/* Compact 2-Row Filter Bar */}
+        <div className="bg-white dark:bg-[#121824] p-2.5 rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-2xs space-y-2 transition-colors">
           
-          {/* Row 1: Search, Country, CRM Status, Compliance, Date Range */}
-          <div className="flex flex-col lg:flex-row gap-2.5 items-center justify-between flex-wrap">
+          {/* Filter Row 1: Search, Country, CRM Status, SECTEUR D'ACTIVITÉ, Période (2024-2026) & Jour Exact */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2 items-center">
             
-            {/* Search Input */}
-            <div className="relative w-full lg:w-64">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            {/* Search Input (3 cols) */}
+            <div className="relative lg:col-span-3">
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Société, dirigeant, ville, SIREN, canton..."
+                placeholder="Société, dirigeant physique, SIREN/UID, holding, ville..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition"
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
               />
             </div>
 
-            {/* Country Selector Tabs */}
-            <div className="flex items-center bg-slate-100 dark:bg-[#161f30] p-1 rounded-xl border border-slate-200 dark:border-slate-700/80 w-full lg:w-auto">
+            {/* Country Selector Tabs (2 cols) */}
+            <div className="flex items-center bg-slate-100 dark:bg-[#161f30] p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 lg:col-span-2">
               <button
                 onClick={() => setSelectedCountry('ALL')}
-                className={`flex-1 lg:flex-none px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
-                  selectedCountry === 'ALL' ? 'bg-blue-600 text-white shadow' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                  selectedCountry === 'ALL' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                Tous Pays
+                Tous ({stats.total})
               </button>
               <button
                 onClick={() => setSelectedCountry('FR')}
-                className={`flex-1 lg:flex-none px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1.5 ${
-                  selectedCountry === 'FR' ? 'bg-blue-600 text-white shadow' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                  selectedCountry === 'FR' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                <span>🇫🇷</span> France
+                🇫🇷 FR ({stats.franceCount})
               </button>
               <button
                 onClick={() => setSelectedCountry('CH')}
-                className={`flex-1 lg:flex-none px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1.5 ${
-                  selectedCountry === 'CH' ? 'bg-blue-600 text-white shadow' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                  selectedCountry === 'CH' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                <span>🇨🇭</span> Suisse
+                🇨🇭 CH ({stats.switzerlandCount})
               </button>
             </div>
 
-            {/* CRM Status Dropdown */}
-            <div className="w-full lg:w-44">
+            {/* SECTEUR D'ACTIVITÉ Filter (replaces old "activités éligibles" filter) (2 cols) */}
+            <div className="lg:col-span-2">
+              <select
+                value={selectedSector}
+                onChange={(e) => setSelectedSector(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-blue-500/40 dark:border-blue-500/40 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
+                title="Filtrer par Secteur d'Activité"
+              >
+                <option value="ALL">🏢 Tous les secteurs d'activité</option>
+                {sectorOptions.map(s => (
+                  <option key={s.cat} value={s.cat}>
+                    {s.cat} ({s.count})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* CRM Status Dropdown (2 cols) */}
+            <div className="lg:col-span-2">
               <select
                 value={selectedCrmStatus}
                 onChange={(e) => setSelectedCrmStatus(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
               >
-                <option value="ALL">📋 Tous les statuts</option>
+                <option value="ALL">📋 Tous les statuts CRM</option>
                 <option value="new">🔵 Nouveau</option>
                 <option value="to_contact">🟡 À contacter</option>
-                <option value="contacted_email">🟣 Email envoyé</option>
+                <option value="contacted_email">🟣 Email / LinkedIn envoyé</option>
                 <option value="contacted_call">📞 Appel passé</option>
                 <option value="in_crm">🟢 Dans le CRM</option>
                 <option value="converted">🏆 Converti Revolut</option>
@@ -867,311 +911,279 @@ export default function App() {
               </select>
             </div>
 
-            {/* Éligibilité Secteur Revolut Business */}
-            <div className="w-full lg:w-52">
-              <select
-                value={selectedCompliance}
-                onChange={(e) => setSelectedCompliance(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
-              >
-                <option value="ALL">🛡️ Toutes activités</option>
-                <option value="eligible">🟢 Éligible Revolut (Activité autorisée)</option>
-                <option value="conditional">🟡 Activité Réglementée (Due Diligence)</option>
-                <option value="restricted">🔴 Non Éligible (Industrie Interdite)</option>
-              </select>
-            </div>
-
-            {/* Date Range Dropdown (6-Month Cumulative History & Months) */}
-            <div className="w-full lg:w-56">
+            {/* Date / Year Range Dropdown (Since Jan 1, 2024) + Exact Day Picker (3 cols) */}
+            <div className="lg:col-span-3 flex items-center gap-1.5">
               <select
                 value={dateFilter}
                 onChange={(e) => {
                   setDateFilter(e.target.value);
                   setExactDate('');
                 }}
-                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+                className="flex-1 min-w-0 bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
               >
-                <optgroup label="Périodes glissantes">
-                  <option value="all">📅 Tout l'historique (6 derniers mois)</option>
-                  <option value="today">📅 Dernières 24h / 48h</option>
-                  <option value="3days">📅 3 derniers jours</option>
-                  <option value="7days">📅 7 derniers jours</option>
-                  <option value="14days">📅 14 derniers jours</option>
-                  <option value="30days">📅 30 derniers jours (1 mois)</option>
-                  <option value="90days">📅 90 derniers jours (3 mois)</option>
-                  <option value="180days">📅 180 derniers jours (6 mois)</option>
+                <optgroup label="Historique 2024 – 2026 (Depuis 01/01/2024)">
+                  <option value="all">📅 Depuis 01/01/2024 (Tout)</option>
+                  <option value="year:2026">🗓️ Année 2026</option>
+                  <option value="year:2025">🗓️ Année 2025</option>
+                  <option value="year:2024">🗓️ Année 2024</option>
                 </optgroup>
-                <optgroup label="Par mois d'incorporation">
-                  <option value="month:2026-10">🗓️ Octobre 2026</option>
-                  <option value="month:2026-09">🗓️ Septembre 2026</option>
-                  <option value="month:2026-08">🗓️ Août 2026</option>
-                  <option value="month:2026-07">🗓️ Juillet 2026</option>
-                  <option value="month:2026-06">🗓️ Juin 2026</option>
-                  <option value="month:2026-05">🗓️ Mai 2026</option>
-                  <option value="month:2026-04">🗓️ Avril 2026</option>
+                <optgroup label="Périodes récentes">
+                  <option value="today">📅 Dernières 48h</option>
+                  <option value="7days">📅 7 derniers jours</option>
+                  <option value="30days">📅 30 derniers jours</option>
+                  <option value="90days">📅 90 derniers jours</option>
+                  <option value="180days">📅 6 derniers mois</option>
+                </optgroup>
+                <optgroup label="Mois 2026">
+                  <option value="month:2026-10">Octobre 2026</option>
+                  <option value="month:2026-09">Septembre 2026</option>
+                  <option value="month:2026-08">Août 2026</option>
+                  <option value="month:2026-07">Juillet 2026</option>
+                  <option value="month:2026-06">Juin 2026</option>
+                  <option value="month:2026-05">Mai 2026</option>
+                  <option value="month:2026-04">Avril 2026</option>
                 </optgroup>
               </select>
-            </div>
 
-          </div>
-
-          {/* Row 2 (Points 1 & 4): FX Potential, Share Capital, Legal Form, Language/Canton/Region & Dynamic Sort */}
-          <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
-            
-            {/* 1. FX Potential Filter */}
-            <select
-              value={fxFilter}
-              onChange={(e) => setFxFilter(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-[#161f30] border border-cyan-500/40 dark:border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 font-semibold"
-              title="Filtrer selon le besoin de change multi-devises (CHF, EUR, USD, GBP)"
-            >
-              <option value="ALL">💱 Tous profils FX (Multi-devises)</option>
-              <option value="high">🔥 Fort Potentiel FX (CHF / EUR / USD)</option>
-              <option value="medium_high">🌐 Potentiel FX Fort & Modéré</option>
-            </select>
-
-            {/* 2. Minimum Share Capital Filter */}
-            <select
-              value={minCapital}
-              onChange={(e) => setMinCapital(Number(e.target.value))}
-              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
-              title="Filtrer par capital social minimum"
-            >
-              <option value={0}>💰 Tous les capitaux sociaux</option>
-              <option value={5000}>💰 Capital ≥ 5 000 € / CHF</option>
-              <option value={10000}>💰 Capital ≥ 10 000 € / CHF</option>
-              <option value={20000}>💰 Capital ≥ 20 000 € / CHF (Sàrl CH)</option>
-              <option value={50000}>💰 Capital ≥ 50 000 € / CHF</option>
-              <option value={100000}>💰 Capital ≥ 100 000 € / CHF (SA / AG)</option>
-            </select>
-
-            {/* 3. Legal Form Filter */}
-            <select
-              value={legalFormFilter}
-              onChange={(e) => setLegalFormFilter(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
-            >
-              <option value="ALL">🏛️ Toutes formes juridiques</option>
-              <option value="SAS">🇫🇷 SAS / SASU</option>
-              <option value="SARL">🇫🇷 SARL / EURL</option>
-              <option value="SA_AG">🇨🇭🇫🇷 SA / AG (Société Anonyme)</option>
-              <option value="SARL_GMBH">🇨🇭 Sàrl / GmbH (Suisse)</option>
-            </select>
-
-            {/* 4. Language Zone / Canton (CH) / Region (FR) Filter */}
-            <select
-              value={geoFilter}
-              onChange={(e) => setGeoFilter(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
-              title="Filtrer par langue (Suisse Romande FR vs Alémanique DE), par Canton suisse ou par Région française"
-            >
-              <option value="ALL">📍 Toutes zones, langues & cantons</option>
-              <optgroup label="🇨🇭 Suisse par Zone Linguistique">
-                <option value="CH_FR">🇨🇭🗣️ Suisse Romande (Francophone : GE, VD, VS, NE, FR, JU)</option>
-                <option value="CH_DE">🇨🇭🗣️ Suisse Alémanique (Germanophone : ZH, ZG, BE, AG, BS...)</option>
-                <option value="CH_IT">🇨🇭🗣️ Suisse Italienne (Tessin TI)</option>
-              </optgroup>
-              <optgroup label="🇨🇭 Suisse par Canton">
-                <option value="canton:GE">🇨🇭 Canton de Genève (GE)</option>
-                <option value="canton:VD">🇨🇭 Canton de Vaud (VD)</option>
-                <option value="canton:VS">🇨🇭 Canton du Valais (VS)</option>
-                <option value="canton:FR">🇨🇭 Canton de Fribourg (FR)</option>
-                <option value="canton:NE">🇨🇭 Canton de Neuchâtel (NE)</option>
-                <option value="canton:JU">🇨🇭 Canton du Jura (JU)</option>
-                <option value="canton:ZH">🇨🇭 Canton de Zürich (ZH)</option>
-                <option value="canton:ZG">🇨🇭 Canton de Zoug (ZG)</option>
-                <option value="canton:AG">🇨🇭 Canton d'Argovie (AG)</option>
-                <option value="canton:BE">🇨🇭 Canton de Berne (BE)</option>
-                <option value="canton:LU">🇨🇭 Canton de Lucerne (LU)</option>
-                <option value="canton:BS">🇨🇭 Canton de Bâle-Ville (BS)</option>
-                <option value="canton:BL">🇨🇭 Canton de Bâle-Campagne (BL)</option>
-                <option value="canton:TI">🇨🇭 Canton du Tessin (TI)</option>
-                <option value="canton:GR">🇨🇭 Canton des Grisons (GR)</option>
-              </optgroup>
-              <optgroup label="🇫🇷 France par Région">
-                <option value="FR_IDF">🇫🇷 Île-de-France (Paris & RP)</option>
-                <option value="FR_ARA">🇫🇷 Auvergne-Rhône-Alpes (Lyon, Genève-74)</option>
-                <option value="FR_PACA">🇫🇷 PACA & Côte d'Azur (Marseille, Nice)</option>
-                <option value="FR_NAQ">🇫🇷 Nouvelle-Aquitaine (Bordeaux)</option>
-                <option value="FR_OCC">🇫🇷 Occitanie (Toulouse, Montpellier)</option>
-                <option value="FR_HDF_GE">🇫🇷 Nord & Grand Est (Lille, Strasbourg)</option>
-                <option value="FR_OUEST">🇫🇷 Grand Ouest & Centre (Nantes, Rennes)</option>
-              </optgroup>
-            </select>
-
-            {/* 5. Dynamic Sorting */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-bold"
-            >
-              <option value="date_desc">🔽 Tri : Date d'incorporation (Récentes)</option>
-              <option value="capital_desc">💰 Tri : Capital Social (Plus élevé)</option>
-              <option value="fx_desc">💱 Tri : Potentiel FX (Plus élevé)</option>
-              <option value="safety_desc">🛡️ Tri : Score Sûreté (Plus élevé)</option>
-            </select>
-
-          </div>
-
-          {/* Dedicated Filter by Exact Incorporation Day (Jour d'incorporation) */}
-          <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
-            <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
-              <span className="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                📅 Filtrer par jour d'incorporation :
-              </span>
-
-              {/* Calendar Date Input */}
               <input
                 type="date"
                 value={exactDate}
-                min="2026-04-01"
+                min="2024-01-01"
                 max="2026-10-31"
                 onChange={(e) => setExactDate(e.target.value)}
-                className="bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-semibold"
-                title="Choisir une date précise d'incorporation sur le calendrier"
+                className="w-[118px] shrink-0 bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                title="Filtrer par jour exact d'incorporation (depuis le 01/01/2024)"
               />
-
-              {/* Dropdown of active registry days with company count */}
-              <select
-                value={exactDate}
-                onChange={(e) => setExactDate(e.target.value)}
-                className="bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
-              >
-                <option value="">— Sélectionner un jour de publication ({availableIncorporationDays.length} jours) —</option>
-                {availableIncorporationDays.map(d => (
-                  <option key={d.date} value={d.date}>
-                    📅 {d.label}
-                  </option>
-                ))}
-              </select>
-
-              {/* Previous / Next active incorporation day navigation */}
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => {
-                    if (!availableIncorporationDays.length) return;
-                    const idx = availableIncorporationDays.findIndex(d => d.date === exactDate);
-                    const nextIdx = idx === -1 ? 0 : Math.min(availableIncorporationDays.length - 1, idx + 1);
-                    setExactDate(availableIncorporationDays[nextIdx].date);
-                  }}
-                  className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition"
-                  title="Jour d'incorporation précédent"
-                >
-                  ◀ Jour préc.
-                </button>
-                <button
-                  onClick={() => {
-                    if (!availableIncorporationDays.length) return;
-                    const idx = availableIncorporationDays.findIndex(d => d.date === exactDate);
-                    const prevIdx = idx <= 0 ? 0 : idx - 1;
-                    setExactDate(availableIncorporationDays[prevIdx].date);
-                  }}
-                  className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition"
-                  title="Jour d'incorporation suivant"
-                >
-                  Jour suiv. ▶
-                </button>
-              </div>
-
-              {exactDate && (
-                <button
-                  onClick={() => setExactDate('')}
-                  className="px-2.5 py-1.5 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-bold text-[11px] transition"
-                >
-                  ✕ Afficher tous les jours
-                </button>
-              )}
             </div>
+
           </div>
 
-          {/* User Requested: Filter to exclude companies with NO active website or LinkedIn */}
-          <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2 text-xs">
-            <label className="flex items-center gap-2 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={verifiedOnly}
-                onChange={(e) => setVerifiedOnly(e.target.checked)}
-                className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300 dark:border-slate-700 dark:bg-slate-900"
-              />
-              <span className="font-semibold text-slate-700 dark:text-slate-300">
-                ⚡ Exclure les boîtes sans site ni LinkedIn (Afficher uniquement avec présence digitale vérifiée)
-              </span>
-            </label>
-            <span className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-              💡 Astuce : Cliquez sur une date 📅, un capital 💰 ou un badge FX 💱 pour filtrer en 1 clic
-            </span>
-          </div>
+          {/* Filter Row 2: FX Potential, Capital Social, Chiffre d'Affaires (<=30M€), Forme Juridique, Zone/Langue/International & Tri */}
+          <div className="pt-1.5 border-t border-slate-200 dark:border-slate-800/80 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-12 gap-2 items-center">
+            
+            {/* 1. FX Potential (2 cols) */}
+            <div className="lg:col-span-2">
+              <select
+                value={fxFilter}
+                onChange={(e) => setFxFilter(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-cyan-500/40 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 font-semibold"
+              >
+                <option value="ALL">💱 Tous profils FX</option>
+                <option value="high">🔥 Fort Potentiel FX (CHF/EUR/USD)</option>
+                <option value="medium_high">🌐 FX Fort & Modéré</option>
+              </select>
+            </div>
 
+            {/* 2. Capital Social Minimum (2 cols) */}
+            <div className="lg:col-span-2">
+              <select
+                value={minCapital}
+                onChange={(e) => setMinCapital(Number(e.target.value))}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+              >
+                <option value={0}>💰 Tous capitaux sociaux</option>
+                <option value={5000}>💰 Capital ≥ 5 000 € / CHF</option>
+                <option value={10000}>💰 Capital ≥ 10 000 € / CHF</option>
+                <option value={20000}>💰 Capital ≥ 20 000 € / CHF</option>
+                <option value={50000}>💰 Capital ≥ 50 000 € / CHF</option>
+                <option value={100000}>💰 Capital ≥ 100 000 € / CHF</option>
+              </select>
+            </div>
+
+            {/* 3. Chiffre d'Affaires <= 30M€ Filter (2 cols) */}
+            <div className="lg:col-span-2">
+              <select
+                value={revenueFilter}
+                onChange={(e) => setRevenueFilter(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-emerald-500/40 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 font-semibold"
+                title="Toutes les entreprises de la base respectent le critère CA ≤ 30M€"
+              >
+                <option value="ALL">📊 Tous CA (Certifiés ≤ 30M€)</option>
+                <option value="published">📊 CA publié au bilan (≤ 30M€)</option>
+                <option value="under_1m">📊 CA &lt; 1 Million €</option>
+                <option value="1m_10m">📊 CA 1M€ à 10M€</option>
+                <option value="10m_30m">📊 CA 10M€ à 30M€</option>
+              </select>
+            </div>
+
+            {/* 4. Forme Juridique Commerciale (2 cols) */}
+            <div className="lg:col-span-2">
+              <select
+                value={legalFormFilter}
+                onChange={(e) => setLegalFormFilter(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+              >
+                <option value="ALL">🏛️ Formes commerciales (0% EI)</option>
+                <option value="SAS">🇫🇷 SAS / SASU</option>
+                <option value="SARL">🇫🇷 SARL / EURL</option>
+                <option value="SA_AG">🇨🇭🇫🇷 SA / AG (Société Anonyme)</option>
+                <option value="SARL_GMBH">🇨🇭 Sàrl / GmbH (Suisse)</option>
+              </select>
+            </div>
+
+            {/* 5. Zone / Langue / Canton / Liens Étrangers (2 cols) */}
+            <div className="lg:col-span-2">
+              <select
+                value={geoFilter}
+                onChange={(e) => setGeoFilter(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
+              >
+                <option value="ALL">📍 Zones, Cantons & International</option>
+                <optgroup label="🌍 Groupes & Liens Internationaux (North Data)">
+                  <option value="CROSS_BORDER">🌍 Liée à une entité à l'étranger</option>
+                  <option value="HAS_HOLDING">🏢 Détenue par une Holding / Groupe</option>
+                </optgroup>
+                <optgroup label="🇨🇭 Suisse par Zone Linguistique">
+                  <option value="CH_FR">🇨🇭🗣️ Suisse Romande (FR : GE, VD, VS, NE, FR, JU)</option>
+                  <option value="CH_DE">🇨🇭🗣️ Suisse Alémanique (DE : ZH, ZG, BE, BS...)</option>
+                  <option value="CH_IT">🇨🇭🗣️ Suisse Italienne (IT : Tessin TI)</option>
+                </optgroup>
+                <optgroup label="🇨🇭 Suisse par Canton">
+                  <option value="canton:GE">🇨🇭 Genève (GE)</option>
+                  <option value="canton:VD">🇨🇭 Vaud (VD)</option>
+                  <option value="canton:VS">🇨🇭 Valais (VS)</option>
+                  <option value="canton:FR">🇨🇭 Fribourg (FR)</option>
+                  <option value="canton:NE">🇨🇭 Neuchâtel (NE)</option>
+                  <option value="canton:JU">🇨🇭 Jura (JU)</option>
+                  <option value="canton:ZH">🇨🇭 Zürich (ZH)</option>
+                  <option value="canton:ZG">🇨🇭 Zoug (ZG)</option>
+                  <option value="canton:AG">🇨🇭 Argovie (AG)</option>
+                  <option value="canton:BE">🇨🇭 Berne (BE)</option>
+                  <option value="canton:LU">🇨🇭 Lucerne (LU)</option>
+                  <option value="canton:BS">🇨🇭 Bâle-Ville (BS)</option>
+                  <option value="canton:TI">🇨🇭 Tessin (TI)</option>
+                </optgroup>
+                <optgroup label="🇫🇷 France par Région">
+                  <option value="FR_IDF">🇫🇷 Île-de-France (Paris & RP)</option>
+                  <option value="FR_ARA">🇫🇷 Auvergne-Rhône-Alpes (Lyon, 74)</option>
+                  <option value="FR_PACA">🇫🇷 PACA & Côte d'Azur</option>
+                  <option value="FR_NAQ">🇫🇷 Nouvelle-Aquitaine (Bordeaux)</option>
+                  <option value="FR_OCC">🇫🇷 Occitanie (Toulouse, Montpellier)</option>
+                  <option value="FR_HDF_GE">🇫🇷 Nord & Grand Est (Lille, Strasbourg)</option>
+                  <option value="FR_OUEST">🇫🇷 Grand Ouest (Nantes, Rennes)</option>
+                </optgroup>
+              </select>
+            </div>
+
+            {/* 6. Tri Dynamique + Toggle Site Web (2 cols) */}
+            <div className="lg:col-span-2 flex items-center gap-1.5">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="flex-1 min-w-0 bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-bold"
+              >
+                <option value="date_desc">🔽 Tri : Plus récentes</option>
+                <option value="capital_desc">💰 Tri : Capital Social</option>
+                <option value="revenue_desc">📊 Tri : Chiffre d'Affaires</option>
+                <option value="fx_desc">💱 Tri : Potentiel FX</option>
+                <option value="safety_desc">🛡️ Tri : Score Sûreté</option>
+              </select>
+            </div>
+
+          </div>
         </div>
 
-        {/* Lead Table View */}
-        <div className="bg-white dark:bg-[#121824] border border-slate-200 dark:border-slate-800/80 rounded-2xl overflow-hidden shadow-sm transition-colors">
+        {/* Lead Table View — 100% Viewport Fitting (`table-fixed w-full`), Zero Horizontal Cutoff */}
+        <div className="bg-white dark:bg-[#121824] border border-slate-200 dark:border-slate-800/80 rounded-xl overflow-hidden shadow-xs transition-colors">
           
-          <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2 bg-slate-50/50 dark:bg-[#161f30]/30">
+          {/* Compact Table Status Bar */}
+          <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2 bg-slate-50/70 dark:bg-[#161f30]/40 text-xs">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-wide">
-                Nouvelles Entreprises Détectées
-              </h3>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border border-slate-300 dark:border-slate-700">
+              <span className="font-bold text-slate-900 dark:text-white">
+                Sociétés Commerciales Détectées :
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-blue-600/15 text-blue-700 dark:text-blue-300 font-bold border border-blue-500/30">
                 {companies.length} résultat(s)
               </span>
+
+              {/* Quick filter pills when active */}
+              {selectedSector !== 'ALL' && (
+                <span className="px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-bold border border-indigo-500/30 flex items-center gap-1 text-[11px]">
+                  🏢 {selectedSector}
+                  <button onClick={() => setSelectedSector('ALL')} className="hover:text-rose-500 ml-0.5">✕</button>
+                </span>
+              )}
               {exactDate && (
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-600/15 text-blue-600 dark:text-blue-400 font-bold border border-blue-500/30 flex items-center gap-1.5">
-                  📅 Jour d'incorporation : {formatDateFr(exactDate)}
-                  <button onClick={() => setExactDate('')} className="hover:text-rose-500 ml-1" title="Retirer le filtre de jour">✕</button>
+                <span className="px-2 py-0.5 rounded-full bg-blue-600/15 text-blue-600 dark:text-blue-400 font-bold border border-blue-500/30 flex items-center gap-1 text-[11px]">
+                  📅 {formatDateFr(exactDate)}
+                  <button onClick={() => setExactDate('')} className="hover:text-rose-500 ml-0.5">✕</button>
                 </span>
               )}
               {fxFilter !== 'ALL' && (
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 font-bold border border-cyan-500/30 flex items-center gap-1.5">
-                  💱 Filtre FX actif
-                  <button onClick={() => setFxFilter('ALL')} className="hover:text-rose-500 ml-1">✕</button>
+                <span className="px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 font-bold border border-cyan-500/30 flex items-center gap-1 text-[11px]">
+                  💱 Filtre FX
+                  <button onClick={() => setFxFilter('ALL')} className="hover:text-rose-500 ml-0.5">✕</button>
                 </span>
               )}
               {minCapital > 0 && (
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-bold border border-indigo-500/30 flex items-center gap-1.5">
-                  💰 Capital ≥ {minCapital.toLocaleString('fr-FR')}
-                  <button onClick={() => setMinCapital(0)} className="hover:text-rose-500 ml-1">✕</button>
+                <span className="px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-bold border border-indigo-500/30 flex items-center gap-1 text-[11px]">
+                  💰 ≥ {minCapital.toLocaleString('fr-FR')}
+                  <button onClick={() => setMinCapital(0)} className="hover:text-rose-500 ml-0.5">✕</button>
                 </span>
               )}
               {geoFilter !== 'ALL' && (
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400 font-bold border border-purple-500/30 flex items-center gap-1.5">
-                  📍 Zone : {geoFilter}
-                  <button onClick={() => setGeoFilter('ALL')} className="hover:text-rose-500 ml-1">✕</button>
+                <span className="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold border border-amber-500/30 flex items-center gap-1 text-[11px]">
+                  📍 {geoFilter}
+                  <button onClick={() => setGeoFilter('ALL')} className="hover:text-rose-500 ml-0.5">✕</button>
                 </span>
               )}
             </div>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              Historique 6 derniers mois • BODACC (FR) & FOSC/SHAB (CH)
-            </span>
+
+            <div className="flex items-center gap-3">
+              <label className="flex items-center gap-1.5 cursor-pointer select-none text-[11px]">
+                <input
+                  type="checkbox"
+                  checked={verifiedOnly}
+                  onChange={(e) => setVerifiedOnly(e.target.checked)}
+                  className="w-3.5 h-3.5 rounded text-blue-600 focus:ring-blue-500 border-slate-300 dark:border-slate-700 dark:bg-slate-900"
+                />
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  🌐 Uniquement avec Site Web vérifié
+                </span>
+              </label>
+
+              {/* Day switcher */}
+              <select
+                value={exactDate}
+                onChange={(e) => setExactDate(e.target.value)}
+                className="bg-white dark:bg-[#161f30] border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-1 text-[11px] text-slate-800 dark:text-slate-200 font-medium"
+              >
+                <option value="">📅 Choisir un jour ({availableIncorporationDays.length} j.)</option>
+                {availableIncorporationDays.slice(0, 120).map(d => (
+                  <option key={d.date} value={d.date}>
+                    {d.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-100 dark:bg-[#161f30] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[11px] border-b border-slate-200 dark:border-slate-800">
+          <div className="w-full overflow-x-auto">
+            <table className="w-full table-fixed text-left text-xs">
+              <thead className="bg-slate-100 dark:bg-[#161f30] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-800">
                 <tr>
-                  <th className="py-3 px-3">Statut CRM</th>
-                  <th className="py-3 px-3">Entreprise, Capital & Incorporation</th>
-                  <th className="py-3 px-3">Activité, Conformité & FX</th>
-                  <th className="py-3 px-3">Dirigeant & CFO</th>
-                  <th className="py-3 px-3">Contact (Tél & Mail)</th>
-                  <th className="py-3 px-3">Score Sûreté</th>
-                  <th className="py-3 px-3 text-right">Réseau & Fiche</th>
+                  <th className="py-2.5 px-2.5 w-[125px]">Statut CRM</th>
+                  <th className="py-2.5 px-2.5 w-[25%]">Entreprise, Capital, CA & Immat.</th>
+                  <th className="py-2.5 px-2.5 w-[20%]">Secteur d'Activité & FX</th>
+                  <th className="py-2.5 px-2.5 w-[22%]">Dirigeants (Personnes Physiques) & Liens</th>
+                  <th className="py-2.5 px-2.5 w-[18%]">Site Web, LinkedIn & Contact</th>
+                  <th className="py-2.5 px-2.5 w-[120px] text-right">Carto & Fiche</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60">
                 {loading ? (
                   <tr>
-                    <td colSpan="7" className="py-12 text-center text-slate-500">
+                    <td colSpan="6" className="py-10 text-center text-slate-500">
                       <div className="flex flex-col items-center justify-center gap-2">
-                        <RefreshCw className="w-6 h-6 animate-spin text-blue-500" />
-                        <span>Vérification DNS & chargement des registres...</span>
+                        <RefreshCw className="w-5 h-5 animate-spin text-blue-500" />
+                        <span>Chargement des registres...</span>
                       </div>
                     </td>
                   </tr>
                 ) : companies.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="py-12 text-center text-slate-500 py-10">
-                      Aucune entreprise ne correspond aux critères de filtre.
+                    <td colSpan="6" className="py-10 text-center text-slate-500">
+                      Aucune société commerciale ne correspond aux critères de filtre sélectionnés.
                     </td>
                   </tr>
                 ) : (
@@ -1179,29 +1191,31 @@ export default function App() {
                     const isCH = c.country === 'CH';
                     const flag = isCH ? '🇨🇭' : '🇫🇷';
                     const rawDir = c.dirigeants?.[0]?.name;
-                    const primaryDirigeant = (!rawDir || rawDir.includes('Direction') || rawDir.includes('Conseil')) ? 'X' : rawDir;
-                    const safetyScore = c.safety?.score || 50;
+                    const primaryDirigeant = (!rawDir || rawDir === 'X') ? 'X' : rawDir;
                     const capAmount = Number(c.shareCapital) || 0;
+                    const revAmount = Number(c.revenue) || 0;
+                    const intlLinks = c.internationalLinks || [];
+                    const corpLinks = c.corporateLinks || [];
 
                     return (
                       <tr 
                         key={c.id} 
-                        className="hover:bg-slate-100/60 dark:hover:bg-[#161f30]/60 transition"
+                        className="hover:bg-slate-100/70 dark:hover:bg-[#161f30]/60 transition align-top"
                       >
                         
-                        {/* 1. CRM Status quick selector + Shared Session Indicators */}
-                        <td className="py-3 px-3 whitespace-nowrap">
-                          <div className="flex flex-col gap-1.5 items-start">
+                        {/* 1. CRM Status + Shared Notes */}
+                        <td className="py-2.5 px-2.5">
+                          <div className="flex flex-col gap-1 items-start">
                             <select
                               value={c.crmStatus || 'new'}
                               onChange={(e) => handleUpdateStatus(c.id, { crmStatus: e.target.value })}
-                              className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-1 text-[11px] font-semibold text-slate-800 dark:text-white focus:outline-none focus:border-blue-500"
+                              className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md px-1.5 py-1 text-[11px] font-semibold text-slate-800 dark:text-white focus:outline-none focus:border-blue-500"
                             >
                               <option value="new">🔵 Nouveau</option>
                               <option value="to_contact">🟡 À contacter</option>
-                              <option value="contacted_email">🟣 Email envoyé</option>
-                              <option value="contacted_call">📞 Appel passé</option>
-                              <option value="in_crm">🟢 Dans le CRM</option>
+                              <option value="contacted_email">🟣 Contacté</option>
+                              <option value="contacted_call">📞 Appelé</option>
+                              <option value="in_crm">🟢 Dans CRM</option>
                               <option value="converted">🏆 Converti</option>
                               <option value="unqualified">⚪ Rejeté</option>
                             </select>
@@ -1209,8 +1223,7 @@ export default function App() {
                             {c.crmAssignedTo && (
                               <span
                                 onClick={() => setSelectedCompany(c)}
-                                className="cursor-pointer inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30"
-                                title={`Attribué à : ${c.crmAssignedTo}`}
+                                className="cursor-pointer inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30 truncate max-w-full"
                               >
                                 👤 {c.crmAssignedTo}
                               </span>
@@ -1219,8 +1232,8 @@ export default function App() {
                             {c.crmNotes && (
                               <button
                                 onClick={() => setSelectedCompany(c)}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-medium bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 max-w-[150px] truncate hover:bg-amber-500/25 transition"
-                                title={`Note partagée : ${c.crmNotes}`}
+                                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 max-w-full truncate hover:bg-amber-500/25 transition"
+                                title={`Note d'équipe : ${c.crmNotes}`}
                               >
                                 📝 <span className="truncate">{c.crmNotes}</span>
                               </button>
@@ -1228,18 +1241,16 @@ export default function App() {
                           </div>
                         </td>
 
-                        {/* 2. Company Name, Capital, Geo & SIREN */}
-                        <td className="py-3 px-3">
-                          <div className="flex items-start gap-2">
-                            <span className="text-base select-none mt-0.5">{flag}</span>
-                            <div>
-                              
-                              {/* Clicking the Name opens the full detailed modal */}
-                              <div className="flex items-center gap-1.5 group">
+                        {/* 2. Company Name, Capital, Turnover (CA) & Geo */}
+                        <td className="py-2.5 px-2.5">
+                          <div className="flex items-start gap-1.5">
+                            <span className="text-sm select-none mt-0.5 shrink-0">{flag}</span>
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-1 group">
                                 <button
                                   onClick={() => setSelectedCompany(c)}
-                                  className="font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 text-left transition text-xs"
-                                  title="Ouvrir la fiche complète"
+                                  className="font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 text-left transition text-xs truncate"
+                                  title={c.name}
                                 >
                                   {c.name}
                                 </button>
@@ -1248,21 +1259,14 @@ export default function App() {
                                     e.stopPropagation();
                                     handleCopy(c.name, `name-${c.id}`);
                                   }}
-                                  className="p-1 opacity-0 group-hover:opacity-100 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 transition"
+                                  className="p-0.5 opacity-0 group-hover:opacity-100 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 transition shrink-0"
                                   title="Copier le nom"
                                 >
-                                  {copiedKey === `name-${c.id}` ? (
-                                    <span className="text-[10px] text-emerald-500 font-bold flex items-center gap-0.5">
-                                      <Check className="w-3 h-3" />
-                                    </span>
-                                  ) : (
-                                    <Copy className="w-3 h-3" />
-                                  )}
+                                  {copiedKey === `name-${c.id}` ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
                                 </button>
                               </div>
 
-                              {/* Forme + Capital + Ville/Canton + SIREN + Date d'incorporation cliquable */}
-                              <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 flex-wrap">
+                              <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex-wrap">
                                 {c.incorporationDate && (
                                   <button
                                     onClick={(e) => {
@@ -1274,28 +1278,37 @@ export default function App() {
                                         ? 'bg-blue-600 text-white border-blue-600'
                                         : 'bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-blue-500'
                                     }`}
-                                    title="Cliquer pour filtrer uniquement les entreprises incorporées ce jour-là"
+                                    title="Filtrer sur ce jour d'immatriculation"
                                   >
                                     📅 {formatDateFr(c.incorporationDate)}
                                   </button>
                                 )}
-                                <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 rounded font-medium text-slate-700 dark:text-slate-300">
+                                <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 rounded font-semibold text-slate-700 dark:text-slate-300">
                                   {c.legalForm}
                                 </span>
                                 {capAmount > 0 && (
                                   <span
-                                    className={`px-1.5 py-0.2 rounded font-bold border ${
-                                      capAmount >= 50000
-                                        ? 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/30'
-                                        : capAmount >= 20000
-                                        ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/25'
-                                        : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700'
-                                    }`}
-                                    title={`Capital social : ${capAmount.toLocaleString('fr-FR')} ${isCH ? 'CHF' : 'EUR'}`}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setMinCapital(prev => prev === capAmount ? 0 : Math.min(capAmount, 100000));
+                                    }}
+                                    className="cursor-pointer px-1.5 py-0.2 rounded font-bold bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25 hover:bg-indigo-500/20"
+                                    title="Cliquer pour filtrer par capital social"
                                   >
                                     💰 {capAmount.toLocaleString('fr-FR')} {isCH ? 'CHF' : '€'}
                                   </span>
                                 )}
+                                {revAmount > 0 && (
+                                  <span
+                                    className="px-1.5 py-0.2 rounded font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
+                                    title={`Chiffre d'affaires officiel (${c.revenueYear || 'Bilan'}) : ${revAmount.toLocaleString('fr-FR')} €`}
+                                  >
+                                    📊 CA: {revAmount >= 1000000 ? `${(revAmount / 1000000).toFixed(1)}M€` : `${Math.round(revAmount / 1000)}k€`}
+                                  </span>
+                                )}
+                              </div>
+
+                              <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex-wrap">
                                 <span
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -1305,8 +1318,7 @@ export default function App() {
                                       setGeoFilter(prev => prev === c.geoZone.regionCode ? 'ALL' : c.geoZone.regionCode);
                                     }
                                   }}
-                                  className="cursor-pointer hover:text-blue-500 font-medium"
-                                  title={c.geoZone?.regionLabel || c.city}
+                                  className="cursor-pointer hover:text-blue-500 font-medium truncate"
                                 >
                                   📍 {c.city} {isCH && c.canton ? `(${c.canton})` : c.postalCode ? `(${c.postalCode.slice(0, 2)})` : ''}
                                 </span>
@@ -1316,322 +1328,215 @@ export default function App() {
                                     e.stopPropagation();
                                     handleCopy(c.registrationNumber, `siren-${c.id}`);
                                   }}
-                                  className="font-mono text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition"
-                                  title="Copier le SIREN / IDE"
+                                  className="font-mono hover:text-blue-500 transition"
                                 >
                                   {copiedKey === `siren-${c.id}` ? '✓ Copié' : c.registrationNumber}
                                 </button>
-                                <span>•</span>
-                                {c.country === 'CH' ? (
-                                  <a
-                                    href={`https://www.zefix.ch/fr/search/entity/list?name=${encodeURIComponent(c.name)}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="px-1.5 py-0.2 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 font-bold hover:underline flex items-center gap-0.5 border border-blue-200 dark:border-blue-900/40 text-[9px]"
-                                    title="Consulter la fiche officielle sur Zefix / FOSC"
-                                  >
-                                    <span>Zefix</span>
-                                    <ExternalLink className="w-2.5 h-2.5" />
-                                  </a>
-                                ) : (
-                                  <a
-                                    href={`https://www.pappers.fr/entreprise/${c.registrationNumber?.replace(/\s+/g, '') || encodeURIComponent(c.name)}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="px-1.5 py-0.2 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 font-bold hover:underline flex items-center gap-0.5 border border-blue-200 dark:border-blue-900/40 text-[9px]"
-                                    title="Consulter la fiche légale sur Pappers"
-                                  >
-                                    <span>Pappers</span>
-                                    <ExternalLink className="w-2.5 h-2.5" />
-                                  </a>
-                                )}
+                                <a
+                                  href={c.northDataUrl || `https://www.northdata.fr/?query=${encodeURIComponent(`${c.name} ${c.registrationNumber || ''}`)}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 font-bold hover:underline flex items-center gap-0.5 border border-indigo-200 dark:border-indigo-800/60 text-[9px]"
+                                  title="Voir le graphe de détention et l'historique sur North Data"
+                                >
+                                  <span>NorthData</span>
+                                  <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
                               </div>
-
                             </div>
                           </div>
                         </td>
 
-                        {/* 3. NATURE D'ACTIVITE, PRE-QUALIFICATION REVOLUT & POTENTIEL FX */}
-                        <td className="py-3 px-3 whitespace-nowrap">
-                          <div 
-                            onClick={() => setSelectedCompany(c)}
-                            className="cursor-pointer group space-y-1"
-                            title="Cliquer pour voir l'analyse conformité, le potentiel FX et la description complète"
-                          >
-                            <div className="flex items-center gap-1.5">
+                        {/* 3. Secteur d'Activité, Conformité & FX */}
+                        <td className="py-2.5 px-2.5">
+                          <div className="space-y-1">
+                            <div
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const cat = c.activityCategory || 'Services B2B';
+                                setSelectedSector(prev => prev === cat ? 'ALL' : cat);
+                              }}
+                              title="Cliquer pour filtrer par ce secteur d'activité"
+                            >
                               {getCategoryBadge(c.activityCategory || 'Services B2B')}
-                              <span className="text-[10px] text-slate-400 dark:text-slate-500 opacity-0 group-hover:opacity-100 transition">
-                                🔍 fiche
-                              </span>
                             </div>
+
                             <div className="flex items-center gap-1 flex-wrap">
+                              {c.fxPotential && c.fxPotential.level === 'high' && (
+                                <span
+                                  onClick={() => setFxFilter(prev => prev === 'high' ? 'ALL' : 'high')}
+                                  className="cursor-pointer text-[10px] font-bold px-1.5 py-0.5 rounded border bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30 inline-flex items-center gap-0.5"
+                                  title={`${c.fxPotential.badge} — Cliquer pour filtrer`}
+                                >
+                                  {c.fxPotential.badge}
+                                </span>
+                              )}
+                              {c.fxPotential && c.fxPotential.level === 'medium' && (
+                                <span className="text-[10px] font-medium px-1.5 py-0.5 rounded border bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700">
+                                  {c.fxPotential.shortBadge}
+                                </span>
+                              )}
                               {c.compliance && (
-                                <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border inline-flex items-center gap-1 ${
+                                <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded border ${
                                   c.compliance.status === 'restricted'
                                     ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800'
                                     : c.compliance.status === 'conditional'
                                     ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800'
                                     : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
                                 }`}>
-                                  <span>{c.compliance.badge}</span>
-                                </span>
-                              )}
-
-                              {c.fxPotential && c.fxPotential.level === 'high' && (
-                                <span
-                                  className="text-[10px] font-bold px-1.5 py-0.5 rounded border bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30 inline-flex items-center gap-1"
-                                  title={`${c.fxPotential.badge} — ${c.fxPotential.reasons?.[0] || ''}`}
-                                >
-                                  {c.fxPotential.badge}
-                                </span>
-                              )}
-                              {c.fxPotential && c.fxPotential.level === 'medium' && (
-                                <span
-                                  className="text-[10px] font-medium px-1.5 py-0.5 rounded border bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700 inline-flex items-center gap-1"
-                                  title={c.fxPotential.badge}
-                                >
-                                  {c.fxPotential.shortBadge}
+                                  {c.compliance.badge}
                                 </span>
                               )}
                             </div>
                           </div>
                         </td>
 
-                        {/* 4. Dirigeant, Board & CFO (1-Click Copyable!) */}
-                        <td className="py-3 px-3 whitespace-nowrap">
-                          
-                          {/* Primary Dirigeant + Board Count */}
-                          {primaryDirigeant === 'X' ? (
-                            <div className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
-                              <span className="font-mono font-bold text-xs bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">X</span>
-                              <span className="text-[10px] italic">Non renseigné</span>
-                            </div>
-                          ) : (
-                            <div>
-                              <div className="flex items-center gap-1.5">
-                                <button
-                                  onClick={() => handleCopy(primaryDirigeant, `dir-${c.id}`)}
-                                  className="font-semibold text-slate-900 dark:text-slate-200 hover:text-blue-500 flex items-center gap-1 text-left group"
-                                  title="Copier le nom du dirigeant"
-                                >
-                                  <UserCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                                  <span>{primaryDirigeant}</span>
-                                  {copiedKey === `dir-${c.id}` && (
-                                    <span className="text-[10px] text-emerald-500 font-semibold">✓</span>
-                                  )}
-                                </button>
-                                {(c.dirigeants?.filter(d => d.name && d.name !== 'X').length || 0) > 1 && (
-                                  <button
-                                    onClick={() => setSelectedCompany(c)}
-                                    className="text-[9px] px-1.5 py-0.2 rounded-full bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-bold"
-                                    title="Voir tous les membres du Board / co-dirigeants"
-                                  >
-                                    +{c.dirigeants.filter(d => d.name && d.name !== 'X').length - 1} Board
-                                  </button>
-                                )}
-                              </div>
-                              <div className="text-[10px] text-slate-400 dark:text-slate-500 truncate max-w-[185px]">
-                                {c.dirigeants?.[0]?.role || 'Dirigeant'}
-                              </div>
-                            </div>
-                          )}
-
-                          <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
-                            <span>CFO / Dir. :</span>
-                            {c.cfo?.name && c.cfo.name !== 'X' && !c.cfo.name.includes('Direction') ? (
+                        {/* 4. Dirigeants (Strictly Physical Persons!) + Cross-Border / Holding Badges */}
+                        <td className="py-2.5 px-2.5">
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-1 flex-wrap">
                               <button
-                                onClick={() => handleCopy(c.cfo.name, `cfo-${c.id}`)}
-                                className="text-slate-700 dark:text-slate-300 font-medium hover:text-blue-500"
-                                title={c.cfo.role || 'Co-Décideur / CFO'}
+                                onClick={() => handleCopy(primaryDirigeant, `dir-${c.id}`)}
+                                className="font-bold text-slate-900 dark:text-slate-100 hover:text-blue-500 flex items-center gap-1 text-left truncate max-w-full"
+                                title="Personne physique certifiée au registre (Cliquer pour copier)"
                               >
-                                {c.cfo.name} {copiedKey === `cfo-${c.id}` && '✓'}
+                                <UserCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                                <span className="truncate">{primaryDirigeant}</span>
+                                {copiedKey === `dir-${c.id}` && <span className="text-[10px] text-emerald-500">✓</span>}
                               </button>
-                            ) : (
-                              <span className="font-mono text-slate-400 dark:text-slate-500 text-[10px]">X</span>
+                              {(c.dirigeants?.filter(d => d.name && d.name !== 'X').length || 0) > 1 && (
+                                <button
+                                  onClick={() => setSelectedCompany(c)}
+                                  className="text-[9px] px-1.5 py-0.2 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/30 font-bold shrink-0"
+                                >
+                                  +{c.dirigeants.filter(d => d.name && d.name !== 'X').length - 1} Board
+                                </button>
+                              )}
+                            </div>
+
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
+                              {c.dirigeants?.[0]?.role || 'Dirigeant (Personne Physique)'}
+                            </div>
+
+                            {/* Cross-Border / Foreign Entity Badges */}
+                            {intlLinks.length > 0 && (
+                              <div className="flex items-center gap-1 flex-wrap pt-0.5">
+                                {intlLinks.slice(0, 2).map((intl, idx) => (
+                                  <button
+                                    key={idx}
+                                    onClick={() => handleOpenNetwork(c)}
+                                    className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 dark:text-amber-300 border border-amber-500/30 font-bold flex items-center gap-1 truncate max-w-full"
+                                    title={`${intl.relation} : ${intl.entityName} (${intl.countryName}) — Cliquer pour voir la cartographie`}
+                                  >
+                                    <span>🌍 {intl.flag} Liée : {intl.countryName}</span>
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Corporate Holding Badge (if owned by a holding) */}
+                            {corpLinks.length > 0 && intlLinks.length === 0 && (
+                              <button
+                                onClick={() => handleOpenNetwork(c)}
+                                className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-bold flex items-center gap-1 truncate max-w-full"
+                                title={`Holding / Société Mère : ${corpLinks[0].name}`}
+                              >
+                                <span>🏢 Holding : {corpLinks[0].name.slice(0, 20)}</span>
+                              </button>
                             )}
                           </div>
                         </td>
 
-                        {/* 5. Contact Info: 1-Click Copy with EXACT SOURCE! */}
-                        <td className="py-3 px-3">
-                          <div className="space-y-1.5">
-                            
-                            {/* Phone (1-Click Copy + Exact Source) */}
-                            {c.phone ? (
-                              <div className="flex items-center gap-1.5 flex-wrap">
-                                <button
-                                  onClick={() => handleCopy(c.phone, `phone-${c.id}`)}
-                                  className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/50 text-[11px] font-mono flex items-center gap-1 transition shadow-xs"
-                                  title={`Cliquez pour copier. Source: ${c.phoneSource || 'Annonce légale / Greffe'}`}
-                                >
-                                  <Phone className="w-3 h-3 text-emerald-500" />
-                                  <span>{copiedKey === `phone-${c.id}` ? 'Copié !' : c.phone}</span>
-                                </button>
-                                <span 
-                                  className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 font-medium"
-                                  title={`Origine vérifiée du numéro : ${c.phoneSource || 'Greffe'}`}
-                                >
-                                  {c.phoneSource?.includes('BODACC') ? 'BODACC' : c.phoneSource?.includes('FOSC') ? 'FOSC (CH)' : 'Greffe'}
-                                </span>
-                              </div>
-                            ) : (
-                              <span className="text-[10px] text-slate-400 italic block">Tél : Non renseigné au greffe</span>
-                            )}
-
-                            {/* Email (1-Click Copy + Exact Source) */}
-                            {c.bestEmail ? (
-                              <div className="flex items-center gap-1.5 flex-wrap">
-                                <button
-                                  onClick={() => handleCopy(c.bestEmail, `mail-${c.id}`)}
-                                  className="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/70 border border-blue-200 dark:border-blue-800/50 text-[11px] font-mono flex items-center gap-1 transition shadow-xs"
-                                  title={`Cliquez pour copier. Source: ${c.emailSource || 'Serveur MX'}`}
-                                >
-                                  <Mail className="w-3 h-3 text-blue-500" />
-                                  <span>{copiedKey === `mail-${c.id}` ? 'Copié !' : c.bestEmail}</span>
-                                </button>
-                                <span 
-                                  className="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium"
-                                  title={`Origine de l'email : ${c.emailSource || 'MX vérifié'}`}
-                                >
-                                  MX Certifié
-                                </span>
-                              </div>
-                            ) : (
-                              <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
-                                <span className="italic">Mail : Non public</span>
-                                {c.linkedinDirigeantUrl && (
-                                  <a
-                                    href={c.linkedinDirigeantUrl}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-0.5 text-[10px] font-semibold"
-                                    title="Approcher le dirigeant directement sur LinkedIn"
-                                  >
-                                    <span>&rarr; Écrire sur LinkedIn</span>
-                                  </a>
-                                )}
-                              </div>
-                            )}
-
-                            {/* Website with strict SSL badge & LinkedIn direct links */}
-                            <div className="flex items-center gap-1.5 pt-0.5 flex-wrap">
+                        {/* 5. Verified Website, Anti-Homonym LinkedIn & Contact */}
+                        <td className="py-2.5 px-2.5">
+                          <div className="space-y-1">
+                            {/* Website + LinkedIn Row */}
+                            <div className="flex items-center gap-1 flex-wrap">
                               {c.website ? (
                                 <a
                                   href={c.website}
                                   target="_blank"
                                   rel="noreferrer"
-                                  className="text-[10px] px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-950/70 border border-purple-200 dark:border-purple-800 flex items-center gap-1 font-semibold transition"
-                                  title="Site sécurisé HTTPS vérifié (certificat SSL valide)"
+                                  className="text-[10px] px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 hover:bg-purple-100 border border-purple-200 dark:border-purple-800 flex items-center gap-1 font-bold transition truncate max-w-[140px]"
+                                  title={`Site officiel vérifié (anti-homonyme) : ${c.website}`}
                                 >
-                                  <Globe className="w-3 h-3 text-purple-500" />
-                                  <span>🔒 HTTPS</span>
+                                  <Globe className="w-3 h-3 text-purple-500 shrink-0" />
+                                  <span className="truncate">{c.domain || 'Site Web'}</span>
                                 </a>
                               ) : (
-                                <span 
-                                  className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700/60"
-                                  title="Pas de site web HTTPS public pour cette société naissante"
-                                >
-                                  ⚪ Pas de site
+                                <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-slate-400 border border-slate-200 dark:border-slate-700/60">
+                                  Pas de site
                                 </span>
                               )}
 
-                              {/* 1. LinkedIn Entreprise : Pour trouver les collaborateurs et l'équipe */}
                               {c.linkedinCompanyUrl && (
                                 <a
                                   href={c.linkedinCompanyUrl}
                                   target="_blank"
                                   rel="noreferrer"
-                                  className="text-[10px] px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-[#0a66c2] dark:text-sky-300 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 flex items-center gap-1 font-semibold transition"
-                                  title="Rechercher la page LinkedIn de l'entreprise pour voir les collaborateurs et décisionnaires"
+                                  className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-[#0a66c2] dark:text-sky-300 hover:bg-blue-100 border border-blue-200 dark:border-blue-800 flex items-center gap-1 font-semibold transition"
+                                  title="Recherche LinkedIn Entreprise (avec filtre pays anti-homonyme)"
                                 >
-                                  <LinkedinIcon className="w-3 h-3 text-[#0a66c2]" />
-                                  <span>LinkedIn Boîte</span>
+                                  <LinkedinIcon className="w-2.5 h-2.5 text-[#0a66c2]" />
+                                  <span>Société</span>
                                 </a>
                               )}
 
-                              {/* 2. LinkedIn Dirigeant : UNIQUEMENT si personne réelle identifiée */}
-                              {primaryDirigeant && primaryDirigeant !== 'X' && (
-                                <>
-                                  <a
-                                    href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(primaryDirigeant)}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="text-[10px] px-1.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/40 text-[#0a66c2] dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-950/70 border border-sky-200 dark:border-sky-800/60 flex items-center gap-1 font-semibold transition"
-                                    title={`Recherche nominative de ${primaryDirigeant} sur LinkedIn`}
-                                  >
-                                    <UserCheck className="w-3 h-3 text-sky-500" />
-                                    <span>Dirigeant</span>
-                                  </a>
-                                  <a
-                                    href={`https://www.google.com/search?q=${encodeURIComponent('site:linkedin.com/in ' + primaryDirigeant + ' ' + (c.city || ''))}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center gap-0.5 transition"
-                                    title={`Recherche Google directe du profil LinkedIn de ${primaryDirigeant}`}
-                                  >
-                                    <span>Google ↗</span>
-                                  </a>
-                                </>
+                              {c.linkedinDirigeantUrl && (
+                                <a
+                                  href={c.linkedinDirigeantUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-[10px] px-1.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/40 text-[#0a66c2] dark:text-sky-300 hover:bg-sky-100 border border-sky-200 dark:border-sky-800/60 flex items-center gap-0.5 font-semibold transition"
+                                  title={`Recherche LinkedIn : "${primaryDirigeant}" + "${c.name}"`}
+                                >
+                                  <UserCheck className="w-2.5 h-2.5 text-sky-500" />
+                                  <span>Décideur</span>
+                                </a>
                               )}
                             </div>
 
+                            {/* Direct Email / Phone if available */}
+                            {c.bestEmail && (
+                              <button
+                                onClick={() => handleCopy(c.bestEmail, `mail-${c.id}`)}
+                                className="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 text-[10px] font-mono flex items-center gap-1 truncate max-w-full hover:bg-blue-100"
+                                title={`Copier l'email (${c.emailSource})`}
+                              >
+                                <Mail className="w-2.5 h-2.5 text-blue-500 shrink-0" />
+                                <span className="truncate">{copiedKey === `mail-${c.id}` ? '✓ Copié !' : c.bestEmail}</span>
+                              </button>
+                            )}
+
+                            {c.phone && (
+                              <button
+                                onClick={() => handleCopy(c.phone, `phone-${c.id}`)}
+                                className="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50 text-[10px] font-mono flex items-center gap-1"
+                              >
+                                <Phone className="w-2.5 h-2.5 text-emerald-500 shrink-0" />
+                                <span>{copiedKey === `phone-${c.id}` ? '✓ Copié !' : c.phone}</span>
+                              </button>
+                            )}
                           </div>
                         </td>
 
-                        {/* 6. SCORE DE SURETE (SAFETY SCORE WITH TRANSPARENT BREAKDOWN!) */}
-                        <td className="py-3 px-3 whitespace-nowrap">
-                          <div className="group relative inline-block">
-                            <div className={`px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center gap-1.5 border cursor-help ${
-                              safetyScore >= 70 
-                                ? 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/30'
-                                : safetyScore >= 45 
-                                ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-500/30'
-                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700'
-                            }`}>
-                              {safetyScore >= 70 ? (
-                                <CheckCircle className="w-3 h-3 text-emerald-500" />
-                              ) : (
-                                <HelpCircle className="w-3 h-3 text-amber-500" />
-                              )}
-                              <span>{safetyScore}% Sûreté</span>
-                            </div>
-
-                            {/* Tooltip Breakdown */}
-                            <div className="hidden group-hover:block absolute bottom-full left-0 mb-2 w-56 p-2.5 bg-slate-900 text-white text-[10px] rounded-xl shadow-xl z-50 border border-slate-700">
-                              <span className="font-bold text-slate-200 block mb-1">Détails du score :</span>
-                              <div className="space-y-1">
-                                {c.safety?.breakdown?.map((b, i) => (
-                                  <div key={i} className="flex items-center justify-between">
-                                    <span className={b.ok ? "text-emerald-300" : "text-slate-400"}>
-                                      {b.ok ? "✓" : "✗"} {b.label}
-                                    </span>
-                                    <span className="font-mono text-slate-400">+{b.pts}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-
-                        {/* 7. Actions: Network Map + Full Drawer */}
-                        <td className="py-3 px-3 text-right whitespace-nowrap">
-                          <div className="flex items-center justify-end gap-1.5">
-                            <button
-                              onClick={() => handleOpenNetwork(c)}
-                              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-600/15 hover:bg-blue-100 dark:hover:bg-blue-600/30 text-blue-700 dark:text-blue-400 font-semibold text-[11px] border border-blue-200 dark:border-blue-500/20 transition shadow-sm"
-                              title="Voir la cartographie des sociétés liées par le dirigeant"
-                            >
-                              <Share2 className="w-3 h-3" />
-                              <span>Cartographie</span>
-                            </button>
+                        {/* 6. Actions: Cartographie Réseau & Fiche Complète */}
+                        <td className="py-2.5 px-2.5 text-right whitespace-nowrap">
+                          <div className="flex flex-col items-end gap-1">
                             <button
                               onClick={() => setSelectedCompany(c)}
-                              className="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg transition"
-                              title="Ouvrir la fiche complète"
+                              className="w-full px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold transition shadow-2xs flex items-center justify-center gap-1"
                             >
-                              <ChevronRight className="w-4 h-4" />
+                              <span>Fiche & Notes</span>
+                            </button>
+                            <button
+                              onClick={() => handleOpenNetwork(c)}
+                              className="w-full px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-[10px] font-semibold border border-slate-200 dark:border-slate-700 transition flex items-center justify-center gap-1"
+                              title="Ouvrir la cartographie North Data des dirigeants et holdings"
+                            >
+                              <Share2 className="w-3 h-3 text-blue-500" />
+                              <span>Cartographie</span>
                             </button>
                           </div>
                         </td>
@@ -1643,36 +1548,28 @@ export default function App() {
               </tbody>
             </table>
           </div>
-
         </div>
-
       </main>
 
-      {/* Network Modal */}
-      {networkData && (
-        <NetworkGraph
-          network={networkData}
-          onClose={() => setNetworkData(null)}
-          onSelectCompany={(comp) => {
-            setNetworkData(null);
-            setSelectedCompany(comp);
-          }}
-        />
-      )}
-
-      {/* Detail Modal */}
+      {/* Modals */}
       {selectedCompany && (
         <CompanyDetailModal
           company={selectedCompany}
           onClose={() => setSelectedCompany(null)}
           onUpdateStatus={handleUpdateStatus}
-          onOpenNetwork={(c) => {
+          onOpenNetwork={(comp) => {
             setSelectedCompany(null);
-            handleOpenNetwork(c);
+            handleOpenNetwork(comp);
           }}
         />
       )}
 
+      {networkData && (
+        <NetworkGraph
+          network={networkData}
+          onClose={() => setNetworkData(null)}
+        />
+      )}
     </div>
   );
 }

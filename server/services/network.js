@@ -1,11 +1,13 @@
 const { findRelatedCompaniesFR } = require('../scrapers/france');
 const { findRelatedCompaniesCH } = require('../scrapers/switzerland');
+const { isValidPhysicalPersonName, buildNorthDataUrl, COUNTRY_MAP } = require('./northdata');
 
 /**
- * Service to build a complete, factual relationship map between:
+ * Service to build a North Data-inspired relationship & ownership cartography between:
  * - The target company
- * - Its directors, board members, CFO & corporate holdings (personnes physiques & morales)
- * - Their other active companies (sociétés liées / participations / mandats croisés RCS & FOSC)
+ * - Its physical directors, board members & CFO (personnes physiques uniquement)
+ * - Its corporate holdings / parent / sister companies (personnes morales)
+ * - Its foreign / cross-border entities (`internationalLinks` with country flags)
  */
 async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
   if (!company) return null;
@@ -33,51 +35,96 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
     }
   }
 
+  const homeFlag = company.country === 'CH' ? '🇨🇭' : '🇫🇷';
+
   // 1. Central Target Company Node
   addNode({
     id: company.id,
     label: company.name,
     type: 'target_company',
     country: company.country,
+    flag: homeFlag,
     registrationNumber: company.registrationNumber,
     legalForm: company.legalForm,
     shareCapital: company.shareCapital,
+    revenue: company.revenue || null,
     city: company.city,
     activity: company.activity,
+    northDataUrl: company.northDataUrl || buildNorthDataUrl(company),
     isTarget: true,
   });
 
-  // 2. Corporate Holdings / Parent Companies / Domiciliation links (if any)
+  // 2. Corporate Holdings / Parent Companies / Domiciliation links
   const corporateLinks = company.corporateLinks || [];
   for (const corp of corporateLinks) {
     if (!corp.name) continue;
     const corpNodeId = corp.id || `sister-corp-${corp.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+    const cc = corp.countryCode || company.country;
+    const cInfo = COUNTRY_MAP[cc] || { code: cc, name: cc, flag: homeFlag };
+    const isForeign = cc !== company.country;
+
     addNode({
       id: corpNodeId,
       label: corp.name,
       type: 'sister_company',
+      isForeign,
+      country: cInfo.code,
+      countryName: cInfo.name,
+      flag: cInfo.flag,
       siren: corp.siren || '',
       legalForm: corp.legalForm || (company.country === 'CH' ? 'SA / GmbH' : 'Holding SAS / SARL'),
       shareCapital: corp.shareCapital || 50000,
       city: corp.city || company.city,
-      activity: corp.activity || 'Structure liée / Holding / Mandataire personne morale',
-      country: company.country,
-      roleHeld: corp.roleHeld || 'Holding / Société liée',
+      activity: corp.activity || 'Structure liée / Holding / Actionnaire Personne Morale',
+      roleHeld: corp.roleHeld || 'Holding / Société Mère',
+      northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(corp.name)}`,
     });
 
     addEdge({
       id: `edge-${company.id}-${corpNodeId}`,
       source: company.id,
       target: corpNodeId,
-      label: corp.roleHeld || 'Holding / Liée',
-      type: 'mandate',
+      label: corp.roleHeld || 'Détention / Holding',
+      type: isForeign ? 'cross_border' : 'mandate',
     });
   }
 
-  // 3. Real Dirigeants, Board Members & Directeurs
-  const realDirigeants = (company.dirigeants || []).filter(
-    d => d.name && d.name !== 'X' && !/^(direction|conseil d'administration)/i.test(d.name)
+  // 3. Explicit Foreign / Cross-Border Entities (`internationalLinks`)
+  const internationalLinks = company.internationalLinks || [];
+  for (const intl of internationalLinks) {
+    if (!intl.entityName) continue;
+    const intlId = `intl-${intl.countryCode}-${intl.entityName.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 28)}`;
+    addNode({
+      id: intlId,
+      label: `${intl.flag || '🌍'} ${intl.entityName}`,
+      type: 'sister_company',
+      isForeign: true,
+      country: intl.countryCode,
+      countryName: intl.countryName,
+      flag: intl.flag || '🌍',
+      legalForm: `Entité Étrangère (${intl.countryName})`,
+      shareCapital: company.shareCapital || 50000,
+      city: intl.city || intl.countryName,
+      activity: `${intl.relation} — Lien transfrontalier (${company.country} ↔ ${intl.countryCode})`,
+      roleHeld: intl.relation || 'Lien International',
+      northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(intl.entityName)}`,
+    });
+
+    addEdge({
+      id: `edge-${company.id}-${intlId}`,
+      source: company.id,
+      target: intlId,
+      label: `${intl.flag || ''} ${intl.relation || 'Lien International'}`.trim(),
+      type: 'cross_border',
+    });
+  }
+
+  // 4. Strictly Physical Dirigeants, Board Members & Directeurs
+  const realDirigeants = (company.dirigeants || []).filter(d =>
+    isValidPhysicalPersonName(d?.name, company.name)
   );
+
+  const cleanComp = (company.name || '').replace(/\b(SAS|SARL|SA|SASU|EURL|GmbH|Sàrl|AG)\b/gi, '').trim() || company.name;
 
   for (let i = 0; i < realDirigeants.length; i++) {
     const d = realDirigeants[i];
@@ -87,11 +134,12 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
       id: personId,
       label: d.name,
       type: 'person',
-      role: d.role || 'Dirigeant / Membre du Board',
+      role: d.role || 'Dirigeant / Membre du Board (Personne Physique)',
       birthYear: d.birthYear || null,
       email: company.bestEmail,
       phone: company.phone,
-      linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(d.name)}`,
+      linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${d.name}" "${cleanComp}"`)}`,
+      northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(`${d.name} ${company.city || ''}`)}`,
       isPrimary: Boolean(d.isPrimary || i === 0),
     });
 
@@ -99,11 +147,11 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
       id: `edge-${company.id}-${personId}`,
       source: company.id,
       target: personId,
-      label: d.role || 'Dirigeant / Mandataire',
+      label: d.role || 'Dirigeant Physique',
       type: 'mandate',
     });
 
-    // Look for sister companies in current database first
+    // Look for sister companies in current database (same physical director across FR or CH!)
     const sisterCompanies = [];
     const dbSisters = allCompanies.filter(
       c =>
@@ -120,7 +168,8 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
         shareCapital: c.shareCapital,
         activity: c.activity,
         city: c.city,
-        roleHeld: c.dirigeants.find(x => x.name.toLowerCase() === d.name.toLowerCase())?.role || 'Mandataire',
+        countryCode: c.country,
+        roleHeld: c.dirigeants.find(x => x.name.toLowerCase() === d.name.toLowerCase())?.role || 'Mandataire commun',
       });
     }
 
@@ -159,21 +208,27 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
       }
     }
 
-    // Add up to 3 sister companies per director to the graph
     for (const sister of sisterCompanies.slice(0, 3)) {
       const sisterNodeId = sister.id || `sister-${sister.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+      const sCountry = sister.countryCode || company.country;
+      const sInfo = COUNTRY_MAP[sCountry] || { code: sCountry, name: sCountry, flag: homeFlag };
+      const isForeignSister = sCountry !== company.country;
 
       addNode({
         id: sisterNodeId,
         label: sister.name,
         type: 'sister_company',
+        isForeign: isForeignSister,
+        country: sInfo.code,
+        countryName: sInfo.name,
+        flag: sInfo.flag,
         siren: sister.siren || '',
-        legalForm: sister.legalForm || (company.country === 'CH' ? 'Sàrl / AG' : 'SAS / SARL'),
-        shareCapital: sister.shareCapital || (company.country === 'CH' ? 20000 : 10000),
+        legalForm: sister.legalForm || (sCountry === 'CH' ? 'Sàrl / AG' : 'SAS / SARL'),
+        shareCapital: sister.shareCapital || (sCountry === 'CH' ? 20000 : 10000),
         city: sister.city || company.city,
-        activity: sister.activity || 'Société liée par mandat commun',
-        country: company.country,
+        activity: sister.activity || 'Société liée par dirigeant physique commun',
         roleHeld: sister.roleHeld || 'Mandat croisé',
+        northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(sister.name)}`,
       });
 
       addEdge({
@@ -181,16 +236,15 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
         source: personId,
         target: sisterNodeId,
         label: sister.roleHeld || 'Mandat croisé',
-        type: 'cross_mandate',
+        type: isForeignSister ? 'cross_border' : 'cross_mandate',
       });
     }
   }
 
-  // 4. Distinct CFO node if not already in realDirigeants
+  // 5. Distinct Physical CFO node if not already in realDirigeants
   if (
     company.cfo &&
-    company.cfo.name &&
-    company.cfo.name !== 'X' &&
+    isValidPhysicalPersonName(company.cfo.name, company.name) &&
     !realDirigeants.some(d => d.name.toLowerCase() === company.cfo.name.toLowerCase())
   ) {
     const cfoId = `person-cfo-${company.cfo.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
@@ -198,8 +252,9 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
       id: cfoId,
       label: company.cfo.name,
       type: 'person_cfo',
-      role: company.cfo.role || 'Directeur Financier / CFO',
+      role: company.cfo.role || 'Directeur Financier / CFO (Personne Physique)',
       linkedinUrl: company.cfo.linkedinSearchUrl,
+      northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(company.cfo.name)}`,
     });
 
     addEdge({
@@ -211,74 +266,36 @@ async function buildCompanyNetwork(company, allCompanies = [], options = {}) {
     });
   }
 
-  // 5. Ensure graph is never a single isolated node if registry has no physical person
+  // 6. Add North Data / Registry Hub node if only 1 node exists
   if (nodes.length === 1) {
-    const linkedinNodeId = `person-linkedin-${company.id}`;
+    const ndNodeId = `sister-nd-${company.id}`;
     addNode({
-      id: linkedinNodeId,
-      label: `Équipe ${company.name}`,
-      type: 'person',
-      role: 'Recherche Décideurs sur LinkedIn',
-      email: company.bestEmail,
-      phone: company.phone,
-      linkedinUrl: company.linkedinCompanyUrl,
-    });
-    addEdge({
-      id: `edge-${company.id}-${linkedinNodeId}`,
-      source: company.id,
-      target: linkedinNodeId,
-      label: 'LinkedIn Entreprise',
-      type: 'mandate',
-    });
-
-    const regNodeId = `sister-reg-${company.id}`;
-    addNode({
-      id: regNodeId,
-      label: company.country === 'CH' ? `Registre FOSC (${company.canton || 'CH'})` : `Greffe RCS (${company.city})`,
+      id: ndNodeId,
+      label: `Graphe North Data (${company.name})`,
       type: 'sister_company',
-      legalForm: 'Dossier Officiel',
-      city: company.city,
-      activity: `Immatriculation ${company.registrationNumber} — consulter les statuts pour identifier les bénéficiaires effectifs`,
       country: company.country,
-      roleHeld: 'Dépôt légal',
+      flag: homeFlag,
+      legalForm: 'Registre Européen North Data',
+      city: company.city,
+      activity: `Consulter la chaîne de détention et l'historique complet sur North Data (${company.registrationNumber})`,
+      roleHeld: 'North Data Europe',
+      northDataUrl: buildNorthDataUrl(company),
     });
     addEdge({
-      id: `edge-${company.id}-${regNodeId}`,
+      id: `edge-${company.id}-${ndNodeId}`,
       source: company.id,
-      target: regNodeId,
-      label: company.registrationNumber,
+      target: ndNodeId,
+      label: 'North Data',
       type: 'cross_mandate',
     });
   }
 
-  const sisterCount = nodes.filter(n => n.type === 'sister_company').length;
-  const dirCount = realDirigeants.length;
-
-  let pitch = '';
-  if (sisterCount > 0 && dirCount > 0) {
-    pitch = `Opportunité Multi-Comptes : ${realDirigeants[0].name} est lié(e) à ${sisterCount} autre(s) structure(s) identifiée(s). Proposer l'onboarding groupé Revolut Business.`;
-  } else if (dirCount > 1) {
-    pitch = `Gouvernance Collégiale (${dirCount} co-décideurs / membres du Board) : Proposer Revolut Business avec cartes d'entreprise et approbations multi-utilisateurs.`;
-  } else if (dirCount === 1) {
-    pitch = `Décideur unique identifié (${realDirigeants[0].name}, ${realDirigeants[0].role}) : Approche directe pour ouverture de compte pro rapide.`;
-  } else {
-    pitch = `Identifier les fondateurs via la page LinkedIn de ${company.name} ou la fiche officielle Pappers / Zefix.`;
-  }
-
   return {
-    companyId: company.id,
-    companyName: company.name,
-    stats: {
-      totalEntities: nodes.length,
-      totalDirigeants: dirCount,
-      totalConnectedCompanies: nodes.filter(n => n.type.includes('company')).length,
-      revolutPitch: pitch,
-    },
     nodes,
     edges,
+    centerId: company.id,
+    northDataUrl: buildNorthDataUrl(company),
   };
 }
 
-module.exports = {
-  buildCompanyNetwork,
-};
+module.exports = { buildCompanyNetwork };

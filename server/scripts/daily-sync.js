@@ -3,34 +3,17 @@ const path = require('path');
 const { runSync } = require('../cron');
 const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone } = require('../services/compliance');
 const { buildCompanyNetwork } = require('../services/network');
-
-function cleanCompanyName(name) {
-  if (!name) return '';
-  return name
-    .replace(/\b(SAS|SARL|SA|SASU|EURL|GmbH|Sàrl|Sarl|AG|SNC|SCI|INC|LTD|CORP|GROUP|FRANCE|SUISSE)\b/gi, '')
-    .replace(/[^\w\s-]/gi, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function isGeneric(name, companyName) {
-  if (!name) return true;
-  const n = name.trim().toLowerCase();
-  const c = (companyName || '').trim().toLowerCase();
-  if (n === 'x' || n === 'fondateur' || n === 'non renseigné' || n === 'non renseigne') return true;
-  if (n.includes('direction') || n.includes('conseil d\'administration')) return true;
-  if (n === c || n === c + ' direction' || n.includes(c + ' direction')) return true;
-  return false;
-}
+const { isValidPhysicalPersonName, isValidCommercialCompany, buildNorthDataUrl, detectInternationalLinks } = require('../services/northdata');
+const { cleanCompanyName } = require('../services/enricher');
 
 async function main() {
   console.log('[Daily Sync] Démarrage du scraping quotidien automatisé...');
-  
+
   // 1. Run official scrapers (BODACC France & SHAB Suisse)
   const syncResult = await runSync({ country: 'ALL' });
   console.log('[Daily Sync] Résultat brut:', JSON.stringify(syncResult));
 
-  // 2. Read updated database and apply 100% factual rules, compliance & cloud CRM overrides
+  // 2. Read updated database and apply 100% factual rules, triple-check commercial filter & cloud CRM overrides
   const dbPath = path.join(__dirname, '../data/db.json');
   const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 
@@ -53,6 +36,9 @@ async function main() {
     console.warn('[Daily Sync] Impossible de lire les overrides Cloud:', e.message);
   }
 
+  // Triple-check: Purge any non-commercial company (Entrepreneur Individuel, Verein, SCI, >30M€ CA)
+  db.companies = db.companies.filter(comp => isValidCommercialCompany(comp));
+
   for (const comp of db.companies) {
     // Merge shared team notes/status if present
     if (cloudOverrides[comp.id]) {
@@ -62,34 +48,44 @@ async function main() {
       if (ov.crmAssignedTo !== undefined) comp.crmAssignedTo = ov.crmAssignedTo;
     }
 
-    const cleanComp = cleanCompanyName(comp.name);
-    comp.linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(cleanComp || comp.name)}`;
+    const cleanComp = cleanCompanyName(comp.name) || comp.name;
+    const countryLabel = comp.country === 'CH' ? 'Suisse' : 'France';
+    comp.linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(`"${cleanComp}" ${countryLabel}`)}`;
+    comp.northDataUrl = buildNorthDataUrl(comp);
+    comp.incorporationYear = (comp.incorporationDate || '').slice(0, 4) || '2026';
 
-    // Dirigeants
-    const realDirs = (comp.dirigeants || []).filter(d => !isGeneric(d.name, comp.name));
+    // Strictly PHYSICAL Dirigeants only
+    const realDirs = (comp.dirigeants || []).filter(d => isValidPhysicalPersonName(d?.name, comp.name));
     if (realDirs.length > 0) {
-      comp.dirigeants = realDirs;
-      comp.linkedinDirigeantUrl = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(realDirs[0].name)}`;
+      comp.dirigeants = realDirs.map((d, idx) => ({ ...d, isPrimary: idx === 0 }));
+      comp.linkedinDirigeantUrl = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${realDirs[0].name}" "${cleanComp}"`)}`;
     } else {
       comp.dirigeants = [{ name: 'X', role: 'Non renseigné au registre', isPrimary: true }];
       comp.linkedinDirigeantUrl = null;
     }
 
-    // CFO
-    if (comp.cfo && isGeneric(comp.cfo.name, comp.name)) {
+    // Strictly PHYSICAL CFO only
+    if (comp.cfo && !isValidPhysicalPersonName(comp.cfo.name, comp.name)) {
       comp.cfo = { name: 'X', role: 'Non renseigné', isEstimated: false, linkedinSearchUrl: null };
     }
+
+    // International / Cross-Border Links
+    comp.internationalLinks = comp.internationalLinks && comp.internationalLinks.length > 0
+      ? comp.internationalLinks
+      : detectInternationalLinks(comp);
+    comp.isCrossBorder = comp.internationalLinks.length > 0;
 
     // Revolut Compliance Pre-Screening + FX Multi-Currency & Geo Zone
     comp.compliance = evaluateRevolutCompliance(comp);
     comp.fxPotential = evaluateFxPotential(comp);
     comp.geoZone = getGeoZone(comp);
 
-    // Ensure rich network cartography
-    if (!comp.network || !comp.network.nodes || comp.network.nodes.length <= 1) {
-      comp.network = await buildCompanyNetwork(comp, db.companies);
-    }
+    // Ensure rich North Data-style network cartography
+    comp.network = await buildCompanyNetwork(comp, db.companies, { skipLiveLookup: true });
   }
+
+  // Remove any company without a physical director
+  db.companies = db.companies.filter(c => c.dirigeants?.[0]?.name && c.dirigeants[0].name !== 'X');
 
   // 3. Write back to server db.json
   fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
@@ -104,6 +100,7 @@ async function main() {
   const highSafetyCount = db.companies.filter(c => (c.safety?.score || c.confidenceScore || 0) >= 60).length;
   const verifiedWebCount = db.companies.filter(c => Boolean(c.website)).length;
   const highFxCount = db.companies.filter(c => c.fxPotential?.level === 'high').length;
+  const crossBorderCount = db.companies.filter(c => c.isCrossBorder || (c.corporateLinks && c.corporateLinks.length > 0)).length;
 
   const stats = {
     total,
@@ -117,25 +114,24 @@ async function main() {
     highConfidence: highSafetyCount,
     highSafetyCount,
     verifiedWebCount,
-    highFxCount
+    highFxCount,
+    crossBorderCount
   };
   const publicBundle = { companies: db.companies, stats };
 
   // 5. Update client data sources
-  const clientPublicPath = path.join(__dirname, '../../client/public/data.json');
-  const clientSrcPath = path.join(__dirname, '../../client/src/data/companies.json');
+  const clientPublicData = path.join(__dirname, '../../client/public/data.json');
+  const clientSrcData = path.join(__dirname, '../../client/src/data/companies.json');
+  const rootData = path.join(__dirname, '../../data.json');
 
-  if (fs.existsSync(path.dirname(clientPublicPath))) {
-    fs.writeFileSync(clientPublicPath, JSON.stringify(publicBundle, null, 2));
-  }
-  if (fs.existsSync(path.dirname(clientSrcPath))) {
-    fs.writeFileSync(clientSrcPath, JSON.stringify(publicBundle, null, 2));
-  }
+  fs.writeFileSync(clientPublicData, JSON.stringify(publicBundle, null, 2));
+  fs.writeFileSync(clientSrcData, JSON.stringify(db.companies, null, 2));
+  fs.writeFileSync(rootData, JSON.stringify(publicBundle, null, 2));
 
-  console.log(`[Daily Sync Terminé] Base à jour avec ${total} sociétés (${france} FR, ${switzerland} CH).`);
+  console.log(`[Daily Sync] Terminé avec succès ! Total base: ${total} sociétés (${france} FR / ${switzerland} CH).`);
 }
 
 main().catch(err => {
-  console.error('[Daily Sync Erreur]', err);
+  console.error('[Daily Sync] Erreur fatale:', err);
   process.exit(1);
 });

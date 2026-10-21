@@ -1,25 +1,30 @@
 const axios = require('axios');
 const { enrichCompany } = require('../services/enricher');
+const { isValidPhysicalPersonName, isValidCommercialCompany, detectInternationalLinks } = require('../services/northdata');
 
 function formatPersonName(prenoms = '', nom = '') {
+  const cleanNom = (nom || '')
+    .replace(/\([^)]*\)/g, '') // Strip maiden/birth name in parens e.g. "PEDINI (BACONNET)"
+    .trim()
+    .toUpperCase();
   const cleanPart = (str) =>
     (str || '')
       .trim()
       .split(/[\s-]+/)
       .filter(Boolean)
+      .slice(0, 2)
       .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
       .join(' ');
   const first = cleanPart(prenoms);
-  const last = (nom || '').trim().toUpperCase();
-  return `${first} ${last}`.trim();
+  return `${first} ${cleanNom}`.trim();
 }
 
 /**
  * Parse the `personne.administration` string directly from a BODACC record
- * to extract physical directors (Président, Directeur général, Gérant, Administrateur)
- * and corporate holdings (Personnes morales).
+ * to extract strictly PHYSICAL directors (`dirigeants`)
+ * and corporate holdings (`corporateLinks`).
  */
-function parseBodaccAdministration(adminStr = '') {
+function parseBodaccAdministration(adminStr = '', companyName = '') {
   if (!adminStr || typeof adminStr !== 'string') {
     return { dirigeants: [], corporateLinks: [] };
   }
@@ -39,7 +44,7 @@ function parseBodaccAdministration(adminStr = '') {
     let rawPerson = seg.slice(colonIdx + 1).trim().replace(/\.$/, '');
     rawPerson = rawPerson.replace(/\s+nom d'usage\s*:\s*[^,;.]*/gi, '').trim();
 
-    const isCorporateKeyword = /(?:^|\s)(SAS|SARL|SA|SASU|EURL|SCI|SNC|St[eé]|Soci[eé]t[eé]|GROUP|GROUPE|HOLDING|CAPITAL|INVEST|PARTNERS|CABINET|AUDIT|KPMG|DELOITTE|ERNST|PWC|FIDUCIAIRE|GESTION)(?:\s|$)/i.test(rawPerson);
+    const isCorporateKeyword = /(?:^|\s)(SAS|SARL|SA|SASU|EURL|SCI|SNC|GmbH|Sàrl|AG|Ltd|LLC|Inc|BV|Srl|St[eé]|Soci[eé]t[eé]|GROUP|GROUPE|HOLDING|CAPITAL|INVEST|PARTNERS|CABINET|AUDIT|KPMG|DELOITTE|ERNST|PWC|FIDUCIAIRE|GESTION|VENTURES|MANAGEMENT)(?:\s|$)/i.test(rawPerson);
     const hasAllCapsOnly = !/[A-ZÀ-Ÿ][a-zà-ÿ]{2,}/.test(rawPerson.replace(/\b(de|du|des|et|la|le|les|en|sur|par|actions|simplifiée|responsabilité|limitée|anonyme)\b/gi, ''));
 
     if (isCorporateKeyword || hasAllCapsOnly || /repr[eé]sent[eé] par/i.test(rawPerson)) {
@@ -93,7 +98,11 @@ function parseBodaccAdministration(adminStr = '') {
       }
     }
 
-    if (fullName && fullName.length > 4 && !/\d/.test(fullName) && !/commissaire/i.test(rawRole)) {
+    if (
+      fullName &&
+      !/commissaire/i.test(rawRole) &&
+      isValidPhysicalPersonName(fullName, companyName)
+    ) {
       if (!dirigeants.some(d => d.name.toLowerCase() === fullName.toLowerCase())) {
         dirigeants.push({
           name: fullName,
@@ -108,7 +117,22 @@ function parseBodaccAdministration(adminStr = '') {
 }
 
 /**
- * Fetch all physical directors, board members, CFOs, and corporate holding links
+ * Extract latest annual turnover (`Chiffre d'Affaires`) from INSEE/RNE `finances` object
+ */
+function extractFrenchRevenue(financesObj) {
+  if (!financesObj || typeof financesObj !== 'object') return { revenue: null, revenueYear: null };
+  const years = Object.keys(financesObj).sort((a, b) => Number(b) - Number(a));
+  for (const y of years) {
+    const ca = financesObj[y]?.ca;
+    if (typeof ca === 'number' && !isNaN(ca) && ca > 0) {
+      return { revenue: Math.round(ca), revenueYear: y };
+    }
+  }
+  return { revenue: null, revenueYear: null };
+}
+
+/**
+ * Fetch all physical directors, board members, CFOs, corporate holding links, and turnover
  * from the official French government RNE/Sirene API (recherche-entreprises.api.gouv.fr).
  * If a company's President/Director is a corporate holding ("personne morale"),
  * recursively resolves the holding's SIREN to find the human decision-makers!
@@ -117,7 +141,7 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
   const cleanSiren = (siren || '').replace(/\D/g, '');
   const query = cleanSiren.length === 9 ? cleanSiren : companyName;
   if (!query || query === 'En cours') {
-    return { dirigeants: [], corporateLinks: [], item: null };
+    return { dirigeants: [], corporateLinks: [], item: null, revenue: null, revenueYear: null };
   }
 
   try {
@@ -129,7 +153,6 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
       ? results.find(r => r.siren === cleanSiren) || results[0]
       : results[0];
 
-    // If SIREN search returned no dirigeants, try searching by companyName
     if ((!item || !item.dirigeants || item.dirigeants.length === 0) && companyName && query !== companyName) {
       try {
         const resName = await axios.get(`https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(companyName)}&per_page=5`, {
@@ -145,21 +168,27 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
     }
 
     if (!item) {
-      return { dirigeants: [], corporateLinks: [], item: null };
+      return { dirigeants: [], corporateLinks: [], item: null, revenue: null, revenueYear: null };
     }
 
+    const { revenue, revenueYear } = extractFrenchRevenue(item.finances);
     const dirigeants = [];
     const corporateLinks = [];
     const rawDirs = item.dirigeants || [];
 
     for (const d of rawDirs) {
       if (d.type_dirigeant === 'personne physique' || (d.nom && d.prenoms)) {
+        if (/commissaire aux comptes/i.test(d.qualite || '')) continue;
         const fullName = formatPersonName(d.prenoms, d.nom);
-        if (fullName && fullName.length > 2 && !dirigeants.some(x => x.name.toLowerCase() === fullName.toLowerCase())) {
+        if (
+          isValidPhysicalPersonName(fullName, companyName) &&
+          !dirigeants.some(x => x.name.toLowerCase() === fullName.toLowerCase())
+        ) {
           dirigeants.push({
             name: fullName,
             role: d.qualite || 'Président / Dirigeant',
             birthYear: d.annee_de_naissance || null,
+            nationality: d.nationalite || null,
             isPrimary: dirigeants.length === 0,
           });
         }
@@ -167,11 +196,12 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
         const holdingName = (d.denomination || '').trim();
         const holdingSiren = (d.siren || '').replace(/\D/g, '');
         if (holdingName) {
+          const isAudit = /commissaire aux comptes/i.test(d.qualite || '');
           corporateLinks.push({
             id: holdingSiren ? `FR-${holdingSiren}` : undefined,
             name: holdingName,
             siren: holdingSiren,
-            legalForm: 'Holding / Personne Morale',
+            legalForm: isAudit ? 'Commissaire aux Comptes' : 'Holding / Personne Morale',
             shareCapital: 50000,
             activity: `Société mère / Mandataire personne morale (${d.qualite || 'Président'})`,
             city: item.siege?.libelle_commune || 'France',
@@ -180,7 +210,7 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
         }
 
         // Resolve human directors of the holding company via its SIREN!
-        if (holdingSiren && holdingSiren.length === 9) {
+        if (holdingSiren && holdingSiren.length === 9 && !/commissaire/i.test(d.qualite || '')) {
           try {
             const holdRes = await axios.get(`https://recherche-entreprises.api.gouv.fr/search?q=${holdingSiren}&per_page=1`, {
               timeout: 4000,
@@ -189,8 +219,12 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
             if (holdItem && Array.isArray(holdItem.dirigeants)) {
               for (const hd of holdItem.dirigeants) {
                 if (hd.type_dirigeant === 'personne physique' || (hd.nom && hd.prenoms)) {
+                  if (/commissaire/i.test(hd.qualite || '')) continue;
                   const humanName = formatPersonName(hd.prenoms, hd.nom);
-                  if (humanName && humanName.length > 2 && !dirigeants.some(x => x.name.toLowerCase() === humanName.toLowerCase())) {
+                  if (
+                    isValidPhysicalPersonName(humanName, companyName) &&
+                    !dirigeants.some(x => x.name.toLowerCase() === humanName.toLowerCase())
+                  ) {
                     dirigeants.push({
                       name: humanName,
                       role: `${hd.qualite || 'Dirigeant'} (via holding ${holdingName})`,
@@ -208,17 +242,14 @@ async function fetchFrenchDirectorsAndLinks(siren = '', companyName = '') {
       }
     }
 
-    return { dirigeants, corporateLinks, item };
-  } catch (err) {
-    return { dirigeants: [], corporateLinks: [], item: null };
+    return { dirigeants, corporateLinks, item, revenue, revenueYear };
+  } catch {
+    return { dirigeants: [], corporateLinks: [], item: null, revenue: null, revenueYear: null };
   }
 }
 
 /**
- * Scraper for newly created companies in France.
- * Sources:
- * 1. BODACC A (Annonces de créations de sociétés) via opendatasoft API
- * 2. API Recherche d'entreprises (DINUM / data.gouv / INPI / Sirene)
+ * Scraper for newly created commercial companies in France (SAS/SASU, SARL/EURL, SA, SNC only).
  */
 async function scrapeFranceCreations(limit = 20) {
   try {
@@ -227,9 +258,9 @@ async function scrapeFranceCreations(limit = 20) {
     const bodaccUrl = 'https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records';
     const bodaccRes = await axios.get(bodaccUrl, {
       params: {
-        where: 'publicationavis="A" AND familleavis_lib="Créations" AND listepersonnes like "%pm%"',
+        where: 'publicationavis="A" AND familleavis_lib="Créations" AND listepersonnes like "%administration%"',
         order_by: 'dateparution desc',
-        limit: Math.min(limit, 50),
+        limit: Math.min(limit * 2, 60),
       },
       timeout: 10000,
     });
@@ -246,22 +277,23 @@ async function scrapeFranceCreations(limit = 20) {
           (record.listepersonnes && typeof record.listepersonnes === 'string' && record.listepersonnes.includes('"typePersonne": "pp"') && !record.listepersonnes.includes('formeJuridique')) ||
           /individuel|auto-entrepreneur|micro-entreprise/i.test(record.commercant || '');
 
-        if (isPersonnePhysique) {
-          continue;
-        }
+        if (isPersonnePhysique) continue;
 
-        const sirenRaw = record.registre?.[0] || '';
+        const sirenRaw = record.registre?.[0] || record.registre?.[1] || '';
         const siren = sirenRaw.replace(/\D/g, '');
-        let companyName = record.commercant || '';
+        if (!siren || siren.length !== 9) continue;
 
+        let companyName = record.commercant || '';
         let dirigeants = [];
         let corporateLinks = [];
         let address = '';
         let city = record.ville || '';
         let postalCode = record.cp || '';
         let activity = '';
-        let legalForm = 'SAS';
+        let legalForm = '';
         let shareCapital = 5000;
+        let revenue = null;
+        let revenueYear = null;
 
         if (record.listepersonnes) {
           try {
@@ -272,7 +304,7 @@ async function scrapeFranceCreations(limit = 20) {
               if (person.formeJuridique) legalForm = person.formeJuridique;
               if (person.capital?.montantCapital) {
                 const cap = parseFloat(person.capital.montantCapital);
-                if (!isNaN(cap)) shareCapital = Math.round(cap);
+                if (!isNaN(cap) && cap > 0) shareCapital = Math.round(cap);
               }
               if (person.adresseSiegeSocial) {
                 const a = person.adresseSiegeSocial;
@@ -281,7 +313,7 @@ async function scrapeFranceCreations(limit = 20) {
                 if (a.ville) city = a.ville;
               }
               if (person.administration) {
-                const adminParsed = parseBodaccAdministration(person.administration);
+                const adminParsed = parseBodaccAdministration(person.administration, companyName);
                 if (adminParsed.dirigeants.length > 0) dirigeants = adminParsed.dirigeants;
                 if (adminParsed.corporateLinks.length > 0) corporateLinks = adminParsed.corporateLinks;
               }
@@ -309,7 +341,6 @@ async function scrapeFranceCreations(limit = 20) {
           }
         }
 
-        // Deep-enrich via API Recherche Entreprises if needed (including holding resolution!)
         if (dirigeants.length === 0 || corporateLinks.length > 0) {
           const gouvData = await fetchFrenchDirectorsAndLinks(siren, companyName);
           if (gouvData.dirigeants.length > 0) {
@@ -318,10 +349,14 @@ async function scrapeFranceCreations(limit = 20) {
           if (gouvData.corporateLinks.length > 0 && corporateLinks.length === 0) {
             corporateLinks = gouvData.corporateLinks;
           }
+          if (gouvData.revenue) {
+            revenue = gouvData.revenue;
+            revenueYear = gouvData.revenueYear;
+          }
           if (gouvData.item) {
             const item = gouvData.item;
             if (!companyName && item.nom_complet) companyName = item.nom_complet;
-            if (item.nature_juridique && (!legalForm || legalForm === 'Société Commerciale')) {
+            if (item.nature_juridique && !legalForm) {
               legalForm = mapNatureJuridique(item.nature_juridique);
             }
             if (item.siege) {
@@ -332,30 +367,27 @@ async function scrapeFranceCreations(limit = 20) {
           }
         }
 
-        if (dirigeants.length === 0) {
-          dirigeants.push({
-            name: 'X',
-            role: 'Non renseigné au registre',
-            isPrimary: true,
-          });
-        }
+        const normalizedLf = normalizeFrenchLegalForm(legalForm);
 
         const rawCompany = {
-          id: `FR-${siren || record.id}`,
+          id: `FR-${siren}`,
           country: 'FR',
           countryName: 'France',
-          name: companyName || 'Société Commerciale',
-          registrationNumber: siren || 'En cours',
+          name: companyName || '',
+          registrationNumber: siren,
           incorporationDate: record.dateparution || new Date().toISOString().split('T')[0],
-          legalForm: legalForm || 'SAS',
+          legalForm: normalizedLf,
           shareCapital: shareCapital || 5000,
+          revenue,
+          revenueYear,
           activity: activity || 'Conseil, commerce et services aux entreprises',
           address: address || `${postalCode} ${city}`,
           city: city || 'Paris',
           postalCode: postalCode || '75001',
           dirigeants,
           corporateLinks,
-          source: 'BODACC A (Greffe RCS)',
+          internationalLinks: detectInternationalLinks({ country: 'FR', corporateLinks, activity, address }),
+          source: 'BODACC A & RNE (INPI)',
           crmStatus: 'new',
           crmNotes: '',
           crmAssignedTo: null,
@@ -363,8 +395,13 @@ async function scrapeFranceCreations(limit = 20) {
           createdAt: new Date().toISOString(),
         };
 
+        // Triple-check: strictly commercial SAS/SARL/SA/SNC, turnover <= 30M€, and physical director
+        if (!isValidCommercialCompany(rawCompany)) continue;
+        if (!rawCompany.dirigeants || rawCompany.dirigeants.length === 0) continue;
+
         const enriched = await enrichCompany(rawCompany);
         companies.push(enriched);
+        if (companies.length >= limit) break;
       } catch (itemErr) {
         console.error('[Scraper FR] Erreur sur annonce unitaire:', itemErr.message);
       }
@@ -378,10 +415,10 @@ async function scrapeFranceCreations(limit = 20) {
 }
 
 /**
- * Find related companies by director name in France
+ * Find related commercial companies by physical director name in France
  */
 async function findRelatedCompaniesFR(dirigeantName, currentSiren = '') {
-  if (!dirigeantName || dirigeantName === 'X' || dirigeantName.length < 3) return [];
+  if (!isValidPhysicalPersonName(dirigeantName)) return [];
 
   try {
     const res = await axios.get(`https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(dirigeantName)}&per_page=6`, {
@@ -393,6 +430,8 @@ async function findRelatedCompaniesFR(dirigeantName, currentSiren = '') {
     const related = [];
     for (const item of list) {
       if (cleanCurrent && item.siren === cleanCurrent) continue;
+      const lf = mapNatureJuridique(item.nature_juridique);
+      if (lf === 'Entrepreneur Individuel') continue;
 
       related.push({
         id: `FR-${item.siren}`,
@@ -400,7 +439,8 @@ async function findRelatedCompaniesFR(dirigeantName, currentSiren = '') {
         siren: item.siren,
         incorporationDate: item.date_creation,
         activity: item.activite_principale ? `Code NAF ${item.activite_principale}` : 'Services aux entreprises',
-        legalForm: mapNatureJuridique(item.nature_juridique),
+        legalForm: lf,
+        countryCode: 'FR',
         relationType: 'Même Dirigeant / Mandataire',
         roleHeld: item.dirigeants?.[0]?.qualite || 'Président / Mandataire',
         city: item.siege?.libelle_commune || 'France',
@@ -410,17 +450,29 @@ async function findRelatedCompaniesFR(dirigeantName, currentSiren = '') {
     }
 
     return related;
-  } catch (err) {
+  } catch {
     return [];
   }
 }
 
+function normalizeFrenchLegalForm(raw = '') {
+  const s = (raw || '').toLowerCase();
+  if (s.includes('individuel') || s.includes('auto-entrepreneur') || s.includes('micro')) return 'Entrepreneur Individuel';
+  if (s.includes('civile') || /\bsci\b/i.test(raw)) return 'SCI';
+  if (s.includes('simplifiée') || /\bsas\b|\bsasu\b/i.test(raw)) return 'SAS / SASU';
+  if (s.includes('responsabilité limitée') || /\bsarl\b|\beurl\b/i.test(raw)) return 'SARL / EURL';
+  if (s.includes('anonyme') || /\bsa\b/i.test(raw)) return 'SA';
+  if (s.includes('nom collectif') || /\bsnc\b/i.test(raw)) return 'SNC';
+  return raw;
+}
+
 function mapNatureJuridique(code) {
-  if (!code) return 'Société Commerciale';
+  if (!code) return 'SAS / SASU';
   const c = String(code);
   if (c.startsWith('57')) return 'SAS / SASU';
   if (c.startsWith('54')) return 'SARL / EURL';
   if (c.startsWith('55') || c.startsWith('56')) return 'SA';
+  if (c.startsWith('52')) return 'SNC';
   if (c.startsWith('65')) return 'SCI';
   if (c.startsWith('10')) return 'Entrepreneur Individuel';
   return 'Société Commerciale';
@@ -433,4 +485,6 @@ module.exports = {
   findRelatedCompaniesFR,
   formatPersonName,
   mapNatureJuridique,
+  normalizeFrenchLegalForm,
+  extractFrenchRevenue,
 };
