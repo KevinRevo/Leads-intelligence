@@ -139,6 +139,13 @@ const REVOLUT_UNSUPPORTED_RULES = [
     industry: 'Unsupported Cryptocurrency Activity (Exchange / Broker / Mining / ICO / Trading)',
     reason: 'Plateformes d\'échange crypto, courtiers/dealers crypto, distributeurs ATM crypto, ICO, minage de crypto, trading ou gestion d\'actifs crypto.',
     pattern: /\b(crypto.?exchange|échange de crypto|echange de crypto|courtier en crypto|crypto broker|crypto dealer|crypto atm|distributeur bitcoin|\bico\b|initial coin offering|minage de crypto|crypto mining|bitcoin mining|ferme de minage|crypto trading|trading de crypto|investissement en crypto|fonds crypto|crypto asset management|gestion d'actifs numériques|gestion de portefeuille crypto|kryptobörse|krypto-mining|kryptohandel)\b/i
+  },
+  // 19. Mots-clés néerlandais (Belgique flamande / Pays-Bas) des industries non supportées
+  {
+    id: 'benelux_nl_terms',
+    industry: 'Unsupported Industry (termes NL)',
+    reason: 'Activité (libellé néerlandais) relevant d\'une industrie exclue par Revolut Business : armes, adulte, enchères/art, cannabis, jeux d\'argent, véhicules/engins d\'occasion, pétrole/gaz, métaux/pierres précieuses, produits chimiques, crypto-échange.',
+    pattern: /\b(wapens|wapenhandel|munitie|erotiek|erotische|seksshop|veiling|veilinghuis|kunsthandel|kunstgalerij|antiquair|cannabis|hennep|gokken|gokhal|goksector|weddenschappen|loterij|tweedehands (?:auto|wagens|voertuigen)|handel in (?:tweedehands|gebruikte) (?:auto|voertuigen|machines)|zware machines|bouwmachines|landbouwmachines|aardolie|aardgas|brandstoffen|petroleum|edelmetaal|edelmetalen|goud(?:handel)?|juwelen|juwelier|diamanten|edelstenen|chemische producten|chemicali[eë]n|cryptobeurs|crypto-?handel|cryptomining|piramide|netwerkmarketing)\b/i
   }
 ];
 
@@ -297,7 +304,7 @@ function evaluateFxPotential(company) {
       score += 15;
       reasons.push(`Implantée dans le hub international / frontalier de ${company.city || canton} (${canton})`);
     }
-  } else {
+  } else if (!company.country || company.country === 'FR') {
     // Départements frontaliers (Suisse, Allemagne, Belgique, Italie, Monaco) ou hubs internationaux FR
     if (['74', '68', '67', '06', '59', '75', '92', '69'].includes(dept)) {
       score += 15;
@@ -415,6 +422,19 @@ function getGeoZone(company) {
       subCode: c,
       subLabel: `Canton ${c}`,
     };
+  }
+
+  if (company.country === 'BE') {
+    const pc = parseInt((company.postalCode || '').slice(0, 4), 10) || 0;
+    if (pc >= 1000 && pc <= 1299) return { regionCode: 'BE_BRU', regionLabel: 'Bruxelles-Capitale', subCode: String(pc).slice(0, 2), subLabel: `CP ${pc}` };
+    if ((pc >= 1300 && pc <= 1499) || (pc >= 4000 && pc <= 7999)) return { regionCode: 'BE_WAL', regionLabel: 'Wallonie', subCode: String(pc).slice(0, 2), subLabel: `CP ${pc}` };
+    return { regionCode: 'BE_VLG', regionLabel: 'Flandre', subCode: String(pc).slice(0, 2), subLabel: `CP ${pc}` };
+  }
+  if (company.country === 'LU') {
+    return { regionCode: 'LU', regionLabel: 'Luxembourg', subCode: 'LU', subLabel: company.city || 'Luxembourg' };
+  }
+  if (company.country === 'NL') {
+    return { regionCode: 'NL', regionLabel: 'Pays-Bas', subCode: (company.postalCode || '').slice(0, 2), subLabel: company.city || 'Pays-Bas' };
   }
 
   const dept = (company.postalCode || '75000').slice(0, 2);

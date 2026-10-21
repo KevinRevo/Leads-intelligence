@@ -200,6 +200,12 @@ function isValidCommercialCompany(company) {
     const validFrenchLf = /\b(SAS|SASU|SARL|EURL|SA|actions simplifiée|responsabilité limitée|société anonyme)\b/i.test(lf);
     if (!validFrenchLf) return false;
     if (/\b(individuel|civile|agricole|libérale|nom collectif)\b/i.test(lf)) return false;
+  } else if (company.country === 'BE' || company.country === 'NL' || company.country === 'LU') {
+    // Benelux: only capital companies (SRL/BV, SA/NV, Sàrl) — no sole proprietors, partnerships (VOF/CV/SNC/SCS), foundations, associations (ASBL/VZW), cooperatives
+    const validBeneluxLf = /^(SRL \/ BV|SA \/ NV|BV|NV|SRL|SA|Sàrl)$/i.test(lf);
+    if (!validBeneluxLf) return false;
+    if (/\b(vzw|asbl|aisbl|ivzw|maatschap|eenmanszaak|stichting|vereniging|co[öo]peratie|coop[ée]rative)\b/i.test(name)) return false;
+    if (/\b(v\.?o\.?f\.?|c\.?v\.?|scs|scsp|sicav|raif|sicar|fcp)\s*$/i.test(name)) return false;
   }
 
   // 3. Turnover (Chiffre d'affaires) check: must not exceed 30M€ / CHF
@@ -350,6 +356,15 @@ function buildNorthDataUrl(company) {
   const cleanSiren = reg.replace(/\s+/g, '');
   if (company.country === 'FR' && /^\d{9}$/.test(cleanSiren)) {
     return `https://www.northdata.fr/${encodeURIComponent(label)}/Siren%20${cleanSiren}`;
+  }
+  if (company.country === 'BE' && /^\d{4}\.\d{3}\.\d{3}$/.test(reg)) {
+    return `https://www.northdata.fr/${encodeURIComponent(label)}/KBO%20${reg}`;
+  }
+  if (company.country === 'NL' && /^\d{8}$/.test(cleanSiren)) {
+    return `https://www.northdata.fr/${encodeURIComponent(label)}/KVK%20${cleanSiren}`;
+  }
+  if (company.country === 'LU' && /^[A-Z]\d{4,7}$/.test(cleanSiren)) {
+    return `https://www.northdata.fr/${encodeURIComponent(label)}/${cleanSiren}`;
   }
   return `https://www.northdata.fr/?query=${encodeURIComponent(label)}`;
 }
@@ -525,6 +540,7 @@ async function fetchNorthDataEnrichment(company) {
 }
 
 module.exports = {
+  generateNorthDataToken,
   normalizePersonName,
   isValidPhysicalPersonName,
   isValidCommercialCompany,

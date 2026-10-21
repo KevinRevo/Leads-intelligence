@@ -15,6 +15,11 @@ function cleanCompanyName(name) {
     .trim();
 }
 
+const COUNTRY_LABELS = { FR: 'France', CH: 'Suisse', BE: 'Belgique', NL: 'Pays-Bas', LU: 'Luxembourg' };
+function getCountryLabel(code) {
+  return COUNTRY_LABELS[code] || 'France';
+}
+
 function slugify(text) {
   return (text || '')
     .toString()
@@ -76,6 +81,12 @@ function generateDomainCandidates(name, countryCode = 'FR') {
   // Prioritize national TLD (.ch for Switzerland, .fr for France) first, then .com ONLY with strict content verification
   const tlds = countryCode === 'CH'
     ? ['ch', 'swiss', 'com']
+    : countryCode === 'BE'
+    ? ['be', 'com']
+    : countryCode === 'LU'
+    ? ['lu', 'com']
+    : countryCode === 'NL'
+    ? ['nl', 'com']
     : ['fr', 'com'];
 
   const domains = [];
@@ -216,10 +227,17 @@ async function checkHttpsValid(hostname, companyName = '', countryCode = 'FR', c
   // 3. For .com domains (prone to US/foreign homonyms), require a French/Swiss local signal in the HTML!
   if (hostname.endsWith('.com')) {
     const cityNorm = (city || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const cityHit = cityNorm.length >= 4 && normalizedHtml.includes(cityNorm);
     const hasLocalSignal =
       countryCode === 'CH'
-        ? /\b(suisse|schweiz|svizzera|switzerland|chf|che-|zürich|zurich|genève|geneve|geneva|lausanne|basel|bern|zug|lugano)\b|lang=["'](fr|de|it)|(\+41\s*\d)/i.test(lower) || (cityNorm.length >= 4 && normalizedHtml.includes(cityNorm))
-        : /\b(france|paris|lyon|marseille|bordeaux|lille|nantes|toulouse|nice|strasbourg|siren|siret|rcs|sas|sarl|mentions l[eé]gales)\b|lang=["']fr|(\+33\s*\d)/i.test(lower) || (cityNorm.length >= 4 && normalizedHtml.includes(cityNorm));
+        ? /\b(suisse|schweiz|svizzera|switzerland|chf|che-|zürich|zurich|genève|geneve|geneva|lausanne|basel|bern|zug|lugano)\b|lang=["'](fr|de|it)|(\+41\s*\d)/i.test(lower) || cityHit
+        : countryCode === 'BE'
+        ? /\b(belgique|belgië|belgie|belgium|bruxelles|brussel|brussels|antwerpen|anvers|gent|liège|liege|namur|charleroi|bce|kbo|btw|tva be|be0\d{3})\b|(\+32\s*\d)/i.test(lower) || cityHit
+        : countryCode === 'LU'
+        ? /\b(luxembourg|luxemburg|lëtzebuerg|rcs luxembourg|tva lu|lu\d{8})\b|(\+352\s*\d)/i.test(lower) || cityHit
+        : countryCode === 'NL'
+        ? /\b(nederland|netherlands|amsterdam|rotterdam|utrecht|den haag|eindhoven|kvk|btw|nl\d{9}b\d{2})\b|(\+31\s*\d)/i.test(lower) || cityHit
+        : /\b(france|paris|lyon|marseille|bordeaux|lille|nantes|toulouse|nice|strasbourg|siren|siret|rcs|sas|sarl|mentions l[eé]gales)\b|lang=["']fr|(\+33\s*\d)/i.test(lower) || cityHit;
 
     if (!hasLocalSignal) {
       return { valid: false, reason: '.com domain lacks FR/CH local signal (homonym protection)' };
@@ -509,8 +527,8 @@ async function enrichCompany(rawCompany) {
   if (!phone) {
     if (rawCompany.rawPhone) {
       phone = rawCompany.rawPhone;
-      phoneSource = country === 'CH' ? 'Annonce légale FOSC (CH)' : 'Annonce légale BODACC';
-    } else if (domainInfo.website) {
+      phoneSource = country === 'CH' ? 'Annonce légale FOSC (CH)' : country === 'FR' ? 'Annonce légale BODACC' : (rawCompany.phoneSource || 'Registre officiel');
+    } else if (domainInfo.website && (country === 'CH' || country === 'FR')) {
       phone = country === 'CH' ? '+41 22 819 20 00' : '+33 1 84 16 00 00';
       phoneSource = country === 'CH' ? 'Standard Siège Social (Local.ch / FOSC)' : 'Standard Siège Social (PagesPro / Insee)';
     }
@@ -520,7 +538,7 @@ async function enrichCompany(rawCompany) {
 
   // Accurate LinkedIn URLs: normalized FirstGivenName LastName + country context (avoids 0-result quote failures when newly incorporated company isn't yet on the founder's profile)
   const cleanComp = cleanCompanyName(rawCompany.name) || rawCompany.name;
-  const countryLabel = country === 'CH' ? 'Suisse' : 'France';
+  const countryLabel = getCountryLabel(country);
   const linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(`${cleanComp} ${countryLabel}`)}`;
   const linkedinDirigeantUrl = hasRealDirigeant
     ? `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${primaryDirigeant} ${countryLabel}`)}`
@@ -601,6 +619,7 @@ function categorizeActivity(activityText, legalForm = '', companyName = '') {
 }
 
 module.exports = {
+  getCountryLabel,
   cleanCompanyName,
   verifyDomain,
   generateDomainCandidates,

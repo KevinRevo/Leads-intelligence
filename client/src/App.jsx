@@ -148,6 +148,7 @@ function computeLocalStats(comps) {
   const total = comps.length;
   const france = comps.filter(c => c.country === 'FR').length;
   const switzerland = comps.filter(c => c.country === 'CH').length;
+  const belgium = comps.filter(c => c.country === 'BE').length;
   const toContact = comps.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
   const contacted = comps.filter(c => c.crmStatus?.startsWith('contacted')).length;
   const inCrm = comps.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
@@ -159,8 +160,10 @@ function computeLocalStats(comps) {
     total,
     france,
     switzerland,
+    belgium,
     franceCount: france,
     switzerlandCount: switzerland,
+    belgiumCount: belgium,
     toContact,
     contacted,
     inCrm,
@@ -170,6 +173,15 @@ function computeLocalStats(comps) {
     highFxCount,
     crossBorderCount
   };
+}
+
+const COUNTRY_FLAGS = { FR: '\u{1F1EB}\u{1F1F7}', CH: '\u{1F1E8}\u{1F1ED}', BE: '\u{1F1E7}\u{1F1EA}', LU: '\u{1F1F1}\u{1F1FA}', NL: '\u{1F1F3}\u{1F1F1}' };
+const COUNTRY_LABELS_FR = { FR: 'France', CH: 'Suisse', BE: 'Belgique', LU: 'Luxembourg', NL: 'Pays-Bas' };
+function countryFlag(code) {
+  return COUNTRY_FLAGS[code] || COUNTRY_FLAGS.FR;
+}
+function countryLabelFr(code) {
+  return COUNTRY_LABELS_FR[code] || 'France';
 }
 
 function formatDateFr(isoDate = '') {
@@ -238,6 +250,8 @@ function applyLocalFilters(rawList, {
       if (legalFormFilter === 'SARL' && (!lf.includes('SARL') && !lf.includes('EURL'))) return false;
       if (legalFormFilter === 'SA_AG' && (!lf.includes('SA / AG') && lf !== 'SA' && !lf.includes('AG'))) return false;
       if (legalFormFilter === 'SARL_GMBH' && (!lf.includes('SÀRL') && !lf.includes('GMBH'))) return false;
+      if (legalFormFilter === 'SRL_BV' && !lf.includes('SRL / BV')) return false;
+      if (legalFormFilter === 'SA_NV' && !lf.includes('SA / NV')) return false;
     }
 
     // Geo / Language / Canton / Region / Cross-Border Filter
@@ -511,7 +525,7 @@ export default function App() {
         label: company.name,
         type: 'target_company',
         country: company.country,
-        flag: company.country === 'CH' ? '🇨🇭' : '🇫🇷',
+        flag: countryFlag(company.country),
         registrationNumber: company.registrationNumber,
         legalForm: company.legalForm,
         shareCapital: company.shareCapital,
@@ -535,7 +549,7 @@ export default function App() {
         role: d.role || 'Dirigeant / Board (Personne Physique)',
         email: idx === 0 ? company.bestEmail : null,
         phone: idx === 0 ? company.phone : null,
-        linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${d.name} ${company.country === 'CH' ? 'Suisse' : 'France'}`)}`,
+        linkedinUrl: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${d.name} ${countryLabelFr(company.country)}`)}`,
         northDataUrl: `https://www.northdata.fr/?query=${encodeURIComponent(d.name)}`,
       });
       edges.push({
@@ -558,7 +572,7 @@ export default function App() {
             label: other.name,
             type: 'sister_company',
             country: other.country,
-            flag: other.country === 'CH' ? '🇨🇭' : '🇫🇷',
+            flag: countryFlag(other.country),
             registrationNumber: other.registrationNumber,
             legalForm: other.legalForm,
             shareCapital: other.shareCapital,
@@ -820,7 +834,7 @@ export default function App() {
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-lg font-black text-slate-900 dark:text-white">{stats.total}</span>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                    🇫🇷 {stats.franceCount} FR • 🇨🇭 {stats.switzerlandCount} CH
+                    🇫🇷 {stats.franceCount} FR • 🇨🇭 {stats.switzerlandCount} CH • 🇧🇪 {stats.belgiumCount || 0} BE
                   </span>
                 </div>
               </div>
@@ -908,8 +922,8 @@ export default function App() {
           {/* Filter Row 1: Search, Country, CRM Status, SECTEUR D'ACTIVITÉ, Période (2024-2026) & Jour Exact */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2 items-center">
             
-            {/* Search Input (3 cols) */}
-            <div className="relative lg:col-span-3">
+            {/* Search Input (2 cols) */}
+            <div className="relative lg:col-span-2">
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -920,8 +934,8 @@ export default function App() {
               />
             </div>
 
-            {/* Country Selector Tabs (2 cols) */}
-            <div className="flex items-center bg-slate-100 dark:bg-[#161f30] p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 lg:col-span-2">
+            {/* Country Selector Tabs (3 cols) */}
+            <div className="flex items-center bg-slate-100 dark:bg-[#161f30] p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 lg:col-span-3">
               <button
                 onClick={() => setSelectedCountry('ALL')}
                 className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
@@ -945,6 +959,14 @@ export default function App() {
                 }`}
               >
                 🇨🇭 CH ({stats.switzerlandCount})
+              </button>
+              <button
+                onClick={() => setSelectedCountry('BE')}
+                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                  selectedCountry === 'BE' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                🇧🇪 BE ({stats.belgiumCount || 0})
               </button>
             </div>
 
@@ -1090,6 +1112,8 @@ export default function App() {
                 <option value="SARL">🇫🇷 SARL / EURL</option>
                 <option value="SA_AG">🇨🇭🇫🇷 SA / AG (Société Anonyme)</option>
                 <option value="SARL_GMBH">🇨🇭 Sàrl / GmbH (Suisse)</option>
+                <option value="SRL_BV">🇧🇪 SRL / BV (Belgique)</option>
+                <option value="SA_NV">🇧🇪 SA / NV (Belgique)</option>
               </select>
             </div>
 
@@ -1125,7 +1149,12 @@ export default function App() {
                   <option value="canton:BS">🇨🇭 Bâle-Ville (BS)</option>
                   <option value="canton:TI">🇨🇭 Tessin (TI)</option>
                 </optgroup>
-                <optgroup label="🇫🇷 France par Région">
+                <optgroup label="🇧🇪 Belgique par Région">
+                <option value="BE_BRU">Bruxelles-Capitale</option>
+                <option value="BE_VLG">Flandre</option>
+                <option value="BE_WAL">Wallonie</option>
+              </optgroup>
+              <optgroup label="🇫🇷 France par Région">
                   <option value="FR_IDF">🇫🇷 Île-de-France (Paris & RP)</option>
                   <option value="FR_ARA">🇫🇷 Auvergne-Rhône-Alpes (Lyon, 74)</option>
                   <option value="FR_PACA">🇫🇷 PACA & Côte d'Azur</option>
@@ -1261,7 +1290,7 @@ export default function App() {
                 ) : (
                   companies.slice(0, visibleCount).map((c) => {
                     const isCH = c.country === 'CH';
-                    const flag = isCH ? '🇨🇭' : '🇫🇷';
+                    const flag = countryFlag(c.country);
                     const rawDir = c.dirigeants?.[0]?.name;
                     const primaryDirigeant = (!rawDir || rawDir === 'X') ? 'X' : rawDir;
                     const capAmount = Number(c.shareCapital) || 0;

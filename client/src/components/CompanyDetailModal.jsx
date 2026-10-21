@@ -58,7 +58,10 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
   };
 
   const isCH = company.country === 'CH';
-  const flag = isCH ? '🇨🇭' : '🇫🇷';
+  const COUNTRY_FLAGS_M = { FR: '\u{1F1EB}\u{1F1F7}', CH: '\u{1F1E8}\u{1F1ED}', BE: '\u{1F1E7}\u{1F1EA}', LU: '\u{1F1F1}\u{1F1FA}', NL: '\u{1F1F3}\u{1F1F1}' };
+  const flag = COUNTRY_FLAGS_M[company.country] || COUNTRY_FLAGS_M.FR;
+  const isBE = company.country === 'BE';
+  const countryLabelFr = { FR: 'France', CH: 'Suisse', BE: 'Belgique', LU: 'Luxembourg', NL: 'Pays-Bas' }[company.country] || 'France';
   const safety = company.safety || { score: 50, label: 'Moyenne', breakdown: [] };
 
   return (
@@ -248,7 +251,7 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
             <div>
               <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
                 <FileText className="w-4 h-4 text-blue-500" />
-                <span>{isCH ? 'Registres Légaux, North Data & FOSC' : 'Registres Légaux, North Data & Pappers'}</span>
+                <span>{isCH ? 'Registres Légaux, North Data & FOSC' : isBE ? 'Registres Légaux, North Data & BCE/KBO' : 'Registres Légaux, North Data & Pappers'}</span>
               </span>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                 Vérification de la chaîne de détention, bilans, personnes physiques et entités étrangères liées
@@ -267,7 +270,30 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                 <span>🌐 North Data</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
-              {isCH ? (
+              {isBE ? (
+                <>
+                  <a
+                    href={`https://kbopub.economie.fgov.be/kbopub/toonondernemingps.html?lang=fr&ondernemingsnummer=${(company.registrationNumber || '').replace(/\D/g, '')}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-[#0066FF] hover:bg-[#0052cc] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                    title="Ouvrir la fiche officielle sur la Banque-Carrefour des Entreprises (BCE / KBO)"
+                  >
+                    <span>Fiche BCE / KBO</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href={`https://www.ejustice.just.fgov.be/cgi_tsv/list.pl?language=fr&btw=${(company.registrationNumber || '').replace(/\D/g, '')}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"
+                    title="Voir les publications au Moniteur belge"
+                  >
+                    <span>Moniteur belge</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </>
+              ) : isCH ? (
                 <>
                   <a
                     href={`https://www.zefix.ch/fr/search/entity/list?name=${encodeURIComponent(company.name)}`}
@@ -387,11 +413,11 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                       {!isX && (
                         <div className="flex items-center gap-1.5">
                           <a
-                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${d.name} ${isCH ? 'Suisse' : 'France'}`)}`}
+                            href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${d.name} ${countryLabelFr}`)}`}
                             target="_blank"
                             rel="noreferrer"
                             className="px-2 py-1 bg-[#0a66c2]/10 hover:bg-[#0a66c2]/20 text-[#0a66c2] rounded-lg transition flex items-center gap-1 text-xs font-semibold"
-                            title={`Rechercher ${d.name} (${isCH ? 'Suisse' : 'France'}) sur LinkedIn`}
+                            title={`Rechercher ${d.name} (${countryLabelFr}) sur LinkedIn`}
                           >
                             <LinkedinIcon className="w-3.5 h-3.5" />
                             <span>LinkedIn</span>
