@@ -23,7 +23,9 @@ import {
 import LinkedinIcon from './components/LinkedinIcon';
 import NetworkGraph from './components/NetworkGraph';
 import CompanyDetailModal from './components/CompanyDetailModal';
-import bundledDataset from './data/companies.json';
+import companiesPart1 from './data/companies-part1.json';
+import companiesPart2 from './data/companies-part2.json';
+const bundledDataset = [...companiesPart1, ...companiesPart2];
 
 const API_BASE = '/api';
 const CLOUD_SYNC_URL = 'https://api.github.com/repos/KevinRevo/Leads-intelligence/issues/1';
@@ -492,9 +494,9 @@ export default function App() {
           return;
         }
       }
-      setSyncMessage(`Session Cloud synchronisée avec l'équipe • ${stats.total} sociétés commerciales vérifiées (2024-2026).`);
+      setSyncMessage(`Session Cloud synchronisée avec l'équipe • ${stats.total} sociétés commerciales vérifiées (5 ans : 2021-2026).`);
     } catch {
-      setSyncMessage(`Session Cloud synchronisée avec l'équipe • ${stats.total} sociétés commerciales vérifiées (2024-2026).`);
+      setSyncMessage(`Session Cloud synchronisée avec l'équipe • ${stats.total} sociétés commerciales vérifiées (5 ans : 2021-2026).`);
     } finally {
       setIsSyncing(false);
       setTimeout(() => setSyncMessage(null), 5000);
@@ -835,7 +837,7 @@ export default function App() {
             >
               <div>
                 <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">
-                  Sociétés Qualifiées (Depuis 01/01/2024 • CA ≤ 30M€)
+                  Sociétés Qualifiées (5 ans : 2021-2026 • CA ≤ 30M€)
                 </span>
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-lg font-black text-slate-900 dark:text-white">{stats.total}</span>
@@ -1037,11 +1039,14 @@ export default function App() {
                 }}
                 className="flex-1 min-w-0 bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-medium"
               >
-                <optgroup label="Historique 2024 – 2026 (Depuis 01/01/2024)">
-                  <option value="all">📅 Depuis 01/01/2024 (Tout)</option>
+                <optgroup label="Historique 5 ans (2021 – 2026)">
+                  <option value="all">📅 5 dernières années (2021 – 2026)</option>
                   <option value="year:2026">🗓️ Année 2026</option>
                   <option value="year:2025">🗓️ Année 2025</option>
                   <option value="year:2024">🗓️ Année 2024</option>
+                  <option value="year:2023">🗓️ Année 2023</option>
+                  <option value="year:2022">🗓️ Année 2022</option>
+                  <option value="year:2021">🗓️ Année 2021</option>
                 </optgroup>
                 <optgroup label="Périodes récentes">
                   <option value="today">📅 Dernières 48h</option>
@@ -1064,11 +1069,11 @@ export default function App() {
               <input
                 type="date"
                 value={exactDate}
-                min="2024-01-01"
+                min="2021-01-01"
                 max="2026-10-31"
                 onChange={(e) => setExactDate(e.target.value)}
                 className="w-[118px] shrink-0 bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
-                title="Filtrer par jour exact d'incorporation (depuis le 01/01/2024)"
+                title="Filtrer par jour exact d'incorporation (5 ans : 2021-2026)"
               />
             </div>
 
