@@ -1305,8 +1305,21 @@ export default function App() {
                   </tr>
                 ) : companies.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="py-10 text-center text-slate-500">
-                      Aucune société commerciale ne correspond aux critères de filtre sélectionnés.
+                    <td colSpan="6" className="py-12 text-center text-slate-500">
+                      {selectedCountry === 'NL' ? (
+                        <div className="max-w-md mx-auto space-y-2 px-4">
+                          <div className="text-3xl">🇳🇱</div>
+                          <div className="font-semibold text-slate-800 dark:text-slate-200 text-sm">
+                            Pays-Bas : Registre KvK sous paywall légal
+                          </div>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Le registre officiel de commerce néerlandais (KvK) restreint l'accès aux dirigeants personnes physiques derrière un extrait payant obligatoire (KvK Uittreksel).
+                            Conformément à la règle de conformité stricte (Option A : 100% dirigeants réels prouvés, 0% hallucination), aucune fiche non certifiée n'est injectée.
+                          </p>
+                        </div>
+                      ) : (
+                        "Aucune société commerciale ne correspond aux critères de filtre sélectionnés."
+                      )}
                     </td>
                   </tr>
                 ) : (
