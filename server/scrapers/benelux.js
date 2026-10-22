@@ -103,20 +103,27 @@ function formatKboNumber(digits = '') {
 
 async function fetchKboHtml(digits) {
   const url = `https://kbopub.economie.fgov.be/kbopub/toonondernemingps.html?lang=fr&ondernemingsnummer=${digits}`;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      // La BCE répond parfois par une redirection vers un hôte interne inaccessible : on la refuse et on réessaie.
       const r = await axios.get(url, {
-        headers: { 'User-Agent': 'Mozilla/5.0' },
-        timeout: 20000,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml',
+          'Accept-Language': 'fr-FR,fr;q=0.9',
+        },
+        timeout: 6000,
         maxRedirects: 0,
         validateStatus: () => true,
       });
-      if (r.status === 200 && typeof r.data === 'string' && r.data.includes('Numéro d\'entreprise')) return r.data;
+      if (r.status === 302 && r.headers.location && r.headers.location.includes('captcha')) {
+        // Anti-bot temporaire activé par la BCE
+        return '';
+      }
+      if (r.status === 200 && typeof r.data === 'string' && r.data.includes("Numéro d'entreprise")) return r.data;
     } catch {
       // retry
     }
-    await SLEEP(800 * (attempt + 1));
+    await SLEEP(500 * (attempt + 1));
   }
   return '';
 }

@@ -149,6 +149,8 @@ function computeLocalStats(comps) {
   const france = comps.filter(c => c.country === 'FR').length;
   const switzerland = comps.filter(c => c.country === 'CH').length;
   const belgium = comps.filter(c => c.country === 'BE').length;
+  const luxembourg = comps.filter(c => c.country === 'LU').length;
+  const netherlands = comps.filter(c => c.country === 'NL').length;
   const toContact = comps.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
   const contacted = comps.filter(c => c.crmStatus?.startsWith('contacted')).length;
   const inCrm = comps.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
@@ -161,9 +163,13 @@ function computeLocalStats(comps) {
     france,
     switzerland,
     belgium,
+    luxembourg,
+    netherlands,
     franceCount: france,
     switzerlandCount: switzerland,
     belgiumCount: belgium,
+    luxembourgCount: luxembourg,
+    netherlandsCount: netherlands,
     toContact,
     contacted,
     inCrm,
@@ -834,7 +840,7 @@ export default function App() {
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-lg font-black text-slate-900 dark:text-white">{stats.total}</span>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                    🇫🇷 {stats.franceCount} FR • 🇨🇭 {stats.switzerlandCount} CH • 🇧🇪 {stats.belgiumCount || 0} BE
+                    🇫🇷 {stats.franceCount} FR • 🇨🇭 {stats.switzerlandCount} CH • 🇧🇪 {stats.belgiumCount || 0} BE{stats.luxembourgCount ? ` • 🇱🇺 ${stats.luxembourgCount} LU` : ''}{stats.netherlandsCount ? ` • 🇳🇱 ${stats.netherlandsCount} NL` : ''}
                   </span>
                 </div>
               </div>
@@ -934,11 +940,11 @@ export default function App() {
               />
             </div>
 
-            {/* Country Selector Tabs (3 cols) */}
-            <div className="flex items-center bg-slate-100 dark:bg-[#161f30] p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 lg:col-span-3">
+            {/* Country Selector Tabs (4 cols) */}
+            <div className="flex items-center bg-slate-100 dark:bg-[#161f30] p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 lg:col-span-4 overflow-x-auto">
               <button
                 onClick={() => setSelectedCountry('ALL')}
-                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                className={`flex-1 py-1 px-1.5 rounded-md text-[11px] font-bold transition whitespace-nowrap ${
                   selectedCountry === 'ALL' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
@@ -946,7 +952,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setSelectedCountry('FR')}
-                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                className={`flex-1 py-1 px-1.5 rounded-md text-[11px] font-bold transition whitespace-nowrap ${
                   selectedCountry === 'FR' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
@@ -954,7 +960,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setSelectedCountry('CH')}
-                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                className={`flex-1 py-1 px-1.5 rounded-md text-[11px] font-bold transition whitespace-nowrap ${
                   selectedCountry === 'CH' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
@@ -962,11 +968,27 @@ export default function App() {
               </button>
               <button
                 onClick={() => setSelectedCountry('BE')}
-                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition ${
+                className={`flex-1 py-1 px-1.5 rounded-md text-[11px] font-bold transition whitespace-nowrap ${
                   selectedCountry === 'BE' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 🇧🇪 BE ({stats.belgiumCount || 0})
+              </button>
+              <button
+                onClick={() => setSelectedCountry('LU')}
+                className={`flex-1 py-1 px-1.5 rounded-md text-[11px] font-bold transition whitespace-nowrap ${
+                  selectedCountry === 'LU' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                🇱🇺 LU ({stats.luxembourgCount || 0})
+              </button>
+              <button
+                onClick={() => setSelectedCountry('NL')}
+                className={`flex-1 py-1 px-1.5 rounded-md text-[11px] font-bold transition whitespace-nowrap ${
+                  selectedCountry === 'NL' ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                🇳🇱 NL ({stats.netherlandsCount || 0})
               </button>
             </div>
 

@@ -61,6 +61,8 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
   const COUNTRY_FLAGS_M = { FR: '\u{1F1EB}\u{1F1F7}', CH: '\u{1F1E8}\u{1F1ED}', BE: '\u{1F1E7}\u{1F1EA}', LU: '\u{1F1F1}\u{1F1FA}', NL: '\u{1F1F3}\u{1F1F1}' };
   const flag = COUNTRY_FLAGS_M[company.country] || COUNTRY_FLAGS_M.FR;
   const isBE = company.country === 'BE';
+  const isLU = company.country === 'LU';
+  const isNL = company.country === 'NL';
   const countryLabelFr = { FR: 'France', CH: 'Suisse', BE: 'Belgique', LU: 'Luxembourg', NL: 'Pays-Bas' }[company.country] || 'France';
   const safety = company.safety || { score: 50, label: 'Moyenne', breakdown: [] };
 
@@ -290,6 +292,52 @@ export default function CompanyDetailModal({ company, onClose, onUpdateStatus, o
                     title="Voir les publications au Moniteur belge"
                   >
                     <span>Moniteur belge</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </>
+              ) : isLU ? (
+                <>
+                  <a
+                    href={`https://www.lbr.lu/`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-[#0066FF] hover:bg-[#0052cc] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                    title="Portail officiel du Registre de Commerce et des Sociétés (LBR Luxembourg)"
+                  >
+                    <span>🇱🇺 Fiche RCS (LBR)</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href={company.northDataUrl || `https://www.northdata.fr/?query=${encodeURIComponent(company.name)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"
+                    title="Voir les actes et le board sur North Data"
+                  >
+                    <span>Fiche North Data</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </>
+              ) : isNL ? (
+                <>
+                  <a
+                    href={`https://www.kvk.nl/zoeken/?source=all&q=${company.registrationNumber || encodeURIComponent(company.name)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-[#0066FF] hover:bg-[#0052cc] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                    title="Ouvrir la fiche officielle sur la Chambre de Commerce des Pays-Bas (KvK)"
+                  >
+                    <span>🇳🇱 Fiche KvK</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href={company.northDataUrl || `https://www.northdata.fr/?query=${encodeURIComponent(company.name)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"
+                    title="Voir la structure sur North Data"
+                  >
+                    <span>Fiche North Data</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </>
