@@ -20,6 +20,33 @@ function ensureDbFile() {
         console.warn('Could not copy seed DB to /tmp:', e.message);
       }
     }
+
+    // Fallback: Reconstruct database from Git-tracked client chunks
+    const p1 = path.join(__dirname, '../client/src/data/companies-part1.json');
+    const p2 = path.join(__dirname, '../client/src/data/companies-part2.json');
+    if (fs.existsSync(p1) && fs.existsSync(p2)) {
+      try {
+        const c1 = JSON.parse(fs.readFileSync(p1, 'utf8'));
+        const c2 = JSON.parse(fs.readFileSync(p2, 'utf8'));
+        const allComps = [...c1, ...c2];
+        const initialData = {
+          companies: allComps,
+          syncLogs: [],
+          lastSync: new Date().toISOString(),
+          settings: {
+            autoRefreshHour: 5,
+            filterSci: true,
+            minCapital: 1000,
+          }
+        };
+        fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2), 'utf-8');
+        console.log(`[DB] Base de données restaurée avec succès depuis les chunks Git (${allComps.length} sociétés).`);
+        return;
+      } catch (err) {
+        console.warn('Could not rebuild DB from client chunks:', err.message);
+      }
+    }
+
     const initialData = {
       companies: [],
       syncLogs: [],
@@ -42,16 +69,33 @@ function readDb() {
   ensureDbFile();
   try {
     const raw = fs.readFileSync(DB_PATH, 'utf-8');
-    return JSON.parse(raw);
-  } catch (e) {
-    if (fs.existsSync(SEED_DB_PATH)) {
-      try {
-        return JSON.parse(fs.readFileSync(SEED_DB_PATH, 'utf-8'));
-      } catch (err) {}
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed.companies) && parsed.companies.length > 0) {
+      return parsed;
     }
-    console.error('Error reading DB, restoring blank:', e);
-    return { companies: [], syncLogs: [], lastSync: null, settings: {} };
+  } catch (e) {}
+
+  // If DB file exists but was empty (e.g. freshly cloned repo), restore from client chunks
+  const p1 = path.join(__dirname, '../client/src/data/companies-part1.json');
+  const p2 = path.join(__dirname, '../client/src/data/companies-part2.json');
+  if (fs.existsSync(p1) && fs.existsSync(p2)) {
+    try {
+      const c1 = JSON.parse(fs.readFileSync(p1, 'utf8'));
+      const c2 = JSON.parse(fs.readFileSync(p2, 'utf8'));
+      const allComps = [...c1, ...c2];
+      const restored = { companies: allComps, syncLogs: [], lastSync: new Date().toISOString(), settings: {} };
+      try { fs.writeFileSync(DB_PATH, JSON.stringify(restored, null, 2), 'utf-8'); } catch (w) {}
+      return restored;
+    } catch (e) {}
   }
+
+  if (fs.existsSync(SEED_DB_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(SEED_DB_PATH, 'utf-8'));
+    } catch (err) {}
+  }
+  console.error('Error reading DB, restoring blank:');
+  return { companies: [], syncLogs: [], lastSync: null, settings: {} };
 }
 
 function writeDb(data) {
@@ -254,4 +298,5 @@ module.exports = {
   logSync,
   getDashboardStats,
   readDb,
+  writeDb,
 };

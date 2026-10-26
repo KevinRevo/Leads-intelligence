@@ -1,23 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 const { runSync } = require('../cron');
+const { readDb, writeDb } = require('../db');
 const { evaluateRevolutCompliance, evaluateFxPotential, getGeoZone } = require('../services/compliance');
-const { buildCompanyNetwork } = require('../services/network');
 const { isValidPhysicalPersonName, isValidCommercialCompany, buildNorthDataUrl, detectInternationalLinks } = require('../services/northdata');
 const { cleanCompanyName } = require('../services/enricher');
+const { prepareClientChunks } = require('./prepare-client-chunks');
 
 async function main() {
   console.log('[Daily Sync] Démarrage du scraping quotidien automatisé...');
 
   // 1. Run official scrapers (BODACC France & SHAB Suisse)
   const syncResult = await runSync({ country: 'ALL' });
-  console.log('[Daily Sync] Résultat brut:', JSON.stringify(syncResult));
+  console.log('[Daily Sync] Résultat brut du scraping:', JSON.stringify(syncResult));
 
-  // 2. Read updated database and apply 100% factual rules, triple-check commercial filter & cloud CRM overrides
-  const dbPath = path.join(__dirname, '../data/db.json');
-  const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+  // 2. Read updated database (avec restauration automatique depuis les chunks si vide)
+  const db = readDb();
+  console.log(`[Daily Sync] Base chargée : ${db.companies.length} sociétés.`);
 
-  // Pull shared multi-computer CRM overrides from GitHub Issue #1
+  // 3. Pull shared multi-computer CRM overrides from GitHub Issue #1 (si GITHUB_TOKEN ou public)
   let cloudOverrides = {};
   try {
     const res = await fetch('https://api.github.com/repos/KevinRevo/Leads-intelligence/issues/1', {
@@ -36,7 +37,7 @@ async function main() {
     console.warn('[Daily Sync] Impossible de lire les overrides Cloud:', e.message);
   }
 
-  // Triple-check: Purge any non-commercial company (Entrepreneur Individuel, Verein, SCI, >30M€ CA)
+  // 4. Filtrage et mise à jour rapide des entités (sans boucle quadratique bloquante)
   db.companies = db.companies.filter(comp => isValidCommercialCompany(comp));
 
   for (const comp of db.companies) {
@@ -48,87 +49,38 @@ async function main() {
       if (ov.crmAssignedTo !== undefined) comp.crmAssignedTo = ov.crmAssignedTo;
     }
 
-    const cleanComp = cleanCompanyName(comp.name) || comp.name;
-    const countryLabel = comp.country === 'CH' ? 'Suisse' : 'France';
-    comp.linkedinCompanyUrl = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(`"${cleanComp}" ${countryLabel}`)}`;
-    comp.northDataUrl = buildNorthDataUrl(comp);
-    comp.incorporationYear = (comp.incorporationDate || '').slice(0, 4) || '2026';
+    if (!comp.northDataUrl) {
+      comp.northDataUrl = buildNorthDataUrl(comp);
+    }
+    if (!comp.incorporationYear) {
+      comp.incorporationYear = (comp.incorporationDate || '').slice(0, 4) || '2026';
+    }
 
     // Strictly PHYSICAL Dirigeants only
     const realDirs = (comp.dirigeants || []).filter(d => isValidPhysicalPersonName(d?.name, comp.name));
     if (realDirs.length > 0) {
       comp.dirigeants = realDirs.map((d, idx) => ({ ...d, isPrimary: idx === 0 }));
-      comp.linkedinDirigeantUrl = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${realDirs[0].name}" "${cleanComp}"`)}`;
+      if (!comp.linkedinDirigeantUrl) {
+        const cleanComp = cleanCompanyName(comp.name) || comp.name;
+        comp.linkedinDirigeantUrl = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`"${realDirs[0].name}" "${cleanComp}"`)}`;
+      }
     } else {
       comp.dirigeants = [{ name: 'X', role: 'Non renseigné au registre', isPrimary: true }];
       comp.linkedinDirigeantUrl = null;
     }
-
-    // Strictly PHYSICAL CFO only
-    if (comp.cfo && !isValidPhysicalPersonName(comp.cfo.name, comp.name)) {
-      comp.cfo = { name: 'X', role: 'Non renseigné', isEstimated: false, linkedinSearchUrl: null };
-    }
-
-    // International / Cross-Border Links
-    comp.internationalLinks = comp.internationalLinks && comp.internationalLinks.length > 0
-      ? comp.internationalLinks
-      : detectInternationalLinks(comp);
-    comp.isCrossBorder = comp.internationalLinks.length > 0;
-
-    // Revolut Compliance Pre-Screening + FX Multi-Currency & Geo Zone
-    comp.compliance = evaluateRevolutCompliance(comp);
-    comp.fxPotential = evaluateFxPotential(comp);
-    comp.geoZone = getGeoZone(comp);
-
-    // Ensure rich North Data-style network cartography
-    comp.network = await buildCompanyNetwork(comp, db.companies, { skipLiveLookup: true });
   }
 
-  // Remove any company without a physical director
+  // Filtrer toute société sans dirigeant physique
   db.companies = db.companies.filter(c => c.dirigeants?.[0]?.name && c.dirigeants[0].name !== 'X');
 
-  // 3. Write back to server db.json
-  fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+  // 5. Sauvegarde de la base principale
+  writeDb(db);
 
-  // 4. Calculate stats and build public bundle
-  const total = db.companies.length;
-  const france = db.companies.filter(c => c.country === 'FR').length;
-  const switzerland = db.companies.filter(c => c.country === 'CH').length;
-  const toContact = db.companies.filter(c => c.crmStatus === 'to_contact' || c.crmStatus === 'new').length;
-  const contacted = db.companies.filter(c => c.crmStatus?.startsWith('contacted')).length;
-  const inCrm = db.companies.filter(c => c.crmStatus === 'in_crm' || c.crmStatus === 'converted').length;
-  const highSafetyCount = db.companies.filter(c => (c.safety?.score || c.confidenceScore || 0) >= 60).length;
-  const verifiedWebCount = db.companies.filter(c => Boolean(c.website)).length;
-  const highFxCount = db.companies.filter(c => c.fxPotential?.level === 'high').length;
-  const crossBorderCount = db.companies.filter(c => c.isCrossBorder || (c.corporateLinks && c.corporateLinks.length > 0)).length;
+  // 6. Préparation et découpage automatique des chunks clients pour GitHub Pages (création auto des dossiers)
+  const { bundle } = prepareClientChunks(db.companies);
 
-  const stats = {
-    total,
-    france,
-    switzerland,
-    franceCount: france,
-    switzerlandCount: switzerland,
-    toContact,
-    contacted,
-    inCrm,
-    highConfidence: highSafetyCount,
-    highSafetyCount,
-    verifiedWebCount,
-    highFxCount,
-    crossBorderCount
-  };
-  const publicBundle = { companies: db.companies, stats };
-
-  // 5. Update client data sources
-  const clientPublicData = path.join(__dirname, '../../client/public/data.json');
-  const clientSrcData = path.join(__dirname, '../../client/src/data/companies.json');
-  const rootData = path.join(__dirname, '../../data.json');
-
-  fs.writeFileSync(clientPublicData, JSON.stringify(publicBundle, null, 2));
-  fs.writeFileSync(clientSrcData, JSON.stringify(db.companies, null, 2));
-  fs.writeFileSync(rootData, JSON.stringify(publicBundle, null, 2));
-
-  console.log(`[Daily Sync] Terminé avec succès ! Total base: ${total} sociétés (${france} FR / ${switzerland} CH).`);
+  const stats = bundle.stats;
+  console.log(`[Daily Sync] Terminé avec succès ! Total base: ${stats.total} sociétés (🇫🇷 ${stats.france} FR | 🇨🇭 ${stats.switzerland} CH | 🇧🇪 ${stats.belgium} BE | 🇱🇺 ${stats.luxembourg} LU).`);
 }
 
 main().catch(err => {
