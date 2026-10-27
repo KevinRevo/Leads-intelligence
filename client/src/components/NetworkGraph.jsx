@@ -15,8 +15,9 @@ import {
   FileText,
   Globe
 } from 'lucide-react';
+import { t } from '../i18n/translations';
 
-export default function NetworkGraph({ network, onClose }) {
+export default function NetworkGraph({ network, onClose, lang = 'fr' }) {
   const [selectedNode, setSelectedNode] = useState(null);
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -109,19 +110,23 @@ export default function NetworkGraph({ network, onClose }) {
     const isForeign = typeof node === 'object' && Boolean(node?.isForeign);
 
     if (isForeign) {
-      return { fill: '#d97706', stroke: '#fbbf24', badge: `🌍 Entité Étrangère (${node.countryName || node.country || 'International'})` };
+      return { 
+        fill: '#d97706', 
+        stroke: '#fbbf24', 
+        badge: t('graphBadgeForeign', lang, { country: node.countryName || node.country || (lang === 'en' ? 'International' : 'International') })
+      };
     }
     switch (type) {
       case 'target_company':
-        return { fill: '#0075eb', stroke: '#38bdf8', badge: 'Société Cible' };
+        return { fill: '#0075eb', stroke: '#38bdf8', badge: t('graphBadgeTarget', lang) };
       case 'person_cfo':
-        return { fill: '#2563eb', stroke: '#60a5fa', badge: '👤 Co-Dirigeant / CFO (Personne Physique)' };
+        return { fill: '#2563eb', stroke: '#60a5fa', badge: t('graphBadgePersonCfo', lang) };
       case 'person':
-        return { fill: '#7c3aed', stroke: '#c084fc', badge: '👤 Dirigeant / Board (Personne Physique)' };
+        return { fill: '#7c3aed', stroke: '#c084fc', badge: t('graphBadgePerson', lang) };
       case 'sister_company':
-        return { fill: '#059669', stroke: '#34d399', badge: '🏢 Holding / Société Liée (Personne Morale)' };
+        return { fill: '#059669', stroke: '#34d399', badge: t('graphBadgeSister', lang) };
       default:
-        return { fill: '#4b5563', stroke: '#9ca3af', badge: 'Entité' };
+        return { fill: '#4b5563', stroke: '#9ca3af', badge: t('graphBadgeEntity', lang) };
     }
   };
 
@@ -141,14 +146,14 @@ export default function NetworkGraph({ network, onClose }) {
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-base font-bold text-slate-900 dark:text-white tracking-wide">
-                  Cartographie North Data — Dirigeants Physiques, Holdings & Liens Internationaux
+                  {t('graphTitle', lang)}
                 </h2>
                 <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200 dark:border-blue-500/30">
                   {targetNode?.label || network?.companyName}
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                Visualisation des décideurs (personnes physiques), sociétés mères / holdings et rattachements étrangers (RCS / FOSC / North Data)
+                {t('graphSubtitle', lang)}
               </p>
             </div>
           </div>
@@ -160,10 +165,10 @@ export default function NetworkGraph({ network, onClose }) {
               target="_blank"
               rel="noreferrer"
               className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
-              title="Ouvrir le graphe de détention et l'historique sur North Data Europe"
+              title={lang === 'en' ? "Open ownership graph and corporate history on North Data" : "Ouvrir le graphe de détention et l'historique sur North Data Europe"}
             >
               <Globe className="w-3.5 h-3.5" />
-              <span>Graphe North Data</span>
+              <span>{t('graphBtnNorthData', lang)}</span>
               <ExternalLink className="w-3 h-3" />
             </a>
 
@@ -172,21 +177,21 @@ export default function NetworkGraph({ network, onClose }) {
               <button 
                 onClick={() => setZoom(z => Math.min(z + 0.15, 2))}
                 className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded transition"
-                title="Zoomer"
+                title={t('graphZoomIn', lang)}
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
               <button 
                 onClick={() => setZoom(z => Math.max(z - 0.15, 0.5))}
                 className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded transition"
-                title="Dézoomer"
+                title={t('graphZoomOut', lang)}
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
               <button 
                 onClick={() => { setZoom(1); setOffset({ x: 0, y: 0 }); }}
                 className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded transition"
-                title="Réinitialiser la vue"
+                title={t('graphResetView', lang)}
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
@@ -195,7 +200,7 @@ export default function NetworkGraph({ network, onClose }) {
             <button
               onClick={onClose}
               className="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
-              title="Fermer uniquement la cartographie (conserve la fiche entreprise ouverte)"
+              title={t('graphClose', lang)}
             >
               <X className="w-5 h-5" />
             </button>
@@ -246,6 +251,12 @@ export default function NetworkGraph({ network, onClose }) {
                 const midY = (sourcePos.y + targetPos.y) / 2;
                 const isCrossBorder = edge.type === 'cross_border';
 
+                let edgeLabel = edge.label;
+                if (!edgeLabel || edgeLabel === 'Mandat') edgeLabel = t('graphEdgeMandate', lang);
+                else if (edgeLabel === 'Même Dirigeant') edgeLabel = t('graphEdgeSharedDirector', lang);
+                else if (edgeLabel === 'Holding / Détention') edgeLabel = t('graphEdgeHolding', lang);
+                else if (edgeLabel === 'Lien International') edgeLabel = t('graphEdgeIntl', lang);
+
                 return (
                   <g key={edge.id}>
                     <line
@@ -275,7 +286,7 @@ export default function NetworkGraph({ network, onClose }) {
                       fontSize="9"
                       textAnchor="middle"
                     >
-                      {edge.label ? (edge.label.length > 22 ? edge.label.slice(0, 20) + '…' : edge.label) : 'Mandat'}
+                      {edgeLabel ? (edgeLabel.length > 22 ? edgeLabel.slice(0, 20) + '…' : edgeLabel) : t('graphEdgeMandate', lang)}
                     </text>
                   </g>
                 );
@@ -365,22 +376,22 @@ export default function NetworkGraph({ network, onClose }) {
 
             {/* Floating Legend */}
             <div className="absolute bottom-4 left-4 bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs flex flex-col gap-1.5 backdrop-blur-sm shadow-xl transition-colors">
-              <span className="font-bold text-slate-800 dark:text-slate-200">Légende Cartographie (Style North Data) :</span>
+              <span className="font-bold text-slate-800 dark:text-slate-200">{t('graphLegendTitle', lang)}</span>
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                 <span className="w-3 h-3 rounded-full bg-[#0075eb] border border-[#38bdf8]" />
-                <span>Société Cible (FR / CH)</span>
+                <span>{t('graphLegendTarget', lang)}</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                 <span className="w-3 h-3 rounded-full bg-[#7c3aed] border border-[#c084fc]" />
-                <span>👤 Dirigeant / Board (Personne Physique uniquement)</span>
+                <span>{t('graphLegendPerson', lang)}</span>
               </div>
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
                 <span className="w-3 h-3 rounded-full bg-[#059669] border border-[#34d399]" />
-                <span>🏢 Holding / Société Mère ou Sœur</span>
+                <span>{t('graphLegendSister', lang)}</span>
               </div>
               <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-semibold">
                 <span className="w-3 h-3 rounded-full bg-[#d97706] border border-[#fbbf24]" />
-                <span>🌍 Entité Étrangère / Lien International</span>
+                <span>{t('graphLegendForeign', lang)}</span>
               </div>
             </div>
           </div>
@@ -406,14 +417,14 @@ export default function NetworkGraph({ network, onClose }) {
               <div className="space-y-2.5 text-xs">
                 {(selectedNode.role || selectedNode.roleHeld) && (
                   <div className="bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700/60">
-                    <span className="text-slate-500 dark:text-slate-400 block mb-0.5">Fonction / Lien de détention</span>
+                    <span className="text-slate-500 dark:text-slate-400 block mb-0.5">{t('graphDrawerRole', lang)}</span>
                     <span className="text-slate-900 dark:text-white font-semibold">{selectedNode.role || selectedNode.roleHeld}</span>
                   </div>
                 )}
 
                 {(selectedNode.registrationNumber || selectedNode.siren) && (
                   <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400">N° Registre (SIREN / IDE)</span>
+                    <span className="text-slate-500 dark:text-slate-400">{t('graphDrawerRegNumber', lang)}</span>
                     <span className="text-slate-800 dark:text-slate-200 font-mono font-semibold">
                       {selectedNode.registrationNumber || selectedNode.siren}
                     </span>
@@ -422,14 +433,14 @@ export default function NetworkGraph({ network, onClose }) {
 
                 {selectedNode.legalForm && (
                   <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400">Forme juridique</span>
+                    <span className="text-slate-500 dark:text-slate-400">{t('graphDrawerLegalForm', lang)}</span>
                     <span className="text-slate-800 dark:text-slate-200 font-semibold">{selectedNode.legalForm}</span>
                   </div>
                 )}
 
                 {selectedNode.shareCapital && (
                   <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400">Capital Social</span>
+                    <span className="text-slate-500 dark:text-slate-400">{t('graphDrawerCapital', lang)}</span>
                     <span className="text-slate-800 dark:text-slate-200 font-semibold">
                       {selectedNode.shareCapital.toLocaleString()} {selectedNode.country === 'CH' ? 'CHF' : '€'}
                     </span>
@@ -438,7 +449,7 @@ export default function NetworkGraph({ network, onClose }) {
 
                 {selectedNode.revenue && (
                   <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400">Chiffre d'Affaires</span>
+                    <span className="text-slate-500 dark:text-slate-400">{t('graphDrawerRevenue', lang)}</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-bold">
                       {selectedNode.revenue.toLocaleString('fr-FR')} €
                     </span>
@@ -447,7 +458,7 @@ export default function NetworkGraph({ network, onClose }) {
 
                 {selectedNode.city && (
                   <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400">Localisation / Pays</span>
+                    <span className="text-slate-500 dark:text-slate-400">{t('graphDrawerLocation', lang)}</span>
                     <span className="text-slate-800 dark:text-slate-200 font-medium">
                       {selectedNode.flag ? `${selectedNode.flag} ` : ''}{selectedNode.city}
                     </span>
@@ -456,7 +467,7 @@ export default function NetworkGraph({ network, onClose }) {
 
                 {selectedNode.activity && (
                   <div className="py-1.5 border-b border-slate-200 dark:border-slate-800">
-                    <span className="text-slate-500 dark:text-slate-400 block mb-1">Activité / Objet</span>
+                    <span className="text-slate-500 dark:text-slate-400 block mb-1">{t('graphDrawerActivity', lang)}</span>
                     <span className="text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-4">{selectedNode.activity}</span>
                   </div>
                 )}
@@ -464,7 +475,7 @@ export default function NetworkGraph({ network, onClose }) {
                 {/* Direct Contact & North Data info if Physical Person */}
                 {selectedNode.type.includes('person') && (
                   <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-xl p-3 space-y-2 mt-2">
-                    <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 block">Décideur Personne Physique :</span>
+                    <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 block">{t('graphDrawerPhysicalPersonHeader', lang)}</span>
                     {selectedNode.email && (
                       <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 truncate">
                         <Mail className="w-3.5 h-3.5 text-blue-500 shrink-0" />
@@ -485,7 +496,7 @@ export default function NetworkGraph({ network, onClose }) {
                         className="w-full py-1.5 px-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg inline-flex items-center justify-center gap-1.5 font-semibold text-xs transition"
                       >
                         <Globe className="w-3.5 h-3.5" />
-                        <span>Voir tous ses mandats sur North Data</span>
+                        <span>{t('graphDrawerViewMandates', lang)}</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                       {selectedNode.linkedinUrl && (
@@ -495,7 +506,7 @@ export default function NetworkGraph({ network, onClose }) {
                           rel="noreferrer"
                           className="w-full py-1.5 px-2.5 bg-[#0a66c2] hover:bg-[#004182] text-white rounded-lg inline-flex items-center justify-center gap-1.5 font-semibold text-xs transition"
                         >
-                          <span>Rechercher sur LinkedIn</span>
+                          <span>{t('graphDrawerSearchLinkedIn', lang)}</span>
                           <ExternalLink className="w-3 h-3" />
                         </a>
                       )}
@@ -513,7 +524,7 @@ export default function NetworkGraph({ network, onClose }) {
                       className="w-full py-1.5 px-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg flex items-center justify-center gap-1.5 font-semibold text-xs transition"
                     >
                       <Globe className="w-3.5 h-3.5" />
-                      <span>Voir l'entité sur North Data</span>
+                      <span>{t('graphDrawerViewEntityNorthData', lang)}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                     <a
@@ -527,7 +538,7 @@ export default function NetworkGraph({ network, onClose }) {
                       className="w-full py-1.5 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg flex items-center justify-center gap-1.5 font-semibold text-xs transition"
                     >
                       <FileText className="w-3.5 h-3.5" />
-                      <span>{selectedNode.country === 'CH' ? 'Consulter sur Zefix (CH)' : 'Consulter sur Pappers (FR)'}</span>
+                      <span>{selectedNode.country === 'CH' ? (lang === 'en' ? 'View on Zefix (CH)' : 'Consulter sur Zefix (CH)') : (lang === 'en' ? 'View on Pappers (FR)' : 'Consulter sur Pappers (FR)')}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
@@ -536,14 +547,14 @@ export default function NetworkGraph({ network, onClose }) {
                 <div className="pt-1">
                   <div className="p-3 bg-slate-50 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
                     <span className="text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1.5 mb-1 text-[11px]">
-                      <ShieldCheck className="w-3.5 h-3.5" /> Opportunité Multi-Comptes / FX
+                      <ShieldCheck className="w-3.5 h-3.5" /> {t('graphDrawerOpportunityTitle', lang)}
                     </span>
                     <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
                       {selectedNode.isForeign
-                        ? `Cette société est reliée à une entité en ${selectedNode.countryName || selectedNode.country}. Fort besoin de transferts internationaux et comptes multi-devises Revolut Business.`
+                        ? t('graphDrawerOpportunityForeign', lang, { country: selectedNode.countryName || selectedNode.country })
                         : selectedNode.type.includes('company')
-                        ? "Vérifier la chaîne de détention sur North Data pour proposer un onboarding groupé (Holding + Filiales)."
-                        : "Approcher cette personne physique en mentionnant ses mandats actifs pour ouvrir plusieurs comptes Revolut Business simultanément."}
+                        ? t('graphDrawerOpportunityHolding', lang)
+                        : t('graphDrawerOpportunityPerson', lang)}
                     </p>
                   </div>
                 </div>
