@@ -1,6 +1,3753 @@
 {
   "companies": [
     {
+      "id": "CH-CHE268742110",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Z2S2 GmbH",
+      "registrationNumber": "CHE-268.742.110",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Führung von Gastronomiebetrieben sowie alle damit zusammenhängenden Tätigkeiten. Die Gesellschaft kann im In- und Ausland Zweigniederlassungen und Tochtergesellschaften errichten, sich an anderen Unternehmen beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihren Zweck in Zusammenhang stehen. Sie kann im In- und Ausland Grundeigentum erwerben, belasten, veräußern und verwalten sowie Finanzierungen für eigene oder fremde Rechnung vornehmen und Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Hauptstrasse 8, 4302 Augst BL",
+      "city": "Augst BL",
+      "postalCode": "4302",
+      "canton": "BL",
+      "dirigeants": [
+        {
+          "name": "Shabir Hussainkheil",
+          "firstName": "Shabir",
+          "lastName": "Hussainkheil",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:17.175Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Z2S2%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Shabir%20Hussainkheil%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Z2S2%20GmbH%2C%20Augst%20BL/CHE-268.742.110",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:07:18.133Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 60,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Augst BL (BL)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "BL",
+        "subLabel": "Canton BL"
+      }
+    },
+    {
+      "id": "CH-CHE262500117",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Wunderfee Reinigung GmbH",
+      "registrationNumber": "CHE-262.500.117",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Reinigung von Privathaushalten und Büroräumen, sowie alle damit direkt und indirekt zusammenhängende Dienstleistungen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen, oder diesen zu fördern geeignet sind. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "St. Gallerstrasse 216, 9320 Stachen",
+      "city": "Stachen",
+      "postalCode": "9320",
+      "canton": "TG",
+      "dirigeants": [
+        {
+          "name": "Simone Heller",
+          "firstName": "Simone",
+          "lastName": "Heller",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:16.864Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Wunderfee%20Reinigung%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Simone%20Heller%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Wunderfee%20Reinigung%20GmbH%2C%20Stachen/CHE-262.500.117",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:07:17.011Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 45,
+        "badge": "🌐 FX Modéré (CHF/EUR)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "TG",
+        "subLabel": "Canton TG"
+      }
+    },
+    {
+      "id": "CH-CHE431871493",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "MICLA GmbH",
+      "registrationNumber": "CHE-431.871.493",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Konzeption, Entwicklung, Programmierung, Produktion, Vermarktung, Lizenzierung, Verwertung und den Vertrieb von Musik-, Audio-, Film-, Video-, Multimedia- und sonstigen audiovisuellen Werken, von Software, mobilen Applikationen (Apps), Computerspielen und digitalen Tools und Inhalten. Die Gesellschaft kann Immaterialgüterrechte, insbesondere Urheber- und Leistungsschutzrechte, Marken, Patente, Designs und Software sowie Lizenzen daran erwerben, verwalten, verwerten, lizenzieren und veräussern. Die Gesellschaft kann mit Finanzanlagen, Währungen, Kryptowährungen und anderen digitalen Vermögenswerten handeln, diese halten und verwalten. Sie kann zudem mit Waren handeln. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Heidenlochstrasse 96a, 4410 Liestal",
+      "city": "Liestal",
+      "postalCode": "4410",
+      "canton": "BL",
+      "dirigeants": [
+        {
+          "name": "Michael Hinterberger",
+          "firstName": "Michael",
+          "lastName": "Hinterberger",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:14.192Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=MICLA%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Michael%20Hinterberger%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/MICLA%20GmbH%2C%20Liestal/CHE-431.871.493",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:07:16.700Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 95,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Liestal (BL)",
+          "Secteur Tech / SaaS : facturation d'infrastructures Cloud & outils logiciels en USD + scalabilité internationale"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "BL",
+        "subLabel": "Canton BL"
+      }
+    },
+    {
+      "id": "CH-CHE296163532",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "ucm holding ag",
+      "registrationNumber": "CHE-296.163.532",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "SA / AG",
+      "shareCapital": 100000,
+      "activity": "Die Gesellschaft bezweckt das Halten und Verwalten von Beteiligungen inkl. Vermögensverwaltung. Die Gesellschaft kann sich daneben an anderen Unternehmen irgendwelcher Art im In- und Ausland beteiligen, solche gründen, übernehmen und mit ihnen fusionieren. Sie kann Liegenschaften und Immaterialgüterrechte im In- und Ausland erwerben, belasten und veräussern sowie durch Beschluss des Verwaltungsrates Zweigniederlassungen und Agenturen im In- oder Ausland errichten. Die Gesellschaft kann alle kommerziellen, finanziellen und andere Tätigkeiten ausüben, die mit dem Zweck der Gesellschaft im Zusammenhang stehen. Die Gesellschaft kann zudem ihrer direkten oder indirekten Aktionären, anderen Gruppengesellschaften oder Dritten Darlehen oder andere Finanzierungen gewähren und für Verbindlichkeiten von solchen Aktionären, anderen Gruppengesellschaften oder Dritten Sicherheiten aller Art stellen, einschliesslich mittels Pfandrechten an oder fiduziarischen Übereignungen von Aktiven der Gesellschaft oder Garantien jedwelcher Art, ob gegen Entgelt oder nicht.",
+      "address": "Haldenweg 4, 4496 Kilchberg BL",
+      "city": "Kilchberg BL",
+      "postalCode": "4496",
+      "canton": "BL",
+      "dirigeants": [
+        {
+          "name": "Ueli Müller",
+          "firstName": "Ueli",
+          "lastName": "Müller",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:13.964Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=ucm%20holding%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Ueli%20M%C3%BCller%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/ucm%20holding%20ag%2C%20Kilchberg%20BL/CHE-296.163.532",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:07:14.026Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 92,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Kilchberg BL (BL)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "BL",
+        "subLabel": "Canton BL"
+      }
+    },
+    {
+      "id": "CH-CHE465622350",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "TopVan GmbH",
+      "registrationNumber": "CHE-465.622.350",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Vermietung von Lieferwagen, Nutzfahrzeugen und Personenwagen, insbesondere für den gewerblichen und privaten Gebrauch, sowie die Erbringung von damit zusammenhängenden Dienstleistungen. Sie erbringt ferner Dienstleistungen in den Bereichen Logistik, Transport und Umzug. Dazu gehören namentlich die Durchführung und Organisation von Gütertransporten, Kurier- und Lieferdiensten, Umzügen, Räumungen sowie der Transport und die Beförderung von Personen, insbesondere mit dafür geeigneten Fahrzeugen. Die Gesellschaft kann Fahrzeuge kaufen, verkaufen, verwalten, unterhalten und vermitteln sowie mit Fahrzeugzubehör und weiter damit zusammenhängenden Produkten handeln. Weiter kann die Gesellschaft sämtliche Geschäfte tätigen, die geeignet sind, den Gesellschaftszweck zu fördern oder die direkt oder indirekt damit zusammenhängen. Sie kann insbesondere Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten, sich an anderen Unternehmen beteiligen, andere Unternehmen erwerben oder sich mit solchen zusammenschliessen sowie Grundstücke und Immobilien erwerben, halten, verwalten und veräussern. Die Gesellschaft ist berechtigt, im In- und Ausland alle Geschäfte vorzunehmen, die dem Gesellschaftszweck dienen.",
+      "address": "Frohburgerstrasse 7, 4132 Muttenz",
+      "city": "Muttenz",
+      "postalCode": "4132",
+      "canton": "BL",
+      "dirigeants": [
+        {
+          "name": "Saman Taghizadeh",
+          "firstName": "Saman",
+          "lastName": "Taghizadeh",
+          "role": "Président de la Direction (Associé-Gérant)",
+          "isPrimary": true
+        },
+        {
+          "name": "Hadis Hejran",
+          "firstName": "Hadis",
+          "lastName": "Hejran",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:12.077Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Transport & Logistique",
+      "website": "https://topvan.ch",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "topvan.ch",
+      "emails": [
+        {
+          "email": "saman.taghizadeh@topvan.ch",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@topvan.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "saman.taghizadeh@topvan.ch",
+      "emailSource": "Serveur Mail MX Actif (topvan.ch)",
+      "phone": "+41 76 434 39 60",
+      "phoneSource": "Site internet officiel (topvan.ch)",
+      "cfo": {
+        "name": "Hadis Hejran",
+        "role": "Associé-Gérant (Direction)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Hadis%20Hejran%20TopVan"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=TopVan%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Saman%20Taghizadeh%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/TopVan%20GmbH%2C%20Muttenz/CHE-465.622.350",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-08T11:07:13.274Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Transport & Logistique",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 70,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Muttenz (BL)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "BL",
+        "subLabel": "Canton BL"
+      }
+    },
+    {
+      "id": "CH-CHE378671038",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Promatherm Sàrl",
+      "registrationNumber": "CHE-378.671.038",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la société a pour but la réalisation de tous travaux et le dépannage dans les domaines du chauffage et du sanitaire. La société peut en outre exercer toute autre activité ayant un lien direct ou indirect avec ces buts; elle peut notamment créer des succursales en Suisse et à l'étranger, participer à d'autres entreprises en Suisse et à l'étranger, acquérir des entreprises visant un but identique ou analogue, ou fusionner avec de telles entreprises, faire toutes opérations et conclure tous contrats propres à développer et à étendre son but ou s'y rapportant directement ou indirectement.",
+      "address": "c/o Atelier MUSE Sàrl, Rue du Vieux-Marché 9, 1260 Nyon",
+      "city": "Nyon",
+      "postalCode": "1260",
+      "canton": "VD",
+      "dirigeants": [
+        {
+          "name": "Xhelal Misini",
+          "firstName": "Xhelal",
+          "lastName": "Misini",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [
+        {
+          "name": "Atelier MUSE Sàrl",
+          "roleHeld": "Siège / Fiduciaire / Groupe (c/o)",
+          "legalForm": "Sàrl / GmbH",
+          "city": "Nyon"
+        }
+      ],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:00.819Z",
+      "incorporationYear": "2026",
+      "activityCategory": "BTP & Construction",
+      "website": "https://promatherm.ch",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "promatherm.ch",
+      "emails": [
+        {
+          "email": "xhelal.misini@promatherm.ch",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@promatherm.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "xhelal.misini@promatherm.ch",
+      "emailSource": "Serveur Mail MX Actif (promatherm.ch)",
+      "phone": "+41 79 775 61 87",
+      "phoneSource": "Site internet officiel (promatherm.ch)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Promatherm%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Xhelal%20Misini%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Promatherm%20S%C3%A0rl%2C%20Nyon/CHE-378.671.038",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-08T11:07:02.512Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "BTP & Construction",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 70,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Nyon (VD)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "VD",
+        "subLabel": "Canton VD"
+      }
+    },
+    {
+      "id": "CH-CHE376963808",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Swissdream paysages et jardins Sàrl",
+      "registrationNumber": "CHE-376.963.808",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la création et l'aménagement de jardins et d'espaces extérieurs, incluant la conception paysagère, l'entretien de végétaux, ainsi que toutes prestations de services s'y rapportant. La société peut en outre exercer toute autre activité ayant un lien direct ou indirect avec ces buts; elle peut notamment créer des succursales en Suisse et à l'étranger, participer à d'autres entreprises en Suisse et à l'étranger, acquérir des entreprises visant un but identique ou analogue, ou fusionner avec de telles entreprises, faire toutes opérations et conclure tous contrats propres à développer et à étendre son but ou s'y rapportant directement ou indirectement.",
+      "address": "Chemin RILLIET 2, 1293 Bellevue",
+      "city": "Bellevue",
+      "postalCode": "1293",
+      "canton": "GE",
+      "dirigeants": [
+        {
+          "name": "Raphaël Araujo Alves",
+          "firstName": "Raphaël",
+          "lastName": "Araujo Alves",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:07:00.481Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Swissdream%20paysages%20et%20jardins%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Rapha%C3%ABl%20Araujo%20Alves%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Swissdream%20paysages%20et%20jardins%20S%C3%A0rl%2C%20Bellevue/CHE-376.963.808",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:07:00.654Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 60,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Bellevue (GE)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "GE",
+        "subLabel": "Canton GE"
+      }
+    },
+    {
+      "id": "CH-CHE439142475",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Immodream&CO Sàrl",
+      "registrationNumber": "CHE-439.142.475",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la société a pour but la réalisation de toutes opérations immobilières, notamment l'achat, la vente, le courtage, la gestion, l'administration, la location et la mise en valeur de biens immobiliers, à l'exception des opérations prohibées par la LFAIE. Elle a également pour but la planification, la direction et la réalisation de travaux de construction ou de rénovation, la prestation de tous services en comptabilité, le conseil et l'accompagnement dans les domaines de la santé financière et des obligations légales. La société peut en outre exercer toute autre activité ayant un lien direct ou indirect avec ces buts; elle peut notamment créer des succursales en Suisse et à l'étranger, participer à d'autres entreprises en Suisse et à l'étranger, acquérir des entreprises visant un but identique ou analogue, ou fusionner avec de telles entreprises, faire toutes opérations et conclure tous contrats propres à développer et à étendre son but ou s'y rapportant directement ou indirectement.",
+      "address": "c/o Gérald Février, Rue des Jardins 4, 1800 Vevey",
+      "city": "Vevey",
+      "postalCode": "1800",
+      "canton": "VD",
+      "dirigeants": [
+        {
+          "name": "Gérald Février",
+          "firstName": "Gérald",
+          "lastName": "Février",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "FR",
+          "countryName": "France",
+          "flag": "🇫🇷",
+          "entityName": "Actionnariat / Direction Franco-Suisse (FR ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "France"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:59.811Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Immodream%20CO%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=G%C3%A9rald%20F%C3%A9vrier%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Immodream%26CO%20S%C3%A0rl%2C%20Vevey/CHE-439.142.475",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:59.986Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 82,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Vevey (VD)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "VD",
+        "subLabel": "Canton VD"
+      }
+    },
+    {
+      "id": "CH-CHE174754658",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "GMA Services & Fournitures Sàrl",
+      "registrationNumber": "CHE-174.754.658",
+      "incorporationDate": "2026-11-06",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la société a pour but le commerce, l'achat, la vente et la distribution de machines, d'équipements et de matériel destinés au nettoyage et à l'entretien, ainsi que de produits d'hygiène, d'entretien et de consommables professionnels. Elle fournit également des prestations de services administratifs, de gestion et de secrétariat aux entreprises. Elle peut se charger de toutes opérations financières, commerciales, industrielles, immobilières et conclure tous contrats propres à développer son but, en Suisse et à l'étranger. Elle peut également créer des succursales, prendre des participations dans d'autres sociétés ou mandater des sous-traitants, en Suisse et à l'étranger. Elle peut accorder des prêts à ses associés ou à des tiers, se porter caution d'emprunts souscrits par ses associés ou des tiers, garantir ces emprunts par l'émission ou le nantissement de titres hypothécaires ou par la souscription de tout autre engagement financier, mettre ces biens en gage pour garantir toute créance.",
+      "address": "Rue de Neuchâtel 52, 1400 Yverdon-les-Bains",
+      "city": "Yverdon-les-Bains",
+      "postalCode": "1400",
+      "canton": "VD",
+      "dirigeants": [
+        {
+          "name": "Mentor Gjema",
+          "firstName": "Mentor",
+          "lastName": "Gjema",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:59.499Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=GMA%20Services%20Fournitures%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Mentor%20Gjema%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/GMA%20Services%20%26%20Fournitures%20S%C3%A0rl%2C%20Yverdon-les-Bains/CHE-174.754.658",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:59.646Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 95,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Yverdon-les-Bains (VD)",
+          "E-Commerce & Distribution : encaissements clients multi-devises et achats fournisseurs hors zone Euro"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "VD",
+        "subLabel": "Canton VD"
+      }
+    },
+    {
+      "id": "FR-131970154",
+      "country": "FR",
+      "countryName": "France",
+      "name": "NUAGE STUDIO",
+      "registrationNumber": "131970154",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "L'enseignement, l'encadrement et l'animation de cours, ateliers, stages et formations de yoga, pilâtes, méditation, respiration, relaxation, mobilité et autres disciplines corporelles et de bien-être ; l'organisation d'événements, retraites, séminaires, conférences et prestations en lien avec la santé, le bien-être, le développement personnel et la qualité de vie ; l'accompagnement individuel ou collectif dans une démarche de bien-être, hors activités réglementées relevant des professions de santé ; la création, la production et la diffusion de contenus pédagogiques, numériques ou physiques, notamment vidéos, podcasts, publications et programmes en ligne ; la vente de produits, matériels, accessoires, vêtements, livres, supports pédagogiques et tous articles liés aux activités de la société ; la location ou la mise à disposition d'espaces destinés à la pratique des activités précitées.",
+      "address": "180 b Route De Crêt Morens",
+      "city": "Sévrier",
+      "postalCode": "74320",
+      "dirigeants": [
+        {
+          "name": "Virginie MISCIOSCIA",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:46.064Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=NUAGE%20STUDIO%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Virginie%20MISCIOSCIA%20France",
+      "northDataUrl": "https://www.northdata.fr/NUAGE%20STUDIO%2C%20S%C3%A9vrier/Siren%20131970154",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:49.359Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 15,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "CHF"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "74",
+        "subLabel": "Dépt 74"
+      }
+    },
+    {
+      "id": "FR-132207812",
+      "country": "FR",
+      "countryName": "France",
+      "name": "CML",
+      "registrationNumber": "132207812",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "29 Grande Rue",
+      "city": "Samoëns",
+      "postalCode": "74340",
+      "dirigeants": [
+        {
+          "name": "Timéo MALAGUTTI",
+          "role": "Gérant",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:46.063Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Non déposé",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=CML%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Tim%C3%A9o%20MALAGUTTI%20France",
+      "northDataUrl": "https://www.northdata.fr/CML%2C%20Samo%C3%ABns/Siren%20132207812",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:46.063Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 37,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "CHF",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "74",
+        "subLabel": "Dépt 74"
+      }
+    },
+    {
+      "id": "FR-132058041",
+      "country": "FR",
+      "countryName": "France",
+      "name": "CLEALY COIFFURE",
+      "registrationNumber": "132058041",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "L'exploitation d'un salon de coiffure mixte, de barbier et d'onglerie.",
+      "address": "29 Rue Vaugelas",
+      "city": "Annecy",
+      "postalCode": "74000",
+      "dirigeants": [
+        {
+          "name": "Aline MAURY",
+          "role": "Président de SAS (via holding ALICOR HOLDING)",
+          "birthYear": "1980",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [
+        {
+          "name": "ALICOR HOLDING",
+          "legalForm": "Holding / Personne Morale",
+          "shareCapital": 50000,
+          "activity": "Société mère / Mandataire (Président)",
+          "roleHeld": "Président (Personne Morale)",
+          "city": "France"
+        }
+      ],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:45.984Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Commerce & E-Commerce",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=CLEALY%20COIFFURE%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Aline%20MAURY%20France",
+      "northDataUrl": "https://www.northdata.fr/CLEALY%20COIFFURE%2C%20Annecy/Siren%20132058041",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:46.063Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Commerce & E-Commerce",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 60,
+        "badge": "💱 Fort Potentiel FX (EUR/CHF/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "EUR",
+          "CHF",
+          "USD",
+          "GBP"
+        ],
+        "reasons": [
+          "Zone frontalière franco-suisse (Dépt 74) à forts flux EUR ↔ CHF",
+          "E-Commerce & Distribution : encaissements clients multi-devises et achats fournisseurs hors zone Euro"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "74",
+        "subLabel": "Dépt 74"
+      }
+    },
+    {
+      "id": "FR-132454620",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LA RIGAUDIERE",
+      "registrationNumber": "132454620",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Toutes activités de restauration, brasserie, bistrot ; Toutes activités de caviste, vente de vins, produits et accessoires liés au monde viticole et vinicole",
+      "address": "17 Rue Sala",
+      "city": "Lyon",
+      "postalCode": "69002",
+      "dirigeants": [
+        {
+          "name": "Morgan SAUZAY",
+          "role": "Gérant",
+          "isPrimary": true
+        },
+        {
+          "name": "Antoine KOCHEN",
+          "role": "Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:42.455Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Restauration & Hôtellerie",
+      "website": "https://rigaudiere.com",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "rigaudiere.com",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Antoine KOCHEN",
+        "role": "Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Antoine%20KOCHEN%20LA%20RIGAUDIERE"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LA%20RIGAUDIERE%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Morgan%20SAUZAY%20France",
+      "northDataUrl": "https://www.northdata.fr/LA%20RIGAUDIERE%2C%20Lyon/Siren%20132454620",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 85,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 85,
+      "enrichedAt": "2026-11-08T11:06:45.229Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Restauration & Hôtellerie",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 55,
+        "badge": "🌐 FX Modéré (EUR/USD)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "EUR",
+          "USD",
+          "CHF",
+          "GBP"
+        ],
+        "reasons": [
+          "Pôle économique à forte ouverture internationale (Dépt 69)",
+          "Hôtellerie, Tourisme & Conciergerie : clientèle internationale (encaissements USD, CHF, GBP)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "69",
+        "subLabel": "Dépt 69"
+      }
+    },
+    {
+      "id": "FR-131268476",
+      "country": "FR",
+      "countryName": "France",
+      "name": "MAISON CREPES & THE",
+      "registrationNumber": "131268476",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 500,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "crêperie. salon de thé",
+      "address": "18 Avenue Louis Pasteur",
+      "city": "Sélestat",
+      "postalCode": "67600",
+      "dirigeants": [
+        {
+          "name": "Aminat SOULIMANOVA",
+          "role": "Gérant",
+          "isPrimary": true
+        },
+        {
+          "name": "Marina TEMIRDZHANOVA",
+          "role": "Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:42.393Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Commerce & E-Commerce",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Marina TEMIRDZHANOVA",
+        "role": "Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Marina%20TEMIRDZHANOVA%20MAISON%20CREPES%20THE"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=MAISON%20CREPES%20THE%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Aminat%20SOULIMANOVA%20France",
+      "northDataUrl": "https://www.northdata.fr/MAISON%20CREPES%20%26%20THE%2C%20S%C3%A9lestat/Siren%20131268476",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:42.455Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Commerce & E-Commerce",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 60,
+        "badge": "💱 Fort Potentiel FX (EUR/USD/GBP)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "EUR",
+          "USD",
+          "GBP"
+        ],
+        "reasons": [
+          "Pôle économique à forte ouverture internationale (Dépt 67)",
+          "E-Commerce & Distribution : encaissements clients multi-devises et achats fournisseurs hors zone Euro"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_HDF_GE",
+        "regionLabel": "Nord & Grand Est",
+        "subCode": "67",
+        "subLabel": "Dépt 67"
+      }
+    },
+    {
+      "id": "FR-130952260",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LE REP'HAIR",
+      "registrationNumber": "130952260",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 2000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "5 Grand-Rue",
+      "city": "Munster",
+      "postalCode": "68140",
+      "dirigeants": [
+        {
+          "name": "Marie ROELTGEN",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:40.967Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LE%20REP%20HAIR%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Marie%20ROELTGEN%20France",
+      "northDataUrl": "https://www.northdata.fr/LE%20REP'HAIR%2C%20Munster/Siren%20130952260",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:42.393Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 37,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "CHF",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_HDF_GE",
+        "regionLabel": "Nord & Grand Est",
+        "subCode": "68",
+        "subLabel": "Dépt 68"
+      }
+    },
+    {
+      "id": "FR-131165367",
+      "country": "FR",
+      "countryName": "France",
+      "name": "DU LONDENBACH",
+      "registrationNumber": "131165367",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 8000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "exploitation de tous fonds de commerce de ferme auberge, de restauration de type traditionnel, de bar, de brasserie et de traiteur - gestion de biens",
+      "address": "21 Chemin du Londenbach",
+      "city": "Soultzeren",
+      "postalCode": "68140",
+      "dirigeants": [
+        {
+          "name": "Emanuel HINDERMANN",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:39.434Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Restauration & Hôtellerie",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=DU%20LONDENBACH%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Emanuel%20HINDERMANN%20France",
+      "northDataUrl": "https://www.northdata.fr/DU%20LONDENBACH%2C%20Soultzeren/Siren%20131165367",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:40.967Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Restauration & Hôtellerie",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 45,
+        "badge": "🌐 FX Modéré (EUR/CHF)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "EUR",
+          "CHF",
+          "USD",
+          "GBP"
+        ],
+        "reasons": [
+          "Zone frontalière franco-suisse (Dépt 68) à forts flux EUR ↔ CHF",
+          "Hôtellerie, Tourisme & Conciergerie : clientèle internationale (encaissements USD, CHF, GBP)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_HDF_GE",
+        "regionLabel": "Nord & Grand Est",
+        "subCode": "68",
+        "subLabel": "Dépt 68"
+      }
+    },
+    {
+      "id": "FR-130287691",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LOUVE",
+      "registrationNumber": "130287691",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 100,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "135 rue du Général Leclerc",
+      "city": "Lys-lez-Lannoy",
+      "postalCode": "59390",
+      "dirigeants": [
+        {
+          "name": "Samuel POLLET",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:36.799Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LOUVE%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Samuel%20POLLET%20France",
+      "northDataUrl": "https://www.northdata.fr/LOUVE%2C%20Lys-lez-Lannoy/Siren%20130287691",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:39.434Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 37,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_HDF_GE",
+        "regionLabel": "Nord & Grand Est",
+        "subCode": "59",
+        "subLabel": "Dépt 59"
+      }
+    },
+    {
+      "id": "FR-131632929",
+      "country": "FR",
+      "countryName": "France",
+      "name": "DYNAMO CROSSFIT",
+      "registrationNumber": "131632929",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 8000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "L'exploitation d'un club sportif, en ce compris l'organisation de la pratique d'une ou plusieurs disciplines sportives, l'encadrement et l'entraînement des adhérents et licenciés, l'organisation de compétitions et de manifestations sportives, la gestion des adhésions et licences, ainsi que l'exploitation des équipements et infrastructures nécessaires à l'exercice de ces activités.",
+      "address": "2 Rue Des Métiers",
+      "city": "Cappelle-la-Grande",
+      "postalCode": "59180",
+      "dirigeants": [
+        {
+          "name": "Mehdi TCHICHE",
+          "role": "Gérant",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:36.747Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=DYNAMO%20CROSSFIT%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Mehdi%20TCHICHE%20France",
+      "northDataUrl": "https://www.northdata.fr/DYNAMO%20CROSSFIT%2C%20Cappelle-la-Grande/Siren%20131632929",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:36.799Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 37,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_HDF_GE",
+        "regionLabel": "Nord & Grand Est",
+        "subCode": "59",
+        "subLabel": "Dépt 59"
+      }
+    },
+    {
+      "id": "FR-132403759",
+      "country": "FR",
+      "countryName": "France",
+      "name": "DAILY BLOOM CAFE",
+      "registrationNumber": "132403759",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "14 bis Route de Coutances",
+      "city": "Donville-les-Bains",
+      "postalCode": "50350",
+      "dirigeants": [
+        {
+          "name": "Clémentine COQUILLET",
+          "role": "Président",
+          "isPrimary": true
+        },
+        {
+          "name": "Théo COQUILLET",
+          "role": "Directeur général",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:36.678Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Théo COQUILLET",
+        "role": "Directeur général",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Th%C3%A9o%20COQUILLET%20DAILY%20BLOOM%20CAFE"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=DAILY%20BLOOM%20CAFE%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Cl%C3%A9mentine%20COQUILLET%20France",
+      "northDataUrl": "https://www.northdata.fr/DAILY%20BLOOM%20CAFE%2C%20Donville-les-Bains/Siren%20132403759",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:36.746Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 32,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_OUEST",
+        "regionLabel": "Grand Ouest & Centre",
+        "subCode": "50",
+        "subLabel": "Dépt 50"
+      }
+    },
+    {
+      "id": "FR-131862344",
+      "country": "FR",
+      "countryName": "France",
+      "name": "Luré",
+      "registrationNumber": "131862344",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 409500,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "holding.",
+      "address": "911 Route de Montadet",
+      "city": "Puylausic",
+      "postalCode": "32220",
+      "dirigeants": [
+        {
+          "name": "Cynthia STRIBICK-BURCKEL",
+          "role": "Gérant",
+          "isPrimary": true
+        },
+        {
+          "name": "Julien RAZEMON",
+          "role": "Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:30.650Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Julien RAZEMON",
+        "role": "Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Julien%20RAZEMON%20Lur%C3%A9"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Lur%C3%A9%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Cynthia%20STRIBICK-BURCKEL%20France",
+      "northDataUrl": "https://www.northdata.fr/Lur%C3%A9%2C%20Puylausic/Siren%20131862344",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:36.668Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 52,
+        "badge": "🌐 FX Modéré (EUR/USD)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises",
+          "Capital social élevé (409 500 €) indiquant un fort volume de trésorerie"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_OCC",
+        "regionLabel": "Occitanie",
+        "subCode": "32",
+        "subLabel": "Dépt 32"
+      }
+    },
+    {
+      "id": "FR-131917981",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LAVERIE & COLLECT",
+      "registrationNumber": "131917981",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 2000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Laverie automatique avec une capacité de lavage de linge inférieure à 50 Kg/jour, distributeur automatique, consignes colis, location de bureaux de coworking.",
+      "address": "27 Rue De la République",
+      "city": "Montbrison",
+      "postalCode": "42600",
+      "dirigeants": [
+        {
+          "name": "Jonathan LATOUR",
+          "role": "Président",
+          "isPrimary": true
+        },
+        {
+          "name": "Clotilde HURTADO",
+          "role": "Directeur général",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:30.156Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Clotilde HURTADO",
+        "role": "Directeur général",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Clotilde%20HURTADO%20LAVERIE%20COLLECT"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LAVERIE%20COLLECT%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Jonathan%20LATOUR%20France",
+      "northDataUrl": "https://www.northdata.fr/LAVERIE%20%26%20COLLECT%2C%20Montbrison/Siren%20131917981",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:30.313Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 15,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "42",
+        "subLabel": "Dépt 42"
+      }
+    },
+    {
+      "id": "FR-132381278",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LE MARCHE D'EVREUX",
+      "registrationNumber": "132381278",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 20000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "vente alimentation, supermarché",
+      "address": "Rue Caravelle",
+      "city": "Guichainville",
+      "postalCode": "27930",
+      "dirigeants": [
+        {
+          "name": "Lahcen EL AZAOUI",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:29.286Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LE%20MARCHE%20D%20EVREUX%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Lahcen%20EL%20AZAOUI%20France",
+      "northDataUrl": "https://www.northdata.fr/LE%20MARCHE%20D'EVREUX%2C%20Guichainville/Siren%20132381278",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:29.767Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 15,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_OUEST",
+        "regionLabel": "Grand Ouest & Centre",
+        "subCode": "27",
+        "subLabel": "Dépt 27"
+      }
+    },
+    {
+      "id": "FR-132335530",
+      "country": "FR",
+      "countryName": "France",
+      "name": "T & T restauration",
+      "registrationNumber": "132335530",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 200,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "15 Impasse De la Garenne",
+      "city": "Saint-Gervais-sur-Roubion",
+      "postalCode": "26160",
+      "dirigeants": [
+        {
+          "name": "Tiphanie KERVEVAN",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:29.243Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=T%20T%20restauration%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Tiphanie%20KERVEVAN%20France",
+      "northDataUrl": "https://www.northdata.fr/T%20%26%20T%20restauration%2C%20Saint-Gervais-sur-Roubion/Siren%20132335530",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:29.286Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 22,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "26",
+        "subLabel": "Dépt 26"
+      }
+    },
+    {
+      "id": "FR-132446931",
+      "country": "FR",
+      "countryName": "France",
+      "name": "SERREDECHABANAS",
+      "registrationNumber": "132446931",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "L'organisation, la promotion, la commercialisation et la gestion de stages, formations, séminaires d'entreprises, retraites, séjours et événements dans les domaines du yoga, du bien-être, du développement personnel, des pratiques corporelles, artistiques, culturelles, éducatives, sportives et de loisirs, directement ou par l'intermédiaire de prestataires - l'accueil et l'hébergement des participants à ces activités, notamment par l'exploitation de chambres d'hôtes, gîtes, hébergements touristiques ou de tout autre établissement d'accueil, avec ou sans prestations annexes de nature hôtelière ou para-hôtelière ; la location, la mise à disposition et l'exploitation de salles, locaux, équipements, mobiliers et espaces destinés à l'organisation des activités susvisées ou de tout autre événement. La fourniture de toutes prestations de e services complémentaires liées à ces activités, notamment l'accueil, l'intendance, la restauration légère, l'accompagnement logistique, ainsi que toute prestation liée à l'hébergement ou aux événements organisés ; l'acquisition, la propriété, l'administration, la gestion, la location, la mise à disposition et l'exploitation, notamment par bail, de tous biens et droits mobiliers et immobiliers nécessaires ou utiles à la réalisation de l'objet social.",
+      "address": "4715 Route De Mirmande",
+      "city": "Grane",
+      "postalCode": "26400",
+      "dirigeants": [
+        {
+          "name": "Stéphane GIN",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:26.091Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": "https://serredechabanas.fr",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "serredechabanas.fr",
+      "emails": [
+        {
+          "email": "stephane.gin@serredechabanas.fr",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@serredechabanas.fr",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "stephane.gin@serredechabanas.fr",
+      "emailSource": "Serveur Mail MX Actif (serredechabanas.fr)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=SERREDECHABANAS%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=St%C3%A9phane%20GIN%20France",
+      "northDataUrl": "https://www.northdata.fr/SERREDECHABANAS%2C%20Grane/Siren%20132446931",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-08T11:06:29.243Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 22,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "26",
+        "subLabel": "Dépt 26"
+      }
+    },
+    {
+      "id": "FR-132159013",
+      "country": "FR",
+      "countryName": "France",
+      "name": "LA VOUTE COMEDIE CLUB",
+      "registrationNumber": "132159013",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "21 Rue Du Général Farre",
+      "city": "Valence",
+      "postalCode": "26000",
+      "dirigeants": [
+        {
+          "name": "Samir BENZINA",
+          "role": "Gérant",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:26.029Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LA%20VOUTE%20COMEDIE%20CLUB%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Samir%20BENZINA%20France",
+      "northDataUrl": "https://www.northdata.fr/LA%20VOUTE%20COMEDIE%20CLUB%2C%20Valence/Siren%20132159013",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:26.091Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 22,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_ARA",
+        "regionLabel": "Auvergne-Rhône-Alpes",
+        "subCode": "26",
+        "subLabel": "Dépt 26"
+      }
+    },
+    {
+      "id": "FR-132401506",
+      "country": "FR",
+      "countryName": "France",
+      "name": "RENOLAB",
+      "registrationNumber": "132401506",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 1500,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "la réalisation de tous travaux de rénovation, de finition et d'aménagement intérieur et extérieur de bâtiments et de maisons. - les travaux de peinture intérieure et extérieure.",
+      "address": "21 Route de Moncey",
+      "city": "Rigney",
+      "postalCode": "25640",
+      "dirigeants": [
+        {
+          "name": "Benjamin GOGUEY",
+          "role": "Gérant",
+          "isPrimary": true
+        },
+        {
+          "name": "Louison MAITRUGUE",
+          "role": "Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:19.279Z",
+      "incorporationYear": "2026",
+      "activityCategory": "BTP & Construction",
+      "website": "https://renolab.fr",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "renolab.fr",
+      "emails": [
+        {
+          "email": "benjamin.goguey@renolab.fr",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@renolab.fr",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "benjamin.goguey@renolab.fr",
+      "emailSource": "Serveur Mail MX Actif (renolab.fr)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Louison MAITRUGUE",
+        "role": "Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Louison%20MAITRUGUE%20RENOLAB"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=RENOLAB%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Benjamin%20GOGUEY%20France",
+      "northDataUrl": "https://www.northdata.fr/RENOLAB%2C%20Rigney/Siren%20132401506",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-08T11:06:22.753Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "BTP & Construction",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 15,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_OUEST",
+        "regionLabel": "Grand Ouest & Centre",
+        "subCode": "25",
+        "subLabel": "Dépt 25"
+      }
+    },
+    {
+      "id": "FR-131968356",
+      "country": "FR",
+      "countryName": "France",
+      "name": "BOUCHERIE ALBERT-POCHET",
+      "registrationNumber": "131968356",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Boucherie tous types de viandes, charcuterie, traiteur, organisation de banquets, Sandwicherie, épicerie, marché ambulant.",
+      "address": "42 rue Hablot",
+      "city": "Carignan",
+      "postalCode": "08110",
+      "dirigeants": [
+        {
+          "name": "Thomas ALBERT",
+          "role": "Gérant",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:19.215Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Restauration & Hôtellerie",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=BOUCHERIE%20ALBERT-POCHET%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Thomas%20ALBERT%20France",
+      "northDataUrl": "https://www.northdata.fr/BOUCHERIE%20ALBERT-POCHET%2C%20Carignan/Siren%20131968356",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:19.278Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Restauration & Hôtellerie",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 30,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD",
+          "CHF",
+          "GBP"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_HDF_GE",
+        "regionLabel": "Nord & Grand Est",
+        "subCode": "08",
+        "subLabel": "Dépt 08"
+      }
+    },
+    {
+      "id": "FR-132371444",
+      "country": "FR",
+      "countryName": "France",
+      "name": "MUNIAM VIAS",
+      "registrationNumber": "132371444",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SAS / SASU",
+      "shareCapital": 10000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "développement commercial, représentation, distribution et commercialisation de matériels, équipements et solutions techniques destinés aux professionnels. - achat, vente, importation, exportation et distribution de matériels, équipements, pièces, accessoires et consommables. - développement et animation de réseaux de distributeurs et partenaires. - prestations de marketing, prospection, conseil et accompagnement commercial. - organisation de démonstrations, salons, essais et formations. - prestations et coordination de services techniques, notamment diagnostics, réglage, optimisation, mise en service, maintenance et assistance sur matériels et équipements. - location de matériels.",
+      "address": "39 Rue Roc'Hell",
+      "city": "Caurel",
+      "postalCode": "22530",
+      "dirigeants": [
+        {
+          "name": "Ales BARTOS",
+          "role": "Président",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:13.114Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=MUNIAM%20VIAS%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Ales%20BARTOS%20France",
+      "northDataUrl": "https://www.northdata.fr/MUNIAM%20VIAS%2C%20Caurel/Siren%20132371444",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:19.212Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 35,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD",
+          "GBP"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_OUEST",
+        "regionLabel": "Grand Ouest & Centre",
+        "subCode": "22",
+        "subLabel": "Dépt 22"
+      }
+    },
+    {
+      "id": "FR-132142712",
+      "country": "FR",
+      "countryName": "France",
+      "name": "NOMAD STUDIO",
+      "registrationNumber": "132142712",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 100,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Exploitation d'un studio de pratique sportive, de bien-être et de remise en forme : cours collectifs et individuels de Pilates (au sol et sur machines), yoga, méthode Lagree, renforcement musculaire, mobilité, respiration et relaxation, en studio, en extérieur, à domicile, en entreprise ou à distance. Activités accessoires : vente de boissons non alcoolisées et collations à consommer sur place ou à emporter ; organisation de retraites, stages, ateliers et événements ; vente et location de matériels, vêtements et accessoires ; contenus et cours en ligne.",
+      "address": "481 Casamozza",
+      "city": "Prunelli-di-Fiumorbo",
+      "postalCode": "20243",
+      "dirigeants": [
+        {
+          "name": "Lionel GIOVANNI",
+          "role": "Gérant",
+          "isPrimary": true
+        },
+        {
+          "name": "Julie LEANDRI",
+          "role": "Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:10.590Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Julie LEANDRI",
+        "role": "Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Julie%20LEANDRI%20NOMAD%20STUDIO"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=NOMAD%20STUDIO%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Lionel%20GIOVANNI%20France",
+      "northDataUrl": "https://www.northdata.fr/NOMAD%20STUDIO%2C%20Prunelli-di-Fiumorbo/Siren%20132142712",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:13.114Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 15,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_OUEST",
+        "regionLabel": "Grand Ouest & Centre",
+        "subCode": "20",
+        "subLabel": "Dépt 20"
+      }
+    },
+    {
+      "id": "FR-132396797",
+      "country": "FR",
+      "countryName": "France",
+      "name": "SARL L&G - LA TAVERNE DE TASDON",
+      "registrationNumber": "132396797",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 10000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "Conseil, commerce et services aux entreprises",
+      "address": "83 Rue Émile Normandin",
+      "city": "La Rochelle",
+      "postalCode": "17000",
+      "dirigeants": [
+        {
+          "name": "Franck LHORTOLARY",
+          "role": "Gérant",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:10.515Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=L%20G%20-%20LA%20TAVERNE%20DE%20TASDON%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Franck%20LHORTOLARY%20France",
+      "northDataUrl": "https://www.northdata.fr/SARL%20L%26G%20-%20LA%20TAVERNE%20DE%20TASDON%2C%20La%20Rochelle/Siren%20132396797",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-08T11:06:10.589Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "low",
+        "score": 22,
+        "badge": "🏠 Flux Domestiques",
+        "shortBadge": "🏠 Domestique",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Activité principalement locale (flux EUR / CHF)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_NAQ",
+        "regionLabel": "Nouvelle-Aquitaine",
+        "subCode": "17",
+        "subLabel": "Dépt 17"
+      }
+    },
+    {
+      "id": "FR-132143918",
+      "country": "FR",
+      "countryName": "France",
+      "name": "Basse Pression signature",
+      "registrationNumber": "132143918",
+      "incorporationDate": "2026-11-08",
+      "legalForm": "SARL / EURL",
+      "shareCapital": 1000,
+      "revenue": null,
+      "revenueYear": null,
+      "activity": "toutes prestations de nettoyage, entretien, lavage, démoussage, décrassage, dégraissage, assainissement, désinfection et traitement de tous bâtiments, locaux, installations, équipements, surfaces et espaces, intérieurs comme extérieurs, notamment par basse pression, haute pression, vapeur, procédés mécaniques ou manuels - le nettoyage, l'entretien, le traitement préventif et curatif, l'embellissement, la protection de surface (hors gros œuvre et second œuvre du bâtiment), l'application d'hydrofuges, imperméabilisants et minéralisants, ainsi que l'embellissement de tous types de surfaces (toitures, façades, terrasses, murs, sols, bardages, vitrages, panneaux photovoltaïques, piscines, locaux professionnels et habitations). - l'entretien courant des espaces extérieurs et espaces verts (débroussaillage, désherbage, tonte, nettoyage) ainsi que l'évacuation des déchets non dangereux issus des prestations. - les prestations de petit bricolage dites \"homme toutes mains\", les prestations multiservices d'entretien courant et de petite maintenance d'équipements, de bâtiments et d'espaces extérieurs, à l'exclusion de tout acte relevant du gros œuvre, du second œuvre ou des activités réglementées du bâtiment, ainsi que toutes prestations connexes ou complémentaires ne nécessitant aucune qualification professionnelle spécifique. - l'achat, la vente, l'importation, l'exportation, la distribution et la commercialisation de matériels, équipements, accessoires, consommables et produits nettoyants ou de traitement. - la location de matériels et équipements en lien avec les activités ci-dessus. - les prestations de conseil, démonstration et formation non professionnelle se rapportant à ces activités.",
+      "address": "5 Boulevard de Marseilleveyre",
+      "city": "Marseille 8e Arrondissement",
+      "postalCode": "13008",
+      "dirigeants": [
+        {
+          "name": "Sabri KHOULALENE",
+          "role": "Gérant",
+          "isPrimary": true
+        },
+        {
+          "name": "Nils HIERNAUX",
+          "role": "Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "BODACC A & RNE (INPI)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-08T11:06:07.315Z",
+      "incorporationYear": "2026",
+      "activityCategory": "BTP & Construction",
+      "website": "https://bassepressionsignature.fr",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "bassepressionsignature.fr",
+      "emails": [
+        {
+          "email": "sabri.khoulalene@bassepressionsignature.fr",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@bassepressionsignature.fr",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "sabri.khoulalene@bassepressionsignature.fr",
+      "emailSource": "Serveur Mail MX Actif (bassepressionsignature.fr)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Nils HIERNAUX",
+        "role": "Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Nils%20HIERNAUX%20Basse%20Pression%20signature"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Basse%20Pression%20signature%20France",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Sabri%20KHOULALENE%20France",
+      "northDataUrl": "https://www.northdata.fr/Basse%20Pression%20signature%2C%20Marseille%208e%20Arrondissement/Siren%20132143918",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-08T11:06:10.513Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "BTP & Construction",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 45,
+        "badge": "🌐 FX Modéré (EUR/USD)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Secteur Tech / SaaS : facturation d'infrastructures Cloud & outils logiciels en USD + scalabilité internationale"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "FR_PACA",
+        "regionLabel": "PACA & Côte d'Azur",
+        "subCode": "13",
+        "subLabel": "Dépt 13"
+      }
+    },
+    {
       "id": "CH-CHE280977581",
       "country": "CH",
       "countryName": "Suisse",
@@ -651,7 +4398,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:22.935Z",
+      "createdAt": "2026-11-08T11:07:11.207Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -707,7 +4454,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:22.972Z",
+      "enrichedAt": "2026-11-08T11:07:11.383Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -738,7 +4485,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SG",
         "subLabel": "Canton SG"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE384795111",
@@ -779,7 +4527,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:22.768Z",
+      "createdAt": "2026-11-08T11:07:10.896Z",
       "incorporationYear": "2026",
       "activityCategory": "Transport & Logistique",
       "website": null,
@@ -835,7 +4583,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:22.810Z",
+      "enrichedAt": "2026-11-08T11:07:11.043Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -864,7 +4612,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SO",
         "subLabel": "Canton SO"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE466451105",
@@ -903,7 +4652,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:22.591Z",
+      "createdAt": "2026-11-08T11:07:10.558Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -959,7 +4708,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:22.642Z",
+      "enrichedAt": "2026-11-08T11:07:10.732Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -991,7 +4740,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SG",
         "subLabel": "Canton SG"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE482470242",
@@ -1047,7 +4797,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:22.341Z",
+      "createdAt": "2026-11-08T11:07:10.239Z",
       "incorporationYear": "2026",
       "activityCategory": "Marketing & Com",
       "website": null,
@@ -1103,7 +4853,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:22.466Z",
+      "enrichedAt": "2026-11-08T11:07:10.394Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1132,7 +4882,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SG",
         "subLabel": "Canton SG"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE464137827",
@@ -1185,7 +4936,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:19.978Z",
+      "createdAt": "2026-11-08T11:07:07.566Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -1241,7 +4992,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:22.215Z",
+      "enrichedAt": "2026-11-08T11:07:10.073Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1273,7 +5024,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SG",
         "subLabel": "Canton SG"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE170546517",
@@ -1305,7 +5057,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:19.815Z",
+      "createdAt": "2026-11-08T11:07:07.331Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -1361,7 +5113,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:19.853Z",
+      "enrichedAt": "2026-11-08T11:07:07.399Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1392,7 +5144,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZG",
         "subLabel": "Canton ZG"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE362752671",
@@ -1424,7 +5177,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:15.884Z",
+      "createdAt": "2026-11-08T11:07:02.840Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -1480,7 +5233,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-07T10:55:19.689Z",
+      "enrichedAt": "2026-11-08T11:07:07.167Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1511,7 +5264,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZG",
         "subLabel": "Canton ZG"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE386841064",
@@ -1650,7 +5404,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-06T11:54:32.445Z",
+      "createdAt": "2026-11-08T11:07:11.712Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -1706,7 +5460,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-06T11:54:32.544Z",
+      "enrichedAt": "2026-11-08T11:07:11.913Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1736,7 +5490,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BS",
         "subLabel": "Canton BS"
-      }
+      },
+      "updatedAt": "2026-11-08T11:07:18.333Z"
     },
     {
       "id": "CH-CHE146038054",
@@ -3609,7 +7364,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:34.466Z",
+      "createdAt": "2026-11-08T11:06:58.211Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": "https://crabswi.com",
@@ -3678,7 +7433,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-07T10:55:35.115Z",
+      "enrichedAt": "2026-11-08T11:06:59.005Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3709,7 +7464,7 @@
         "subCode": "GE",
         "subLabel": "Canton GE"
       },
-      "updatedAt": "2026-11-07T10:55:41.540Z"
+      "updatedAt": "2026-11-08T11:07:18.331Z"
     },
     {
       "id": "CH-CHE280192746",
@@ -3741,7 +7496,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:32.418Z",
+      "createdAt": "2026-11-08T11:06:55.376Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": "https://www.immopic.ch",
@@ -3810,7 +7565,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-07T10:55:34.340Z",
+      "enrichedAt": "2026-11-08T11:06:58.044Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3842,7 +7597,7 @@
         "subCode": "VS",
         "subLabel": "Canton VS"
       },
-      "updatedAt": "2026-11-07T10:55:41.540Z"
+      "updatedAt": "2026-11-08T11:07:18.331Z"
     },
     {
       "id": "CH-CHE259528049",
@@ -3902,7 +7657,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-07T10:55:29.544Z",
+      "createdAt": "2026-11-08T11:06:51.992Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": "https://olealp.ch",
@@ -3971,7 +7726,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-07T10:55:32.291Z",
+      "enrichedAt": "2026-11-08T11:06:55.209Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4003,7 +7758,7 @@
         "subCode": "VS",
         "subLabel": "Canton VS"
       },
-      "updatedAt": "2026-11-07T10:55:41.540Z"
+      "updatedAt": "2026-11-08T11:07:18.331Z"
     },
     {
       "id": "FR-132331216",
@@ -680355,6 +684110,17 @@
   ],
   "syncLogs": [
     {
+      "date": "2026-11-08T11:07:18.673Z",
+      "status": "success",
+      "recordsFetched": 42,
+      "recordsAdded": 31,
+      "recordsUpdated": 11,
+      "totalDatabase": 10776,
+      "durationSeconds": 73,
+      "errors": null,
+      "country": "ALL"
+    },
+    {
       "date": "2026-11-07T10:55:41.840Z",
       "status": "success",
       "recordsFetched": 45,
@@ -680488,13 +684254,13 @@
     }
   ],
   "lastSync": {
-    "date": "2026-11-07T10:55:41.840Z",
+    "date": "2026-11-08T11:07:18.673Z",
     "status": "success",
-    "recordsFetched": 45,
-    "recordsAdded": 12,
-    "recordsUpdated": 33,
-    "totalDatabase": 10745,
-    "durationSeconds": 53.9,
+    "recordsFetched": 42,
+    "recordsAdded": 31,
+    "recordsUpdated": 11,
+    "totalDatabase": 10776,
+    "durationSeconds": 73,
     "errors": null,
     "country": "ALL"
   },
