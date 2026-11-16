@@ -1,6 +1,2642 @@
 {
   "companies": [
     {
+      "id": "CH-CHE466251931",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Schilliger Holding GmbH",
+      "registrationNumber": "CHE-466.251.931",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt das Halten von und Handeln mit Beteiligungen im In- und Ausland, Abwicklung von Finanzierungsgeschäften; Kauf, Verkauf und Verwaltung von Liegenschaften und Stockwerkeigentümergemeinschaften im In- und Ausland. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Sicherheiten für Verbindlichkeiten verbundener Gesellschaften abgeben.",
+      "address": "Eibenweg 2d, 8404 Winterthur",
+      "city": "Winterthur",
+      "postalCode": "8404",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Matthias Schilliger",
+          "firstName": "Matthias",
+          "lastName": "Schilliger",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:34.188Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Schilliger%20Holding%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Matthias%20Schilliger%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Schilliger%20Holding%20GmbH%2C%20Winterthur/CHE-466.251.931",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:37.084Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 82,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Winterthur (ZH)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE494351638",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Vínculo GmbH",
+      "registrationNumber": "CHE-494.351.638",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Vermittlung von Versicherungen aller Art als ungebundene Versicherungsvermittlerin, die Beratung von Privatpersonen und Unternehmen in Versicherungs- und Vorsorgefragen sowie die Erbringung damit verbundener administrativer Dienstleistungen. Sie kann zudem Kredite und Leasingverträge vermitteln, sofern und soweit hierfür die erforderlichen Bewilligungen vorliegen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "c/o Jan Noe Fernandez Borello, Mutschellenstrasse 109, 8038 Zürich",
+      "city": "Zürich",
+      "postalCode": "8038",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Jan Fernandez Borello",
+          "firstName": "Jan",
+          "lastName": "Fernandez Borello",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "ES",
+          "countryName": "Espagne",
+          "flag": "🇪🇸",
+          "entityName": "Actionnariat / Direction Hispano-Suisse (ES ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Espagne"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:31.859Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=V%C3%ADnculo%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Jan%20Fernandez%20Borello%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/V%C3%ADnculo%20GmbH%2C%20Z%C3%BCrich/CHE-494.351.638",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:33.872Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 82,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zürich (ZH)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE270279937",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Movoya GmbH",
+      "registrationNumber": "CHE-270.279.937",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Entwicklung, die Herstellung, den Vertrieb, die Vermietung, die Lizenzierung und den Betrieb von Software, Hardware, digitalen Produkten und interaktiven Systemen in den Bereichen Bewegung, körperliches und kognitives Training, Gesundheitsförderung, Prävention, Aktivierung, Unterhaltung und Bildung; sie erbringt damit zusammenhängende Dienstleistungen, insbesondere Beratung, Schulung, Installation, Wartung und Datenauswertung sowie die Erstellung und Bereitstellung digitaler Inhalte. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Hardturmstrasse 161, 8005 Zürich",
+      "city": "Zürich",
+      "postalCode": "8005",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Aurel Berger",
+          "firstName": "Aurel",
+          "lastName": "Berger",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:30.590Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Tech & Logiciel",
+      "website": "https://movoya.com",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "movoya.com",
+      "emails": [
+        {
+          "email": "aurel.berger@movoya.com",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@movoya.com",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "aurel.berger@movoya.com",
+      "emailSource": "Serveur Mail MX Actif (movoya.com)",
+      "phone": "+41 76 259 39 40",
+      "phoneSource": "Site internet officiel (movoya.com)",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Movoya%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Aurel%20Berger%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Movoya%20GmbH%2C%20Z%C3%BCrich/CHE-270.279.937",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-16T12:31:31.701Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 95,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zürich (ZH)",
+          "Secteur Tech / SaaS : facturation d'infrastructures Cloud & outils logiciels en USD + scalabilité internationale"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE312570961",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "mern.ch GmbH",
+      "registrationNumber": "CHE-312.570.961",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 21000,
+      "activity": "Die Gesellschaft bezweckt die Konzeption, Forschung, Herstellung, Entwicklung, Bereitstellung, den Betrieb, die Vermarktung und die Lizenzierung von computergestützten Technologieprodukten, Software, Webseiten, mobilen und webbasierten Apps, digitalen Plattformen, Internetprogrammen, KI-Anwendungen, digitalen Inhalten, Produkten und Dienstleistungen. Sie kann insbesondere das PIP-AR-GALAXY-System und dessen Anwendungswelten, Module, Plattformen und Kooperationsbereiche, einschliesslich der 9 Worlds, 22 Sterne und 7 Parteien, entwickeln, betreiben, koordinieren, miteinander verbinden, lizenzieren und wirtschaftlich nutzen. Die Gesellschaft kann internationale Plattform-, Mitglieder-, Partner- und Anbieterstrukturen aufbauen und verwalten sowie digitale und physische Produkte, Software, Webseiten, Apps, Dienstleistungen und Inhalte weltweit entwickeln, anbieten, beziehen, vertreiben und abrechnen. Sie kann im In- und Ausland mit natürlichen Personen, Unternehmen, Gesellschaften, Hochschulen, Forschungsinstitutionen, Behörden, Verbänden und weiteren Organisationen Kooperations-, Entwicklungs-, Forschungs-, Pilot-, Lizenz-, Vertriebs-, Vermittlungs-, Agentur-, Franchise-, Sponsoring-, Marketing-, Beratungs- und Dienstleistungsverträge abschliessen. Die Zusammenarbeit kann entgeltlich oder unentgeltlich sowie gegen Honorar, Pauschalvergütung, Abonnement, Lizenzgebühr, Nutzungsgebühr, Umsatzbeteiligung, Erfolgsvergütung oder Provision erfolgen. Die Gesellschaft kann Buchhaltungs-, administrative und treuhänderische Dienstleistungen sowie allgemeine Beratungs- und Informationsdienstleistungen im Finanz- und Versicherungsbereich erbringen. Eine individuelle Anlageberatung, Versicherungsvermittlung, Vermögensverwaltung oder andere bewilligungs-, registrierungs- oder aufsichtsrechtlich geregelte Tätigkeit wird nur ausgeübt, wenn sämtliche gesetzlichen Voraussetzungen, Bewilligungen und Registrierungen erfüllt sind. Die Gesellschaft kann Online-Shops, digitale Marktplätze und E-Commerce-Plattformen entwickeln und betreiben, Domain-Marketing betreiben sowie Waren, Software, Apps, digitale Inhalte, Lizenzen und Dienstleistungen über elektronische Vertriebskanäle anbieten, vermitteln und verkaufen. Sie kann Immaterialgüterrechte, insbesondere Urheberrechte, Marken, Designs, Patente, Domains, Software, Datenmodelle, Lizenzen und Know-how, entwickeln, erwerben, halten, verwalten, lizenzieren und veräussern. Die Gesellschaft kann sich an anderen Unternehmen beteiligen, im In- und Ausland Zweigniederlassungen und Tochtergesellschaften errichten sowie Grundeigentum erwerben, belasten, verwalten und veräussern. Sie kann Finanzierungen für eigene oder verbundene Unternehmen vornehmen, Garantien und Sicherheiten stellen und alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck zusammenhängen oder dessen Erreichung fördern.",
+      "address": "Zürichstrasse 50, 8610 Uster",
+      "city": "Uster",
+      "postalCode": "8610",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Rami Haziri",
+          "firstName": "Rami",
+          "lastName": "Haziri",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:30.282Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=mern%20ch%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Rami%20Haziri%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/mern.ch%20GmbH%2C%20Uster/CHE-312.570.961",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:30.434Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 95,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Uster (ZH)",
+          "Secteur Tech / SaaS : facturation d'infrastructures Cloud & outils logiciels en USD + scalabilité internationale"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE308662896",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Olmo Digital GmbH",
+      "registrationNumber": "CHE-308.662.896",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Erbringung von Dienstleistungen in den Bereichen Informationstechnologie, Softwareentwicklung, künstliche Intelligenz, Design, digitales Marketing und Unternehmensberatung sowie die Entwicklung, den Betrieb und die Vermarktung digitaler Lösungen und Geschäftsmodelle. Zudem bezweckt sie die Forschung und Entwicklung sowie die Herstellung, den Vertrieb und die Lizenzierung von physischen und digitalen Produkten aller Art. Sie betreibt den Handel mit Waren aller Art, insbesondere mit Software, technischen Produkten, Designprodukten, Bekleidung, Textilien, Accessoires und Merchandising-Artikeln. Zudem erbringt sie Schulungs-, Coaching- und Beratungsdienstleistungen und organisiert Veranstaltungen im Bereich der Informationstechnologie. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "c/o Domiix.ch GmbH, Badenerstrasse 816, 8048 Zürich",
+      "city": "Zürich",
+      "postalCode": "8048",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Mario Arduini",
+          "firstName": "Mario",
+          "lastName": "Arduini",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        },
+        {
+          "name": "Marta Salini",
+          "firstName": "Marta",
+          "lastName": "Salini",
+          "role": "Associé / Actionnaire",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [
+        {
+          "name": "Domiix.ch GmbH",
+          "roleHeld": "Siège / Fiduciaire / Groupe (c/o)",
+          "legalForm": "Sàrl / GmbH",
+          "city": "Zürich"
+        }
+      ],
+      "internationalLinks": [
+        {
+          "countryCode": "IT",
+          "countryName": "Italie",
+          "flag": "🇮🇹",
+          "entityName": "Établissement / Actionnaire (Rom)",
+          "relation": "Lien transfrontalier enregistré au registre",
+          "city": "Rom"
+        },
+        {
+          "countryCode": "IT",
+          "countryName": "Italie",
+          "flag": "🇮🇹",
+          "entityName": "Actionnariat / Direction Italo-Suisse (IT ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Italie"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:29.948Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Marketing & Com",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Marta Salini",
+        "role": "Associé / Actionnaire",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Marta%20Salini%20Olmo%20Digital"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Olmo%20Digital%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Mario%20Arduini%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Olmo%20Digital%20GmbH%2C%20Z%C3%BCrich/CHE-308.662.896",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:30.125Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Marketing & Com",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 98,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "CNY",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zürich (ZH)",
+          "Activité d'Import-Export / Négoce international : paiements fournisseurs récurrents en USD, EUR, GBP ou CNY"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE155234772",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "WE-R GmbH",
+      "registrationNumber": "CHE-155.234.772",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Durchführung von Wettkampf- und Trainingsformaten sowie von Events, insbesondere von Sport-, Fitness- und Community-Events. Die Gesellschaft verfolgt dabei das Ziel, professionelle, erlebnisorientierte und gemeinschaftsfördernde Veranstaltungen für ein breites Publikum zu entwickeln und durchzuführen. Die Gesellschaft kann hierfür eigene Veranstaltungs-, Wettkampf- und Trainingsformate entwickeln, planen, organisieren, betreiben, vermarkten, lizenzieren und bestehende Formate von Dritten adaptieren und weiterentwickeln sowie entsprechende Rechte erwerben, halten, verwerten und übertragen. Sie kann weitere Dienstleistungen in den Bereichen Sport, Fitness, Training, Marketing, Kommunikation und Medien erbringen. Die Gesellschaft ist berechtigt, alle Geschäfte und Massnahmen vorzunehmen, die geeignet sind, den Geseilschaftszweck unmittelbar oder mittelbar zu fördern. So kann sie hierfür auch mit Sportlerinnen und Sportlern, Fitnessstudios, Vereinen, Unternehmen, Marken, Sponsoren und weiteren Partnern zusammenarbeiten. Die Gesellschaft kann zudem Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen. Sie kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Die Gesellschaft kann Finanzierungen für eigene Rechnung aufnehmen und im Rahmen ihres Zwecks Darlehen oder andere Finanzierungen gewähren sowie Sicherheiten bestellen.",
+      "address": "Thunstrasse 8a, 3005 Bern",
+      "city": "Bern",
+      "postalCode": "3005",
+      "canton": "BE",
+      "dirigeants": [
+        {
+          "name": "Fabian Seiler",
+          "firstName": "Fabian",
+          "lastName": "Seiler",
+          "role": "Président de la Direction (Associé-Gérant)",
+          "isPrimary": true
+        },
+        {
+          "name": "Malik Belbey",
+          "firstName": "Malik",
+          "lastName": "Belbey",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        },
+        {
+          "name": "Thomas Schläfli",
+          "firstName": "Thomas",
+          "lastName": "Schläfli",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        },
+        {
+          "name": "Nadine Toller",
+          "firstName": "Nadine",
+          "lastName": "Toller",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        },
+        {
+          "name": "Rahel Wenger",
+          "firstName": "Rahel",
+          "lastName": "Wenger",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:29.791Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Non déposé",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Malik Belbey",
+        "role": "Associé-Gérant (Direction)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Malik%20Belbey%20WE-R"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=WE-R%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Fabian%20Seiler%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/WE-R%20GmbH%2C%20Bern/CHE-155.234.772",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:29.791Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 55,
+        "badge": "🌐 FX Modéré (CHF/EUR)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "BE",
+        "subLabel": "Canton BE"
+      }
+    },
+    {
+      "id": "CH-CHE335542303",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Treis Frairs AG",
+      "registrationNumber": "CHE-335.542.303",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "SA / AG",
+      "shareCapital": 120000,
+      "activity": "Die Gesellschaft bezweckt den Erwerb, Verkauf und die Verwaltung von Beteiligungen in- und ausländischer Gesellschaften. Sie kann im In- und Ausland Zweigniederlassungen, Geschäftsstellen und Vertretungen errichten, sich an anderen Unternehmen im In- und Ausland beteiligen sowie Patente, Lizenzen und Grundeigentum erwerben, verwalten und veräussern. Die Gesellschaft kann alle kommerziellen, finanziellen und anderen Tätigkeiten ausüben, welche mit dem Zweck der Gesellschaft im Zusammenhang stehen.",
+      "address": "Industriestrasse 7, 7402 Bonaduz",
+      "city": "Bonaduz",
+      "postalCode": "7402",
+      "canton": "GR",
+      "dirigeants": [
+        {
+          "name": "Daniel Eggenberger",
+          "firstName": "Daniel",
+          "lastName": "Eggenberger",
+          "role": "Président du Conseil d'Administration (Board)",
+          "isPrimary": true
+        },
+        {
+          "name": "Manuel Eggenberger",
+          "firstName": "Manuel",
+          "lastName": "Eggenberger",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        },
+        {
+          "name": "Raphael Eggenberger",
+          "firstName": "Raphael",
+          "lastName": "Eggenberger",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        },
+        {
+          "name": "Heinz Eggenberger",
+          "firstName": "Heinz",
+          "lastName": "Eggenberger",
+          "role": "Mandataire / Membre du Board",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:27.294Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Manuel Eggenberger",
+        "role": "Membre du Conseil d'Administration (Board)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Manuel%20Eggenberger%20Treis%20Frairs"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Treis%20Frairs%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Daniel%20Eggenberger%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Treis%20Frairs%20AG%2C%20Bonaduz/CHE-335.542.303",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:27.443Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 87,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises",
+          "Capital social élevé (120 000 CHF) indiquant un fort volume de trésorerie"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "GR",
+        "subLabel": "Canton GR"
+      }
+    },
+    {
+      "id": "CH-CHE343359824",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Oriana Moments GmbH",
+      "registrationNumber": "CHE-343.359.824",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Begleitung und Betreuung von Personen, die aufgrund ihres Alters, einer Erkrankung oder ihrer persönlichen Lebenssituation Unterstützung im Alltag wünschen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Sicherheiten für Verbindlichkeiten verbundener Gesellschaften abgeben.",
+      "address": "Walderstrasse 31, 8340 Hinwil",
+      "city": "Hinwil",
+      "postalCode": "8340",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Else Kouwenhoven",
+          "firstName": "Else",
+          "lastName": "Kouwenhoven",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "NL",
+          "countryName": "Pays-Bas",
+          "flag": "🇳🇱",
+          "entityName": "Actionnariat / Direction NL-Suisse (NL ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Pays-Bas"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:25.174Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Oriana%20Moments%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Else%20Kouwenhoven%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Oriana%20Moments%20GmbH%2C%20Hinwil/CHE-343.359.824",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:27.137Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 60,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Hinwil (ZH)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE194464873",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Corsos GmbH",
+      "registrationNumber": "CHE-194.464.873",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Personalverleih und Personalvermittlung sowie Aus- und Weiterbildung von Personal im Eisenbahnsektor wie auch Erbringung von Eisenbahnverkehrsleistungen aller Art im Personen- und Güterverkehr sowie Beratungs- und Vermarktungsdienstleistungen im Bereich des Schienenverkehrs. Kann im In- und Ausland Zweigniederlassungen und Tochtergesellschaften errichten, sich an anderen Unternehmen beteiligen, Grundeigentum erwerben, belasten und veräussern sowie alle Geschäfte tätigen, die geeignet sind, den Gesellschaftszweck zu fördern.",
+      "address": "Tiergartenweg 1, 4710 Balsthal",
+      "city": "Balsthal",
+      "postalCode": "4710",
+      "canton": "SO",
+      "dirigeants": [
+        {
+          "name": "Simone Schlitt",
+          "firstName": "Simone",
+          "lastName": "Schlitt",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        },
+        {
+          "name": "Ronny Schürch",
+          "firstName": "Ronny",
+          "lastName": "Schürch",
+          "role": "Mandataire / Membre du Board",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:23.179Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": "https://corsos.ch",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "corsos.ch",
+      "emails": [
+        {
+          "email": "simone.schlitt@corsos.ch",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@corsos.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "simone.schlitt@corsos.ch",
+      "emailSource": "Serveur Mail MX Actif (corsos.ch)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Ronny Schürch",
+        "role": "Mandataire / Membre du Board",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Ronny%20Sch%C3%BCrch%20Corsos"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Corsos%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Simone%20Schlitt%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Corsos%20GmbH%2C%20Balsthal/CHE-194.464.873",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-16T12:31:25.018Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 55,
+        "badge": "🌐 FX Modéré (CHF/EUR)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "SO",
+        "subLabel": "Canton SO"
+      }
+    },
+    {
+      "id": "CH-CHE157941099",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Oren Capital GmbH",
+      "registrationNumber": "CHE-157.941.099",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Erbringung von Dienstleistungen im Zusammenhang mit der Verwaltung, Vermietung, Vermittlung, dem Betrieb, der Instandhaltung und dem Unterhalt von Immobilien als auch den Handel mit Immobilien. Die Gesellschaft kann Zweigniederlassungen in der Schweiz und im Ausland errichten, sich an anderen Unternehmungen des In- und des Auslandes beteiligen, gleichartige oder verwandte Unternehmen erwerben oder sich mit solchen zusammenschliessen sowie alle Geschäfte eingehen und Verträge abschliessen, die geeignet sind, den Zweck der Gesellschaft zu fördern oder die direkt oder indirekt damit im Zusammenhang stehen. Sie kann Grundstücke, Immaterialgüterrechte und Lizenzen aller Art erwerben, verwalten, belasten und veräussern.",
+      "address": "Goldbrunnenstrasse 81, 8055 Zürich",
+      "city": "Zürich",
+      "postalCode": "8055",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Naftali Halonbrenner",
+          "firstName": "Naftali",
+          "lastName": "Halonbrenner",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:22.816Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Oren%20Capital%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Naftali%20Halonbrenner%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Oren%20Capital%20GmbH%2C%20Z%C3%BCrich/CHE-157.941.099",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:23.022Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 98,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "CNY",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zürich (ZH)",
+          "Activité d'Import-Export / Négoce international : paiements fournisseurs récurrents en USD, EUR, GBP ou CNY"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE455677349",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Gotthard Deli AG",
+      "registrationNumber": "CHE-455.677.349",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "SA / AG",
+      "shareCapital": 100000,
+      "activity": "Die Gesellschaft bezweckt den Handel mit möglichst regional hergestellten Lebensmitteln, Spezialitäten und weiteren Waren sowie den Betrieb von Verkaufsstellen und Online- Angeboten, die Vermietung von Verkaufsflächen an Dritte und die Erbringung von Dienstleistungen im Detailhandel und in der Gastronomie. Die Gesellschaft kann alle Geschäfte tätigen und Dienstleistungen erbringen, die direkt oder indirekt mit ihrem Zweck zusammenhängen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Furkagasse 9, 6490 Andermatt",
+      "city": "Andermatt",
+      "postalCode": "6490",
+      "canton": "UR",
+      "dirigeants": [
+        {
+          "name": "Patrick Schillig",
+          "firstName": "Patrick",
+          "lastName": "Schillig",
+          "role": "Président du Conseil d'Administration (Board)",
+          "isPrimary": true
+        },
+        {
+          "name": "Guido Betschart",
+          "firstName": "Guido",
+          "lastName": "Betschart",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        },
+        {
+          "name": "Raphael Krucker",
+          "firstName": "Raphael",
+          "lastName": "Krucker",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        },
+        {
+          "name": "Janick Staub",
+          "firstName": "Janick",
+          "lastName": "Staub",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:20.492Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Commerce & E-Commerce",
+      "website": "https://gotthard-deli.ch",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "gotthard-deli.ch",
+      "emails": [
+        {
+          "email": "patrick.schillig@gotthard-deli.ch",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@gotthard-deli.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "patrick.schillig@gotthard-deli.ch",
+      "emailSource": "Serveur Mail MX Actif (gotthard-deli.ch)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Guido Betschart",
+        "role": "Membre du Conseil d'Administration (Board)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Guido%20Betschart%20Gotthard%20Deli"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Gotthard%20Deli%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Patrick%20Schillig%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Gotthard%20Deli%20AG%2C%20Andermatt/CHE-455.677.349",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-16T12:31:22.501Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Commerce & E-Commerce",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 98,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "CNY",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Activité d'Import-Export / Négoce international : paiements fournisseurs récurrents en USD, EUR, GBP ou CNY",
+          "Capital social élevé (100 000 CHF) indiquant un fort volume de trésorerie"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "UR",
+        "subLabel": "Canton UR"
+      }
+    },
+    {
+      "id": "CH-CHE167622773",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Visualline GmbH",
+      "registrationNumber": "CHE-167.622.773",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Konzeption, Gestaltung, Herstellung und den Vertrieb von Werbetechnik, Beschriftungen, Leitsystemen und visuellen Kommunikationsmitteln. Sie erbringt zudem Beratungsdienstleistungen in den Bereichen Werbung, Markenauftritt, Gestaltung und visuelle Kommunikation sowie allgemeine Unternehmens-, Management- und Projektberatungsdienstleistungen. Ferner kann die Gesellschaft Vermittlungsdienstleistungen, insbesondere die Vermittlung von Geschäften und Geschäftskontakten, sowie Management- und Projektmanagement-Dienstleistungen erbringen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Industriestrasse 47, 8152 Glattbrugg",
+      "city": "Glattbrugg",
+      "postalCode": "8152",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Cyril Gretler",
+          "firstName": "Cyril",
+          "lastName": "Gretler",
+          "role": "Président de la Direction (Associé-Gérant)",
+          "isPrimary": true
+        },
+        {
+          "name": "Nadia Aebischer",
+          "firstName": "Nadia",
+          "lastName": "Aebischer",
+          "role": "Directeur Général / Gérant",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [
+        {
+          "name": "CNL AG",
+          "siren": "CHE-419.247.384",
+          "countryCode": "CH",
+          "roleHeld": "Actionnaire / Associée Morale (Holding)",
+          "legalForm": "SA / AG",
+          "city": "Opfikon"
+        }
+      ],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:18.610Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Nadia Aebischer",
+        "role": "Directeur Général / Gérant",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Nadia%20Aebischer%20Visualline"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Visualline%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Cyril%20Gretler%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Visualline%20GmbH%2C%20Glattbrugg/CHE-167.622.773",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:20.334Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 92,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Glattbrugg (ZH)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE372227432",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Alpner Umzug GmbH",
+      "registrationNumber": "CHE-372.227.432",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Erbringung von Dienstleistungen in den Bereichen Umzug, Reinigung, Lagerung und Entsorgung. Die Gesellschaft kann Zweigniederlassungen in der Schweiz und im Ausland errichten, sich an anderen Unternehmungen des In- und des Auslandes beteiligen, gleichartige oder verwandte Unternehmen erwerben oder sich mit solchen zusammenschliessen sowie alle Geschäfte eingehen und Verträge abschliessen, die geeignet sind, den Zweck der Gesellschaft zu fördern oder die direkt oder indirekt damit im Zusammenhang stehen. Sie kann Grundstücke, Immaterialgüterrechte und Lizenzen aller Art erwerben, verwalten, belasten und veräussern.",
+      "address": "Bruggerstrasse 28, 5102 Rupperswil",
+      "city": "Rupperswil",
+      "postalCode": "5102",
+      "canton": "AG",
+      "dirigeants": [
+        {
+          "name": "Fakhir Mohammed",
+          "firstName": "Fakhir",
+          "lastName": "Mohammed",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:12.298Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Services B2B",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Alpner%20Umzug%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Fakhir%20Mohammed%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Alpner%20Umzug%20GmbH%2C%20Rupperswil/CHE-372.227.432",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:17.299Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Services B2B",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 45,
+        "badge": "🌐 FX Modéré (CHF/EUR)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "AG",
+        "subLabel": "Canton AG"
+      }
+    },
+    {
+      "id": "CH-CHE412686498",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "fibena GmbH",
+      "registrationNumber": "CHE-412.686.498",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Erbringung von Treuhand- und Beratungsdienstleistungen für Unternehmen und Privatpersonen, insbesondere in den Bereichen Finanz- und Rechnungswesen, Buchführung, Lohnwesen, Mehrwertsteuer, Steuern, Jahresabschlüsse und Unternehmensadministration. Sie erbringt zudem Dienstleistungen in den Bereichen betriebswirtschaftliche Beratung, Controlling, Budgetierung, Liquiditätsplanung sowie Digitalisierung und Optimierung von Finanz- und Geschäftsprozessen und begleitet Unternehmen bei betriebswirtschaftlichen und administrativen Fragestellungen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Farnenbüel 6, 8733 Eschenbach SG",
+      "city": "Eschenbach SG",
+      "postalCode": "8733",
+      "canton": "SG",
+      "dirigeants": [
+        {
+          "name": "Nadine Schnyder",
+          "firstName": "Nadine",
+          "lastName": "Schnyder",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "SG",
+          "countryName": "Singapour",
+          "flag": "🇸🇬",
+          "entityName": "Établissement / Actionnaire (Eschenbach)",
+          "relation": "Lien transfrontalier enregistré au registre",
+          "city": "Eschenbach"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:09.009Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=fibena%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Nadine%20Schnyder%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/fibena%20GmbH%2C%20Eschenbach%20SG/CHE-412.686.498",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:11.992Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 67,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "SG",
+        "subLabel": "Canton SG"
+      }
+    },
+    {
+      "id": "CH-CHE429321740",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "R. R. Hauswartung GmbH",
+      "registrationNumber": "CHE-429.321.740",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Erbringung von Dienstleistungen im Zusammenhang mit dem Facility Management, insbesondere die Reinigung von Geschäfts-, Büro- und Verwaltungsgebäuden, Baureinigungen, Hauswartungen, Gartenunterhalt und die Pflege von Gärten sowie den Handel mit Waren aller Art. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Sicherheiten für Verbindlichkeiten verbundener Gesellschaften abgeben.",
+      "address": "Maiackerstrasse 27, 6345 Neuheim",
+      "city": "Neuheim",
+      "postalCode": "6345",
+      "canton": "ZG",
+      "dirigeants": [
+        {
+          "name": "Rudolf Rogenmoser",
+          "firstName": "Rudolf",
+          "lastName": "Rogenmoser",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:08.793Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Santé & Médical",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=R%20R%20Hauswartung%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Rudolf%20Rogenmoser%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/R.%20R.%20Hauswartung%20GmbH%2C%20Neuheim/CHE-429.321.740",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:08.856Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Santé & Médical",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 98,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "CNY",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Neuheim (ZG)",
+          "Activité d'Import-Export / Négoce international : paiements fournisseurs récurrents en USD, EUR, GBP ou CNY"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZG",
+        "subLabel": "Canton ZG"
+      }
+    },
+    {
+      "id": "CH-CHE227204878",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "nyo vision gmbh",
+      "registrationNumber": "CHE-227.204.878",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Erbringung von Dienstleistungen in den Bereichen Veranstaltungen, Live-Kommunikation und audiovisuelle Installationen, einschliesslich der Durchführung von Schulungen und Ausbildungen. Weiter bezweckt sie die Vermietung, Installation und den Betrieb von Licht-, Ton- und Kommunikationstechnik sowie den Handel mit Waren aller Art. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen oder solche erwerben, sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Sicherheiten für Verbindlichkeiten verbundener Gesellschaften abgeben.",
+      "address": "Libellenweg 11, 3510 Konolfingen",
+      "city": "Konolfingen",
+      "postalCode": "3510",
+      "canton": "BE",
+      "dirigeants": [
+        {
+          "name": "Dan Zürcher",
+          "firstName": "Dan",
+          "lastName": "Zürcher",
+          "role": "Président de la Direction (Associé-Gérant)",
+          "isPrimary": true
+        },
+        {
+          "name": "Silvan Knechtenhofer",
+          "firstName": "Silvan",
+          "lastName": "Knechtenhofer",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        },
+        {
+          "name": "Lucas Badertscher",
+          "firstName": "Lucas",
+          "lastName": "Badertscher",
+          "role": "Associé / Actionnaire",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:07.209Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": "https://nyovision.ch",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "nyovision.ch",
+      "emails": [
+        {
+          "email": "dan.zurcher@nyovision.ch",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@nyovision.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "dan.zurcher@nyovision.ch",
+      "emailSource": "Serveur Mail MX Actif (nyovision.ch)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Silvan Knechtenhofer",
+        "role": "Associé-Gérant (Direction)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Silvan%20Knechtenhofer%20nyo%20vision"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=nyo%20vision%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Dan%20Z%C3%BCrcher%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/nyo%20vision%20gmbh%2C%20Konolfingen/CHE-227.204.878",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-16T12:31:08.642Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 98,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "CNY",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Activité d'Import-Export / Négoce international : paiements fournisseurs récurrents en USD, EUR, GBP ou CNY"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "BE",
+        "subLabel": "Canton BE"
+      }
+    },
+    {
+      "id": "CH-CHE388780232",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "AquaShield AG",
+      "registrationNumber": "CHE-388.780.232",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "SA / AG",
+      "shareCapital": 100000,
+      "activity": "Der Zweck der Gesellschaft besteht in der Entwicklung, Herstellung, Vermarktung, dem Vertrieb, der Lizenzierung, dem Betrieb und der Wartung von Hardware- und Softwaresystemen zur Erkennung, Überwachung und Verhinderung von Wasserlecks und Wasserschäden, einschliesslich der damit verbundenen Daten, Datenanalysen und auf künstlicher Intelligenz basierenden Dienstleistungen. Die Gesellschaft kann Forschungs-, Entwicklungs-, Ingenieurs-, Beratungs-, Vertriebs-, Marketing-, Support- und sonstige Dienstleistungen für verbundene Unternehmen und Dritte erbringen. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Technoparkstrasse 1, 8005 Zürich",
+      "city": "Zürich",
+      "postalCode": "8005",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Richard Beckers",
+          "firstName": "Richard",
+          "lastName": "Beckers",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "DE",
+          "countryName": "Allemagne",
+          "flag": "🇩🇪",
+          "entityName": "Actionnariat / Direction Germano-Suisse (DE ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Allemagne"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:03.282Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=AquaShield%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Richard%20Beckers%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/AquaShield%20AG%2C%20Z%C3%BCrich/CHE-388.780.232",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:06.905Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 70,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zürich (ZH)",
+          "Capital social élevé (100 000 CHF) indiquant un fort volume de trésorerie"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
+      "id": "CH-CHE199970422",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Aurora GB Sàrl",
+      "registrationNumber": "CHE-199.970.422",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la société a pour but le développement, l'édition, l'exploitation et la commercialisation de solutions digitales, notamment d'applications mobiles et de logiciels intégrant des technologies d'intelligence artificielle, destinés à l'apprentissage, la formation et l'amélioration des compétences des utilisateurs. Elle propose également des services dans les domaines de l'éducation en ligne, du coaching digital, de la création de contenu pédagogique, ainsi que de l'automatisation de processus d'apprentissage. La société peut fournir toutes prestations de conseil, de développement technologique, de marketing et de stratégie digitale en lien avec son activité. La société peut constituer des succursales et des filiales en Suisse et à l'étranger et participer à d'autres entreprises en Suisse et à l'étranger. Elle peut acquérir, détenir et aliéner des immeubles (à l'exclusion des opérations prohibées par la LFAIE). Elle peut exercer toutes les activités commerciales, financières et autres en rapport avec son but. Elle peut accorder des prêts ou des garanties à des associés ou à des tiers si cela favorise ses intérêts.",
+      "address": "Route du Pâqui 12, 1720 Corminboeuf",
+      "city": "Corminboeuf",
+      "postalCode": "1720",
+      "canton": "FR",
+      "dirigeants": [
+        {
+          "name": "Antonio Buzzurro",
+          "firstName": "Antonio",
+          "lastName": "Buzzurro",
+          "role": "Directeur Général / Gérant",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [
+        {
+          "name": "Nolram Holding SA",
+          "siren": "CHE-430.397.773",
+          "countryCode": "CH",
+          "roleHeld": "Actionnaire / Associée Morale (Holding)",
+          "legalForm": "SA / AG",
+          "city": "Corminboeuf"
+        }
+      ],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:02.909Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Tech & Logiciel",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Aurora%20GB%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Antonio%20Buzzurro%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Aurora%20GB%20S%C3%A0rl%2C%20Corminboeuf/CHE-199.970.422",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:03.129Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Tech & Logiciel",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 90,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Secteur Tech / SaaS : facturation d'infrastructures Cloud & outils logiciels en USD + scalabilité internationale"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "FR",
+        "subLabel": "Canton FR"
+      }
+    },
+    {
+      "id": "CH-CHE331123031",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "North Star Investment AG",
+      "registrationNumber": "CHE-331.123.031",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "SA / AG",
+      "shareCapital": 200000,
+      "activity": "Die Gesellschaft bezweckt den Erwerb, das Halten, die Verwaltung und Veräusserung von in-und ausländischen Finanzanlagen aller Art und von Beteiligungen an anderen in und ausländischen Unternehmen sowie die eigene Vermögensverwaltung. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im ln- und Ausland errichten und alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im ln- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für nahestehende Gesellschaften und Dritte eingehen.",
+      "address": "c/o KENDRIS Schweiz AG, Gotthardstrasse 26, 6300 Zug",
+      "city": "Zug",
+      "postalCode": "6300",
+      "canton": "ZG",
+      "dirigeants": [
+        {
+          "name": "Adrian Escher",
+          "firstName": "Adrian",
+          "lastName": "Escher",
+          "role": "Président du Conseil d'Administration (Board)",
+          "isPrimary": true
+        },
+        {
+          "name": "Kristina Albisser-Trajkovic",
+          "firstName": "Kristina",
+          "lastName": "Albisser-Trajkovic",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        },
+        {
+          "name": "Dominik Riepl",
+          "firstName": "Dominik",
+          "lastName": "Riepl",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [
+        {
+          "name": "KENDRIS Schweiz AG",
+          "roleHeld": "Siège / Fiduciaire / Groupe (c/o)",
+          "legalForm": "SA / AG",
+          "city": "Zug"
+        }
+      ],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:01.867Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": "https://northstarinvestment.com",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "northstarinvestment.com",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Kristina Albisser-Trajkovic",
+        "role": "Membre du Conseil d'Administration (Board)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Kristina%20Albisser-Trajkovic%20North%20Star%20Investment"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=North%20Star%20Investment%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Adrian%20Escher%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/North%20Star%20Investment%20AG%2C%20Zug/CHE-331.123.031",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 85,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 85,
+      "enrichedAt": "2026-11-16T12:31:02.756Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 98,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zug (ZG)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZG",
+        "subLabel": "Canton ZG"
+      }
+    },
+    {
+      "id": "CH-CHE252827367",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Tamara Schär GmbH",
+      "registrationNumber": "CHE-252.827.367",
+      "incorporationDate": "2026-11-16",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt die Entwicklung, Gestaltung und Umsetzung von Markenauftritten sowie die Beratung und Begleitung von Unternehmen in den Bereichen Markenführung, Strategie, Corporate Design, Signaletik, Kommunikation und Events. Dazu gehören insbesondere die Planung, Realisierung und Produktion von Kommunikations- und Ausstattungselementen sowie die Organisation und Durchführung von Veranstaltungen. Die Gesellschaft kann eigene Produkte und Produktlinien entwickeln, herstellen (lassen) und vertreiben sowie Schulungen, Workshops und Vorträge anbieten. Sie kann verwandte und ergänzende Dienstleistungen im Bereich Marketing, Kommunikationsberatung, Projektmanagement und Behördenkoordination erbringen sowie mit entsprechenden Waren handeln. Die Gesellschaft kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen. Die Gesellschaft kann im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten. Sie kann auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Garantien und Bürgschaften für Tochtergesellschaften und Dritte eingehen.",
+      "address": "Weberstrasse 3, 8004 Zürich",
+      "city": "Zürich",
+      "postalCode": "8004",
+      "canton": "ZH",
+      "dirigeants": [
+        {
+          "name": "Tamara Schär",
+          "firstName": "Tamara",
+          "lastName": "Schär",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-16T12:31:01.564Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Consulting & Conseil",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Tamara%20Sch%C3%A4r%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Tamara%20Sch%C3%A4r%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Tamara%20Sch%C3%A4r%20GmbH%2C%20Z%C3%BCrich/CHE-252.827.367",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-16T12:31:01.712Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Consulting & Conseil",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 82,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Zürich (ZH)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "ZH",
+        "subLabel": "Canton ZH"
+      }
+    },
+    {
       "id": "FR-132352311",
       "country": "FR",
       "countryName": "France",
@@ -29,7 +2665,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:13.442Z",
+      "createdAt": "2026-11-16T12:30:59.882Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -85,7 +2721,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:13.549Z",
+      "enrichedAt": "2026-11-16T12:31:00.049Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -114,7 +2750,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "77",
         "subLabel": "Dépt 77"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132445412",
@@ -145,7 +2782,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:13.333Z",
+      "createdAt": "2026-11-16T12:30:59.715Z",
       "incorporationYear": "2026",
       "activityCategory": "Transport & Logistique",
       "website": null,
@@ -201,7 +2838,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:13.442Z",
+      "enrichedAt": "2026-11-16T12:30:59.882Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -232,7 +2869,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132437781",
@@ -263,7 +2901,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:13.225Z",
+      "createdAt": "2026-11-16T12:30:59.653Z",
       "incorporationYear": "2026",
       "activityCategory": "Transport & Logistique",
       "website": null,
@@ -319,7 +2957,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:13.332Z",
+      "enrichedAt": "2026-11-16T12:30:59.714Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -347,7 +2985,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132439076",
@@ -378,7 +3017,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:13.224Z",
+      "createdAt": "2026-11-16T12:30:59.653Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -434,7 +3073,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:13.225Z",
+      "enrichedAt": "2026-11-16T12:30:59.653Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -462,7 +3101,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132441106",
@@ -619,12 +3259,12 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:11.845Z",
+      "createdAt": "2026-11-16T12:30:47.683Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
-      "website": null,
-      "websiteStatus": "Pas de site web officiel détecté",
-      "domain": null,
+      "website": "https://clrt-solutions.com",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "clrt-solutions.com",
       "emails": [],
       "bestEmail": null,
       "emailSource": "Non communiqué aux registres publics",
@@ -642,10 +3282,10 @@
       "isCrossBorder": false,
       "hasDigitalPresence": true,
       "safety": {
-        "score": 60,
-        "level": "medium",
-        "label": "Moyenne (Dirigeant certifié)",
-        "color": "amber",
+        "score": 85,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
         "breakdown": [
           {
             "label": "Immatriculation officielle RCS / FOSC",
@@ -658,9 +3298,9 @@
             "ok": true
           },
           {
-            "label": "Aucun site web actif détecté",
-            "pts": 0,
-            "ok": false
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
           },
           {
             "label": "Serveur mail non vérifié",
@@ -674,8 +3314,8 @@
           }
         ]
       },
-      "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:12.760Z",
+      "confidenceScore": 85,
+      "enrichedAt": "2026-11-16T12:30:49.642Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -704,7 +3344,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132364621",
@@ -735,7 +3376,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:10.613Z",
+      "createdAt": "2026-11-16T12:30:45.189Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": "https://cleannjoy.fr",
@@ -804,7 +3445,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-15T11:48:11.844Z",
+      "enrichedAt": "2026-11-16T12:30:47.683Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -832,7 +3473,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132163023",
@@ -863,7 +3505,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:09.015Z",
+      "createdAt": "2026-11-16T12:30:39.195Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -919,7 +3561,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:10.163Z",
+      "enrichedAt": "2026-11-16T12:30:40.801Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -947,7 +3589,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "60",
         "subLabel": "Dépt 60"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132329350",
@@ -983,7 +3626,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:08.906Z",
+      "createdAt": "2026-11-16T12:30:39.124Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -1039,7 +3682,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:09.015Z",
+      "enrichedAt": "2026-11-16T12:30:39.195Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1068,7 +3711,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "59",
         "subLabel": "Dépt 59"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132258021",
@@ -1127,7 +3771,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:08.797Z",
+      "createdAt": "2026-11-16T12:30:38.956Z",
       "incorporationYear": "2026",
       "activityCategory": "Industrie & Ingénierie",
       "website": null,
@@ -1183,7 +3827,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:08.905Z",
+      "enrichedAt": "2026-11-16T12:30:39.124Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1211,7 +3855,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "54",
         "subLabel": "Dépt 54"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132400946",
@@ -1242,7 +3887,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:48:02.082Z",
+      "createdAt": "2026-11-16T12:30:32.114Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1298,7 +3943,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:48:02.122Z",
+      "enrichedAt": "2026-11-16T12:30:32.276Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1325,7 +3970,8 @@
         "regionLabel": "Auvergne-Rhône-Alpes",
         "subCode": "42",
         "subLabel": "Dépt 42"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132380858",
@@ -1356,7 +4002,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:57.990Z",
+      "createdAt": "2026-11-16T12:30:27.777Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -1412,7 +4058,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:47:59.191Z",
+      "enrichedAt": "2026-11-16T12:30:28.941Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1439,7 +4085,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "37",
         "subLabel": "Dépt 37"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132428350",
@@ -1470,7 +4117,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:56.580Z",
+      "createdAt": "2026-11-16T12:30:25.720Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": "https://cfhorizon.fr",
@@ -1539,7 +4186,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-15T11:47:57.989Z",
+      "enrichedAt": "2026-11-16T12:30:27.777Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1569,7 +4216,8 @@
         "regionLabel": "Occitanie",
         "subCode": "31",
         "subLabel": "Dépt 31"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132450693",
@@ -1600,7 +4248,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:54.345Z",
+      "createdAt": "2026-11-16T12:30:15.814Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": "https://bastide-horizons-wellness.fr",
@@ -1669,7 +4317,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-15T11:47:54.976Z",
+      "enrichedAt": "2026-11-16T12:30:16.752Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1696,7 +4344,8 @@
         "regionLabel": "Auvergne-Rhône-Alpes",
         "subCode": "26",
         "subLabel": "Dépt 26"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132499211",
@@ -1737,7 +4386,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:53.059Z",
+      "createdAt": "2026-11-16T12:30:15.372Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1793,7 +4442,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:47:53.098Z",
+      "enrichedAt": "2026-11-16T12:30:15.435Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -1821,7 +4470,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "06",
         "subLabel": "Dépt 06"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132167172",
@@ -1852,7 +4502,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:51.443Z",
+      "createdAt": "2026-11-16T12:30:14.450Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -1908,7 +4558,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:47:51.483Z",
+      "enrichedAt": "2026-11-16T12:30:14.616Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1935,7 +4585,8 @@
         "regionLabel": "Nouvelle-Aquitaine",
         "subCode": "86",
         "subLabel": "Dépt 86"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132479056",
@@ -1966,7 +4617,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:51.214Z",
+      "createdAt": "2026-11-16T12:30:13.521Z",
       "incorporationYear": "2026",
       "activityCategory": "Tech & Logiciel",
       "website": null,
@@ -2022,7 +4673,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:47:51.442Z",
+      "enrichedAt": "2026-11-16T12:30:14.449Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2051,7 +4702,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132336678",
@@ -2082,28 +4734,15 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:47.901Z",
+      "createdAt": "2026-11-16T12:30:09.165Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": "https://www.portelio.fr",
       "websiteStatus": "Certifié SSL & Contenu Vérifié",
       "domain": "portelio.fr",
-      "emails": [
-        {
-          "email": "touria.mhanni@portelio.fr",
-          "type": "Nominatif Dirigeant (MX vérifié)",
-          "confidence": 90,
-          "recommended": true
-        },
-        {
-          "email": "contact@portelio.fr",
-          "type": "Standard Direction (MX vérifié)",
-          "confidence": 80,
-          "recommended": false
-        }
-      ],
-      "bestEmail": "touria.mhanni@portelio.fr",
-      "emailSource": "Serveur Mail MX Actif (portelio.fr)",
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
       "phone": null,
       "phoneSource": "Non renseigné au registre ou sur le site",
       "cfo": {
@@ -2118,7 +4757,7 @@
       "isCrossBorder": false,
       "hasDigitalPresence": true,
       "safety": {
-        "score": 100,
+        "score": 85,
         "level": "high",
         "label": "Élevée (Prêt à prospecter)",
         "color": "emerald",
@@ -2139,9 +4778,9 @@
             "ok": true
           },
           {
-            "label": "Serveur de messagerie MX opérationnel",
-            "pts": 15,
-            "ok": true
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
           },
           {
             "label": "Empreinte LinkedIn dirigeant vérifiable",
@@ -2150,8 +4789,8 @@
           }
         ]
       },
-      "confidenceScore": 100,
-      "enrichedAt": "2026-11-15T11:47:51.211Z",
+      "confidenceScore": 85,
+      "enrichedAt": "2026-11-16T12:30:13.519Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2179,7 +4818,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "FR-132442633",
@@ -2210,7 +4850,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-15T11:47:41.472Z",
+      "createdAt": "2026-11-16T12:30:02.797Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": null,
@@ -2266,7 +4906,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-15T11:47:42.890Z",
+      "enrichedAt": "2026-11-16T12:30:04.005Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2293,7 +4933,8 @@
         "regionLabel": "Occitanie",
         "subCode": "31",
         "subLabel": "Dépt 31"
-      }
+      },
+      "updatedAt": "2026-11-16T12:31:37.260Z"
     },
     {
       "id": "CH-CHE430044085",
@@ -709413,6 +712054,17 @@
   ],
   "syncLogs": [
     {
+      "date": "2026-11-16T12:31:37.680Z",
+      "status": "success",
+      "recordsFetched": 38,
+      "recordsAdded": 20,
+      "recordsUpdated": 18,
+      "totalDatabase": 10998,
+      "durationSeconds": 97.9,
+      "errors": null,
+      "country": "ALL"
+    },
+    {
       "date": "2026-11-15T11:48:31.091Z",
       "status": "success",
       "recordsFetched": 39,
@@ -709634,13 +712286,13 @@
     }
   ],
   "lastSync": {
-    "date": "2026-11-15T11:48:31.091Z",
+    "date": "2026-11-16T12:31:37.680Z",
     "status": "success",
-    "recordsFetched": 39,
-    "recordsAdded": 19,
-    "recordsUpdated": 20,
-    "totalDatabase": 10978,
-    "durationSeconds": 50.3,
+    "recordsFetched": 38,
+    "recordsAdded": 20,
+    "recordsUpdated": 18,
+    "totalDatabase": 10998,
+    "durationSeconds": 97.9,
     "errors": null,
     "country": "ALL"
   },
