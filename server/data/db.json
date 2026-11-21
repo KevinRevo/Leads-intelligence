@@ -1,6 +1,780 @@
 {
   "companies": [
     {
+      "id": "CH-CHE370316088",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Zoëll Holding Sàrl",
+      "registrationNumber": "CHE-370.316.088",
+      "incorporationDate": "2026-11-20",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la société a pour but l'acquisition, la vente, l'administration, la gestion et la détention de participations dans toute société ou entreprise en Suisse et à l'étranger, à l'exclusion de toute opération prohibée par la LFAIE. La société peut poursuivre son but par toutes opérations - spécialement par tous contrats -sans limitation: quant à leur localisation - en Suisse ou à l'étranger; quant à leur objet - qu'il s'agisse de propriété matérielle (mobilière ou immobilière) ou intellectuelle ou de services; quant à leur exécution - que ce soit par la société, par des succursales de la société, par des participations dans d'autres sociétés ou par des sous-traitants. La société peut en outre conclure des contrats de prêt avec ses associés, en qualité de débitrice ou de créancière, ou leur accorder des garanties, si cela favorise ses intérêts.",
+      "address": "c/o Julien Zoëll, Chemin des Grands-Prés 1, 1055 Froideville",
+      "city": "Froideville",
+      "postalCode": "1055",
+      "canton": "VD",
+      "dirigeants": [
+        {
+          "name": "Julien Zoëll",
+          "firstName": "Julien",
+          "lastName": "Zoëll",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-21T12:15:37.996Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Zo%C3%ABll%20Holding%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Julien%20Zo%C3%ABll%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Zo%C3%ABll%20Holding%20S%C3%A0rl%2C%20Froideville/CHE-370.316.088",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-21T12:15:38.132Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 82,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Froideville (VD)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "VD",
+        "subLabel": "Canton VD"
+      }
+    },
+    {
+      "id": "CH-CHE336991365",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Roata Group GmbH",
+      "registrationNumber": "CHE-336.991.365",
+      "incorporationDate": "2026-11-20",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Beratung und Begleitung von Unternehmern, Privatpersonen und Unternehmen in den Bereichen Gesundheit, Leistungsfähigkeit, Lebensführung und persönliche Entwicklung; Konzeption, Entwicklung und Vertrieb von Programmen, Kursen, Workshops, Büchern, Medien und digitalen Inhalten; Erbringung von Beratungs- und Marketingdienstleistungen; Vertrieb von Produkten und Dienstleistungen im Bereich Gesundheit und Leistungsfähigkeit; Halten, Verwalten und Finanzieren von Beteiligungen an anderen Unternehmen sowie Handel mit Waren aller Art. Kann Zweigniederlassungen und Tochtergesellschaften im In- und Ausland errichten und sich an anderen Unternehmen im In- und Ausland beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen, im In- und Ausland Grundeigentum erwerben, belasten, veräussern und verwalten, auch Finanzierungen für eigene oder fremde Rechnung vornehmen sowie Sicherheiten für Verbindlichkeiten verbundener Gesellschaften abgeben.",
+      "address": "Eichholzstrasse 11, 4566 Kriegstetten",
+      "city": "Kriegstetten",
+      "postalCode": "4566",
+      "canton": "SO",
+      "dirigeants": [
+        {
+          "name": "Jay Roata",
+          "firstName": "Jay",
+          "lastName": "Roata",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "DE",
+          "countryName": "Allemagne",
+          "flag": "🇩🇪",
+          "entityName": "Actionnariat / Direction Germano-Suisse (DE ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Allemagne"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-21T12:15:37.771Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Roata%20Group%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Jay%20Roata%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Roata%20Group%20GmbH%2C%20Kriegstetten/CHE-336.991.365",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-21T12:15:37.883Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 90,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD",
+          "CNY",
+          "GBP"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Activité d'Import-Export / Négoce international : paiements fournisseurs récurrents en USD, EUR, GBP ou CNY"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "SO",
+        "subLabel": "Canton SO"
+      }
+    },
+    {
+      "id": "CH-CHE415743193",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "TSOFIM SARL",
+      "registrationNumber": "CHE-415.743.193",
+      "incorporationDate": "2026-11-20",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 22500,
+      "activity": "la société a pour but la prise de participations, sous quelque forme que ce soit, dans toutes entreprises commerciales, industrielles, financières ou autres, en Suisse et à l'étranger, ainsi que l'administration, la gestion et la mise en valeur de ces participations. La société peut détenir des participations dans d'autres sociétés et acquérir, exploiter, gérer et vendre des biens immobiliers et des droits de propriété intellectuelle, constituer des filiales et des succursales en Suisse et à l'étranger et entreprendre tous actes juridiques en relation avec son but ou qui sont susceptibles de favoriser son développement ou celui des sociétés du même groupe. La société peut accorder des financements directs ou indirects à des tiers, y compris des sociétés dans lesquelles elle détient une participation directe ou indirecte, à ses associés directs ou indirects et aux sociétés dans lesquelles ceux-ci détiennent une participation directe ou indirecte, que ce soit par le biais de prêts ou d'autres financements, y compris dans le cadre d'accords de centralisation de trésorerie (cash pooling), ainsi que constituer des sûretés de toute nature pour leurs engagements, y compris par le biais de gages ou de transferts à titre fiduciaire d'actifs de la société ou de garanties de toute nature, que ce soit contre rémunération ou non. Sont exclues du but de la société toutes activités soumises à la Loi fédérale sur l'acquisition d'immeubles par des personnes à l'étranger (LFAIE), en particulier l'acquisition de participations dans des sociétés immobilières détenant des immeubles résidentiels en Suisse ainsi que la propriété directe d'immeubles résidentiels situés en Suisse.",
+      "address": "Route des Crêts Leyron 16, 1091 Grandvaux",
+      "city": "Grandvaux",
+      "postalCode": "1091",
+      "canton": "VD",
+      "dirigeants": [
+        {
+          "name": "Philippe Glaubert",
+          "firstName": "Philippe",
+          "lastName": "Glaubert",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        },
+        {
+          "name": "Ruth Cohen",
+          "firstName": "Ruth",
+          "lastName": "Cohen",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "FR",
+          "countryName": "France",
+          "flag": "🇫🇷",
+          "entityName": "Actionnariat / Direction Franco-Suisse (FR ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "France"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-21T12:15:36.090Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Holding & Participations",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Ruth Cohen",
+        "role": "Associé-Gérant (Direction)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Ruth%20Cohen%20TSOFIM"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=TSOFIM%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Philippe%20Glaubert%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/TSOFIM%20SARL%2C%20Grandvaux/CHE-415.743.193",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-21T12:15:37.659Z",
+      "compliance": {
+        "status": "conditional",
+        "badge": "🟡 Éligible (KYB Renforcé)",
+        "tag": "🟡 KYB Renforcé",
+        "industry": "Holding & Gestion de Participations (Propre Compte)",
+        "color": "amber",
+        "reason": "Holding patrimoniale ou opérationnelle (sans gestion de fonds clients tiers) : nécessite l'organigramme de détention et l'identité des bénéficiaires effectifs (UBO).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 92,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Grandvaux (VD)",
+          "Conseil B2B & Holding : honoraires internationaux et gestion de trésorerie multi-devises"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "VD",
+        "subLabel": "Canton VD"
+      }
+    },
+    {
+      "id": "CH-CHE276660796",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "LMM Immobilien AG",
+      "registrationNumber": "CHE-276.660.796",
+      "incorporationDate": "2026-11-20",
+      "legalForm": "SA / AG",
+      "shareCapital": 100000,
+      "activity": "Zweck der Gesellschaft ist der Erwerb, das Halten, die Verwaltung, die Vermietung, die Verpachtung, die Vermittlung und die Veräusserung von Grundstücken und Immobilien im In- und Ausland. Die Gesellschaft kann Liegenschaften überbauen, renovieren, sanieren und entwickeln sowie sämtliche damit zusammenhängenden Dienstleistungen erbringen. Zudem bezweckt die Gesellschaft die allgemeine Vermögensverwaltung. Die Gesellschaft kann sich an anderen Unternehmungen beteiligen, Tochtergesellschaften und Zweigniederlassungen im In- und Ausland errichten, Darlehen gewähren, Grundstücke erwerben, belasten und veräussern und ausserdem alle Rechtshandlungen vornehmen, die der Zweck der Gesellschaft mit sich bringen kann.",
+      "address": "Hägelerstrasse 57, 5400 Baden",
+      "city": "Baden",
+      "postalCode": "5400",
+      "canton": "AG",
+      "dirigeants": [
+        {
+          "name": "Samuel Merker",
+          "firstName": "Samuel",
+          "lastName": "Merker",
+          "role": "Président du Conseil d'Administration (Board)",
+          "isPrimary": true
+        },
+        {
+          "name": "Stephanie Bonde",
+          "firstName": "Stephanie",
+          "lastName": "Bonde",
+          "role": "Membre du Conseil d'Administration (Board)",
+          "isPrimary": false
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "LU",
+          "countryName": "Luxembourg",
+          "flag": "🇱🇺",
+          "entityName": "Actionnariat / Direction Luxembourg-Suisse (LU ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Luxembourg"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-21T12:15:30.829Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "Stephanie Bonde",
+        "role": "Membre du Conseil d'Administration (Board)",
+        "isEstimated": false,
+        "linkedinSearchUrl": "https://www.linkedin.com/search/results/people/?keywords=Stephanie%20Bonde%20LMM%20Immobilien"
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=LMM%20Immobilien%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Samuel%20Merker%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/LMM%20Immobilien%20AG%2C%20Baden/CHE-276.660.796",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-21T12:15:31.073Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 65,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Capital social élevé (100 000 CHF) indiquant un fort volume de trésorerie"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "AG",
+        "subLabel": "Canton AG"
+      }
+    },
+    {
+      "id": "CH-CHE247939173",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "Wyna Optik GmbH",
+      "registrationNumber": "CHE-247.939.173",
+      "incorporationDate": "2026-11-20",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "Die Gesellschaft bezweckt den Betrieb eines Foto- und Optikergeschäftes. Die Gesellschaft kann im In- und Ausland Zweigniederlassungen und Tochtergesellschaften errichten, sich an anderen Unternehmen beteiligen, andere Unternehmen erwerben oder erworbene Unternehmen verkaufen, Finanzierungen für eigene oder fremde Rechnung vornehmen, Darlehen aufnehmen und gewähren, Garantien stellen und andere Sicherheiten insbesondere für Verbindlichkeiten verbundener Gesellschaften abgeben, Immobilien errichten, erwerben, belasten, verwalten, vermieten und verkaufen sowie Immaterialgüterrechte und Wertschriften erwerben, belasten, verwalten und veräussern. Sie kann alle kommerziellen und finanziellen Transaktionen durchführen und Geschäfte tätigen, die direkt oder indirekt im Zusammenhang mit dem Gesellschaftszweck stehen und damit dessen Verwirklichung förderlich sind.",
+      "address": "Hauptstrasse 56, 5734 Reinach AG",
+      "city": "Reinach AG",
+      "postalCode": "5734",
+      "canton": "AG",
+      "dirigeants": [
+        {
+          "name": "Monia Saputelli",
+          "firstName": "Monia",
+          "lastName": "Saputelli",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [
+        {
+          "countryCode": "IT",
+          "countryName": "Italie",
+          "flag": "🇮🇹",
+          "entityName": "Actionnariat / Direction Italo-Suisse (IT ↔ CH)",
+          "relation": "Associé / Dirigeant International",
+          "city": "Italie"
+        }
+      ],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-21T12:15:29.534Z",
+      "incorporationYear": "2026",
+      "activityCategory": "Immobilier (Propre Compte)",
+      "website": "https://wynaoptik.ch",
+      "websiteStatus": "Certifié SSL & Contenu Vérifié",
+      "domain": "wynaoptik.ch",
+      "emails": [
+        {
+          "email": "monia.saputelli@wynaoptik.ch",
+          "type": "Nominatif Dirigeant (MX vérifié)",
+          "confidence": 90,
+          "recommended": true
+        },
+        {
+          "email": "contact@wynaoptik.ch",
+          "type": "Standard Direction (MX vérifié)",
+          "confidence": 80,
+          "recommended": false
+        }
+      ],
+      "bestEmail": "monia.saputelli@wynaoptik.ch",
+      "emailSource": "Serveur Mail MX Actif (wynaoptik.ch)",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=Wyna%20Optik%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=Monia%20Saputelli%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/Wyna%20Optik%20GmbH%2C%20Reinach%20AG/CHE-247.939.173",
+      "isCrossBorder": true,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 100,
+        "level": "high",
+        "label": "Élevée (Prêt à prospecter)",
+        "color": "emerald",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Site web officiel actif & anti-homonyme vérifié",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Serveur de messagerie MX opérationnel",
+            "pts": 15,
+            "ok": true
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 100,
+      "enrichedAt": "2026-11-21T12:15:30.716Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "Immobilier (Propre Compte)",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "medium",
+        "score": 45,
+        "badge": "🌐 FX Modéré (CHF/EUR)",
+        "shortBadge": "🌐 FX Modéré",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_DE",
+        "regionLabel": "Suisse Alémanique (DE)",
+        "subCode": "AG",
+        "subLabel": "Canton AG"
+      }
+    },
+    {
+      "id": "CH-CHE413191070",
+      "country": "CH",
+      "countryName": "Suisse",
+      "name": "DW Ménager Sàrl",
+      "registrationNumber": "CHE-413.191.070",
+      "incorporationDate": "2026-11-20",
+      "legalForm": "Sàrl / GmbH",
+      "shareCapital": 20000,
+      "activity": "la société a pour but la réparation, le commerce et la location d'appareils ménagers et de tout autre matériel, la réalisation de tous travaux dans le domaine de l'agencement de cuisine et de buanderie, le développement et la production de tous types de produits. Elle a également pour but tous services d'entretien et de gestion dans le domaine de l'immobilier. La société peut en outre exercer toute autre activité ayant un lien direct ou indirect avec ces buts; elle peut notamment créer des succursales en Suisse et à l'étranger, participer à d'autres entreprises en Suisse et à l'étranger, acquérir des entreprises visant un but identique ou analogue, ou fusionner avec de telles entreprises, faire toutes opérations et conclure tous contrats propres à développer et à étendre son but ou s'y rapportant directement ou indirectement.",
+      "address": "c/o William Dantchakoff, Route de Lausanne 5 a, 1041 Poliez-Pittet",
+      "city": "Poliez-Pittet",
+      "postalCode": "1041",
+      "canton": "VD",
+      "dirigeants": [
+        {
+          "name": "William Dantchakoff",
+          "firstName": "William",
+          "lastName": "Dantchakoff",
+          "role": "Associé-Gérant (Direction)",
+          "isPrimary": true
+        }
+      ],
+      "corporateLinks": [],
+      "internationalLinks": [],
+      "source": "FOSC / SHAB (Registre du Commerce Suisse)",
+      "crmStatus": "new",
+      "crmNotes": "",
+      "crmAssignedTo": null,
+      "lastContactedAt": null,
+      "createdAt": "2026-11-21T12:15:29.106Z",
+      "incorporationYear": "2026",
+      "activityCategory": "BTP & Construction",
+      "website": null,
+      "websiteStatus": "Pas de site web officiel détecté",
+      "domain": null,
+      "emails": [],
+      "bestEmail": null,
+      "emailSource": "Non communiqué aux registres publics",
+      "phone": null,
+      "phoneSource": "Non renseigné au registre ou sur le site",
+      "cfo": {
+        "name": "X",
+        "role": "Non renseigné",
+        "isEstimated": false,
+        "linkedinSearchUrl": null
+      },
+      "linkedinCompanyUrl": "https://www.linkedin.com/search/results/companies/?keywords=DW%20M%C3%A9nager%20Suisse",
+      "linkedinDirigeantUrl": "https://www.linkedin.com/search/results/people/?keywords=William%20Dantchakoff%20Suisse",
+      "northDataUrl": "https://www.northdata.fr/DW%20M%C3%A9nager%20S%C3%A0rl%2C%20Poliez-Pittet/CHE-413.191.070",
+      "isCrossBorder": false,
+      "hasDigitalPresence": true,
+      "safety": {
+        "score": 60,
+        "level": "medium",
+        "label": "Moyenne (Dirigeant certifié)",
+        "color": "amber",
+        "breakdown": [
+          {
+            "label": "Immatriculation officielle RCS / FOSC",
+            "pts": 30,
+            "ok": true
+          },
+          {
+            "label": "Dirigeant (Personne Physique) certifié au registre",
+            "pts": 25,
+            "ok": true
+          },
+          {
+            "label": "Aucun site web actif détecté",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Serveur mail non vérifié",
+            "pts": 0,
+            "ok": false
+          },
+          {
+            "label": "Empreinte LinkedIn dirigeant vérifiable",
+            "pts": 5,
+            "ok": true
+          }
+        ]
+      },
+      "confidenceScore": 60,
+      "enrichedAt": "2026-11-21T12:15:29.421Z",
+      "compliance": {
+        "status": "eligible",
+        "badge": "🟢 Éligible Revolut",
+        "tag": "🟢 Industrie Supportée",
+        "industry": "BTP & Construction",
+        "color": "emerald",
+        "reason": "Activité commerciale ou de services B2B/B2C conforme à la politique d'acceptation Revolut Business (aucune activité sur la liste Unsupported Industries et aucune gestion de fonds clients tiers).",
+        "isEligible": true
+      },
+      "fxPotential": {
+        "level": "high",
+        "score": 60,
+        "badge": "💱 Fort Potentiel FX (CHF/EUR/USD)",
+        "shortBadge": "💱 Fort Potentiel FX",
+        "currencies": [
+          "CHF",
+          "EUR",
+          "USD"
+        ],
+        "reasons": [
+          "Société suisse (compte principal CHF) avec flux fournisseurs/clients naturels en Zone Euro (EUR)",
+          "Implantée dans le hub international / frontalier de Poliez-Pittet (VD)"
+        ]
+      },
+      "geoZone": {
+        "regionCode": "CH_FR",
+        "regionLabel": "Suisse Romande (FR)",
+        "subCode": "VD",
+        "subLabel": "Canton VD"
+      }
+    },
+    {
       "id": "CH-CHE446833403",
       "country": "CH",
       "countryName": "Suisse",
@@ -156,7 +930,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:20.414Z",
+      "createdAt": "2026-11-21T12:15:22.579Z",
       "incorporationYear": "2026",
       "activityCategory": "Marketing & Com",
       "website": null,
@@ -212,7 +986,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:20.522Z",
+      "enrichedAt": "2026-11-21T12:15:22.586Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -244,7 +1018,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "LU",
         "subLabel": "Canton LU"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE172666055",
@@ -276,7 +1051,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:19.810Z",
+      "createdAt": "2026-11-21T12:15:28.420Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -332,7 +1107,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:20.015Z",
+      "enrichedAt": "2026-11-21T12:15:28.539Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -361,7 +1136,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SO",
         "subLabel": "Canton SO"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE441914922",
@@ -534,7 +1310,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:19.348Z",
+      "createdAt": "2026-11-21T12:15:28.057Z",
       "incorporationYear": "2026",
       "activityCategory": "Import / Export",
       "website": null,
@@ -590,7 +1366,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:19.442Z",
+      "enrichedAt": "2026-11-21T12:15:28.080Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -623,7 +1399,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BS",
         "subLabel": "Canton BS"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE413028464",
@@ -789,7 +1566,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:18.165Z",
+      "createdAt": "2026-11-21T12:15:26.783Z",
       "incorporationYear": "2026",
       "activityCategory": "Santé & Médical",
       "website": "https://vertrauenswert.ch",
@@ -858,7 +1635,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:35:18.940Z",
+      "enrichedAt": "2026-11-21T12:15:27.703Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -889,7 +1666,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BL",
         "subLabel": "Canton BL"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE482659408",
@@ -929,7 +1707,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:17.857Z",
+      "createdAt": "2026-11-21T12:15:22.316Z",
       "incorporationYear": "2026",
       "activityCategory": "Santé & Médical",
       "website": null,
@@ -985,7 +1763,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:17.956Z",
+      "enrichedAt": "2026-11-21T12:15:22.351Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1016,7 +1794,8 @@
         "regionLabel": "Suisse Romande (FR)",
         "subCode": "VD",
         "subLabel": "Canton VD"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE455917105",
@@ -1048,7 +1827,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:15.634Z",
+      "createdAt": "2026-11-21T12:15:21.863Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": null,
@@ -1104,7 +1883,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:15.809Z",
+      "enrichedAt": "2026-11-21T12:15:22.199Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1135,7 +1914,8 @@
         "regionLabel": "Suisse Romande (FR)",
         "subCode": "VD",
         "subLabel": "Canton VD"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE480975034",
@@ -1294,7 +2074,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:14.836Z",
+      "createdAt": "2026-11-21T12:15:28.193Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1350,7 +2130,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:14.932Z",
+      "enrichedAt": "2026-11-21T12:15:28.307Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1380,7 +2160,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE324855502",
@@ -1559,7 +2340,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:11.229Z",
+      "createdAt": "2026-11-21T12:15:27.827Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1615,7 +2396,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:11.329Z",
+      "enrichedAt": "2026-11-21T12:15:27.944Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1645,7 +2426,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE454424857",
@@ -1833,7 +2615,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:09.449Z",
+      "createdAt": "2026-11-21T12:15:26.403Z",
       "incorporationYear": "2026",
       "activityCategory": "Import / Export",
       "website": null,
@@ -1889,7 +2671,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:09.655Z",
+      "enrichedAt": "2026-11-21T12:15:26.670Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1922,7 +2704,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE203117591",
@@ -1970,7 +2753,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:09.159Z",
+      "createdAt": "2026-11-21T12:15:33.630Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -2026,7 +2809,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:09.251Z",
+      "enrichedAt": "2026-11-21T12:15:33.738Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2055,7 +2838,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "AG",
         "subLabel": "Canton AG"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.354Z"
     },
     {
       "id": "CH-CHE336271302",
@@ -2096,7 +2880,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:08.782Z",
+      "createdAt": "2026-11-21T12:15:31.186Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -2152,7 +2936,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:09.060Z",
+      "enrichedAt": "2026-11-21T12:15:33.518Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -2182,7 +2966,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SG",
         "subLabel": "Canton SG"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.354Z"
     },
     {
       "id": "CH-CHE311400397",
@@ -2230,7 +3015,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:06.403Z",
+      "createdAt": "2026-11-21T12:15:24.281Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -2286,7 +3071,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:08.671Z",
+      "enrichedAt": "2026-11-21T12:15:26.165Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2316,7 +3101,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SG",
         "subLabel": "Canton SG"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE301874115",
@@ -2348,7 +3134,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:06.204Z",
+      "createdAt": "2026-11-21T12:15:24.057Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -2404,7 +3190,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:06.304Z",
+      "enrichedAt": "2026-11-21T12:15:24.168Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2436,7 +3222,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "LU",
         "subLabel": "Canton LU"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE132160051",
@@ -2468,7 +3255,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:05.148Z",
+      "createdAt": "2026-11-21T12:15:22.698Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": "https://wono.ch",
@@ -2537,7 +3324,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:35:06.102Z",
+      "enrichedAt": "2026-11-21T12:15:23.944Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2569,7 +3356,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BE",
         "subLabel": "Canton BE"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-131981532",
@@ -2605,7 +3393,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:04.289Z",
+      "createdAt": "2026-11-21T12:15:20.542Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -2661,7 +3449,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:04.320Z",
+      "enrichedAt": "2026-11-21T12:15:20.577Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2688,7 +3476,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "83",
         "subLabel": "Dépt 83"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132863937",
@@ -2719,7 +3508,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:35:04.187Z",
+      "createdAt": "2026-11-21T12:15:20.513Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -2775,7 +3564,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:04.288Z",
+      "enrichedAt": "2026-11-21T12:15:20.541Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2804,7 +3593,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "80",
         "subLabel": "Dépt 80"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132852161",
@@ -2835,7 +3625,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:59.057Z",
+      "createdAt": "2026-11-21T12:15:14.475Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -2891,7 +3681,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:35:04.187Z",
+      "enrichedAt": "2026-11-21T12:15:20.513Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2919,7 +3709,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "77",
         "subLabel": "Dépt 77"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-133012609",
@@ -2960,10 +3751,10 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:55.436Z",
+      "createdAt": "2026-11-21T12:15:06.578Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
-      "website": "https://asgroup.com",
+      "website": "https://www.asgroup.com",
       "websiteStatus": "Certifié SSL & Contenu Vérifié",
       "domain": "asgroup.com",
       "emails": [
@@ -3029,7 +3820,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:34:59.057Z",
+      "enrichedAt": "2026-11-21T12:15:14.474Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -3057,7 +3848,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "77",
         "subLabel": "Dépt 77"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132880212",
@@ -3088,7 +3880,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:51.656Z",
+      "createdAt": "2026-11-21T12:15:01.827Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": "https://3-caps.fr",
@@ -3157,7 +3949,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:34:54.785Z",
+      "enrichedAt": "2026-11-21T12:15:05.885Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3187,7 +3979,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "77",
         "subLabel": "Dépt 77"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132970211",
@@ -3218,7 +4011,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:49.056Z",
+      "createdAt": "2026-11-21T12:14:59.029Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -3274,7 +4067,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:51.656Z",
+      "enrichedAt": "2026-11-21T12:15:01.827Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3302,7 +4095,8 @@
         "regionLabel": "Auvergne-Rhône-Alpes",
         "subCode": "69",
         "subLabel": "Dépt 69"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132722034",
@@ -3338,7 +4132,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:48.573Z",
+      "createdAt": "2026-11-21T12:14:58.262Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -3394,7 +4188,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:49.056Z",
+      "enrichedAt": "2026-11-21T12:14:59.029Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3424,7 +4218,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "68",
         "subLabel": "Dépt 68"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132840356",
@@ -3455,7 +4250,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:47.590Z",
+      "createdAt": "2026-11-21T12:14:53.867Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -3511,7 +4306,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:48.573Z",
+      "enrichedAt": "2026-11-21T12:14:58.262Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3540,7 +4335,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "68",
         "subLabel": "Dépt 68"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132445354",
@@ -3576,7 +4372,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:47.155Z",
+      "createdAt": "2026-11-21T12:14:53.173Z",
       "incorporationYear": "2026",
       "activityCategory": "Marketing & Com",
       "website": "https://club.com",
@@ -3645,7 +4441,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:34:47.590Z",
+      "enrichedAt": "2026-11-21T12:14:53.867Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3673,7 +4469,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "68",
         "subLabel": "Dépt 68"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-130224207",
@@ -3728,7 +4525,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:47.123Z",
+      "createdAt": "2026-11-21T12:14:53.054Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": null,
@@ -3784,7 +4581,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:47.155Z",
+      "enrichedAt": "2026-11-21T12:14:53.172Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3813,7 +4610,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "67",
         "subLabel": "Dépt 67"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-131969982",
@@ -3861,7 +4659,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:46.505Z",
+      "createdAt": "2026-11-21T12:14:52.515Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -3917,7 +4715,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:46.605Z",
+      "enrichedAt": "2026-11-21T12:14:52.633Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3945,7 +4743,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "67",
         "subLabel": "Dépt 67"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132860636",
@@ -3981,7 +4780,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:43.491Z",
+      "createdAt": "2026-11-21T12:14:51.330Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -4037,7 +4836,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:43.728Z",
+      "enrichedAt": "2026-11-21T12:14:51.673Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4065,7 +4864,8 @@
         "regionLabel": "Nouvelle-Aquitaine",
         "subCode": "64",
         "subLabel": "Dépt 64"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132703133",
@@ -4096,7 +4896,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:43.324Z",
+      "createdAt": "2026-11-21T12:14:51.043Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -4152,7 +4952,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:43.489Z",
+      "enrichedAt": "2026-11-21T12:14:51.329Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4180,7 +4980,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "57",
         "subLabel": "Dépt 57"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132919184",
@@ -4231,7 +5032,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:43.216Z",
+      "createdAt": "2026-11-21T12:14:50.929Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -4287,7 +5088,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:43.323Z",
+      "enrichedAt": "2026-11-21T12:14:51.042Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4315,7 +5116,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "35",
         "subLabel": "Dépt 35"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132980434",
@@ -4370,7 +5172,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:42.006Z",
+      "createdAt": "2026-11-21T12:14:48.947Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -4426,7 +5228,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:43.215Z",
+      "enrichedAt": "2026-11-21T12:14:50.929Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4454,7 +5256,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "35",
         "subLabel": "Dépt 35"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132969940",
@@ -4485,7 +5288,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:40.151Z",
+      "createdAt": "2026-11-21T12:14:46.765Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": "https://lebongroupe.fr",
@@ -4554,7 +5357,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:34:41.257Z",
+      "enrichedAt": "2026-11-21T12:14:47.067Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4582,7 +5385,8 @@
         "regionLabel": "Occitanie",
         "subCode": "34",
         "subLabel": "Dépt 34"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132976978",
@@ -4618,7 +5422,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:40.119Z",
+      "createdAt": "2026-11-21T12:14:46.651Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -4674,7 +5478,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:40.150Z",
+      "enrichedAt": "2026-11-21T12:14:46.764Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4703,7 +5507,8 @@
         "regionLabel": "Nouvelle-Aquitaine",
         "subCode": "33",
         "subLabel": "Dépt 33"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132875030",
@@ -4734,7 +5539,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:38.660Z",
+      "createdAt": "2026-11-21T12:14:44.960Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": null,
@@ -4790,7 +5595,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:40.118Z",
+      "enrichedAt": "2026-11-21T12:14:46.650Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4817,7 +5622,8 @@
         "regionLabel": "Nouvelle-Aquitaine",
         "subCode": "33",
         "subLabel": "Dépt 33"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132994666",
@@ -4860,7 +5666,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:38.620Z",
+      "createdAt": "2026-11-21T12:14:44.842Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -4916,7 +5722,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:38.659Z",
+      "enrichedAt": "2026-11-21T12:14:44.959Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4944,7 +5750,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "27",
         "subLabel": "Dépt 27"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132936816",
@@ -4980,7 +5787,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:37.594Z",
+      "createdAt": "2026-11-21T12:14:43.552Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -5036,7 +5843,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:38.353Z",
+      "enrichedAt": "2026-11-21T12:14:44.494Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5064,7 +5871,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "21",
         "subLabel": "Dépt 21"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132927930",
@@ -5105,7 +5913,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:35.669Z",
+      "createdAt": "2026-11-21T12:14:41.562Z",
       "incorporationYear": "2026",
       "activityCategory": "Tech & Logiciel",
       "website": null,
@@ -5161,7 +5969,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:37.591Z",
+      "enrichedAt": "2026-11-21T12:14:43.549Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5189,7 +5997,8 @@
         "regionLabel": "Nouvelle-Aquitaine",
         "subCode": "17",
         "subLabel": "Dépt 17"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132909664",
@@ -5220,7 +6029,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:34.564Z",
+      "createdAt": "2026-11-21T12:14:39.614Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -5276,7 +6085,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:34.676Z",
+      "enrichedAt": "2026-11-21T12:14:39.623Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -5304,7 +6113,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "13",
         "subLabel": "Dépt 13"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132705336",
@@ -5340,7 +6150,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:33.311Z",
+      "createdAt": "2026-11-21T12:14:38.368Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": "https://habitat-pro-services.com",
@@ -5409,7 +6219,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-20T12:34:34.563Z",
+      "enrichedAt": "2026-11-21T12:14:39.613Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5436,7 +6246,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "13",
         "subLabel": "Dépt 13"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-132680182",
@@ -5467,7 +6278,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:33.122Z",
+      "createdAt": "2026-11-21T12:14:38.030Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -5523,7 +6334,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:33.310Z",
+      "enrichedAt": "2026-11-21T12:14:38.366Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5551,7 +6362,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "06",
         "subLabel": "Dépt 06"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "FR-133019141",
@@ -5587,7 +6399,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-20T12:34:29.845Z",
+      "createdAt": "2026-11-21T12:14:34.586Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -5643,7 +6455,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-20T12:34:33.117Z",
+      "enrichedAt": "2026-11-21T12:14:38.024Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5672,7 +6484,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "06",
         "subLabel": "Dépt 06"
-      }
+      },
+      "updatedAt": "2026-11-21T12:15:38.349Z"
     },
     {
       "id": "CH-CHE388460141",
@@ -734319,6 +735132,17 @@
   ],
   "syncLogs": [
     {
+      "date": "2026-11-21T12:15:38.736Z",
+      "status": "success",
+      "recordsFetched": 45,
+      "recordsAdded": 6,
+      "recordsUpdated": 39,
+      "totalDatabase": 11181,
+      "durationSeconds": 64.9,
+      "errors": null,
+      "country": "ALL"
+    },
+    {
       "date": "2026-11-20T12:35:21.380Z",
       "status": "success",
       "recordsFetched": 45,
@@ -734595,13 +735419,13 @@
     }
   ],
   "lastSync": {
-    "date": "2026-11-20T12:35:21.380Z",
+    "date": "2026-11-21T12:15:38.736Z",
     "status": "success",
     "recordsFetched": 45,
-    "recordsAdded": 45,
-    "recordsUpdated": 0,
-    "totalDatabase": 11175,
-    "durationSeconds": 52.4,
+    "recordsAdded": 6,
+    "recordsUpdated": 39,
+    "totalDatabase": 11181,
+    "durationSeconds": 64.9,
     "errors": null,
     "country": "ALL"
   },
