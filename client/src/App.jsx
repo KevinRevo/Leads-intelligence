@@ -1094,6 +1094,9 @@ export default function App() {
                   <option value="year:2023">{t('dateYear', language, { year: '2023' })}</option>
                   <option value="year:2022">{t('dateYear', language, { year: '2022' })}</option>
                   <option value="year:2021">{t('dateYear', language, { year: '2021' })}</option>
+                  <option value="year:2020">{t('dateYear', language, { year: '2020' })}</option>
+                  <option value="year:2019">{t('dateYear', language, { year: '2019' })}</option>
+                  <option value="year:2018">{t('dateYear', language, { year: '2018' })}</option>
                 </optgroup>
                 <optgroup label={t('dateGroupRecent', language)}>
                   <option value="today">{t('dateToday48h', language)}</option>
@@ -1116,8 +1119,8 @@ export default function App() {
               <input
                 type="date"
                 value={exactDate}
-                min="2021-01-01"
-                max="2026-10-31"
+                min="2018-01-01"
+                max="2026-12-31"
                 onChange={(e) => setExactDate(e.target.value)}
                 className="w-[118px] shrink-0 bg-slate-50 dark:bg-[#161f30] border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1.5 text-[11px] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
                 title={t('exactDateTooltip', language)}

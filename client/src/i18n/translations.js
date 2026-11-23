@@ -4,7 +4,7 @@
 export const translations = {
   fr: {
     // Header
-    appSubtitleBadge: "Lead Intelligence 2024–2026",
+    appSubtitleBadge: "Lead Intelligence 2018–2026",
     appSubtitleDesc: "• Sociétés Commerciales FR & CH (CA ≤ 30M€ • 0% Entrepreneur Individuel • Carto North Data)",
     themeLight: "Passer en mode clair",
     themeDark: "Passer en mode sombre",
@@ -14,12 +14,12 @@ export const translations = {
     refreshing: "Sync...",
     exportCsv: "Exporter CSV",
     exportCsvTooltip: "Exporter la sélection filtrée au format CSV (Excel)",
-    syncSuccess: "Session Cloud synchronisée avec l'équipe • {total} sociétés commerciales vérifiées (5 ans : 2021-2026).",
+    syncSuccess: "Session Cloud synchronisée avec l'équipe • {total} sociétés commerciales vérifiées (2018-2026).",
     syncRecordsAdded: "Synchronisation réussie ! {count} nouvelles entreprises enregistrées.",
     syncInProgress: "Synchronisation en cours (BODACC / FOSC / North Data & Session Partagée)...",
 
     // KPI Cards
-    kpiQualifiedTotal: "Sociétés Qualifiées (5 ans : 2021-2026 • CA ≤ 30M€)",
+    kpiQualifiedTotal: "Sociétés Qualifiées (2018-2026 • CA ≤ 30M€)",
     kpiHoldingsTitle: "🌍 Liens Holdings & Entités Étrangères (North Data)",
     kpiHoldingsActive: "✓ Filtre Holding actif",
     kpiHoldingsDesc: "Groupes & Filiales internationales",
@@ -48,8 +48,8 @@ export const translations = {
     crmStatusUnqualified: "⚪ Non qualifié",
 
     // Date range filters
-    dateGroupHistory: "Historique 5 ans (2021 – 2026)",
-    dateAll5Years: "📅 5 dernières années (2021 – 2026)",
+    dateGroupHistory: "Historique complet (2018 – 2026)",
+    dateAll5Years: "📅 Toutes les années (2018 – 2026)",
     dateYear: "🗓️ Année {year}",
     dateGroupRecent: "Périodes récentes",
     dateToday48h: "📅 Dernières 48h",
@@ -65,7 +65,7 @@ export const translations = {
     monthJun2026: "Juin 2026",
     monthMay2026: "Mai 2026",
     monthApr2026: "Avril 2026",
-    exactDateTooltip: "Filtrer par jour exact d'incorporation (5 ans : 2021-2026)",
+    exactDateTooltip: "Filtrer par jour exact d'incorporation (2018-2026)",
 
     // Filters - Row 2
     fxAll: "💱 Tous profils FX",
@@ -169,7 +169,7 @@ export const translations = {
     actionNetwork: "Cartographie",
     actionNetworkTooltip: "Ouvrir la cartographie North Data des dirigeants et holdings",
 
-    displayingCount: "Affichage de {visible} sur {total} sociétés commerciales qualifiées (2021–2026)",
+    displayingCount: "Affichage de {visible} sur {total} sociétés commerciales qualifiées (2018–2026)",
     show300More: "+ Afficher 300 sociétés de plus",
     showAll: "Tout afficher ({count})",
 
@@ -316,7 +316,7 @@ export const translations = {
 
   en: {
     // Header
-    appSubtitleBadge: "Lead Intelligence 2024–2026",
+    appSubtitleBadge: "Lead Intelligence 2018–2026",
     appSubtitleDesc: "• Commercial Companies FR & CH (Turnover ≤ €30M • 0% Sole Proprietorships • North Data Mapping)",
     themeLight: "Switch to light mode",
     themeDark: "Switch to dark mode",
@@ -326,12 +326,12 @@ export const translations = {
     refreshing: "Syncing...",
     exportCsv: "Export CSV",
     exportCsvTooltip: "Export filtered selection to CSV (Excel format)",
-    syncSuccess: "Cloud session synced with team • {total} verified commercial companies (5-year historical: 2021-2026).",
+    syncSuccess: "Cloud session synced with team • {total} verified commercial companies (2018-2026).",
     syncRecordsAdded: "Sync successful! {count} new companies recorded.",
     syncInProgress: "Synchronizing data (BODACC / FOSC / North Data & Shared Session)...",
 
     // KPI Cards
-    kpiQualifiedTotal: "Qualified Companies (5 years: 2021-2026 • Turnover ≤ €30M)",
+    kpiQualifiedTotal: "Qualified Companies (2018-2026 • Turnover ≤ €30M)",
     kpiHoldingsTitle: "🌍 Holding Links & Foreign Entities (North Data)",
     kpiHoldingsActive: "✓ Holding filter active",
     kpiHoldingsDesc: "International Groups & Subsidiaries",
@@ -360,8 +360,8 @@ export const translations = {
     crmStatusUnqualified: "⚪ Unqualified",
 
     // Date range filters
-    dateGroupHistory: "5-Year Historical (2021 – 2026)",
-    dateAll5Years: "📅 Last 5 years (2021 – 2026)",
+    dateGroupHistory: "Full Historical (2018 – 2026)",
+    dateAll5Years: "📅 All years (2018 – 2026)",
     dateYear: "🗓️ Year {year}",
     dateGroupRecent: "Recent Periods",
     dateToday48h: "📅 Last 48 hours",
@@ -377,7 +377,7 @@ export const translations = {
     monthJun2026: "June 2026",
     monthMay2026: "May 2026",
     monthApr2026: "April 2026",
-    exactDateTooltip: "Filter by exact incorporation day (5 years: 2021-2026)",
+    exactDateTooltip: "Filter by exact incorporation day (2018-2026)",
 
     // Filters - Row 2
     fxAll: "💱 All FX Profiles",
@@ -481,7 +481,7 @@ export const translations = {
     actionNetwork: "Network Map",
     actionNetworkTooltip: "Open North Data interactive mapping of directors and corporate holdings",
 
-    displayingCount: "Displaying {visible} of {total} qualified commercial companies (2021–2026)",
+    displayingCount: "Displaying {visible} of {total} qualified commercial companies (2018–2026)",
     show300More: "+ Show 300 more companies",
     showAll: "Show all ({count})",
 
