@@ -59,114 +59,118 @@ function generateHistoricalWindows2018To2020() {
 }
 
 // =========================================================================
-// 1. FRANCE (FR) HISTORIQUE 2018-2020 (BODACC A - Créations)
+// 1. FRANCE (FR) HISTORIQUE 2018-2020 (BODACC A - Créations avec pagination)
 // =========================================================================
-async function fetchFranceHistoricalWindow([start, end], maxPerWindow = 18) {
+async function fetchFranceHistoricalWindow([start, end], maxPerWindow = 42) {
   try {
     const url = 'https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records';
     const whereClause = `publicationavis='A' AND familleavis_lib='Créations' AND listepersonnes like '%administration%' AND dateparution >= date'${start}' AND dateparution <= date'${end}'`;
 
-    const res = await axios.get(url, {
-      params: { where: whereClause, order_by: 'dateparution desc', limit: 100, offset: 0 },
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-      timeout: 12000,
-    }).catch(() => ({ data: { results: [] } }));
-
-    const records = res.data?.results || [];
     const candidates = [];
+    for (let offset = 0; offset <= 400 && candidates.length < maxPerWindow; offset += 100) {
+      const res = await axios.get(url, {
+        params: { where: whereClause, order_by: 'dateparution desc', limit: 100, offset },
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        timeout: 12000,
+      }).catch(() => ({ data: { results: [] } }));
 
-    for (const record of records) {
-      if (candidates.length >= maxPerWindow) break;
-      try {
-        const sirenRaw = record.registre?.[0] || record.registre?.[1] || '';
-        const siren = sirenRaw.replace(/\D/g, '');
-        if (!siren || siren.length !== 9) continue;
-        if (seenRegs.has(siren) || seenIds.has(`FR-${siren}`)) continue;
+      const records = res.data?.results || [];
+      if (!records.length) break;
 
-        let companyName = record.commercant || '';
-        let rawLegalForm = '';
-        let shareCapital = 5000;
-        let address = '';
-        let city = record.ville || '';
-        let postalCode = record.cp || '';
-        let activity = '';
-        const immatDate = record.dateparution || start;
+      for (const record of records) {
+        if (candidates.length >= maxPerWindow) break;
+        try {
+          const sirenRaw = record.registre?.[0] || record.registre?.[1] || '';
+          const siren = sirenRaw.replace(/\D/g, '');
+          if (!siren || siren.length !== 9) continue;
+          if (seenRegs.has(siren) || seenIds.has(`FR-${siren}`)) continue;
 
-        if (record.listepersonnes) {
-          const parsed = typeof record.listepersonnes === 'string' ? JSON.parse(record.listepersonnes) : record.listepersonnes;
-          const person = parsed.personne;
-          if (person) {
-            if (!companyName && person.denomination) companyName = person.denomination;
-            if (!companyName && person.nomCommercial) companyName = person.nomCommercial;
-            if (person.formeJuridique) rawLegalForm = person.formeJuridique;
-            if (person.capital?.montantCapital) {
-              const cap = parseFloat(person.capital.montantCapital);
-              if (!isNaN(cap) && cap > 0) shareCapital = Math.round(cap);
-            }
-          }
-        }
+          let companyName = record.commercant || '';
+          let rawLegalForm = '';
+          let shareCapital = 5000;
+          let address = '';
+          let city = record.ville || '';
+          let postalCode = record.cp || '';
+          let activity = '';
+          const immatDate = record.dateparution || start;
 
-        if (record.listeetablissements) {
-          try {
-            const parsed = typeof record.listeetablissements === 'string' ? JSON.parse(record.listeetablissements) : record.listeetablissements;
-            const etab = parsed.etablissement;
-            if (etab) {
-              if (etab.activite) activity = etab.activite;
-              if (etab.adresse && !address) {
-                const a = etab.adresse;
-                address = [a.numeroVoie, a.typeVoie, a.nomVoie].filter(Boolean).join(' ').trim();
-                if (a.codePostal) postalCode = a.codePostal;
-                if (a.ville) city = a.ville;
+          if (record.listepersonnes) {
+            const parsed = typeof record.listepersonnes === 'string' ? JSON.parse(record.listepersonnes) : record.listepersonnes;
+            const person = parsed.personne;
+            if (person) {
+              if (!companyName && person.denomination) companyName = person.denomination;
+              if (!companyName && person.nomCommercial) companyName = person.nomCommercial;
+              if (person.formeJuridique) rawLegalForm = person.formeJuridique;
+              if (person.capital?.montantCapital) {
+                const cap = parseFloat(person.capital.montantCapital);
+                if (!isNaN(cap) && cap > 0) shareCapital = Math.round(cap);
               }
             }
-          } catch {
-            // ignore
           }
+
+          if (record.listeetablissements) {
+            try {
+              const parsed = typeof record.listeetablissements === 'string' ? JSON.parse(record.listeetablissements) : record.listeetablissements;
+              const etab = parsed.etablissement;
+              if (etab) {
+                if (etab.activite) activity = etab.activite;
+                if (etab.adresse && !address) {
+                  const a = etab.adresse;
+                  address = [a.numeroVoie, a.typeVoie, a.nomVoie].filter(Boolean).join(' ').trim();
+                  if (a.codePostal) postalCode = a.codePostal;
+                  if (a.ville) city = a.ville;
+                }
+              }
+            } catch {
+              // ignore
+            }
+          }
+
+          if (!companyName || !activity || activity.length < 8) continue;
+          if (shareCapital > 5000000) continue;
+
+          const { dirigeants, corporateLinks } = parseBodaccAdministration(record.listepersonnes, companyName);
+          if (!dirigeants || dirigeants.length === 0) continue;
+
+          const legalForm = normalizeFrenchLegalForm(rawLegalForm);
+          const rawComp = {
+            id: `FR-${siren}`,
+            country: 'FR',
+            countryName: 'France',
+            name: cleanCompanyName(companyName),
+            registrationNumber: siren,
+            incorporationDate: immatDate,
+            incorporationYear: immatDate.slice(0, 4),
+            legalForm,
+            shareCapital,
+            revenue: null,
+            revenueYear: null,
+            activity: activity.trim(),
+            address: address || `${postalCode} ${city}`.trim(),
+            city: city || 'Paris',
+            postalCode: postalCode || '75001',
+            dirigeants,
+            corporateLinks: corporateLinks || [],
+            source: 'BODACC A & RNE (INPI)',
+            crmStatus: 'new',
+            crmNotes: '',
+            crmAssignedTo: null,
+            lastContactedAt: null,
+            createdAt: new Date().toISOString(),
+          };
+
+          if (!isValidCommercialCompany(rawComp) || isRevolutUnsupportedIndustry(rawComp)) continue;
+          const compCheck = evaluateRevolutCompliance(rawComp);
+          if (!compCheck.isEligible || compCheck.status === 'restricted') continue;
+
+          seenRegs.add(siren);
+          seenIds.add(rawComp.id);
+          candidates.push(rawComp);
+        } catch {
+          // ignore
         }
-
-        if (!companyName || !activity || activity.length < 8) continue;
-        if (shareCapital > 5000000) continue;
-
-        const { dirigeants, corporateLinks } = parseBodaccAdministration(record.listepersonnes, companyName);
-        if (!dirigeants || dirigeants.length === 0) continue;
-
-        const legalForm = normalizeFrenchLegalForm(rawLegalForm);
-        const rawComp = {
-          id: `FR-${siren}`,
-          country: 'FR',
-          countryName: 'France',
-          name: cleanCompanyName(companyName),
-          registrationNumber: siren,
-          incorporationDate: immatDate,
-          incorporationYear: immatDate.slice(0, 4),
-          legalForm,
-          shareCapital,
-          revenue: null,
-          revenueYear: null,
-          activity: activity.trim(),
-          address: address || `${postalCode} ${city}`.trim(),
-          city: city || 'Paris',
-          postalCode: postalCode || '75001',
-          dirigeants,
-          corporateLinks: corporateLinks || [],
-          source: 'BODACC A & RNE (INPI)',
-          crmStatus: 'new',
-          crmNotes: '',
-          crmAssignedTo: null,
-          lastContactedAt: null,
-          createdAt: new Date().toISOString(),
-        };
-
-        if (!isValidCommercialCompany(rawComp) || isRevolutUnsupportedIndustry(rawComp)) continue;
-        const compCheck = evaluateRevolutCompliance(rawComp);
-        if (!compCheck.isEligible || compCheck.status === 'restricted') continue;
-
-        seenRegs.add(siren);
-        seenIds.add(rawComp.id);
-        candidates.push(rawComp);
-      } catch {
-        // ignore
       }
+      if (records.length < 100) break;
     }
     return candidates;
   } catch {
@@ -175,101 +179,104 @@ async function fetchFranceHistoricalWindow([start, end], maxPerWindow = 18) {
 }
 
 // =========================================================================
-// 2. SUISSE (CH) HISTORIQUE 2018-2020 (FOSC / SHAB - HR01)
+// 2. SUISSE (CH) HISTORIQUE 2018-2020 (FOSC / SHAB - HR01 avec pagination)
 // =========================================================================
-async function fetchSwitzerlandHistoricalWindow([start, end], maxPerWindow = 14) {
+async function fetchSwitzerlandHistoricalWindow([start, end], maxPerWindow = 38) {
   try {
-    const res = await axios.get('https://www.shab.ch/api/v1/publications', {
-      params: {
-        publicationStates: 'PUBLISHED',
-        subRubrics: 'HR01',
-        'publicationDate.start': start,
-        'publicationDate.end': end,
-        'pageRequest.size': 100,
-        'pageRequest.page': 0,
-      },
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-      timeout: 10000,
-    });
-    const allPubs = res.data?.content || [];
-    if (!allPubs.length) return [];
-
-    const commercialPubs = allPubs.filter((pub) => {
-      const meta = pub.meta || {};
-      const title = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
-      const compName = title
-        .replace(/^(Nouvelles entrées|Neueintragung|Nuove registrazioni|New entries)\s+/i, '')
-        .replace(/,\s*[^,]+$/, '')
-        .trim();
-      return (
-        /\b(SA|AG|S\.A\.|A\.G\.|Sàrl|Sarl|S\.à\.r\.l\.|GmbH|Sagl)\b/i.test(compName) &&
-        !/\b(Stiftung|Fondation|Fondazione|Verein|Association|Genossenschaft)\b/i.test(compName)
-      );
-    });
-
     const candidates = [];
-    for (const pub of commercialPubs) {
-      if (candidates.length >= maxPerWindow) break;
-      const meta = pub.meta || {};
-      const title = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
-      const pubDate = meta.publicationDate ? meta.publicationDate.split('T')[0] : start;
-      const fallbackName = title
-        .replace(/^(Nouvelles entrées|Neueintragung|Nuove registrazioni|New entries)\s+/i, '')
-        .replace(/,\s*[^,]+$/, '')
-        .trim();
+    for (let page = 0; page <= 2 && candidates.length < maxPerWindow; page++) {
+      const res = await axios.get('https://www.shab.ch/api/v1/publications', {
+        params: {
+          publicationStates: 'PUBLISHED',
+          subRubrics: 'HR01',
+          'publicationDate.start': start,
+          'publicationDate.end': end,
+          'pageRequest.size': 100,
+          'pageRequest.page': page,
+        },
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        timeout: 10000,
+      }).catch(() => ({ data: { content: [] } }));
+      const allPubs = res.data?.content || [];
+      if (!allPubs.length) break;
 
-      try {
-        const xmlRes = await axios.get(`https://www.shab.ch/api/v1/publications/${meta.id}/xml`, {
-          headers: { 'User-Agent': 'Mozilla/5.0' },
-          timeout: 6000,
-        });
-        const parsed = parseShabXml(xmlRes.data, fallbackName);
-        if (!parsed || !parsed.uid) continue;
+      const commercialPubs = allPubs.filter((pub) => {
+        const meta = pub.meta || {};
+        const title = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
+        const compName = title
+          .replace(/^(Nouvelles entrées|Neueintragung|Nuove registrazioni|New entries)\s+/i, '')
+          .replace(/,\s*[^,]+$/, '')
+          .trim();
+        return (
+          /\b(SA|AG|S\.A\.|A\.G\.|Sàrl|Sarl|S\.à\.r\.l\.|GmbH|Sagl)\b/i.test(compName) &&
+          !/\b(Stiftung|Fondation|Fondazione|Verein|Association|Genossenschaft)\b/i.test(compName)
+        );
+      });
 
-        const uidClean = parsed.uid.replace(/[^\w]/g, '');
-        if (seenRegs.has(uidClean) || seenIds.has(`CH-${uidClean}`)) continue;
-        if (parsed.shareCapital > 5000000) continue;
+      for (const pub of commercialPubs) {
+        if (candidates.length >= maxPerWindow) break;
+        const meta = pub.meta || {};
+        const title = meta.title?.fr || meta.title?.de || meta.title?.it || meta.title?.en || '';
+        const pubDate = meta.publicationDate ? meta.publicationDate.split('T')[0] : start;
+        const fallbackName = title
+          .replace(/^(Nouvelles entrées|Neueintragung|Nuove registrazioni|New entries)\s+/i, '')
+          .replace(/,\s*[^,]+$/, '')
+          .trim();
 
-        const rawComp = {
-          id: `CH-${uidClean}`,
-          country: 'CH',
-          countryName: 'Suisse',
-          name: parsed.name || fallbackName,
-          registrationNumber: parsed.uid,
-          incorporationDate: pubDate,
-          incorporationYear: pubDate.slice(0, 4),
-          legalForm: parsed.legalForm,
-          shareCapital: parsed.shareCapital || 20000,
-          revenue: null,
-          revenueYear: null,
-          activity: parsed.activity || 'Services commerciaux, conseil et technologies en Suisse',
-          address: parsed.address,
-          city: parsed.city || 'Zürich',
-          postalCode: parsed.postalCode || '8000',
-          canton: parsed.canton || 'ZH',
-          dirigeants: parsed.dirigeants,
-          corporateLinks: parsed.corporateLinks || [],
-          internationalLinks: parsed.internationalLinks || [],
-          source: 'FOSC / SHAB (Registre officiel suisse)',
-          crmStatus: 'new',
-          crmNotes: '',
-          crmAssignedTo: null,
-          lastContactedAt: null,
-          createdAt: new Date().toISOString(),
-        };
+        try {
+          const xmlRes = await axios.get(`https://www.shab.ch/api/v1/publications/${meta.id}/xml`, {
+            headers: { 'User-Agent': 'Mozilla/5.0' },
+            timeout: 6000,
+          });
+          const parsed = parseShabXml(xmlRes.data, fallbackName);
+          if (!parsed || !parsed.uid) continue;
 
-        if (!isValidCommercialCompany(rawComp) || isRevolutUnsupportedIndustry(rawComp)) continue;
-        if (!rawComp.dirigeants || rawComp.dirigeants.length === 0) continue;
+          const uidClean = parsed.uid.replace(/[^\w]/g, '');
+          if (seenRegs.has(uidClean) || seenIds.has(`CH-${uidClean}`)) continue;
+          if (parsed.shareCapital > 5000000) continue;
 
-        const compCheck = evaluateRevolutCompliance(rawComp);
-        if (!compCheck.isEligible || compCheck.status === 'restricted') continue;
+          const rawComp = {
+            id: `CH-${uidClean}`,
+            country: 'CH',
+            countryName: 'Suisse',
+            name: parsed.name || fallbackName,
+            registrationNumber: parsed.uid,
+            incorporationDate: pubDate,
+            incorporationYear: pubDate.slice(0, 4),
+            legalForm: parsed.legalForm,
+            shareCapital: parsed.shareCapital || 20000,
+            revenue: null,
+            revenueYear: null,
+            activity: parsed.activity || 'Services commerciaux, conseil et technologies en Suisse',
+            address: parsed.address,
+            city: parsed.city || 'Zürich',
+            postalCode: parsed.postalCode || '8000',
+            canton: parsed.canton || 'ZH',
+            dirigeants: parsed.dirigeants,
+            corporateLinks: parsed.corporateLinks || [],
+            internationalLinks: parsed.internationalLinks || [],
+            source: 'FOSC / SHAB (Registre officiel suisse)',
+            crmStatus: 'new',
+            crmNotes: '',
+            crmAssignedTo: null,
+            lastContactedAt: null,
+            createdAt: new Date().toISOString(),
+          };
 
-        seenRegs.add(uidClean);
-        seenIds.add(rawComp.id);
-        candidates.push(rawComp);
-      } catch {
-        // ignore
+          if (!isValidCommercialCompany(rawComp) || isRevolutUnsupportedIndustry(rawComp)) continue;
+          if (!rawComp.dirigeants || rawComp.dirigeants.length === 0) continue;
+
+          const compCheck = evaluateRevolutCompliance(rawComp);
+          if (!compCheck.isEligible || compCheck.status === 'restricted') continue;
+
+          seenRegs.add(uidClean);
+          seenIds.add(rawComp.id);
+          candidates.push(rawComp);
+        } catch {
+          // ignore
+        }
       }
+      if (allPubs.length < 100) break;
     }
     return candidates;
   } catch {
@@ -473,7 +480,7 @@ async function main() {
   let frCount = 0;
   for (let i = 0; i < windows.length; i++) {
     const w = windows[i];
-    const batch = await fetchFranceHistoricalWindow(w, 14);
+    const batch = await fetchFranceHistoricalWindow(w, 42);
     rawNewCompanies.push(...batch);
     frCount += batch.length;
     if ((i + 1) % 12 === 0 || i === windows.length - 1) {
@@ -487,7 +494,7 @@ async function main() {
   let chCount = 0;
   for (let i = 0; i < windows.length; i++) {
     const w = windows[i];
-    const batch = await fetchSwitzerlandHistoricalWindow(w, 12);
+    const batch = await fetchSwitzerlandHistoricalWindow(w, 38);
     rawNewCompanies.push(...batch);
     chCount += batch.length;
     if ((i + 1) % 12 === 0 || i === windows.length - 1) {
