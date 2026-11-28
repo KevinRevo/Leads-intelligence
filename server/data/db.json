@@ -54,7 +54,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:54.887Z",
+      "createdAt": "2026-11-28T12:46:51.676Z",
       "incorporationYear": "2026",
       "activityCategory": "Restauration & Hôtellerie",
       "website": null,
@@ -110,7 +110,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:59.290Z",
+      "enrichedAt": "2026-11-28T12:46:55.686Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -141,7 +141,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BE",
         "subLabel": "Canton BE"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE451344162",
@@ -208,7 +209,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:53.246Z",
+      "createdAt": "2026-11-28T12:46:50.398Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": "https://bm-real-estate.com",
@@ -264,7 +265,7 @@
         ]
       },
       "confidenceScore": 85,
-      "enrichedAt": "2026-11-27T13:33:54.738Z",
+      "enrichedAt": "2026-11-28T12:46:51.517Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -294,7 +295,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "GR",
         "subLabel": "Canton GR"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE366396078",
@@ -374,7 +376,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:51.834Z",
+      "createdAt": "2026-11-28T12:46:49.027Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -430,7 +432,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:53.097Z",
+      "enrichedAt": "2026-11-28T12:46:50.239Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -463,7 +465,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BL",
         "subLabel": "Canton BL"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE182646019",
@@ -495,7 +498,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:49.369Z",
+      "createdAt": "2026-11-28T12:46:46.891Z",
       "incorporationYear": "2026",
       "activityCategory": "Transport & Logistique",
       "website": null,
@@ -551,7 +554,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:51.685Z",
+      "enrichedAt": "2026-11-28T12:46:48.867Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -583,7 +586,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BE",
         "subLabel": "Canton BE"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE361176196",
@@ -615,7 +619,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:48.704Z",
+      "createdAt": "2026-11-28T12:46:46.039Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -671,7 +675,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:48.918Z",
+      "enrichedAt": "2026-11-28T12:46:46.413Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -702,7 +706,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE343985878",
@@ -734,7 +739,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:48.217Z",
+      "createdAt": "2026-11-28T12:46:44.123Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -790,7 +795,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:48.554Z",
+      "enrichedAt": "2026-11-28T12:46:44.470Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -821,7 +826,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE384070338",
@@ -860,7 +866,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:46.404Z",
+      "createdAt": "2026-11-28T12:46:42.640Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -916,7 +922,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:48.068Z",
+      "enrichedAt": "2026-11-28T12:46:43.965Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -946,7 +952,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE445935142",
@@ -978,7 +985,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:45.966Z",
+      "createdAt": "2026-11-28T12:46:42.163Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1034,7 +1041,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:46.106Z",
+      "enrichedAt": "2026-11-28T12:46:42.322Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1064,7 +1071,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "LU",
         "subLabel": "Canton LU"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE251900381",
@@ -1103,7 +1111,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:45.815Z",
+      "createdAt": "2026-11-28T12:46:42.005Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1159,7 +1167,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:45.815Z",
+      "enrichedAt": "2026-11-28T12:46:42.005Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1191,7 +1199,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SO",
         "subLabel": "Canton SO"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE317575842",
@@ -1269,7 +1278,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:45.528Z",
+      "createdAt": "2026-11-28T12:46:41.666Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -1325,7 +1334,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:45.663Z",
+      "enrichedAt": "2026-11-28T12:46:41.843Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1355,7 +1364,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "BE",
         "subLabel": "Canton BE"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE415717250",
@@ -1396,7 +1406,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:45.243Z",
+      "createdAt": "2026-11-28T12:46:41.351Z",
       "incorporationYear": "2026",
       "activityCategory": "Tech & Logiciel",
       "website": null,
@@ -1452,7 +1462,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:45.378Z",
+      "enrichedAt": "2026-11-28T12:46:41.507Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1484,7 +1494,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "LU",
         "subLabel": "Canton LU"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE332753507",
@@ -1523,7 +1534,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:44.901Z",
+      "createdAt": "2026-11-28T12:46:40.876Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -1579,7 +1590,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:44.945Z",
+      "enrichedAt": "2026-11-28T12:46:41.032Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1610,7 +1621,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZG",
         "subLabel": "Canton ZG"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE255704703",
@@ -1642,7 +1654,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:40.637Z",
+      "createdAt": "2026-11-28T12:46:37.066Z",
       "incorporationYear": "2026",
       "activityCategory": "Marketing & Com",
       "website": null,
@@ -1698,7 +1710,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:44.752Z",
+      "enrichedAt": "2026-11-28T12:46:40.717Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1731,7 +1743,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZG",
         "subLabel": "Canton ZG"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE483873068",
@@ -1779,7 +1792,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:39.794Z",
+      "createdAt": "2026-11-28T12:46:36.068Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -1835,7 +1848,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:40.488Z",
+      "enrichedAt": "2026-11-28T12:46:36.905Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -1868,7 +1881,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZG",
         "subLabel": "Canton ZG"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE385273571",
@@ -1916,7 +1930,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:39.065Z",
+      "createdAt": "2026-11-28T12:46:35.134Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": null,
@@ -1972,7 +1986,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:39.192Z",
+      "enrichedAt": "2026-11-28T12:46:35.430Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2004,7 +2018,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "TG",
         "subLabel": "Canton TG"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE384753029",
@@ -2036,7 +2051,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:38.781Z",
+      "createdAt": "2026-11-28T12:46:34.820Z",
       "incorporationYear": "2026",
       "activityCategory": "Marketing & Com",
       "website": null,
@@ -2092,7 +2107,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:38.916Z",
+      "enrichedAt": "2026-11-28T12:46:34.972Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2122,7 +2137,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "ZH",
         "subLabel": "Canton ZH"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE265075553",
@@ -2154,7 +2170,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:38.494Z",
+      "createdAt": "2026-11-28T12:46:33.509Z",
       "incorporationYear": "2026",
       "activityCategory": "Immobilier (Propre Compte)",
       "website": null,
@@ -2210,7 +2226,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:38.629Z",
+      "enrichedAt": "2026-11-28T12:46:34.661Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2240,7 +2256,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SZ",
         "subLabel": "Canton SZ"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE410750292",
@@ -2272,7 +2289,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:37.048Z",
+      "createdAt": "2026-11-28T12:46:32.372Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -2328,7 +2345,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:38.342Z",
+      "enrichedAt": "2026-11-28T12:46:33.350Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2361,7 +2378,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "AR",
         "subLabel": "Canton AR"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE195327842",
@@ -2400,10 +2418,10 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:33.906Z",
+      "createdAt": "2026-11-28T12:46:26.413Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
-      "website": "https://allaman.ch",
+      "website": "https://www.allaman.ch",
       "websiteStatus": "Certifié SSL & Contenu Vérifié",
       "domain": "allaman.ch",
       "emails": [
@@ -2469,7 +2487,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-27T13:33:36.898Z",
+      "enrichedAt": "2026-11-28T12:46:31.499Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2500,7 +2518,8 @@
         "regionLabel": "Suisse Romande (FR)",
         "subCode": "FR",
         "subLabel": "Canton FR"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE248306332",
@@ -2548,7 +2567,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:32.608Z",
+      "createdAt": "2026-11-28T12:46:25.274Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -2604,7 +2623,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:32.991Z",
+      "enrichedAt": "2026-11-28T12:46:25.448Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -2635,7 +2654,8 @@
         "regionLabel": "Suisse Alémanique (DE)",
         "subCode": "SZ",
         "subLabel": "Canton SZ"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133274605",
@@ -2666,7 +2686,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:31.161Z",
+      "createdAt": "2026-11-28T12:46:21.130Z",
       "incorporationYear": "2026",
       "activityCategory": "Import / Export",
       "website": null,
@@ -2722,7 +2742,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:31.161Z",
+      "enrichedAt": "2026-11-28T12:46:21.131Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2752,7 +2772,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "80",
         "subLabel": "Dépt 80"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133381764",
@@ -2793,7 +2814,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:31.160Z",
+      "createdAt": "2026-11-28T12:46:21.129Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -2849,7 +2870,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:31.161Z",
+      "enrichedAt": "2026-11-28T12:46:21.130Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2877,7 +2898,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "78",
         "subLabel": "Dépt 78"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133303123",
@@ -2908,7 +2930,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:30.493Z",
+      "createdAt": "2026-11-28T12:46:20.244Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -2964,7 +2986,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:30.531Z",
+      "enrichedAt": "2026-11-28T12:46:20.306Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -2991,7 +3013,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "77",
         "subLabel": "Dépt 77"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133045393",
@@ -3022,7 +3045,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:30.447Z",
+      "createdAt": "2026-11-28T12:46:20.176Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -3078,7 +3101,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:30.493Z",
+      "enrichedAt": "2026-11-28T12:46:20.243Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3106,7 +3129,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132953845",
@@ -3137,7 +3161,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:29.749Z",
+      "createdAt": "2026-11-28T12:46:19.628Z",
       "incorporationYear": "2026",
       "activityCategory": "Tech & Logiciel",
       "website": null,
@@ -3193,7 +3217,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:30.134Z",
+      "enrichedAt": "2026-11-28T12:46:19.834Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3222,7 +3246,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132989641",
@@ -3263,7 +3288,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:29.608Z",
+      "createdAt": "2026-11-28T12:46:19.564Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -3319,7 +3344,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:29.748Z",
+      "enrichedAt": "2026-11-28T12:46:19.627Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3347,7 +3372,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133028431",
@@ -3378,7 +3404,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:27.884Z",
+      "createdAt": "2026-11-28T12:46:17.360Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": "https://astprojet.fr",
@@ -3447,7 +3473,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-27T13:33:29.294Z",
+      "enrichedAt": "2026-11-28T12:46:19.062Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3475,7 +3501,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132906702",
@@ -3516,7 +3543,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:27.843Z",
+      "createdAt": "2026-11-28T12:46:17.298Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -3572,7 +3599,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:27.884Z",
+      "enrichedAt": "2026-11-28T12:46:17.360Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3601,7 +3628,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132998790",
@@ -3666,7 +3694,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:27.530Z",
+      "createdAt": "2026-11-28T12:46:16.967Z",
       "incorporationYear": "2026",
       "activityCategory": "Restauration & Hôtellerie",
       "website": null,
@@ -3722,7 +3750,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:27.531Z",
+      "enrichedAt": "2026-11-28T12:46:16.967Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3752,7 +3780,8 @@
         "regionLabel": "Île-de-France (Paris & RP)",
         "subCode": "75",
         "subLabel": "Dépt 75"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133233429",
@@ -3793,7 +3822,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:25.650Z",
+      "createdAt": "2026-11-28T12:46:14.727Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": "https://torii.fr",
@@ -3862,7 +3891,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-27T13:33:27.203Z",
+      "enrichedAt": "2026-11-28T12:46:16.636Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -3891,7 +3920,8 @@
         "regionLabel": "Auvergne-Rhône-Alpes",
         "subCode": "69",
         "subLabel": "Dépt 69"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133297531",
@@ -3932,7 +3962,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:24.385Z",
+      "createdAt": "2026-11-28T12:46:13.692Z",
       "incorporationYear": "2026",
       "activityCategory": "Transport & Logistique",
       "website": null,
@@ -3988,7 +4018,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:25.016Z",
+      "enrichedAt": "2026-11-28T12:46:14.059Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4015,7 +4045,8 @@
         "regionLabel": "Auvergne-Rhône-Alpes",
         "subCode": "63",
         "subLabel": "Dépt 63"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132867896",
@@ -4051,7 +4082,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:22.842Z",
+      "createdAt": "2026-11-28T12:46:12.078Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -4107,7 +4138,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:23.616Z",
+      "enrichedAt": "2026-11-28T12:46:12.828Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4135,7 +4166,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "59",
         "subLabel": "Dépt 59"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133150326",
@@ -4171,7 +4203,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:17.033Z",
+      "createdAt": "2026-11-28T12:46:06.045Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": "https://horizon-invest.com",
@@ -4240,7 +4272,7 @@
         ]
       },
       "confidenceScore": 100,
-      "enrichedAt": "2026-11-27T13:33:22.842Z",
+      "enrichedAt": "2026-11-28T12:46:12.078Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4268,7 +4300,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "56",
         "subLabel": "Dépt 56"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132994351",
@@ -4299,7 +4332,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:16.995Z",
+      "createdAt": "2026-11-28T12:46:05.979Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -4355,7 +4388,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:17.032Z",
+      "enrichedAt": "2026-11-28T12:46:06.044Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4383,7 +4416,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "54",
         "subLabel": "Dépt 54"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133247528",
@@ -4588,7 +4622,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:16.947Z",
+      "createdAt": "2026-11-28T12:46:05.910Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": null,
@@ -4644,7 +4678,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:16.993Z",
+      "enrichedAt": "2026-11-28T12:46:05.978Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4672,7 +4706,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "51",
         "subLabel": "Dépt 51"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133247759",
@@ -4703,7 +4738,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:15.497Z",
+      "createdAt": "2026-11-28T12:46:04.384Z",
       "incorporationYear": "2026",
       "activityCategory": "BTP & Construction",
       "website": null,
@@ -4759,7 +4794,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:15.641Z",
+      "enrichedAt": "2026-11-28T12:46:04.543Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -4787,7 +4822,8 @@
         "regionLabel": "Nord & Grand Est",
         "subCode": "51",
         "subLabel": "Dépt 51"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132996752",
@@ -4818,7 +4854,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:11.569Z",
+      "createdAt": "2026-11-28T12:46:00.403Z",
       "incorporationYear": "2026",
       "activityCategory": "Services B2B",
       "website": "https://g-trix.fr",
@@ -4874,7 +4910,7 @@
         ]
       },
       "confidenceScore": 85,
-      "enrichedAt": "2026-11-27T13:33:15.495Z",
+      "enrichedAt": "2026-11-28T12:46:04.382Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -4901,7 +4937,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "44",
         "subLabel": "Dépt 44"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133237149",
@@ -4942,7 +4979,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:11.522Z",
+      "createdAt": "2026-11-28T12:46:00.246Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -4998,7 +5035,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:11.569Z",
+      "enrichedAt": "2026-11-28T12:46:00.403Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5026,7 +5063,8 @@
         "regionLabel": "Grand Ouest & Centre",
         "subCode": "35",
         "subLabel": "Dépt 35"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133006940",
@@ -5057,7 +5095,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:10.066Z",
+      "createdAt": "2026-11-28T12:45:58.370Z",
       "incorporationYear": "2026",
       "activityCategory": "Transport & Logistique",
       "website": null,
@@ -5113,7 +5151,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:11.036Z",
+      "enrichedAt": "2026-11-28T12:45:59.748Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5141,7 +5179,8 @@
         "regionLabel": "Occitanie",
         "subCode": "31",
         "subLabel": "Dépt 31"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132943960",
@@ -5172,7 +5211,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:10.037Z",
+      "createdAt": "2026-11-28T12:45:58.308Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -5228,7 +5267,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:10.066Z",
+      "enrichedAt": "2026-11-28T12:45:58.369Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5256,7 +5295,8 @@
         "regionLabel": "Occitanie",
         "subCode": "31",
         "subLabel": "Dépt 31"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133313510",
@@ -5287,7 +5327,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:09.993Z",
+      "createdAt": "2026-11-28T12:45:58.239Z",
       "incorporationYear": "2026",
       "activityCategory": "Consulting & Conseil",
       "website": null,
@@ -5343,7 +5383,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:10.036Z",
+      "enrichedAt": "2026-11-28T12:45:58.307Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5371,7 +5411,8 @@
         "regionLabel": "Nouvelle-Aquitaine",
         "subCode": "17",
         "subLabel": "Dépt 17"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133333922",
@@ -5402,7 +5443,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:09.123Z",
+      "createdAt": "2026-11-28T12:45:56.930Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -5458,7 +5499,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:09.163Z",
+      "enrichedAt": "2026-11-28T12:45:57.093Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -5486,7 +5527,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "13",
         "subLabel": "Dépt 13"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-133241299",
@@ -5517,7 +5559,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:09.070Z",
+      "createdAt": "2026-11-28T12:45:56.848Z",
       "incorporationYear": "2026",
       "activityCategory": "Holding & Participations",
       "website": null,
@@ -5573,7 +5615,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:09.122Z",
+      "enrichedAt": "2026-11-28T12:45:56.930Z",
       "compliance": {
         "status": "conditional",
         "badge": "🟡 Éligible (KYB Renforcé)",
@@ -5601,7 +5643,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "13",
         "subLabel": "Dépt 13"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "FR-132916354",
@@ -5632,7 +5675,7 @@
       "crmNotes": "",
       "crmAssignedTo": null,
       "lastContactedAt": null,
-      "createdAt": "2026-11-27T13:33:08.222Z",
+      "createdAt": "2026-11-28T12:45:56.370Z",
       "incorporationYear": "2026",
       "activityCategory": "Industrie & Ingénierie",
       "website": null,
@@ -5688,7 +5731,7 @@
         ]
       },
       "confidenceScore": 60,
-      "enrichedAt": "2026-11-27T13:33:09.065Z",
+      "enrichedAt": "2026-11-28T12:45:56.844Z",
       "compliance": {
         "status": "eligible",
         "badge": "🟢 Éligible Revolut",
@@ -5717,7 +5760,8 @@
         "regionLabel": "PACA & Côte d'Azur",
         "subCode": "06",
         "subLabel": "Dépt 06"
-      }
+      },
+      "updatedAt": "2026-11-28T12:46:55.928Z"
     },
     {
       "id": "CH-CHE295240242",
@@ -946239,6 +946283,17 @@
   ],
   "syncLogs": [
     {
+      "date": "2026-11-28T12:46:56.430Z",
+      "status": "success",
+      "recordsFetched": 44,
+      "recordsAdded": 0,
+      "recordsUpdated": 44,
+      "totalDatabase": 15341,
+      "durationSeconds": 61,
+      "errors": null,
+      "country": "ALL"
+    },
+    {
       "date": "2026-11-27T13:34:00.096Z",
       "status": "success",
       "recordsFetched": 44,
@@ -946284,13 +946339,13 @@
     }
   ],
   "lastSync": {
-    "date": "2026-11-27T13:34:00.096Z",
+    "date": "2026-11-28T12:46:56.430Z",
     "status": "success",
     "recordsFetched": 44,
-    "recordsAdded": 44,
-    "recordsUpdated": 0,
+    "recordsAdded": 0,
+    "recordsUpdated": 44,
     "totalDatabase": 15341,
-    "durationSeconds": 53.1,
+    "durationSeconds": 61,
     "errors": null,
     "country": "ALL"
   },
